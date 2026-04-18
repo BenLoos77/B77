@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>B_77 — Vertriebsberatung für den Mittelstand</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- WM-Banner -->
+<div class="wm-banner" aria-hidden="true">
+  <span class="flag"></span>
+  <span>WM-Modus aktiv · Deutschland 2026</span>
+  <span class="flag"></span>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="/" aria-label="B_77"><img src="" alt="B_77" class="logo-img" id="navLogo" /></a>
+  <ul class="nav-center">
+    <li><a href="/ueber">Über B_77</a></li>
+    <li><a href="/vertriebsoptimierung">Vertriebsoptimierung</a></li>
+    <li><a href="/aktiver-vertrieb">Aktiver Vertrieb</a></li>
+    <li><a href="/blog">Blog</a></li>
+    <li><a href="/kontakt">Kontakt</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="theme-tabs" role="tablist" aria-label="Theme auswählen">
+      <button data-theme="dark" aria-label="Dark-Modus"><span class="label-full">Dark</span></button>
+      <button data-theme="light" aria-label="Light-Modus"><span class="label-full">Light</span></button>
+      <button data-theme="wm" aria-label="WM-Modus" title="WM-Edition"><span class="flag-mini"></span><span class="label-full">WM</span></button>
+    </div>
+    <a href="/kontakt" class="nav-cta">Gespräch</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <!-- WM-Pixel-Hintergrund: Flaggen-inspiriert, nur im WM-Modus sichtbar -->
+  <div class="wm-pixelbg" aria-hidden="true">
+    <img src="assets/pixel-flag.svg" alt="" />
+  </div>
+
+  <div class="crosshair" aria-hidden="true">
+    <svg viewBox="0 0 200 200" fill="none" stroke-width="0.5">
+      <circle class="ring-outer" cx="100" cy="100" r="98" stroke-opacity="0.4"/>
+      <circle class="ring-mid" cx="100" cy="100" r="72" stroke-opacity="0.6"/>
+      <circle class="ring-inner" cx="100" cy="100" r="46" stroke-opacity="0.8"/>
+      <circle class="ring-core" cx="100" cy="100" r="22"/>
+      <circle class="center-dot" cx="100" cy="100" r="3"/>
+      <line class="crosshair-line" x1="100" y1="0" x2="100" y2="38" stroke-width="0.8"/>
+      <line class="crosshair-line" x1="100" y1="162" x2="100" y2="200" stroke-width="0.8"/>
+      <line class="crosshair-line" x1="0" y1="100" x2="38" y2="100" stroke-width="0.8"/>
+      <line class="crosshair-line" x1="162" y1="100" x2="200" y2="100" stroke-width="0.8"/>
+      <g stroke-opacity="0.5" class="crosshair-inner-ticks">
+        <line class="crosshair-line" x1="100" y1="38" x2="100" y2="58"/>
+        <line class="crosshair-line" x1="100" y1="142" x2="100" y2="162"/>
+        <line class="crosshair-line" x1="38" y1="100" x2="58" y2="100"/>
+        <line class="crosshair-line" x1="142" y1="100" x2="162" y2="100"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="hero-meta">
+    <div class="left">
+      B_77 Vertriebsberatung<br>
+      Est. Siegen / DE<br>
+      Index 01 — Vertriebsaktivierung
+    </div>
+    <div class="right">
+      57.072° N · 8.027° E<br>
+      Seit 2017 im Mandat<br>
+      Mittelstand / Industrie / Handel
+    </div>
+  </div>
+
+  <span class="kicker">Wir machen Unternehmen</span>
+  <h1 class="hero-title">Vertriebs<br>aktiv<span class="dot"></span></h1>
+
+  <div class="hero-sub">
+    <p>
+      <strong>Vertriebsaktiv</strong> zu sein bedeutet, Märkte bewusst zu bearbeiten,
+      Zielkunden systematisch zu gewinnen und Abschlüsse nicht dem Zufall zu überlassen.
+      Es schafft Steuerbarkeit — weil Unternehmen ihren Marktanteil aktiv gestalten,
+      statt auf Anfragen zu warten.
+    </p>
+    <div class="scroll"><span>Scroll</span><span class="line"></span></div>
+  </div>
+</section>
+
+<!-- WM-SPIELKALENDER (nur im WM-Modus sichtbar) -->
+<section class="wm-calendar" id="wm-calendar">
+  <div class="wm-cal-head">
+    <span class="wm-cal-label">B_77 × WM 2026 — Spielkalender</span>
+    <h2 class="wm-cal-title">Alle Spiele. Auf einen Blick.</h2>
+    <p class="wm-cal-sub">Klick ein Spiel an für Paarung, Stadion und Ergebnis. Filter oben wählen.</p>
+  </div>
+
+  <!-- Haupt-Filter -->
+  <div class="wm-cal-filters">
+    <button class="wm-filter active" data-filter="de">🇩🇪 Deutschland</button>
+    <button class="wm-filter" data-filter="group-by-letter" data-sub="wm-groups-sub">Nach Gruppe</button>
+    <button class="wm-filter" data-filter="by-date" data-sub="wm-dates-sub">Nach Tag</button>
+    <button class="wm-filter" data-filter="group">Gruppenphase (alle)</button>
+    <button class="wm-filter" data-filter="ko">K.o.-Runde</button>
+    <button class="wm-filter" data-filter="all">Alle Spiele</button>
+  </div>
+
+  <!-- Sub-Filter: Gruppen A-L -->
+  <div class="wm-subfilter" id="wm-groups-sub">
+    <button class="wm-sub-btn active" data-value="A">A</button>
+    <button class="wm-sub-btn" data-value="B">B</button>
+    <button class="wm-sub-btn" data-value="C">C</button>
+    <button class="wm-sub-btn" data-value="D">D</button>
+    <button class="wm-sub-btn" data-value="E">E <span class="de-dot" aria-label="Deutschland"></span></button>
+    <button class="wm-sub-btn" data-value="F">F</button>
+    <button class="wm-sub-btn" data-value="G">G</button>
+    <button class="wm-sub-btn" data-value="H">H</button>
+    <button class="wm-sub-btn" data-value="I">I</button>
+    <button class="wm-sub-btn" data-value="J">J</button>
+    <button class="wm-sub-btn" data-value="K">K</button>
+    <button class="wm-sub-btn" data-value="L">L</button>
+  </div>
+
+  <!-- Sub-Filter: Datum (wird per JS gefüllt, aber mit statischen Terminen als Basis) -->
+  <div class="wm-subfilter" id="wm-dates-sub">
+    <button class="wm-sub-btn active" data-value="2026-06-11">11. Jun</button>
+    <button class="wm-sub-btn" data-value="2026-06-12">12. Jun</button>
+    <button class="wm-sub-btn" data-value="2026-06-13">13. Jun</button>
+    <button class="wm-sub-btn" data-value="2026-06-14">14. Jun <span class="de-dot"></span></button>
+    <button class="wm-sub-btn" data-value="2026-06-15">15. Jun</button>
+    <button class="wm-sub-btn" data-value="2026-06-16">16. Jun</button>
+    <button class="wm-sub-btn" data-value="2026-06-17">17. Jun</button>
+    <button class="wm-sub-btn" data-value="2026-06-18">18. Jun</button>
+    <button class="wm-sub-btn" data-value="2026-06-19">19. Jun</button>
+    <button class="wm-sub-btn" data-value="2026-06-20">20. Jun <span class="de-dot"></span></button>
+    <button class="wm-sub-btn" data-value="2026-06-21">21. Jun</button>
+    <button class="wm-sub-btn" data-value="2026-06-22">22. Jun</button>
+    <button class="wm-sub-btn" data-value="2026-06-23">23. Jun</button>
+    <button class="wm-sub-btn" data-value="2026-06-24">24. Jun</button>
+    <button class="wm-sub-btn" data-value="2026-06-25">25. Jun <span class="de-dot"></span></button>
+    <button class="wm-sub-btn" data-value="2026-06-26">26. Jun</button>
+    <button class="wm-sub-btn" data-value="2026-06-27">27. Jun</button>
+    <button class="wm-sub-btn" data-value="2026-06-28">28. Jun</button>
+    <button class="wm-sub-btn" data-value="2026-07-04">4. Jul</button>
+    <button class="wm-sub-btn" data-value="2026-07-09">9. Jul</button>
+    <button class="wm-sub-btn" data-value="2026-07-14">14. Jul</button>
+    <button class="wm-sub-btn" data-value="2026-07-15">15. Jul</button>
+    <button class="wm-sub-btn" data-value="2026-07-18">18. Jul</button>
+    <button class="wm-sub-btn" data-value="2026-07-19">19. Jul · Finale</button>
+  </div>
+
+  <div class="wm-cal-list" id="wm-cal-list">
+    <!-- Wird per JavaScript gefüllt -->
+  </div>
+</section>
+
+<!-- Spiel-Detail Modal -->
+<div class="wm-modal" id="wm-modal" aria-hidden="true">
+  <div class="wm-modal-backdrop" data-close></div>
+  <div class="wm-modal-card" role="dialog" aria-modal="true" aria-labelledby="wm-modal-title">
+    <button class="wm-modal-close" data-close aria-label="Schließen">×</button>
+    <div class="wm-modal-body" id="wm-modal-body">
+      <!-- Inhalt wird per JS gesetzt -->
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stat">
+    <div class="num">25<sup>+</sup></div>
+    <div class="label">Jahre Erfahrung im Management und der Beratung mittelständischer Unternehmen</div>
+  </div>
+  <div class="stat">
+    <div class="num">10<sup>+</sup></div>
+    <div class="label">Jahre Erfahrung in internationalen Projekten und Märkten</div>
+  </div>
+  <div class="stat">
+    <div class="num">50<sup>+</sup></div>
+    <div class="label">Erfolgreich durchgeführte Mandate in Industrie, Handel und Dienstleistung</div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section class="mission" id="mission">
+  <div class="label">B_77.Mission</div>
+  <h2>
+    Wir <strong>stärken Unternehmen</strong>, indem wir sie konsequent auf
+    <strong>aktiven Vertrieb</strong> ausrichten. Für mehr Planbarkeit, mehr Kontrolle
+    und mehr Umsatz.
+  </h2>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-head">
+    <span class="label">B_77.Leistungen — 02 / 03</span>
+    <h3>Zwei Wege, einen aktiven Vertrieb zu bauen.</h3>
+  </div>
+  <div class="service-grid">
+    <a href="/vertriebsoptimierung" class="service" style="text-decoration:none;color:inherit"><div class="num">— 01 / Strategie &amp; Struktur</div>
+      <h4>Vertriebsoptimierung</h4>
+      <p>
+        Positionierung, Prozesse, CRM-Disziplin, Pipeline-Transparenz. Wir analysieren
+        Ihre Vertriebsorganisation nüchtern und bauen die Strukturen, die Wachstum
+        erst planbar machen. Weniger Zufall. Mehr Steuerung.
+      </p>
+      <span class="arrow">Mehr erfahren →</span>
+    </a>
+    <a href="/aktiver-vertrieb" class="service" style="text-decoration:none;color:inherit"><div class="num">— 02 / Umsetzung im Markt</div>
+      <h4>Aktiver Vertrieb</h4>
+      <p>
+        Zielkunden identifizieren, Entscheider systematisch ansprechen, Verhandlungen
+        konsequent führen. Wir übernehmen Verantwortung in Ihrem Markt — vom ersten
+        Kontakt bis zum Abschluss.
+      </p>
+      <span class="arrow">Mehr erfahren →</span>
+    </a>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote">
+  <span class="mark-big">„</span>
+  <p>
+    Der Markt bestimmt nicht automatisch Ihr Ergebnis.<br>
+    Ihr <strong>Marktanteil</strong> tut es.
+  </p>
+  <div class="attr">— B_77 Credo</div>
+</section>
+
+<!-- BLOG -->
+<section class="blog" id="blog">
+  <div class="blog-head">
+    <div class="title">Let's talk about Sales, Baby.</div>
+    <span class="label">B_77.Blog — Gedanken zum Vertrieb</span>
+  </div>
+  <div class="blog-grid">
+    <a href="/blog-vorm-wind" class="post" style="text-decoration:none;color:inherit">
+      <div class="meta"><span>Benjamin Loos</span><span>24.02.2026</span></div>
+      <h5>Vorm Wind ist gut segeln.</h5>
+      <p>Wer bestimmt den Kurs in Ihrem Unternehmen? Oder setzen Sie lediglich die Segel und lassen sich vom Markt treiben? Über den Unterschied zwischen Führen und Verwalten.</p>
+      <span class="read">Lesen →</span>
+    </a>
+    <a href="/blog-vorm-wind" class="post" style="text-decoration:none;color:inherit">
+      <div class="meta"><span>Benjamin Loos</span><span>24.02.2026</span></div>
+      <h5>Hören Sie auf, wahllos Ihren Sales Funnel zu füllen.</h5>
+      <p>Ein voller Funnel ersetzt keinen funktionierenden Vertriebsprozess. Warum mehr Leads ohne Struktur nur mehr Unordnung erzeugen.</p>
+      <span class="read">Lesen →</span>
+    </a>
+    <a href="/blog-vorm-wind" class="post" style="text-decoration:none;color:inherit">
+      <div class="meta"><span>Benjamin Loos</span><span>24.02.2026</span></div>
+      <h5>„Und ich werde Spitzenverkäufer!"</h5>
+      <p>Kein Buch der Welt macht aus jemandem einen Spitzenverkäufer. Über Haltung, Präsenz und den Unterschied zwischen Technik und Substanz.</p>
+      <span class="read">Lesen →</span>
+    </a>
+    <a href="/blog-vorm-wind" class="post" style="text-decoration:none;color:inherit">
+      <div class="meta"><span>Benjamin Loos</span><span>23.02.2026</span></div>
+      <h5>Die Torten-Theorie.</h5>
+      <p>Der Markt ist eine Torte. Wer zögert, bekommt die Reste. Warum Marktanteile nicht verteilt, sondern gewonnen werden.</p>
+      <span class="read">Lesen →</span>
+    </a>
+    <a href="/blog-vorm-wind" class="post" style="text-decoration:none;color:inherit">
+      <div class="meta"><span>Benjamin Loos</span><span>05.01.2026</span></div>
+      <h5>Die CHANCEN-Formel.</h5>
+      <p>Ein einfaches Rechenmodell zeigt: Der Engpass liegt selten im Marktvolumen. Er liegt im Marktanteil. Und den gestalten Sie.</p>
+      <span class="read">Lesen →</span>
+    </a>
+    <a href="/blog-vorm-wind" class="post" style="text-decoration:none;color:inherit">
+      <div class="meta"><span>Benjamin Loos</span><span>10.02.2017</span></div>
+      <h5>Verkäufer oder Vertriebler?</h5>
+      <p>Der Unterschied zwischen Verkauf und Vertrieb liegt nicht im Talent. Er liegt in der Initiative. Verwaltung vs. Marktbearbeitung.</p>
+      <span class="read">Lesen →</span>
+    </a>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="label">B_77.Kontakt</div>
+  <h2>Lassen Sie uns Ihren Vertrieb aktivieren.</h2>
+  <div class="phone">Rufen Sie an: <a href="tel:+4927189027837">+49 (0) 271 — 890 27 837</a></div>
+  <a href="/kontakt" class="cta-btn">Erstgespräch vereinbaren →</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-brand">
+    <img src="" alt="B_77" class="foot-logo" id="footLogo" />
+    <p>Vertriebsberatung für mittelständische Unternehmen. Wir machen Unternehmen vertriebsaktiv.</p>
+  </div>
+  <div>
+    <h6>Adresse</h6>
+    <ul><li>Wallhausenstraße 1</li><li>57072 Siegen</li><li>Germany</li></ul>
+  </div>
+  <div>
+    <h6>Kontakt</h6>
+    <ul>
+      <li><a href="mailto:kontakt@b77.de">kontakt@b77.de</a></li>
+      <li><a href="tel:+4927189027837">+49 271 890 27 837</a></li>
+    </ul>
+  </div>
+  <div>
+    <h6>Navigation</h6>
+    <ul>
+      <li><a href="/ueber">Über B_77</a></li>
+      <li><a href="/vertriebsoptimierung">Vertriebsoptimierung</a></li>
+      <li><a href="/aktiver-vertrieb">Aktiver Vertrieb</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/kontakt">Kontakt</a></li>
+    </ul>
+  </div>
+  <div class="legal">
+    <span>© 2026 B_77 — Alle Rechte vorbehalten.</span>
+    <span><a href="/impressum">Impressum · Datenschutz</a></span>
+  </div>
+</footer>
+
+<script src="css/scripts.js"></script>
+
+</body>
+</html>

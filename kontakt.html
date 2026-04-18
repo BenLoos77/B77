@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kontakt — B_77 Vertriebsberatung</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- WM-Banner -->
+<div class="wm-banner" aria-hidden="true">
+  <span class="flag"></span>
+  <span>WM-Modus aktiv · Deutschland 2026</span>
+  <span class="flag"></span>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="/" aria-label="B_77"><img src="" alt="B_77" class="logo-img" id="navLogo" /></a>
+  <ul class="nav-center">
+    <li><a href="/ueber">Über B_77</a></li>
+    <li><a href="/vertriebsoptimierung">Vertriebsoptimierung</a></li>
+    <li><a href="/aktiver-vertrieb">Aktiver Vertrieb</a></li>
+    <li><a href="/blog">Blog</a></li>
+    <li><a href="/kontakt">Kontakt</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="theme-tabs" role="tablist" aria-label="Theme auswählen">
+      <button data-theme="dark" aria-label="Dark-Modus"><span class="label-full">Dark</span></button>
+      <button data-theme="light" aria-label="Light-Modus"><span class="label-full">Light</span></button>
+      <button data-theme="wm" aria-label="WM-Modus" title="WM-Edition"><span class="flag-mini"></span><span class="label-full">WM</span></button>
+    </div>
+    <a href="/kontakt" class="nav-cta">Gespräch</a>
+  </div>
+</nav>
+
+<!-- SUB-HERO -->
+<section class="sub-hero">
+  <div class="breadcrumb">
+    <a href="/">Start</a>
+    <span class="sep">/</span>
+    <span>Kontakt</span>
+  </div>
+  <h1>Lassen Sie<br>uns reden.</h1>
+  <p class="lede">
+    <strong>Das Erstgespräch ist kostenlos.</strong> 45 Minuten Zeit, in denen wir verstehen,
+    wo Sie stehen und was Sie brauchen. Wenn es passt, machen wir weiter — wenn nicht,
+    haben Sie eine ehrliche Außensicht. Versprochen.
+  </p>
+</section>
+
+<!-- KONTAKT -->
+<section class="content">
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h3>Der direkte Weg.</h3>
+
+      <div class="line">
+        <div class="label">Telefon</div>
+        <div class="value"><a href="tel:+4927189027837">+49 (0) 271 — 890 27 837</a></div>
+      </div>
+
+      <div class="line">
+        <div class="label">E-Mail</div>
+        <div class="value"><a href="mailto:kontakt@b77.de">kontakt@b77.de</a></div>
+      </div>
+
+      <div class="line">
+        <div class="label">Adresse</div>
+        <div class="value">Wallhausenstraße 1<br>57072 Siegen, Germany</div>
+      </div>
+
+      <div class="line">
+        <div class="label">Bürozeiten</div>
+        <div class="value">Mo — Fr · 08:30 — 18:00 Uhr</div>
+      </div>
+    </div>
+
+    <form class="contact-form" onsubmit="event.preventDefault(); alert('Vielen Dank! Wir melden uns so schnell wie möglich.');">
+      <div>
+        <label for="name">Vollständiger Name</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div>
+        <label for="tel">Telefonnummer</label>
+        <input type="tel" id="tel" name="tel">
+      </div>
+      <div>
+        <label for="email">E-Mail-Adresse</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div>
+        <label for="msg">Ihre Nachricht</label>
+        <textarea id="msg" name="msg" rows="4" placeholder="Worum soll es im Gespräch gehen?"></textarea>
+      </div>
+      <button type="submit">Anfrage senden →</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-brand">
+    <img src="" alt="B_77" class="foot-logo" id="footLogo" />
+    <p>Vertriebsberatung für mittelständische Unternehmen. Wir machen Unternehmen vertriebsaktiv.</p>
+  </div>
+  <div>
+    <h6>Adresse</h6>
+    <ul><li>Wallhausenstraße 1</li><li>57072 Siegen</li><li>Germany</li></ul>
+  </div>
+  <div>
+    <h6>Kontakt</h6>
+    <ul>
+      <li><a href="mailto:kontakt@b77.de">kontakt@b77.de</a></li>
+      <li><a href="tel:+4927189027837">+49 271 890 27 837</a></li>
+    </ul>
+  </div>
+  <div>
+    <h6>Navigation</h6>
+    <ul>
+      <li><a href="/ueber">Über B_77</a></li>
+      <li><a href="/vertriebsoptimierung">Vertriebsoptimierung</a></li>
+      <li><a href="/aktiver-vertrieb">Aktiver Vertrieb</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/kontakt">Kontakt</a></li>
+    </ul>
+  </div>
+  <div class="legal">
+    <span>© 2026 B_77 — Alle Rechte vorbehalten.</span>
+    <span><a href="/impressum">Impressum · Datenschutz</a></span>
+  </div>
+</footer>
+
+<script src="css/scripts.js"></script>
+
+</body>
+</html>
