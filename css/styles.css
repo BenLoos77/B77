@@ -147,7 +147,16 @@
   .nav-center a:hover{color:var(--ink)}
   .nav-right{display:flex;align-items:center;gap:12px}
 
-  /* Theme-Tabs — statt Binary-Toggle jetzt 3 Optionen */
+  /* Theme-Switch: Label + Tabs */
+  .theme-switch{
+    display:flex;align-items:center;gap:10px;
+  }
+  .theme-switch-label{
+    font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--ink-mute);font-weight:600;
+  }
+
+  /* Theme-Tabs — 3 Optionen für die Design-Variante der Seite */
   .theme-tabs{
     display:flex;border:1px solid var(--line-strong);border-radius:999px;padding:3px;
     background:transparent;
@@ -408,6 +417,7 @@
     .foot-logo{height:52px}
     .theme-tabs button{padding:6px 10px;font-size:10px}
     .theme-tabs button span.label-full{display:none}
+    .theme-switch-label{display:none}
   }
   /* ==================================================================
      UNTERSEITEN-SPEZIFISCHE STILE
@@ -872,4 +882,71 @@
   @media (max-width:900px){
     .wm-cal-daymatches{grid-template-columns:1fr}
     .wm-sub-btn{padding:8px 12px;font-size:11px}
+  }
+
+  /* ==================================================================
+     PORTRAIT-Sektion (auf ueber.html)
+     ================================================================== */
+  .portrait{padding:100px 40px 80px;max-width:1400px;margin:0 auto}
+  .portrait-grid{
+    display:grid;grid-template-columns:minmax(280px,420px) 1fr;gap:80px;
+    align-items:start;
+  }
+  .portrait-img{
+    margin:0;position:relative;aspect-ratio:2/3;
+    background:var(--bg-2);overflow:hidden;
+  }
+  .portrait-img img{
+    width:100%;height:100%;object-fit:cover;display:block;
+    transition:transform .8s ease;
+  }
+  .portrait-img:hover img{transform:scale(1.02)}
+  .portrait-img::after{
+    content:"";position:absolute;inset:0;
+    border:1px solid var(--line);pointer-events:none;
+  }
+  html[data-theme="wm"] .portrait-img::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:6px;z-index:2;
+    background:linear-gradient(90deg,#0A0A0A 0 33.33%,#DD0000 33.33% 66.66%,#FFCE00 66.66% 100%);
+  }
+
+  .portrait-text .label{
+    font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--ink-mute);
+    font-weight:600;margin-bottom:16px;position:static;
+  }
+  .portrait-text h2{
+    font-family:"Inter Tight",sans-serif;font-weight:800;
+    font-size:clamp(42px,5.5vw,84px);line-height:.95;letter-spacing:-.035em;
+    color:var(--ink);margin:0 0 32px;
+  }
+  .portrait-text .lead{
+    font-size:clamp(18px,1.5vw,22px);line-height:1.5;color:var(--ink);
+    margin-bottom:24px;font-weight:400;
+  }
+  .portrait-text p{
+    font-size:16px;line-height:1.7;color:var(--ink-dim);margin-bottom:20px;
+  }
+  .portrait-sig{
+    margin-top:40px;padding-top:28px;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;
+  }
+  .sig-name{
+    font-family:"Inter Tight",sans-serif;font-weight:700;font-size:18px;color:var(--ink);
+    letter-spacing:-.01em;
+  }
+  .sig-role{
+    font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-mute);
+    margin-top:4px;font-weight:500;
+  }
+  .sig-cta{
+    font-size:13px;letter-spacing:.15em;text-transform:uppercase;font-weight:600;
+    color:var(--ink);padding-bottom:4px;border-bottom:1px solid var(--ink);
+    transition:gap .3s, padding-right .3s;display:inline-flex;align-items:center;gap:8px;
+  }
+  .sig-cta:hover{padding-right:6px}
+
+  @media (max-width:900px){
+    .portrait{padding:60px 20px 40px}
+    .portrait-grid{grid-template-columns:1fr;gap:40px}
+    .portrait-img{aspect-ratio:3/4;max-width:500px;margin:0 auto}
   }
