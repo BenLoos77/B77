@@ -19,25 +19,60 @@
     try { localStorage.setItem('b77-theme', theme); } catch(e) {}
   }
 
-  // Initial: gespeicherte Wahl, sonst WM-Modus während des Turniers, sonst System-Präferenz, sonst dark
+  // Regelwerk:
+  // 1. Während der WM (11.06.–19.07.2026): IMMER WM-Modus (Gewinner-Override).
+  //    Ausnahme: Nutzer hat während der WM aktiv ein anderes Theme gewählt – dann gewinnt seine Wahl.
+  // 2. Außerhalb der WM: automatischer Tag/Nacht-Wechsel nach Berliner Ortszeit
+  //    (07:00–20:00 = Light, 20:00–07:00 = Dark).
+  //    Ausnahme: Nutzer hat aktiv was gewählt – dann gewinnt seine Wahl.
+  //
+  // Wenn der Nutzer manuell auf einen der drei Buttons klickt, wird seine Wahl
+  // gespeichert und hebelt die Automatik aus.
+
+  function isDuringWM(now) {
+    const wmStart = new Date('2026-06-11T00:00:00');
+    const wmEnd   = new Date('2026-07-20T23:59:59');
+    return now >= wmStart && now <= wmEnd;
+  }
+
+  function autoThemeForNow(now) {
+    if (isDuringWM(now)) return 'wm';
+    // Berliner Stunde ermitteln (DST-aware dank Intl)
+    const hourStr = new Intl.DateTimeFormat('de-DE', {
+      hour: '2-digit', hour12: false, timeZone: 'Europe/Berlin'
+    }).format(now);
+    const hour = parseInt(hourStr, 10);
+    // 07:00 bis 19:59 = Light, sonst Dark
+    return (hour >= 7 && hour < 20) ? 'light' : 'dark';
+  }
+
+  // Initial: gespeicherte Wahl, sonst Automatik
   let initial = 'dark';
   try {
     const saved = localStorage.getItem('b77-theme');
     if (['light','dark','wm'].includes(saved)) {
       initial = saved;
     } else {
-      // Kein Nutzer-Override: automatisch WM-Modus während des Turniers
-      const now = new Date();
-      const wmStart = new Date('2026-06-11T00:00:00');
-      const wmEnd   = new Date('2026-07-20T23:59:59'); // bis Ende des Finaltags
-      if (now >= wmStart && now <= wmEnd) {
-        initial = 'wm';
-      } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-        initial = 'light';
-      }
+      initial = autoThemeForNow(new Date());
     }
-  } catch(e) {}
+  } catch(e) {
+    initial = autoThemeForNow(new Date());
+  }
   applyTheme(initial);
+
+  // Auto-Wechsel zur vollen Stunde, solange Nutzer KEINE eigene Wahl getroffen hat
+  setInterval(() => {
+    try {
+      if (localStorage.getItem('b77-theme')) return; // Nutzer hat gewählt → nicht anfassen
+    } catch(e) {}
+    const next = autoThemeForNow(new Date());
+    if (next !== document.documentElement.getAttribute('data-theme')) {
+      applyTheme(next);
+      // applyTheme speichert standardmäßig in localStorage – bei Auto-Wechsel wollen wir das NICHT,
+      // damit die Automatik weiterlaufen kann. Daher löschen wir den Eintrag direkt wieder:
+      try { localStorage.removeItem('b77-theme'); } catch(e) {}
+    }
+  }, 60 * 1000); // jede Minute prüfen
 
   document.querySelectorAll('.theme-tabs button').forEach(b =>
     b.addEventListener('click', () => applyTheme(b.dataset.theme))
