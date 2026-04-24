@@ -1046,3 +1046,120 @@
   @media (max-width:900px){
     .service-links{padding:24px 20px 0;font-size:13px}
   }
+
+  /* Check-Link in der Nav — sekundär neben Gespräch */
+  .nav-check{
+    padding:11px 18px;
+    font-size:13px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;
+    color:var(--ink);transition:all .3s;
+    display:inline-flex;align-items:center;gap:8px;
+    white-space:nowrap;
+  }
+  .nav-check::before{
+    content:"";display:inline-block;width:8px;height:8px;border-radius:50%;
+    background:#DD0000;box-shadow:0 0 8px rgba(221,0,0,.5);
+  }
+  .nav-check:hover{color:#DD0000}
+  @media (max-width:900px){
+    .nav-check{padding:9px 12px;font-size:12px}
+    .nav-check::before{width:6px;height:6px}
+  }
+  @media (max-width:680px){
+    .nav-check{display:none}
+  }
+
+  /* ==================================================================
+     VERTRIEBS-CHECK TEASER (Startseite + Landingpages)
+     ================================================================== */
+  .check-teaser{
+    padding:120px 40px;background:var(--bg-2);
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    position:relative;overflow:hidden;
+  }
+  .check-teaser::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:3px;
+    background:linear-gradient(90deg,#0A0A0A 0 33.33%,#DD0000 33.33% 66.66%,#FFCE00 66.66% 100%);
+    opacity:.7;
+  }
+  html[data-theme="wm"] .check-teaser::before{opacity:1;height:6px}
+
+  .check-teaser-inner{
+    max-width:900px;margin:0 auto;text-align:center;
+  }
+  .check-teaser-meta{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--ink-mute);font-weight:600;margin-bottom:32px;
+  }
+  .check-teaser-pulse{
+    width:10px;height:10px;border-radius:50%;background:#DD0000;
+    box-shadow:0 0 0 0 rgba(221,0,0,.4);
+    animation:checkPulse 2s infinite;
+  }
+  @keyframes checkPulse{
+    0%{box-shadow:0 0 0 0 rgba(221,0,0,.5)}
+    70%{box-shadow:0 0 0 12px rgba(221,0,0,0)}
+    100%{box-shadow:0 0 0 0 rgba(221,0,0,0)}
+  }
+  .check-teaser-title{
+    font-family:"Inter Tight",sans-serif;font-weight:800;
+    font-size:clamp(36px,5vw,64px);line-height:1.05;letter-spacing:-.035em;
+    color:var(--ink);margin:0 0 28px;
+  }
+  .check-teaser-highlight{color:#DD0000}
+  html[data-theme="wm"] .check-teaser-highlight{color:#DD0000}
+  .check-teaser-text{
+    font-size:clamp(16px,1.4vw,19px);line-height:1.6;color:var(--ink-dim);
+    max-width:640px;margin:0 auto 40px;
+  }
+  .check-teaser-actions{
+    display:flex;flex-direction:column;align-items:center;gap:14px;
+  }
+  .btn-check{
+    display:inline-flex;align-items:center;gap:14px;
+    padding:20px 40px;background:#DD0000;color:#fff;
+    font-size:14px;letter-spacing:.15em;text-transform:uppercase;font-weight:700;
+    transition:all .3s;border:2px solid #DD0000;
+  }
+  .btn-check:hover{background:#B80000;border-color:#B80000;transform:translateY(-2px);box-shadow:0 10px 25px -10px rgba(221,0,0,.5)}
+  .check-teaser-note{
+    font-size:12px;color:var(--ink-mute);letter-spacing:.05em;
+  }
+
+  @media (max-width:900px){
+    .check-teaser{padding:80px 20px}
+    .btn-check{padding:16px 28px;font-size:13px}
+  }
+
+  /* Mid-CTA mit Dual-Button (Check + Gespräch) */
+  .mid-cta .mid-cta-sub{
+    font-size:16px;color:var(--ink-dim);margin:8px 0 32px;line-height:1.5;
+  }
+  .mid-cta-buttons{
+    display:flex;gap:16px;justify-content:center;flex-wrap:wrap;
+  }
+  .mid-cta-buttons .btn-primary{
+    background:#DD0000;color:#fff;border-color:#DD0000;
+  }
+  .mid-cta-buttons .btn-primary:hover{
+    background:#B80000;border-color:#B80000;color:#fff;
+  }
+  .mid-cta-buttons .btn-ghost{
+    background:transparent;color:var(--ink);border-color:var(--ink);
+  }
+  .mid-cta-buttons .btn-ghost:hover{
+    background:var(--ink);color:var(--bg);
+  }
+  @media (max-width:600px){
+    .mid-cta-buttons{flex-direction:column;align-items:stretch;max-width:320px;margin:0 auto}
+  }
+
+  /* Alt-Hinweis auf Kontakt-Seite für Check */
+  .lede-alt{
+    margin-top:24px;padding-top:20px;border-top:1px solid var(--line);
+    font-size:15px;color:var(--ink-dim);
+  }
+  .lede-alt a{
+    color:#DD0000;font-weight:600;border-bottom:1px solid #DD0000;padding-bottom:1px;
+  }
+  .lede-alt a:hover{background:rgba(221,0,0,.08)}
