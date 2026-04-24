@@ -1111,7 +1111,8 @@
   .check-teaser::before{
     content:"";position:absolute;top:0;left:0;right:0;height:3px;
     background:linear-gradient(90deg,#0A0A0A 0 33.33%,#DD0000 33.33% 66.66%,#FFCE00 66.66% 100%);
-    opacity:.7;
+    opacity:0;
+    transition:opacity .3s;
   }
   html[data-theme="wm"] .check-teaser::before{opacity:1;height:6px}
 
