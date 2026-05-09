@@ -1,0 +1,226 @@
+/* ==========================================================================
+   SALES-INTELLIGENCE-ANTEASER — in styles.v2.css ergänzen
+   ========================================================================== */
+
+  .si-teaser {
+    display: block;
+    padding: 100px 40px;
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Cyan-Akzentlinie oben — verbindet visuell mit Quoodix */
+  .si-teaser::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      #00F5FF 50%,
+      transparent 100%);
+    opacity: 0.5;
+  }
+
+  .si-teaser:hover {
+    transform: translateY(-2px);
+  }
+
+  .si-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .si-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 32px;
+    font-family: "Inter Tight", sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+
+  .si-pulse {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #00F5FF;
+    box-shadow: 0 0 12px rgba(0, 245, 255, 0.6);
+    animation: si-pulse 2.5s ease-in-out infinite;
+  }
+
+  @keyframes si-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%      { opacity: 0.4; transform: scale(0.85); }
+  }
+
+  /* Grid: Text links, Stats rechts */
+  .si-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .si-eyebrow {
+    font-family: "Inter Tight", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--ink-mute);
+    margin-bottom: 16px;
+    text-transform: lowercase;
+  }
+  .si-eyebrow em {
+    font-style: italic;
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  .si-title {
+    font-family: "Inter Tight", sans-serif;
+    font-size: clamp(36px, 4.5vw, 64px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin: 0 0 24px;
+  }
+
+  .si-accent {
+    color: var(--ink);
+    font-weight: 500;
+    font-style: italic;
+  }
+
+  .si-desc {
+    max-width: 560px;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--ink-dim);
+    margin-bottom: 32px;
+  }
+
+  .si-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: "Inter Tight", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+  }
+  .si-teaser:hover .si-cta {
+    background: #00F5FF;
+    border-color: #00F5FF;
+    color: #0A0A0A;
+  }
+  .si-arrow {
+    transition: transform 0.3s ease;
+    font-weight: 400;
+  }
+  .si-teaser:hover .si-arrow {
+    transform: translateX(4px);
+  }
+
+  /* Stats-Spalte */
+  .si-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    border-left: 1px solid var(--line);
+    padding-left: 60px;
+  }
+
+  .si-stat {
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 24px;
+  }
+  .si-stat:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .si-stat-num {
+    font-family: "Inter Tight", sans-serif;
+    font-size: 56px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: #00F5FF;
+    margin-bottom: 8px;
+  }
+  .si-stat-num span {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .si-stat-label {
+    font-family: "Inter Tight", sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    line-height: 1.5;
+  }
+
+  /* Footer-Zeile */
+  .si-foot {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-family: "Inter Tight", sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    text-align: center;
+  }
+
+  /* Mobile */
+  @media (max-width: 900px) {
+    .si-teaser {
+      padding: 70px 20px;
+    }
+    .si-grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    .si-stats {
+      border-left: none;
+      border-top: 1px solid var(--line);
+      padding-left: 0;
+      padding-top: 32px;
+    }
+    .si-stat-num {
+      font-size: 44px;
+    }
+    .si-foot {
+      margin-top: 40px;
+    }
+  }
+
+  /* Im WM-Modus: Cyan-Akzent dezenter, damit Schwarz-Rot-Gold nicht stört */
+  html[data-theme="wm"] .si-teaser::before {
+    opacity: 0.3;
+  }

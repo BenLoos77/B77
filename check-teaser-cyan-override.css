@@ -1,0 +1,77 @@
+/* ==========================================================================
+   VERTRIEBS-CHECK-TEASER — Cyan statt Rot
+   Diesen Block ans ENDE der styles.v2.css anhängen
+   (die alten roten Werte werden durch diese überschrieben — Cascade)
+   ========================================================================== */
+
+  /* Pulsierender Punkt links neben "Vertriebs-Check · Kostenlos" */
+  .check-teaser-pulse{
+    background:#00F5FF !important;
+    box-shadow:0 0 12px rgba(0,245,255,0.6) !important;
+  }
+
+  /* Hervorhebung "Machen Sie den Check." → schwarz, nur italic-Akzent */
+  .check-teaser-highlight{
+    color:var(--ink) !important;
+  }
+  html[data-theme="wm"] .check-teaser-highlight{
+    color:var(--ink) !important;
+  }
+
+  /* CTA-Button "Vertriebs-Check starten →" */
+  .btn-check{
+    background:#00F5FF !important;
+    color:#0A0A0A !important;
+    border-color:#00F5FF !important;
+  }
+  .btn-check:hover{
+    background:#0A0A0A !important;
+    color:#00F5FF !important;
+    border-color:#00F5FF !important;
+  }
+
+  /* Falls der Schwarz-Rot-Gold-Streifen oben auch im Check-Teaser im WM-Modus erscheint:
+     Im WM-Modus den Streifen behalten (Flagge ist okay), in Light/Dark KEIN Akzent */
+  /* Bereits in einem früheren Update so eingestellt — falls nicht, hier nochmal sicher: */
+  .check-teaser::before{
+    opacity:0;
+  }
+  html[data-theme="wm"] .check-teaser::before{
+    opacity:1;
+  }
+
+  /* "mid-cta-buttons" auf den Landingpages — der primäre Button war auch rot */
+  .mid-cta-buttons .btn-primary{
+    background:#00F5FF !important;
+    color:#0A0A0A !important;
+    border-color:#00F5FF !important;
+  }
+  .mid-cta-buttons .btn-primary:hover{
+    background:#0A0A0A !important;
+    color:#00F5FF !important;
+    border-color:#00F5FF !important;
+  }
+
+  /* 67-Easter-Egg-Button: roter Glow → Cyan-Glow */
+  .sixseven-btn{
+    box-shadow:0 10px 30px -10px rgba(0,0,0,.5),
+               0 0 0 0 rgba(0,245,255,0.4) !important;
+    animation:sixseven-pulse-cyan 3s ease-in-out infinite !important;
+  }
+  .sixseven-btn:hover{
+    background:#00F5FF !important;
+    color:#0A0A0A !important;
+    box-shadow:0 16px 40px -10px rgba(0,245,255,0.5),
+               0 0 0 8px rgba(0,245,255,0.15) !important;
+    animation:none !important;
+  }
+  @keyframes sixseven-pulse-cyan {
+    0%, 100% {
+      box-shadow:0 10px 30px -10px rgba(0,0,0,.5),
+                 0 0 0 0 rgba(0,245,255,0.4);
+    }
+    50% {
+      box-shadow:0 10px 30px -10px rgba(0,0,0,.5),
+                 0 0 0 12px rgba(0,245,255,0);
+    }
+  }
