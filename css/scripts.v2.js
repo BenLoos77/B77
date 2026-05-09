@@ -19,60 +19,25 @@
     try { localStorage.setItem('b77-theme', theme); } catch(e) {}
   }
 
-  // Regelwerk:
-  // 1. Während der WM (11.06.–19.07.2026): IMMER WM-Modus (Gewinner-Override).
-  //    Ausnahme: Nutzer hat während der WM aktiv ein anderes Theme gewählt – dann gewinnt seine Wahl.
-  // 2. Außerhalb der WM: automatischer Tag/Nacht-Wechsel nach Berliner Ortszeit
-  //    (07:00–20:00 = Light, 20:00–07:00 = Dark).
-  //    Ausnahme: Nutzer hat aktiv was gewählt – dann gewinnt seine Wahl.
-  //
-  // Wenn der Nutzer manuell auf einen der drei Buttons klickt, wird seine Wahl
-  // gespeichert und hebelt die Automatik aus.
-
-  function isDuringWM(now) {
-    const wmStart = new Date('2026-06-11T00:00:00');
-    const wmEnd   = new Date('2026-07-20T23:59:59');
-    return now >= wmStart && now <= wmEnd;
-  }
-
-  function autoThemeForNow(now) {
-    if (isDuringWM(now)) return 'wm';
-    // Berliner Stunde ermitteln (DST-aware dank Intl)
-    const hourStr = new Intl.DateTimeFormat('de-DE', {
-      hour: '2-digit', hour12: false, timeZone: 'Europe/Berlin'
-    }).format(now);
-    const hour = parseInt(hourStr, 10);
-    // 07:00 bis 19:59 = Light, sonst Dark
-    return (hour >= 7 && hour < 20) ? 'light' : 'dark';
-  }
-
-  // Initial: gespeicherte Wahl, sonst Automatik
+  // Initial: gespeicherte Wahl, sonst WM-Modus während des Turniers, sonst System-Präferenz, sonst dark
   let initial = 'dark';
   try {
     const saved = localStorage.getItem('b77-theme');
     if (['light','dark','wm'].includes(saved)) {
       initial = saved;
     } else {
-      initial = autoThemeForNow(new Date());
+      // Kein Nutzer-Override: automatisch WM-Modus während des Turniers
+      const now = new Date();
+      const wmStart = new Date('2026-06-11T00:00:00');
+      const wmEnd   = new Date('2026-07-20T23:59:59'); // bis Ende des Finaltags
+      if (now >= wmStart && now <= wmEnd) {
+        initial = 'wm';
+      } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+        initial = 'light';
+      }
     }
-  } catch(e) {
-    initial = autoThemeForNow(new Date());
-  }
+  } catch(e) {}
   applyTheme(initial);
-
-  // Auto-Wechsel zur vollen Stunde, solange Nutzer KEINE eigene Wahl getroffen hat
-  setInterval(() => {
-    try {
-      if (localStorage.getItem('b77-theme')) return; // Nutzer hat gewählt → nicht anfassen
-    } catch(e) {}
-    const next = autoThemeForNow(new Date());
-    if (next !== document.documentElement.getAttribute('data-theme')) {
-      applyTheme(next);
-      // applyTheme speichert standardmäßig in localStorage – bei Auto-Wechsel wollen wir das NICHT,
-      // damit die Automatik weiterlaufen kann. Daher löschen wir den Eintrag direkt wieder:
-      try { localStorage.removeItem('b77-theme'); } catch(e) {}
-    }
-  }, 60 * 1000); // jede Minute prüfen
 
   document.querySelectorAll('.theme-tabs button').forEach(b =>
     b.addEventListener('click', () => applyTheme(b.dataset.theme))
@@ -560,3 +525,64 @@ if (document.getElementById('wm-cal-list')) {
   // Start: Deutschland
   renderMatches('de');
 }
+
+
+// ==========================================================================
+// B_77 EASTER EGG: 77 tippen oder 67-Button klicken → Erdbeben
+// ==========================================================================
+(function() {
+  'use strict';
+  let buffer = '';
+  let resetTimer = null;
+
+  function triggerQuake() {
+    if (document.body.classList.contains('b77-quake-active')) return;
+
+    const toast = document.createElement('div');
+    toast.className = 'b77-egg-toast';
+    toast.textContent = 'B_77 — Erschütterung im Markt';
+    document.body.appendChild(toast);
+    requestAnimationFrame(() => toast.classList.add('visible'));
+
+    document.body.classList.add('b77-quake-active');
+
+    setTimeout(() => {
+      document.body.classList.remove('b77-quake-active');
+    }, 1600);
+
+    setTimeout(() => {
+      toast.classList.remove('visible');
+      setTimeout(() => toast.remove(), 400);
+    }, 2500);
+  }
+
+  function handleKey(e) {
+    const tag = (e.target && e.target.tagName) || '';
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || (e.target && e.target.isContentEditable)) {
+      return;
+    }
+    if (e.key === '7') {
+      buffer += '7';
+      if (resetTimer) clearTimeout(resetTimer);
+      resetTimer = setTimeout(() => { buffer = ''; }, 1500);
+      if (buffer === '77') {
+        buffer = '';
+        triggerQuake();
+      }
+    } else {
+      buffer = '';
+    }
+  }
+
+  document.addEventListener('keydown', handleKey);
+
+  function bindButton() {
+    const btn = document.getElementById('sixsevenBtn');
+    if (btn) btn.addEventListener('click', triggerQuake);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bindButton);
+  } else {
+    bindButton();
+  }
+})();
