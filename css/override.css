@@ -304,3 +304,150 @@ footer {
   align-items: center !important;
   gap: 10px !important;
   font-size:
+
+/* ==========================================================================
+   KI IM VERTRIEB - Phasen-Schaubild
+   ========================================================================== */
+
+.ki-phases {
+  padding: 120px 40px !important;
+  background: var(--bg-2) !important;
+  border-top: 1px solid var(--line) !important;
+  border-bottom: 1px solid var(--line) !important;
+  position: relative !important;
+}
+
+.ki-phases::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important; left: 0 !important; right: 0 !important;
+  height: 1px !important;
+  background: linear-gradient(90deg, transparent 0%, #00F5FF 50%, transparent 100%) !important;
+  opacity: 0.5 !important;
+}
+
+.ki-phases-head {
+  max-width: 1400px !important;
+  margin: 0 auto 60px !important;
+}
+
+.ki-phases-label {
+  font-size: 11px !important;
+  letter-spacing: .25em !important;
+  text-transform: uppercase !important;
+  color: var(--ink-mute) !important;
+  font-weight: 600 !important;
+  margin-bottom: 20px !important;
+}
+
+.ki-phases-title {
+  font-family: "Inter Tight", sans-serif !important;
+  font-weight: 700 !important;
+  font-size: clamp(32px, 4.5vw, 56px) !important;
+  line-height: 1.1 !important;
+  letter-spacing: -.025em !important;
+  color: var(--ink) !important;
+  margin: 0 !important;
+  max-width: 900px !important;
+}
+
+.ki-phases-title em {
+  font-style: italic !important;
+  font-weight: 500 !important;
+}
+
+.ki-pipeline {
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 24px !important;
+  position: relative !important;
+}
+
+.ki-phase {
+  background: var(--bg-panel) !important;
+  border: 1px solid var(--line) !important;
+  padding: 32px !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: all .4s cubic-bezier(.2,.8,.2,1) !important;
+}
+
+.ki-phase::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important; left: 0 !important; right: 0 !important;
+  height: 2px !important;
+  background: #00F5FF !important;
+  transform: scaleX(0) !important;
+  transform-origin: left !important;
+  transition: transform .5s ease !important;
+}
+
+.ki-phase:hover {
+  border-color: var(--ink) !important;
+  transform: translateY(-4px) !important;
+}
+
+.ki-phase:hover::before {
+  transform: scaleX(1) !important;
+}
+
+.ki-phase-num {
+  font-family: "Inter Tight", sans-serif !important;
+  font-size: 12px !important;
+  letter-spacing: .2em !important;
+  font-weight: 700 !important;
+  color: #00F5FF !important;
+  margin-bottom: 24px !important;
+}
+
+.ki-phase-title {
+  font-family: "Inter Tight", sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 24px !important;
+  line-height: 1.15 !important;
+  letter-spacing: -.02em !important;
+  color: var(--ink) !important;
+  margin: 0 0 14px !important;
+}
+
+.ki-phase-text {
+  font-size: 14px !important;
+  line-height: 1.65 !important;
+  color: var(--ink-dim) !important;
+  margin: 0 0 24px !important;
+}
+
+.ki-phase-tools {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+  margin-top: auto !important;
+}
+
+.ki-tool {
+  display: inline-flex !important;
+  padding: 5px 11px !important;
+  font-size: 10.5px !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+  font-weight: 600 !important;
+  color: var(--ink-dim) !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 999px !important;
+  background: var(--bg) !important;
+}
+
+@media (max-width: 1100px) {
+  .ki-pipeline {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .ki-phases { padding: 80px 20px !important; }
+  .ki-pipeline { grid-template-columns: 1fr !important; }
+  .ki-phase { padding: 28px !important; }
+}
