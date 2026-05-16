@@ -43,3 +43,20 @@ footer {
     font-size: 13px !important;
   }
 }
+/* Mini-Karten Breite auf großen Monitoren erzwingen */
+.mini-cards {
+  max-width: 1400px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+}
+
+.mini-card {
+  min-width: 0 !important;
+}
+
+@media (max-width: 900px) {
+  .mini-cards {
+    grid-template-columns: 1fr !important;
+  }
+}
