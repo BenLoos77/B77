@@ -1491,3 +1491,24 @@
     transform: translateY(-2px) !important;
     box-shadow: 0 10px 25px -10px rgba(0,245,255,.5) !important;
   }
+.hero, .stats, .sub-hero, footer {
+  max-width: 1500px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.si-cta {
+  padding: 20px 40px !important;
+  background: #00F5FF !important;
+  color: #0A0A0A !important;
+  border: 2px solid #00F5FF !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  letter-spacing: .15em !important;
+  text-transform: uppercase !important;
+}
+
+.si-teaser:hover .si-cta {
+  background: #0A0A0A !important;
+  color: #00F5FF !important;
+}
