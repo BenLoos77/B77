@@ -60,3 +60,9 @@ footer {
     grid-template-columns: 1fr !important;
   }
 }
+/* Mini-Karten: Nummer fett + mehr Abstand zur Headline */
+.mini-card-num {
+  font-weight: 700 !important;
+  color: var(--ink) !important;
+  margin-bottom: 32px !important;
+}
