@@ -685,3 +685,8 @@ section.cta-section {
   color: var(--ink) !important;
   transform: translateY(-2px) !important;
 }
+
+/* CTA-Section: alle Texte zentriert */
+.cta-section, .cta-section * {
+  text-align: center !important;
+}
