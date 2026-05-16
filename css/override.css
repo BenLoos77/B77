@@ -413,3 +413,201 @@
   border: 2px solid var(--ink) !important;
 }
 .cta-btn:hover { background: transparent !important; color: var(--ink) !important; transform: translateY(-2px) !important; }
+
+/* QUOODIX-ANTEASER (aus styles.v2.css repliziert) */
+.quoodix-stage {
+  display: block !important;
+  position: relative !important;
+  overflow: hidden !important;
+  background: #0A0A0A !important;
+  color: #FFFFFF !important;
+  text-decoration: none !important;
+  padding: 120px 40px !important;
+  margin: 0 !important;
+  border-top: 1px solid rgba(0,245,255,0.15) !important;
+  border-bottom: 1px solid rgba(0,245,255,0.15) !important;
+}
+.quoodix-bg {
+  position: absolute !important;
+  top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
+  pointer-events: none !important;
+}
+.quoodix-grid {
+  position: absolute !important;
+  inset: 0 !important;
+  background-image:
+    linear-gradient(rgba(0,245,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,245,255,0.06) 1px, transparent 1px) !important;
+  background-size: 60px 60px !important;
+  opacity: 0.5 !important;
+}
+.quoodix-connector {
+  position: absolute !important;
+  background: linear-gradient(90deg, transparent 0%, rgba(0,245,255,0.4) 50%, transparent 100%) !important;
+  height: 1px !important;
+  width: 100% !important;
+}
+.quoodix-connector-1 { top: 30% !important; }
+.quoodix-connector-2 { top: 70% !important; }
+.quoodix-floater {
+  position: absolute !important;
+  border-radius: 50% !important;
+  background: rgba(0,245,255,0.4) !important;
+  box-shadow: 0 0 20px rgba(0,245,255,0.5) !important;
+  animation: quoodix-float 6s ease-in-out infinite !important;
+}
+.quoodix-floater-1 { width: 6px; height: 6px; top: 25%; left: 12%; animation-delay: 0s !important; }
+.quoodix-floater-2 { width: 4px; height: 4px; top: 65%; left: 88%; animation-delay: 1.5s !important; }
+.quoodix-floater-3 { width: 8px; height: 8px; top: 80%; left: 22%; animation-delay: 3s !important; }
+.quoodix-floater-4 { width: 5px; height: 5px; top: 15%; left: 75%; animation-delay: 4s !important; }
+.quoodix-floater-5 { width: 6px; height: 6px; top: 50%; left: 50%; animation-delay: 2s !important; }
+@keyframes quoodix-float {
+  0%, 100% { transform: translateY(0); opacity: 0.4; }
+  50% { transform: translateY(-15px); opacity: 1; }
+}
+.quoodix-content {
+  position: relative !important;
+  z-index: 2 !important;
+  max-width: 1100px !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+}
+.quoodix-eyebrow {
+  font-size: 11px !important;
+  letter-spacing: .35em !important;
+  text-transform: uppercase !important;
+  color: #00F5FF !important;
+  font-weight: 600 !important;
+  margin-bottom: 16px !important;
+}
+.quoodix-wordmark {
+  font-family: "Inter Tight", sans-serif !important;
+  font-weight: 800 !important;
+  font-size: clamp(64px, 10vw, 140px) !important;
+  line-height: .9 !important;
+  letter-spacing: -.04em !important;
+  margin: 0 0 24px !important;
+  color: #FFFFFF !important;
+  background: linear-gradient(135deg, #FFFFFF 0%, #00F5FF 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+.quoodix-tagline {
+  font-family: "Inter Tight", sans-serif !important;
+  font-size: clamp(20px, 2.5vw, 28px) !important;
+  font-weight: 500 !important;
+  line-height: 1.3 !important;
+  color: #FFFFFF !important;
+  margin-bottom: 24px !important;
+}
+.quoodix-tagline em { font-style: italic !important; color: #00F5FF !important; }
+.quoodix-description {
+  font-size: 16px !important;
+  line-height: 1.7 !important;
+  color: rgba(255,255,255,0.7) !important;
+  max-width: 720px !important;
+  margin: 0 auto 32px !important;
+}
+.quoodix-meta-row {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 40px !important;
+  font-size: 12px !important;
+  letter-spacing: .15em !important;
+  text-transform: uppercase !important;
+  color: rgba(255,255,255,0.5) !important;
+}
+.quoodix-meta-arrow { color: #00F5FF !important; font-weight: 600 !important; }
+.quoodix-stage:hover .quoodix-meta-arrow { letter-spacing: .25em !important; transition: letter-spacing .3s !important; }
+
+@media (max-width: 720px) {
+  .quoodix-stage { padding: 80px 20px !important; }
+  .quoodix-meta-row { flex-direction: column !important; gap: 12px !important; }
+}
+
+/* KI-CHECK-TEASER */
+.check-teaser {
+  padding: 100px 40px !important;
+  background: var(--bg) !important;
+  text-align: center !important;
+}
+.check-teaser-inner {
+  max-width: 900px !important;
+  margin: 0 auto !important;
+}
+.check-teaser-meta {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  font-size: 11px !important;
+  letter-spacing: .25em !important;
+  text-transform: uppercase !important;
+  color: var(--ink-mute) !important;
+  font-weight: 600 !important;
+  margin-bottom: 32px !important;
+}
+.check-teaser-pulse {
+  width: 8px !important; height: 8px !important;
+  border-radius: 50% !important;
+  background: #00F5FF !important;
+  box-shadow: 0 0 12px rgba(0,245,255,0.6) !important;
+  animation: si-pulse 2.5s ease-in-out infinite !important;
+}
+@keyframes si-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 12px rgba(0,245,255,0.6); }
+  50% { opacity: 0.5; box-shadow: 0 0 20px rgba(0,245,255,0.9); }
+}
+.check-teaser-title {
+  font-family: "Inter Tight", sans-serif !important;
+  font-weight: 700 !important;
+  font-size: clamp(32px, 4.5vw, 56px) !important;
+  line-height: 1.1 !important;
+  letter-spacing: -.025em !important;
+  color: var(--ink) !important;
+  margin: 0 0 24px !important;
+}
+.check-teaser-highlight { color: #00F5FF !important; }
+.check-teaser-text {
+  font-size: 17px !important;
+  line-height: 1.6 !important;
+  color: var(--ink-dim) !important;
+  margin: 0 auto 40px !important;
+  max-width: 720px !important;
+}
+.check-teaser-actions {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 14px !important;
+}
+.check-teaser .btn-check {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  padding: 20px 40px !important;
+  background: #00F5FF !important;
+  color: #0A0A0A !important;
+  border: 2px solid #00F5FF !important;
+  font-family: "Inter Tight", sans-serif !important;
+  font-size: 14px !important;
+  letter-spacing: .15em !important;
+  text-transform: uppercase !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  transition: all .3s !important;
+}
+.check-teaser .btn-check:hover {
+  background: var(--bg) !important;
+  color: #00F5FF !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 25px -10px rgba(0,245,255,.5) !important;
+}
+.check-teaser-note {
+  font-size: 12px !important;
+  color: var(--ink-mute) !important;
+}
+@media (max-width: 720px) {
+  .check-teaser { padding: 80px 20px !important; }
+  .check-teaser .btn-check { padding: 16px 28px !important; font-size: 13px !important; }
+}
