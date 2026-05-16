@@ -1,18 +1,18 @@
-.hero,
-.stats,
-.sub-hero,
-footer {
+/* ==========================================================================
+   B_77 OVERRIDE.CSS — Stand 16.05.2026, sauber neu aufgebaut
+   ========================================================================== */
+
+/* Content-Begrenzung auf großen Monitoren */
+.hero, .stats, .sub-hero, footer {
   max-width: 1500px !important;
   margin-left: auto !important;
   margin-right: auto !important;
 }
-
 @media (max-width: 900px) {
-  .hero, .stats, .sub-hero, footer {
-    max-width: 100% !important;
-  }
+  .hero, .stats, .sub-hero, footer { max-width: 100% !important; }
 }
 
+/* Sales-Intelligence-Button */
 .si-cta {
   display: inline-flex !important;
   align-items: center !important;
@@ -28,45 +28,18 @@ footer {
   font-weight: 700 !important;
   transition: all .3s !important;
 }
-
 .si-teaser:hover .si-cta {
-  background: #0A0A0A !important;
+  background: var(--bg) !important;
   color: #00F5FF !important;
   border-color: #00F5FF !important;
   transform: translateY(-2px) !important;
   box-shadow: 0 10px 25px -10px rgba(0,245,255,.5) !important;
 }
-
 @media (max-width: 900px) {
-  .si-cta {
-    padding: 16px 28px !important;
-    font-size: 13px !important;
-  }
-}
-/* Mini-Karten Breite auf großen Monitoren erzwingen */
-.mini-cards {
-  max-width: 1400px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  box-sizing: border-box !important;
+  .si-cta { padding: 16px 28px !important; font-size: 13px !important; }
 }
 
-.mini-card {
-  min-width: 0 !important;
-}
-
-@media (max-width: 900px) {
-  .mini-cards {
-    grid-template-columns: 1fr !important;
-  }
-}
-/* Mini-Karten: Nummer fett + mehr Abstand zur Headline */
-.mini-card-num {
-  font-weight: 700 !important;
-  color: var(--ink) !important;
-  margin-bottom: 32px !important;
-}
-/* Mini-Karten: exakt im Stil der Hauptkarten, nur kleiner */
+/* MINI-KARTEN unter den Services */
 .mini-cards {
   max-width: 1400px !important;
   margin: 40px auto 0 !important;
@@ -76,7 +49,6 @@ footer {
   gap: 24px !important;
   box-sizing: border-box !important;
 }
-
 .mini-card {
   background: var(--bg-panel) !important;
   border: 1px solid var(--line) !important;
@@ -89,29 +61,18 @@ footer {
   display: block !important;
   min-width: 0 !important;
 }
-
 .mini-card::before {
   content: "" !important;
   position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
+  top: 0 !important; left: 0 !important; right: 0 !important;
   height: 1px !important;
   background: var(--ink) !important;
   transform: scaleX(0) !important;
   transform-origin: left !important;
   transition: transform .6s ease !important;
 }
-
-.mini-card:hover {
-  border-color: var(--ink) !important;
-  transform: translateY(-4px) !important;
-}
-
-.mini-card:hover::before {
-  transform: scaleX(1) !important;
-}
-
+.mini-card:hover { border-color: var(--ink) !important; transform: translateY(-4px) !important; }
+.mini-card:hover::before { transform: scaleX(1) !important; }
 .mini-card-num {
   font-size: 11px !important;
   letter-spacing: .2em !important;
@@ -120,7 +81,6 @@ footer {
   font-weight: 500 !important;
   text-transform: uppercase !important;
 }
-
 .mini-card-title {
   font-family: "Inter Tight", sans-serif !important;
   font-weight: 700 !important;
@@ -130,15 +90,12 @@ footer {
   margin: 0 0 14px !important;
   color: var(--ink) !important;
 }
-
 .mini-card-text {
   font-size: 14px !important;
   line-height: 1.65 !important;
   color: var(--ink-dim) !important;
   margin: 0 0 28px !important;
-  max-width: none !important;
 }
-
 .mini-card-arrow {
   display: inline-flex !important;
   align-items: center !important;
@@ -150,20 +107,12 @@ footer {
   transition: gap .3s !important;
   font-weight: 600 !important;
 }
-
-.mini-card:hover .mini-card-arrow {
-  gap: 20px !important;
-}
-
+.mini-card:hover .mini-card-arrow { gap: 20px !important; }
 @media (max-width: 900px) {
-  .mini-cards {
-    grid-template-columns: 1fr !important;
-    padding: 0 20px !important;
-  }
-  .mini-card {
-    padding: 28px !important;
-  }
+  .mini-cards { grid-template-columns: 1fr !important; padding: 0 20px !important; }
+  .mini-card { padding: 28px !important; }
 }
+
 /* AUS DEM MAGAZIN */
 .magazine-section {
   padding: 120px 40px !important;
@@ -172,7 +121,6 @@ footer {
   border-bottom: 1px solid var(--line) !important;
   position: relative !important;
 }
-
 .magazine-section::before {
   content: "" !important;
   position: absolute !important;
@@ -181,12 +129,7 @@ footer {
   background: linear-gradient(90deg, transparent 0%, #00F5FF 50%, transparent 100%) !important;
   opacity: 0.5 !important;
 }
-
-.magazine-head {
-  max-width: 1400px !important;
-  margin: 0 auto 60px !important;
-}
-
+.magazine-head { max-width: 1400px !important; margin: 0 auto 60px !important; }
 .magazine-label {
   display: inline-flex !important;
   align-items: center !important;
@@ -199,7 +142,6 @@ footer {
   font-weight: 600 !important;
   margin-bottom: 28px !important;
 }
-
 .magazine-pulse {
   width: 8px !important; height: 8px !important;
   border-radius: 50% !important;
@@ -207,7 +149,6 @@ footer {
   box-shadow: 0 0 12px rgba(0,245,255,0.6) !important;
   animation: si-pulse 2.5s ease-in-out infinite !important;
 }
-
 .magazine-title {
   font-family: "Inter Tight", sans-serif !important;
   font-weight: 700 !important;
@@ -218,12 +159,7 @@ footer {
   margin: 0 !important;
   max-width: 900px !important;
 }
-
-.magazine-title em {
-  font-style: italic !important;
-  font-weight: 500 !important;
-}
-
+.magazine-title em { font-style: italic !important; font-weight: 500 !important; }
 .magazine-grid {
   max-width: 1400px !important;
   margin: 0 auto !important;
@@ -231,7 +167,6 @@ footer {
   grid-template-columns: 1fr 1fr 1fr !important;
   gap: 24px !important;
 }
-
 .magazine-post {
   display: block !important;
   background: var(--bg-panel) !important;
@@ -244,7 +179,6 @@ footer {
   transition: all .4s cubic-bezier(.2,.8,.2,1) !important;
   min-width: 0 !important;
 }
-
 .magazine-post::before {
   content: "" !important;
   position: absolute !important;
@@ -255,16 +189,8 @@ footer {
   transform-origin: left !important;
   transition: transform .5s ease !important;
 }
-
-.magazine-post:hover {
-  border-color: var(--ink) !important;
-  transform: translateY(-4px) !important;
-}
-
-.magazine-post:hover::before {
-  transform: scaleX(1) !important;
-}
-
+.magazine-post:hover { border-color: var(--ink) !important; transform: translateY(-4px) !important; }
+.magazine-post:hover::before { transform: scaleX(1) !important; }
 .magazine-meta {
   display: flex !important;
   justify-content: space-between !important;
@@ -276,12 +202,7 @@ footer {
   font-weight: 500 !important;
   margin-bottom: 24px !important;
 }
-
-.magazine-rubric {
-  color: #00F5FF !important;
-  font-weight: 700 !important;
-}
-
+.magazine-rubric { color: #00F5FF !important; font-weight: 700 !important; }
 .magazine-post-title {
   font-family: "Inter Tight", sans-serif !important;
   font-weight: 700 !important;
@@ -291,14 +212,12 @@ footer {
   color: var(--ink) !important;
   margin: 0 0 16px !important;
 }
-
 .magazine-post-text {
   font-size: 14px !important;
   line-height: 1.65 !important;
   color: var(--ink-dim) !important;
   margin: 0 0 28px !important;
 }
-
 .magazine-read {
   display: inline-flex !important;
   align-items: center !important;
@@ -310,17 +229,8 @@ footer {
   color: var(--ink) !important;
   transition: gap .3s !important;
 }
-
-.magazine-post:hover .magazine-read {
-  gap: 18px !important;
-}
-
-.magazine-foot {
-  max-width: 1400px !important;
-  margin: 60px auto 0 !important;
-  text-align: center !important;
-}
-
+.magazine-post:hover .magazine-read { gap: 18px !important; }
+.magazine-foot { max-width: 1400px !important; margin: 60px auto 0 !important; text-align: center !important; }
 .magazine-cta {
   display: inline-flex !important;
   align-items: center !important;
@@ -337,25 +247,20 @@ footer {
   text-decoration: none !important;
   transition: all .3s !important;
 }
-
 .magazine-cta:hover {
-  background: #0A0A0A !important;
+  background: var(--bg) !important;
   color: #00F5FF !important;
   border-color: #00F5FF !important;
   transform: translateY(-2px) !important;
   box-shadow: 0 10px 25px -10px rgba(0,245,255,.5) !important;
 }
-
 @media (max-width: 900px) {
   .magazine-section { padding: 80px 20px !important; }
   .magazine-grid { grid-template-columns: 1fr !important; }
   .magazine-cta { padding: 16px 28px !important; font-size: 13px !important; }
 }
 
-/* ==========================================================================
-   KI IM VERTRIEB - Phasen-Schaubild
-   ========================================================================== */
-
+/* KI IM VERTRIEB — Phasen-Schaubild */
 .ki-phases {
   padding: 120px 40px !important;
   background: var(--bg-2) !important;
@@ -363,7 +268,6 @@ footer {
   border-bottom: 1px solid var(--line) !important;
   position: relative !important;
 }
-
 .ki-phases::before {
   content: "" !important;
   position: absolute !important;
@@ -372,12 +276,7 @@ footer {
   background: linear-gradient(90deg, transparent 0%, #00F5FF 50%, transparent 100%) !important;
   opacity: 0.5 !important;
 }
-
-.ki-phases-head {
-  max-width: 1400px !important;
-  margin: 0 auto 60px !important;
-}
-
+.ki-phases-head { max-width: 1400px !important; margin: 0 auto 60px !important; }
 .ki-phases-label {
   font-size: 11px !important;
   letter-spacing: .25em !important;
@@ -386,7 +285,6 @@ footer {
   font-weight: 600 !important;
   margin-bottom: 20px !important;
 }
-
 .ki-phases-title {
   font-family: "Inter Tight", sans-serif !important;
   font-weight: 700 !important;
@@ -397,21 +295,14 @@ footer {
   margin: 0 !important;
   max-width: 900px !important;
 }
-
-.ki-phases-title em {
-  font-style: italic !important;
-  font-weight: 500 !important;
-}
-
+.ki-phases-title em { font-style: italic !important; font-weight: 500 !important; }
 .ki-pipeline {
   max-width: 1400px !important;
   margin: 0 auto !important;
   display: grid !important;
   grid-template-columns: repeat(3, 1fr) !important;
   gap: 24px !important;
-  position: relative !important;
 }
-
 .ki-phase {
   background: var(--bg-panel) !important;
   border: 1px solid var(--line) !important;
@@ -420,7 +311,6 @@ footer {
   overflow: hidden !important;
   transition: all .4s cubic-bezier(.2,.8,.2,1) !important;
 }
-
 .ki-phase::before {
   content: "" !important;
   position: absolute !important;
@@ -431,16 +321,8 @@ footer {
   transform-origin: left !important;
   transition: transform .5s ease !important;
 }
-
-.ki-phase:hover {
-  border-color: var(--ink) !important;
-  transform: translateY(-4px) !important;
-}
-
-.ki-phase:hover::before {
-  transform: scaleX(1) !important;
-}
-
+.ki-phase:hover { border-color: var(--ink) !important; transform: translateY(-4px) !important; }
+.ki-phase:hover::before { transform: scaleX(1) !important; }
 .ki-phase-num {
   font-family: "Inter Tight", sans-serif !important;
   font-size: 12px !important;
@@ -449,7 +331,6 @@ footer {
   color: #00F5FF !important;
   margin-bottom: 24px !important;
 }
-
 .ki-phase-title {
   font-family: "Inter Tight", sans-serif !important;
   font-weight: 700 !important;
@@ -459,21 +340,13 @@ footer {
   color: var(--ink) !important;
   margin: 0 0 14px !important;
 }
-
 .ki-phase-text {
   font-size: 14px !important;
   line-height: 1.65 !important;
   color: var(--ink-dim) !important;
   margin: 0 0 24px !important;
 }
-
-.ki-phase-tools {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  gap: 6px !important;
-  margin-top: auto !important;
-}
-
+.ki-phase-tools { display: flex !important; flex-wrap: wrap !important; gap: 6px !important; }
 .ki-tool {
   display: inline-flex !important;
   padding: 5px 11px !important;
@@ -486,15 +359,57 @@ footer {
   border-radius: 999px !important;
   background: var(--bg) !important;
 }
-
-@media (max-width: 1100px) {
-  .ki-pipeline {
-    grid-template-columns: 1fr 1fr !important;
-  }
-}
-
+@media (max-width: 1100px) { .ki-pipeline { grid-template-columns: 1fr 1fr !important; } }
 @media (max-width: 720px) {
   .ki-phases { padding: 80px 20px !important; }
   .ki-pipeline { grid-template-columns: 1fr !important; }
   .ki-phase { padding: 28px !important; }
 }
+
+/* CTA-Section auf KI-Seite */
+.cta-section {
+  padding: 100px 40px !important;
+  text-align: center !important;
+  max-width: 900px !important;
+  margin: 0 auto !important;
+}
+.cta-section .label {
+  font-size: 11px !important;
+  letter-spacing: .25em !important;
+  text-transform: uppercase !important;
+  color: var(--ink-mute) !important;
+  font-weight: 600 !important;
+  margin-bottom: 20px !important;
+}
+.cta-section h2 {
+  font-family: "Inter Tight", sans-serif !important;
+  font-weight: 700 !important;
+  font-size: clamp(32px, 4.5vw, 56px) !important;
+  line-height: 1.1 !important;
+  letter-spacing: -.025em !important;
+  color: var(--ink) !important;
+  margin: 0 0 24px !important;
+}
+.cta-section p {
+  font-size: 17px !important;
+  line-height: 1.6 !important;
+  color: var(--ink-dim) !important;
+  margin: 0 auto 40px !important;
+  max-width: 720px !important;
+}
+.cta-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  padding: 18px 36px !important;
+  background: var(--ink) !important;
+  color: var(--bg) !important;
+  font-size: 13px !important;
+  letter-spacing: .15em !important;
+  text-transform: uppercase !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  transition: all .3s !important;
+  border: 2px solid var(--ink) !important;
+}
+.cta-btn:hover { background: transparent !important; color: var(--ink) !important; transform: translateY(-2px) !important; }
