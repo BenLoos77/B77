@@ -690,3 +690,31 @@ section.cta-section {
 .cta-section, .cta-section * {
   text-align: center !important;
 }
+
+/* HARTER FIX: CTA-Section komplett zentriert, mit Container */
+section.cta-section {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  padding: 120px 40px !important;
+}
+section.cta-section .label,
+section.cta-section h2,
+section.cta-section p {
+  width: 100% !important;
+  max-width: 900px !important;
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block !important;
+}
+section.cta-section h2 {
+  font-family: "Inter Tight", sans-serif !important;
+  font-weight: 700 !important;
+  font-size: clamp(32px, 4.5vw, 56px) !important;
+  line-height: 1.1 !important;
+  letter-spacing: -.025em !important;
+  margin: 0 auto 24px !important;
+}
