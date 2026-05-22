@@ -3972,11 +3972,11 @@ function renderResult() {
 
       <div style="background: var(--black); color: var(--paper); padding: 40px; margin: 56px 0 0;">
         <div style="font-family: var(--mono); font-size: 13px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 10px;">Übermittlung an B_77</div>
-        <div style="font-size: 24px; line-height: 1.4; font-family: var(--display); font-weight: 500;">Ihre Angaben werden an B_77 übermittelt.</div>
-        <div style="font-size: 19px; color: rgba(255,255,255,0.75); margin-top: 12px; line-height: 1.55;">Die komplette Zusammenfassung geht an <strong style="color:var(--paper)">ben@b77.de</strong>${kundeEmailCC ? ` — mit einer Kopie an <strong style="color:var(--paper)">${escapeHtml(kundeEmailCC)}</strong>` : ''}.</div>
-        <div id="submitStatus" style="font-size: 18px; margin-top: 18px; min-height: 24px; color: rgba(255,255,255,0.75); font-weight: 500;">Übermittlung wird vorbereitet …</div>
+        <div style="font-size: 24px; line-height: 1.4; font-family: var(--display); font-weight: 500;">Ihr E-Mail-Programm öffnet sich.</div>
+        <div style="font-size: 19px; color: rgba(255,255,255,0.75); margin-top: 12px; line-height: 1.55;">Die komplette Zusammenfassung wird als fertige E-Mail an <strong style="color:var(--paper)">ben@b77.de</strong>${kundeEmailCC ? ` — mit Kopie an <strong style="color:var(--paper)">${escapeHtml(kundeEmailCC)}</strong>` : ''} vorbereitet. Bitte im E-Mail-Programm auf <strong style="color:var(--paper)">Senden</strong> klicken.</div>
+        <div id="submitStatus" style="font-size: 18px; margin-top: 18px; min-height: 24px; color: rgba(255,255,255,0.75); font-weight: 500;"></div>
         <div style="margin-top: 20px; display: flex; gap: 14px; flex-wrap: wrap; align-items: center;">
-          <button class="btn-inverse" style="white-space: nowrap; font-size: 19px; padding: 16px 26px;" onclick="sendSummaryToB77()">Erneut übermitteln</button>
+          <button class="btn-inverse" style="white-space: nowrap; font-size: 19px; padding: 16px 26px;" onclick="sendSummaryToB77()">✉ E-Mail erneut öffnen →</button>
           <button class="btn" style="background: transparent; color: var(--paper); border-color: rgba(255,255,255,0.4);" onclick="copySummaryToClipboard(this)">Zusammenfassung kopieren</button>
         </div>
       </div>
@@ -4104,7 +4104,7 @@ function buildSummaryText(ctx) {
        "https://b77-mahlo-check.vercel.app/api/submit" oder
        "https://check.b77.de/api/submit".
 ============================================================ */
-const SUBMIT_ENDPOINT = "https://b77-mahlo-mailer.vercel.app/api/submit";
+const SUBMIT_ENDPOINT = ""; // leer = direkter mailto-Versand über das E-Mail-Programm
 
 /* HTML-Variante der Zusammenfassung für eine formatierte E-Mail (Brevo). */
 function buildSummaryEmailHtml(ctx) {
