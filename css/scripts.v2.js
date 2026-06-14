@@ -192,7 +192,7 @@ const MATCHES = [
   { g:'D', home:'PAR', away:'AUS', date:'2026-06-26', time:'04:00', venue:'Levi\'s Stadium', city:'San Francisco Bay' },
 
   // ===== GRUPPE E — Deutschland =====
-  { g:'E', home:'GER', away:'CUR', date:'2026-06-14', time:'19:00', venue:'NRG Stadium', city:'Houston', de:true },
+  { g:'E', home:'GER', away:'CUR', date:'2026-06-14', time:'19:00', venue:'NRG Stadium', city:'Houston', de:true, score:[7,1] },
   { g:'E', home:'CIV', away:'ECU', date:'2026-06-15', time:'01:00', venue:'Lincoln Financial Field', city:'Philadelphia' },
   { g:'E', home:'GER', away:'CIV', date:'2026-06-20', time:'22:00', venue:'BMO Field', city:'Toronto', de:true },
   { g:'E', home:'ECU', away:'CUR', date:'2026-06-21', time:'02:00', venue:'Arrowhead Stadium', city:'Kansas City' },
