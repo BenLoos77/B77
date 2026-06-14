@@ -185,7 +185,7 @@ const MATCHES = [
 
   // ===== GRUPPE D =====
   { g:'D', home:'USA', away:'PAR', date:'2026-06-13', time:'02:00', venue:'SoFi Stadium', city:'Los Angeles', score:[4,1] },
-  { g:'D', home:'AUS', away:'TUR', date:'2026-06-14', time:'06:00', venue:'BC Place', city:'Vancouver' },
+  { g:'D', home:'AUS', away:'TUR', date:'2026-06-14', time:'06:00', venue:'BC Place', city:'Vancouver', score:[2,0] },
   { g:'D', home:'USA', away:'AUS', date:'2026-06-19', time:'21:00', venue:'Lumen Field', city:'Seattle' },
   { g:'D', home:'TUR', away:'PAR', date:'2026-06-20', time:'06:00', venue:'Levi\'s Stadium', city:'San Francisco Bay' },
   { g:'D', home:'TUR', away:'USA', date:'2026-06-26', time:'04:00', venue:'SoFi Stadium', city:'Los Angeles' },
