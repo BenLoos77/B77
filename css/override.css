@@ -2,14 +2,22 @@
    B_77 OVERRIDE.CSS — Stand 16.05.2026, sauber neu aufgebaut
    ========================================================================== */
 
-/* Content-Begrenzung auf großen Monitoren */
-.hero, .stats, .sub-hero, footer {
+/* Content-Begrenzung auf großen Monitoren.
+   Hinweis: .hero bewusst NICHT begrenzt — der Hero soll auf breiten
+   Bildschirmen volle Breite einnehmen (Full-Bleed). */
+.stats, .sub-hero, footer {
   max-width: 1500px !important;
   margin-left: auto !important;
   margin-right: auto !important;
 }
 @media (max-width: 900px) {
-  .hero, .stats, .sub-hero, footer { max-width: 100% !important; }
+  .stats, .sub-hero, footer { max-width: 100% !important; }
+}
+/* Hero auf großen Monitoren volle Breite (hebt die 1500px-Grenze aus styles.v2.css auf) */
+.hero {
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
 
 /* Sales-Intelligence-Button */

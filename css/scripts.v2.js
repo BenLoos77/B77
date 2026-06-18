@@ -270,6 +270,7 @@ const MATCHES = [
 
 // Helfer
 function matchStatus(m) {
+  if (m.live) return 'live';
   if (m.score) return 'done';
   const now = new Date();
   const t = m.time && m.time !== 'tba' ? m.time : '20:00';
@@ -295,7 +296,13 @@ function flag(code) {
   return `<span class="wm-team-flag" style="background:${FLAGS[code] || FLAGS.TBD}"></span>`;
 }
 
+// Merkt sich die zuletzt gewählte Ansicht, damit nach dem automatischen
+// Ergebnis-Update mit demselben Filter neu gezeichnet werden kann.
+let LAST_FILTER = 'de', LAST_VALUE = null;
+function rerenderMatches() { renderMatches(LAST_FILTER, LAST_VALUE); }
+
 function renderMatches(filter = 'de', value = null) {
+  LAST_FILTER = filter; LAST_VALUE = value;
   const list = document.getElementById('wm-cal-list');
   if (!list) return;
 
@@ -445,6 +452,39 @@ function closeMatch() {
   document.body.style.overflow = '';
 }
 
+// ---------------------------------------------------------------------------
+// Automatischer Ergebnis-Abruf
+// wm-results.json wird von der GitHub Action (football-data.org) gepflegt und
+// enthält Ergebnisse + Live-Status in unseren Team-Kürzeln. Gematcht wird über
+// das (ungeordnete) Team-Paar der Gruppenspiele — unabhängig von der Zeitzone.
+// ---------------------------------------------------------------------------
+function mergeWmResults(apiMatches) {
+  if (!Array.isArray(apiMatches)) return;
+  apiMatches.forEach(r => {
+    const m = MATCHES.find(x => x.phase === 'group' && (
+      (x.home === r.home && x.away === r.away) ||
+      (x.home === r.away && x.away === r.home)
+    ));
+    if (!m) return;
+    if (typeof r.hs === 'number' && typeof r.as === 'number') {
+      m.score = (m.home === r.home) ? [r.hs, r.as] : [r.as, r.hs];
+    }
+    m.live = !!r.live;
+  });
+}
+
+async function fetchWmResults() {
+  try {
+    const res = await fetch('wm-results.json?ts=' + Date.now(), { cache: 'no-store' });
+    if (!res.ok) return;
+    const data = await res.json();
+    mergeWmResults(data && data.matches);
+    rerenderMatches();
+  } catch (e) {
+    // Bei Netzwerk-/Parsefehler bleiben die hinterlegten Ergebnisse stehen.
+  }
+}
+
 if (document.getElementById('wm-cal-list')) {
   const mainFilters = document.querySelectorAll('.wm-filter');
   mainFilters.forEach(btn => {
@@ -502,4 +542,8 @@ if (document.getElementById('wm-cal-list')) {
   });
 
   renderMatches('de');
+
+  // Ergebnisse automatisch laden und regelmäßig aktualisieren, solange offen.
+  fetchWmResults();
+  setInterval(fetchWmResults, 90000);
 }

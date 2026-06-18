@@ -1,0 +1,46 @@
+name: WM-Ergebnisse aktualisieren
+
+# Holt regelmäßig die aktuellen WM-2026-Ergebnisse von football-data.org und
+# schreibt sie nach wm-results.json. Vercel deployt den Commit automatisch,
+# der Kalender auf b77.de zeigt die Ergebnisse dann ohne weiteres Zutun.
+
+on:
+  schedule:
+    - cron: "*/20 * * * *"   # alle 20 Minuten
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: wm-results
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Ergebnisse abrufen
+        env:
+          FOOTBALL_DATA_TOKEN: ${{ secrets.FOOTBALL_DATA_TOKEN }}
+        run: python tools/update-wm-results.py
+
+      - name: Änderungen committen
+        run: |
+          if [ -z "$(git status --porcelain wm-results.json)" ]; then
+            echo "Keine neuen Ergebnisse — nichts zu committen."
+            exit 0
+          fi
+          git config user.name "WM Ergebnis-Bot"
+          git config user.email "kontakt@b77.de"
+          git add wm-results.json
+          git commit -m "WM-Ergebnisse aktualisiert ($(date -u +%Y-%m-%dT%H:%MZ))"
+          git push
