@@ -1,1 +1,239 @@
-{ "updated": null, "matches": [] }
+{
+  "updated": "2026-06-18T23:18:26+02:00",
+  "matches": [
+    {
+      "home": "MEX",
+      "away": "RSA",
+      "hs": 2,
+      "as": 0,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-11"
+    },
+    {
+      "home": "CAN",
+      "away": "BIH",
+      "hs": 1,
+      "as": 1,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-12"
+    },
+    {
+      "home": "KOR",
+      "away": "CZE",
+      "hs": 2,
+      "as": 1,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-12"
+    },
+    {
+      "home": "QAT",
+      "away": "SUI",
+      "hs": 1,
+      "as": 1,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-13"
+    },
+    {
+      "home": "USA",
+      "away": "PAR",
+      "hs": 4,
+      "as": 1,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-13"
+    },
+    {
+      "home": "AUS",
+      "away": "TUR",
+      "hs": 2,
+      "as": 0,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-14"
+    },
+    {
+      "home": "BRA",
+      "away": "MAR",
+      "hs": 1,
+      "as": 1,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-14"
+    },
+    {
+      "home": "GER",
+      "away": "CUR",
+      "hs": 7,
+      "as": 1,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-14"
+    },
+    {
+      "home": "HAI",
+      "away": "SCO",
+      "hs": 0,
+      "as": 1,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-14"
+    },
+    {
+      "home": "NED",
+      "away": "JPN",
+      "hs": 2,
+      "as": 2,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-14"
+    },
+    {
+      "home": "BEL",
+      "away": "EGY",
+      "hs": 1,
+      "as": 1,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-15"
+    },
+    {
+      "home": "CIV",
+      "away": "ECU",
+      "hs": 1,
+      "as": 0,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-15"
+    },
+    {
+      "home": "ESP",
+      "away": "CPV",
+      "hs": 0,
+      "as": 0,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-15"
+    },
+    {
+      "home": "SWE",
+      "away": "TUN",
+      "hs": 5,
+      "as": 1,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-15"
+    },
+    {
+      "home": "FRA",
+      "away": "SEN",
+      "hs": 3,
+      "as": 1,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-16"
+    },
+    {
+      "home": "IRN",
+      "away": "NZL",
+      "hs": 2,
+      "as": 2,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-16"
+    },
+    {
+      "home": "KSA",
+      "away": "URU",
+      "hs": 1,
+      "as": 1,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-16"
+    },
+    {
+      "home": "ARG",
+      "away": "ALG",
+      "hs": 3,
+      "as": 0,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-17"
+    },
+    {
+      "home": "AUT",
+      "away": "JOR",
+      "hs": 3,
+      "as": 1,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-17"
+    },
+    {
+      "home": "ENG",
+      "away": "CRO",
+      "hs": 4,
+      "as": 2,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-17"
+    },
+    {
+      "home": "IRQ",
+      "away": "NOR",
+      "hs": 1,
+      "as": 4,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-17"
+    },
+    {
+      "home": "POR",
+      "away": "COD",
+      "hs": 1,
+      "as": 1,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-17"
+    },
+    {
+      "home": "CZE",
+      "away": "RSA",
+      "hs": 1,
+      "as": 1,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-18"
+    },
+    {
+      "home": "GHA",
+      "away": "PAN",
+      "hs": 1,
+      "as": 0,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-18"
+    },
+    {
+      "home": "SUI",
+      "away": "BIH",
+      "hs": 4,
+      "as": 1,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-18"
+    },
+    {
+      "home": "UZB",
+      "away": "COL",
+      "hs": 1,
+      "as": 3,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-18"
+    }
+  ]
+}
