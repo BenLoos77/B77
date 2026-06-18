@@ -726,3 +726,115 @@ section.cta-section h2 {
   letter-spacing: -.025em !important;
   margin: 0 auto 24px !important;
 }
+
+/* ==========================================================================
+   LEISTUNGEN — klarere Trennung: zwei Wege + weitere Leistungen
+   ========================================================================== */
+/* Kopf links gestapelt statt 2-Spalten (behebt die Leerfläche oben links) */
+.services-head {
+  display: block !important;
+  max-width: 1400px !important;
+  margin: 0 auto 56px !important;
+  text-align: left !important;
+}
+.services-head .label { display: block !important; margin-bottom: 22px !important; }
+.services-head h3 { max-width: 15em !important; margin: 0 !important; }
+.services-intro {
+  margin: 26px 0 0 !important;
+  max-width: 640px !important;
+  font-size: 17px !important;
+  line-height: 1.6 !important;
+  color: var(--ink-dim) !important;
+}
+
+/* Trenner mit Label vor den weiteren Leistungen */
+.services-sub {
+  max-width: 1400px !important;
+  margin: 72px auto 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 24px !important;
+}
+.services-sub-label {
+  font-size: 11px !important;
+  letter-spacing: .25em !important;
+  text-transform: uppercase !important;
+  color: var(--ink-mute) !important;
+  font-weight: 600 !important;
+  white-space: nowrap !important;
+}
+.services-sub-line { flex: 1 !important; height: 1px !important; background: var(--line) !important; }
+@media (max-width: 900px) {
+  .services-sub { margin: 56px auto 0 !important; }
+}
+
+/* ==========================================================================
+   LEISTUNGEN — Variante A (minimal, offen, Icons + Cyan-Akzent)
+   ========================================================================== */
+.svc-ways {
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 56px !important;
+}
+.svc-way {
+  display: block !important;
+  border-top: 2px solid var(--ink) !important;
+  padding-top: 28px !important;
+  text-decoration: none !important;
+  color: inherit !important;
+}
+.svc-ic { width: 28px !important; height: 28px !important; color: #0096C7 !important; display: block !important; margin-bottom: 20px !important; }
+.svc-cat {
+  display: flex !important;
+  align-items: center !important;
+  font-size: 11px !important;
+  letter-spacing: .22em !important;
+  text-transform: uppercase !important;
+  color: var(--ink-mute) !important;
+  font-weight: 600 !important;
+  margin-bottom: 14px !important;
+}
+.svc-cat::before { content: "" !important; width: 7px !important; height: 7px !important; background: #00C2D6 !important; margin-right: 9px !important; display: inline-block !important; flex: none !important; }
+.svc-way h4 {
+  font-family: "Inter Tight", sans-serif !important;
+  font-weight: 700 !important;
+  font-size: clamp(26px, 2.8vw, 34px) !important;
+  line-height: 1.04 !important;
+  letter-spacing: -.025em !important;
+  margin: 0 0 14px !important;
+  color: var(--ink) !important;
+  transition: transform .35s cubic-bezier(.2,.8,.2,1) !important;
+}
+.svc-way p { font-size: 15px !important; line-height: 1.65 !important; color: var(--ink-dim) !important; margin: 0 !important; max-width: 460px !important; }
+.svc-more-link { display: inline-block !important; margin-top: 22px !important; font-size: 11px !important; letter-spacing: .2em !important; text-transform: uppercase !important; font-weight: 600 !important; color: var(--ink) !important; }
+.svc-more-link .ar { color: #0096C7 !important; display: inline-block !important; transition: transform .3s ease !important; }
+.svc-way:hover h4 { transform: translateX(6px) !important; }
+.svc-way:hover .svc-more-link .ar { transform: translateX(5px) !important; }
+
+/* weitere Leistungen — kompakte Zeilen */
+.svc-extra { max-width: 1400px !important; margin: 8px auto 0 !important; }
+.svc-erow {
+  display: grid !important;
+  grid-template-columns: 36px 1fr auto !important;
+  gap: 22px !important;
+  align-items: center !important;
+  padding: 22px 4px !important;
+  border-top: 1px solid var(--line) !important;
+  text-decoration: none !important;
+  color: inherit !important;
+  transition: background .3s ease !important;
+}
+.svc-extra .svc-erow:first-child { border-top: none !important; }
+.svc-erow:hover { background: var(--bg) !important; }
+.svc-erow .svc-ic { width: 23px !important; height: 23px !important; margin: 0 !important; }
+.svc-erow h5 { font-family: "Inter Tight", sans-serif !important; font-weight: 700 !important; font-size: 19px !important; letter-spacing: -.02em !important; margin: 0 0 4px !important; color: var(--ink) !important; }
+.svc-erow p { font-size: 13px !important; line-height: 1.5 !important; color: var(--ink-dim) !important; margin: 0 !important; }
+.svc-erow .go { font-size: 10.5px !important; letter-spacing: .18em !important; text-transform: uppercase !important; font-weight: 600 !important; color: #0096C7 !important; white-space: nowrap !important; }
+
+@media (max-width: 760px) {
+  .svc-ways { grid-template-columns: 1fr !important; gap: 40px !important; }
+  .svc-erow { grid-template-columns: 28px 1fr !important; gap: 16px !important; }
+  .svc-erow .go { display: none !important; }
+}
