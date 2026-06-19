@@ -1,6 +1,9 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "crons": [
+    { "path": "/api/trigger-magazin", "schedule": "0 4 * * *" }
+  ],
   "headers": [
     {
       "source": "/(.*)\\.(css|js|svg|png|jpg|jpeg|webp|woff2)",
