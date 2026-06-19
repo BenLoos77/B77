@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-19T00:31:51+02:00",
+  "updated": "2026-06-19T02:13:21+02:00",
   "matches": [
     {
       "home": "MEX",
@@ -238,10 +238,10 @@
     {
       "home": "CAN",
       "away": "QAT",
-      "hs": 1,
+      "hs": 6,
       "as": 0,
-      "live": true,
-      "status": "IN_PLAY",
+      "live": false,
+      "status": "FINISHED",
       "date": "2026-06-19"
     }
   ]
