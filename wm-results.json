@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-20T22:09:57+02:00",
+  "updated": "2026-06-20T23:40:58+02:00",
   "matches": [
     {
       "home": "MEX",
@@ -274,8 +274,8 @@
     {
       "home": "GER",
       "away": "CIV",
-      "hs": 0,
-      "as": 0,
+      "hs": 1,
+      "as": 1,
       "live": true,
       "status": "IN_PLAY",
       "date": "2026-06-20"
