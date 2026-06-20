@@ -23,6 +23,33 @@
     if (!form) return;
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+
+      // mailto-Interim: Felder werden über Typ/Reihenfolge gelesen,
+      // da das Markup keine name/id-Attribute trägt.
+      function val(sel) { var el = form.querySelector(sel); return el ? el.value.trim() : ''; }
+      var name = val('input[type="text"]');
+      var company = '';
+      var texts = form.querySelectorAll('input[type="text"]');
+      if (texts.length > 1) company = texts[1].value.trim();
+      var email = val('input[type="email"]');
+      var tel = val('input[type="tel"]');
+      var message = val('textarea');
+
+      var subject = 'Anfrage Erstgespräch' + (name ? ' — ' + name : '');
+      var bodyLines = [
+        'Name: ' + name,
+        'Unternehmen: ' + company,
+        'E-Mail: ' + email,
+        'Telefon: ' + tel,
+        '',
+        'Nachricht:',
+        message
+      ];
+      var mailto = 'mailto:kontakt@b77.de'
+        + '?subject=' + encodeURIComponent(subject)
+        + '&body=' + encodeURIComponent(bodyLines.join('\n'));
+      window.location.href = mailto;
+
       form.style.display = 'none';
       var ok = document.getElementById('form-success');
       if (ok) ok.classList.add('show');
