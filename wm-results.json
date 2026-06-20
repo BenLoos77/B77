@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-20T00:32:37+02:00",
+  "updated": "2026-06-20T04:09:05+02:00",
   "matches": [
     {
       "home": "MEX",
@@ -263,12 +263,21 @@
       "date": "2026-06-19"
     },
     {
+      "home": "BRA",
+      "away": "HAI",
+      "hs": 3,
+      "as": 0,
+      "live": true,
+      "status": "IN_PLAY",
+      "date": "2026-06-20"
+    },
+    {
       "home": "SCO",
       "away": "MAR",
       "hs": 0,
       "as": 1,
-      "live": true,
-      "status": "IN_PLAY",
+      "live": false,
+      "status": "FINISHED",
       "date": "2026-06-20"
     }
   ]
