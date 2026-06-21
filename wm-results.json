@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-21T22:19:49+02:00",
+  "updated": "2026-06-21T23:45:46+02:00",
   "matches": [
     {
       "home": "MEX",
@@ -312,8 +312,8 @@
       "away": "IRN",
       "hs": 0,
       "as": 0,
-      "live": true,
-      "status": "IN_PLAY",
+      "live": false,
+      "status": "FINISHED",
       "date": "2026-06-21"
     },
     {
@@ -328,7 +328,7 @@
     {
       "home": "ESP",
       "away": "KSA",
-      "hs": 5,
+      "hs": 4,
       "as": 0,
       "live": false,
       "status": "FINISHED",
