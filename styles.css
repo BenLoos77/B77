@@ -9,7 +9,8 @@
   --panel-hover:#ECEAE5;
   --ink:#14110D;
   --ink-word:#221F1B;
-  --accent:#F23B12;
+  --accent:#5DEAFF;
+  --accent-text:#0096C7;
   --accent-ink:#14110D;
   --muted:#8A8884;
   --body:#4A4A46;
@@ -34,7 +35,7 @@ body{
   font-family:var(--font);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
   overflow-x:hidden;
 }
-::selection{background:var(--accent);color:#fff;}
+::selection{background:var(--accent);color:var(--ink);}
 a{color:inherit;}
 img{max-width:100%;display:block;}
 
@@ -72,8 +73,8 @@ p{margin:0;}
 /* ---------- Buttons ---------- */
 .btn{display:inline-flex;align-items:center;gap:10px;padding:16px 28px;font-family:var(--font);font-weight:700;font-size:15px;text-decoration:none;border:none;border-radius:2px;cursor:pointer;transition:transform .18s ease,background .18s ease,color .18s ease;}
 .btn .arr{font-family:var(--mono);}
-.btn--primary{background:var(--accent);color:#fff;}
-.btn--primary:hover{background:var(--ink);transform:translateY(-3px);}
+.btn--primary{background:var(--accent);color:var(--accent-ink);}
+.btn--primary:hover{background:var(--ink);color:#fff;transform:translateY(-3px);}
 .btn--dark{background:var(--ink);color:#fff;}
 .btn--dark:hover{transform:translateY(-3px);}
 .btn--outline{background:transparent;color:var(--ink);border:1.5px solid var(--ink);}
@@ -343,3 +344,7 @@ p{margin:0;}
 .city-links{display:flex;flex-wrap:wrap;gap:12px;}
 .city-links a{font-family:var(--mono);font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);border:1px solid var(--border);border-radius:999px;padding:10px 18px;text-decoration:none;transition:all .2s;}
 .city-links a:hover{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+
+/* Signalfarbe Zwei-Ton: helles Cyan für Flächen, tieferes Cyan für Akzent-TEXT auf Weiß (Lesbarkeit) */
+.accent,.svc-num,.svc-row .arr,.fcard .n,.col2 .bignum{color:var(--accent-text);}
+.section--dark .accent,.section--dark .svc-num,.section--dark .col2 .bignum,.section--dark .col2 .label,.section--dark .kicker{color:var(--accent);}

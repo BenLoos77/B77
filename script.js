@@ -231,34 +231,3 @@
   });
 })();
 
-
-/* ===== NUR PREVIEW/LOCALHOST: Signalfarben-Tester (auf b77.de inaktiv) ===== */
-(function () {
-  var h = location.hostname;
-  if (!(h.indexOf('vercel.app') !== -1 || h === 'localhost' || h === '127.0.0.1')) return;
-  var COLORS = [['Orange', '#F23B12'],['Cyan tief', '#0096C7'],['Cyan hell (Magazin)', '#5DEAFF'],['Aqua-Neon', '#00E5FF'],['Grün', '#00C853'],['Neon-Grün', '#2BFF55'],['Blau', '#2D5BFF'],['Neon-Pink', '#FF2D9B'],['Neon-Lime', '#C6FF00']];
-  var saved = sessionStorage.getItem('b77-accent');
-  if (saved) document.documentElement.style.setProperty('--accent', saved);
-  function build() {
-    if (document.getElementById('b77-accent-switch')) return;
-    var bar = document.createElement('div');
-    bar.id = 'b77-accent-switch';
-    bar.style.cssText = 'position:fixed;left:16px;bottom:16px;z-index:99998;display:flex;flex-wrap:wrap;gap:9px;align-items:center;max-width:calc(100vw - 36px);background:#fff;border:1px solid rgba(20,17,13,.16);border-radius:999px;padding:9px 14px;box-shadow:0 12px 34px -14px rgba(20,17,13,.45);font-family:\'Space Mono\',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#8A8884;';
-    var lbl = document.createElement('span'); lbl.textContent = 'Farbe testen'; bar.appendChild(lbl);
-    COLORS.forEach(function (c) {
-      var b = document.createElement('button');
-      b.title = c[0] + ' ' + c[1];
-      b.setAttribute('aria-label', 'Akzent ' + c[0]);
-      b.style.cssText = 'width:22px;height:22px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px rgba(20,17,13,.25);background:' + c[1] + ';cursor:pointer;padding:0;transition:transform .15s;';
-      b.onmouseenter = function () { b.style.transform = 'scale(1.15)'; };
-      b.onmouseleave = function () { b.style.transform = 'none'; };
-      b.onclick = function () {
-        document.documentElement.style.setProperty('--accent', c[1]);
-        try { sessionStorage.setItem('b77-accent', c[1]); } catch (e) {}
-      };
-      bar.appendChild(b);
-    });
-    document.body.appendChild(bar);
-  }
-  if (document.readyState !== 'loading') build(); else document.addEventListener('DOMContentLoaded', build);
-})();
