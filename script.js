@@ -236,14 +236,14 @@
 (function () {
   var h = location.hostname;
   if (!(h.indexOf('vercel.app') !== -1 || h === 'localhost' || h === '127.0.0.1')) return;
-  var COLORS = [['Orange', '#F23B12'], ['Cyan', '#0096C7'], ['Grün', '#00C853'], ['Blau', '#2D5BFF']];
+  var COLORS = [['Orange', '#F23B12'],['Cyan tief', '#0096C7'],['Cyan hell (Magazin)', '#5DEAFF'],['Aqua-Neon', '#00E5FF'],['Grün', '#00C853'],['Neon-Grün', '#2BFF55'],['Blau', '#2D5BFF'],['Neon-Pink', '#FF2D9B'],['Neon-Lime', '#C6FF00']];
   var saved = sessionStorage.getItem('b77-accent');
   if (saved) document.documentElement.style.setProperty('--accent', saved);
   function build() {
     if (document.getElementById('b77-accent-switch')) return;
     var bar = document.createElement('div');
     bar.id = 'b77-accent-switch';
-    bar.style.cssText = 'position:fixed;left:16px;bottom:16px;z-index:99998;display:flex;gap:9px;align-items:center;background:#fff;border:1px solid rgba(20,17,13,.16);border-radius:999px;padding:9px 14px;box-shadow:0 12px 34px -14px rgba(20,17,13,.45);font-family:\'Space Mono\',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#8A8884;';
+    bar.style.cssText = 'position:fixed;left:16px;bottom:16px;z-index:99998;display:flex;flex-wrap:wrap;gap:9px;align-items:center;max-width:calc(100vw - 36px);background:#fff;border:1px solid rgba(20,17,13,.16);border-radius:999px;padding:9px 14px;box-shadow:0 12px 34px -14px rgba(20,17,13,.45);font-family:\'Space Mono\',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#8A8884;';
     var lbl = document.createElement('span'); lbl.textContent = 'Farbe testen'; bar.appendChild(lbl);
     COLORS.forEach(function (c) {
       var b = document.createElement('button');
