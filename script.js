@@ -224,10 +224,45 @@
     show('intro');
   }
 
+  /* ---------- Motion: Scroll-Reveal + Hero-Parallax ---------- */
+  function initMotion() {
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) return;
+
+    // Scroll-Reveal: jede Sektion einmalig sanft einblenden.
+    var targets = document.querySelectorAll('.section, .footer');
+    if ('IntersectionObserver' in window && targets.length) {
+      Array.prototype.forEach.call(targets, function (el) { el.classList.add('reveal'); });
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -8% 0px' });
+      Array.prototype.forEach.call(targets, function (el) { io.observe(el); });
+      // Bereits sichtbare Sektion (Hero) sofort zeigen.
+      requestAnimationFrame(function () {
+        Array.prototype.forEach.call(targets, function (el) {
+          if (el.getBoundingClientRect().top < window.innerHeight * 0.92) el.classList.add('in');
+        });
+      });
+    }
+
+    // Maus-Parallax auf den Hero-Glow (leicht versetzt).
+    var glow = document.querySelector('.hero-glow');
+    if (glow) {
+      window.addEventListener('mousemove', function (ev) {
+        var x = (ev.clientX / window.innerWidth - 0.5) * 28;
+        var y = (ev.clientY / window.innerHeight - 0.5) * 28;
+        glow.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+      }, { passive: true });
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     initNav();
     initForm();
     initCheck();
+    initMotion();
   });
 })();
 
