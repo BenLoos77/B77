@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-21T23:45:46+02:00",
+  "updated": "2026-06-22T00:58:32+02:00",
   "matches": [
     {
       "home": "MEX",
@@ -342,6 +342,15 @@
       "live": false,
       "status": "FINISHED",
       "date": "2026-06-21"
+    },
+    {
+      "home": "URU",
+      "away": "CPV",
+      "hs": 2,
+      "as": 1,
+      "live": true,
+      "status": "IN_PLAY",
+      "date": "2026-06-22"
     }
   ]
 }
