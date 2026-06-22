@@ -7,8 +7,8 @@
 <meta name="description" content="Kostenloses Erstgespräch mit B_77. Wir melden uns innerhalb von 24 Stunden.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20260621d">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="monolith.css?v=mono1">
 <link rel="canonical" href="https://b77.de/kontakt">
 <meta name="robots" content="index, follow">
 <meta name="author" content="Benjamin Loos">
@@ -29,78 +29,127 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ProfessionalService","name":"B_77 Vertriebsberatung","alternateName":"B_77","description":"Vertriebsberatung für mittelständische Unternehmen in Siegen, NRW und deutschlandweit.","url":"https://b77.de","logo":"https://b77.de/assets/B77_Logo_black.png","image":"https://b77.de/assets/og-b77.png","email":"kontakt@b77.de","telephone":"+49-271-89027837","founder":{"@type":"Person","name":"Benjamin Loos"},"foundingDate":"2017","address":{"@type":"PostalAddress","streetAddress":"Wallhausenstraße 1","postalCode":"57072","addressLocality":"Siegen","addressRegion":"Nordrhein-Westfalen","addressCountry":"DE"},"areaServed":[{"@type":"City","name":"Siegen"},{"@type":"AdministrativeArea","name":"Nordrhein-Westfalen"},{"@type":"Country","name":"Deutschland"}],"serviceType":["Vertriebsberatung","Vertriebsoptimierung","Aktiver Vertrieb","Neukundengewinnung","Vertriebsaufbau"],"priceRange":"€€€","openingHours":"Mo-Fr 08:30-18:00"}
 </script>
-<script src="/css/analytics.js?v=20260621d" defer></script>
+<script src="/css/analytics.js?v=mono1" defer></script>
+<style>
+  /* Kontakt-Formular im Monolith-Stil: reines Schwarz/Weiß, eckig, typografisch */
+  .kontakt-grid{display:grid;grid-template-columns:minmax(0,0.85fr) minmax(0,1fr);
+    gap:clamp(40px,6vw,96px);padding:0 var(--gutter);align-items:start;}
+  .kx-phone{font-family:var(--sans);font-weight:800;font-size:clamp(26px,3.4vw,46px);
+    letter-spacing:-0.02em;line-height:1.04;color:var(--ink);display:inline-block;
+    position:relative;margin-bottom:18px;}
+  .kx-mail{font-family:var(--sans);font-weight:700;font-size:clamp(20px,2.2vw,30px);
+    letter-spacing:-0.01em;color:var(--ink);display:inline-block;position:relative;}
+  .kx-phone::after,.kx-mail::after{content:"";position:absolute;left:0;bottom:1px;width:100%;height:1px;
+    background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.2,.7,.2,1);}
+  .kx-phone:hover::after,.kx-mail:hover::after{transform:scaleX(1);}
+  .kx-meta{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:clamp(40px,5vw,64px);
+    border-top:1px solid var(--line);padding-top:clamp(28px,3vw,40px);}
+  .kx-meta h4{font-family:var(--mono);font-weight:600;font-size:12px;letter-spacing:0.04em;
+    text-transform:uppercase;color:var(--mute);margin-bottom:10px;}
+  .kx-meta p{font-family:var(--sans);font-weight:400;font-size:clamp(15px,1.5vw,18px);
+    line-height:1.5;color:var(--text-2);}
+  .form-card{border:1px solid var(--ink);padding:clamp(28px,3.4vw,48px);}
+  .form-card .label{display:block;margin-bottom:clamp(24px,3vw,34px);}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;}
+  .field{display:flex;flex-direction:column;}
+  .field label{font-family:var(--mono);font-weight:600;font-size:12px;letter-spacing:0.04em;
+    text-transform:uppercase;color:var(--mute);margin-bottom:8px;}
+  .field input,.field textarea{font-family:var(--sans);font-weight:400;font-size:17px;
+    color:var(--ink);background:var(--paper);border:none;border-bottom:1px solid var(--ink);
+    padding:10px 0;width:100%;border-radius:0;}
+  .field input::placeholder,.field textarea::placeholder{color:var(--mute);}
+  .field input:focus,.field textarea:focus{outline:none;border-bottom-width:2px;}
+  .field textarea{resize:vertical;}
+  .kx-submit{font-family:var(--mono);font-weight:600;font-size:13px;letter-spacing:0.04em;
+    text-transform:uppercase;color:var(--paper);background:var(--ink);border:1px solid var(--ink);
+    padding:16px 28px;cursor:pointer;margin-top:8px;transition:background .3s,color .3s;}
+  .kx-submit:hover{background:var(--paper);color:var(--ink);}
+  .form-note{font-family:var(--mono);font-weight:400;font-size:11px;letter-spacing:0.03em;
+    color:var(--mute);margin-top:16px;line-height:1.5;}
+  .form-success{display:none;}
+  .form-success .ok{font-family:var(--sans);font-weight:800;font-size:48px;line-height:1;margin-bottom:18px;}
+  .form-success h3{font-family:var(--sans);font-weight:700;font-size:clamp(22px,2.4vw,32px);
+    letter-spacing:-0.01em;margin-bottom:12px;}
+  .form-success p{font-family:var(--sans);font-weight:400;font-size:clamp(15px,1.5vw,18px);
+    line-height:1.5;color:var(--text-2);}
+  @media(max-width:900px){
+    .kontakt-grid{grid-template-columns:1fr;}
+    .form-row{grid-template-columns:1fr;}
+    .kx-meta{grid-template-columns:1fr;gap:24px;}
+  }
+</style>
 </head>
 <body>
+
   <nav class="nav">
-    <a class="nav__logo" href="/"><img src="/assets/B77_Logo_white.png" alt="B_77"></a>
+    <a class="nav__brand" href="/">B_77 Vertriebsberatung</a>
     <div class="nav__links">
-        <a href="/ueber">Über B_77</a>
-        <a href="/vertriebsoptimierung">Vertriebsoptimierung</a>
-        <a href="/aktiver-vertrieb">Aktiver Vertrieb</a>
-        <a href="/ki-im-vertrieb">KI im Vertrieb</a>
-        <a href="/kontakt" class="is-active">Kontakt</a>
+      <a href="/#leistungen">Leistungen</a>
+      <a href="/ki-im-vertrieb">KI</a>
+      <a href="/kontakt" class="is-active">Kontakt</a>
     </div>
-    <div class="nav__cta"><a class="btn btn--primary" href="/kontakt">Gespräch<span class="arr">→</span></a></div>
-    <button class="nav__burger" aria-label="Menü" aria-expanded="false">☰</button>
+    <div class="nav__place">Siegen, DE →</div>
+    <button class="nav__burger" aria-label="Menü" aria-expanded="false">Menü</button>
     <div class="nav__mobile">
-      <a class="m-link" href="/ueber">Über B_77</a>
-      <a class="m-link" href="/vertriebsoptimierung">Vertriebsoptimierung</a>
-      <a class="m-link" href="/aktiver-vertrieb">Aktiver Vertrieb</a>
-      <a class="m-link" href="/ki-im-vertrieb">KI im Vertrieb</a>
-      <a class="m-link is-active" href="/kontakt">Kontakt</a>
-      <a class="btn btn--primary" href="/kontakt">Gespräch vereinbaren <span class="arr">→</span></a>
+      <a href="/#leistungen">Leistungen</a>
+      <a href="/ki-im-vertrieb">KI</a>
+      <a href="/kontakt">Kontakt</a>
+      <a href="/ueber">Über B_77</a>
     </div>
   </nav>
-  <section class="section" style="padding-top:78px;padding-bottom:80px;"><div class="wrap">
-    <div class="breadcrumb"><a href="/">Start</a><span>/</span><span class="cur">Kontakt</span></div>
-    <div class="eyebrow"><span class="rule"></span><span>B_77.Kontakt</span></div>
-    <h1 class="h1">Lassen Sie<br><span class="accent">uns reden.</span></h1>
-    <p class="lead">Kostenloses Erstgespräch, unverbindlich. Erzählen Sie uns kurz, wo Ihr Vertrieb gerade steht — wir melden uns innerhalb von 24 Stunden.</p>
-  </div></section>
-  <section class="section divider-top" style="padding-top:90px;"><div class="wrap"><div class="contact-grid">
-    <div>
-      <p class="kicker" style="margin-bottom:36px;">Direkt erreichen</p>
-      <a class="contact-phone" href="tel:+4927189027837">+49 (0) 271 — 890 27 837</a>
-      <a class="contact-mail" href="mailto:kontakt@b77.de">kontakt@b77.de</a>
-      <div class="contact-meta">
-        <div><h4>Adresse</h4><p>Bseventyseven GmbH<br>Wallhausenstraße 1<br>57072 Siegen<br>Germany</p></div>
-        <div><h4>Erreichbarkeit</h4><p>Mo – Fr<br>08:00 – 18:00 Uhr<br>Antwort &lt; 24 h</p></div>
+
+  <!-- Kopf -->
+  <section class="section section--first page-head">
+    <div class="corners wrap"><span>B_77 — Kontakt</span><span class="r">01</span></div>
+    <h1 class="display">Lassen Sie uns reden.</h1>
+    <div class="hero__grid">
+      <div class="label">Erstgespräch</div>
+      <p class="body lead">Kostenloses Erstgespräch, unverbindlich. Erzählen Sie uns kurz, wo Ihr Vertrieb gerade steht — wir melden uns innerhalb von 24 Stunden.</p>
+    </div>
+  </section>
+
+  <!-- Direkt erreichen + Formular -->
+  <section class="section" data-reveal>
+    <div class="corners wrap"><span>Direkt erreichen</span><span class="r">02</span></div>
+    <div class="kontakt-grid">
+      <div>
+        <a class="kx-phone" href="tel:+4927189027837">+49 (0) 271 — 890 27 837</a><br>
+        <a class="kx-mail" href="mailto:kontakt@b77.de">kontakt@b77.de</a>
+        <div class="kx-meta">
+          <div><h4>Adresse</h4><p>Bseventyseven GmbH<br>Wallhausenstraße 1<br>57072 Siegen<br>Germany</p></div>
+          <div><h4>Erreichbarkeit</h4><p>Mo – Fr<br>08:00 – 18:00 Uhr<br>Antwort &lt; 24 h</p></div>
+        </div>
+      </div>
+      <div class="form-card">
+        <!-- TODO: an Brevo/Backend anbinden (aktuell mailto-Fallback) -->
+        <form id="contact-form">
+          <span class="label">Erstgespräch anfragen</span>
+          <div class="form-row">
+            <div class="field"><label>Name *</label><input required type="text" placeholder="Ihr Name"></div>
+            <div class="field"><label>Unternehmen</label><input type="text" placeholder="Firma"></div>
+          </div>
+          <div class="form-row">
+            <div class="field"><label>E-Mail *</label><input required type="email" placeholder="name@firma.de"></div>
+            <div class="field"><label>Telefon</label><input type="tel" placeholder="+49 …"></div>
+          </div>
+          <div class="field" style="margin-bottom:26px;"><label>Worum geht es? *</label><textarea required rows="4" placeholder="Wo steht Ihr Vertrieb gerade?"></textarea></div>
+          <button class="kx-submit" type="submit">Anfrage senden →</button>
+          <p class="form-note">Mit dem Absenden stimmen Sie der Verarbeitung gemäß Datenschutzerklärung zu.</p>
+        </form>
+        <div class="form-success" id="form-success">
+          <div class="ok">✓</div>
+          <h3>Danke — Anfrage ist da.</h3>
+          <p>Wir melden uns innerhalb von 24 Stunden bei Ihnen. Bei dringenden Anliegen erreichen Sie uns direkt unter +49 271 890 27 837.</p>
+        </div>
       </div>
     </div>
-    <div class="form-card">
-      <!-- TODO: an Brevo/Backend anbinden (aktuell mailto-Fallback) -->
-      <form id="contact-form">
-        <p class="kicker" style="margin-bottom:30px;">Erstgespräch anfragen</p>
-        <div class="form-row">
-          <div class="field"><label>Name *</label><input required type="text" placeholder="Ihr Name"></div>
-          <div class="field"><label>Unternehmen</label><input type="text" placeholder="Firma"></div>
-        </div>
-        <div class="form-row">
-          <div class="field"><label>E-Mail *</label><input required type="email" placeholder="name@firma.de"></div>
-          <div class="field"><label>Telefon</label><input type="tel" placeholder="+49 …"></div>
-        </div>
-        <div class="field" style="margin-bottom:26px;"><label>Worum geht es? *</label><textarea required rows="4" placeholder="Wo steht Ihr Vertrieb gerade?"></textarea></div>
-        <button class="btn btn--primary btn--lg" type="submit">Anfrage senden <span class="arr">→</span></button>
-        <p class="form-note">Mit dem Absenden stimmen Sie der Verarbeitung gemäß Datenschutzerklärung zu.</p>
-      </form>
-      <div class="form-success" id="form-success">
-        <div class="ok">✓</div>
-        <h3>Danke — Anfrage ist da.</h3>
-        <p>Wir melden uns innerhalb von 24 Stunden bei Ihnen. Bei dringenden Anliegen erreichen Sie uns direkt unter +49 271 890 27 837.</p>
-      </div>
-    </div>
-  </div></div></section>
+  </section>
+
   <footer class="footer">
-    <div class="footer__grid">
-      <div class="footer__brand"><div class="logo"><img src="/assets/B77_Logo_white.png" alt="B_77"></div><p>Vertriebsberatung für mittelständische Unternehmen. Wir machen Unternehmen vertriebsaktiv.</p></div>
-      <div class="footer__col"><h4>Adresse</h4><div>Wallhausenstraße 1<br>57072 Siegen<br>Germany</div></div>
-      <div class="footer__col"><h4>Kontakt</h4><div><a href="mailto:kontakt@b77.de">kontakt@b77.de</a><br><a href="tel:+4927189027837">+49 271 890 27 837</a></div></div>
-      <div class="footer__col"><h4>Navigation</h4><div class="links"><a href="/ueber">Über B_77</a><a href="/vertriebsoptimierung">Vertriebsoptimierung</a><a href="/aktiver-vertrieb">Aktiver Vertrieb</a><a href="/ki-im-vertrieb">KI im Vertrieb</a><a href="/kontakt">Kontakt</a></div></div>
-    </div>
-    <div class="footer__word-wrap"><img class="footer__word" src="/assets/B77_Logo_outline.png" alt=""></div>
-    <div class="footer__legal"><span>© 2026 B_77 — Alle Rechte vorbehalten.</span><span><a href="/impressum">Impressum · Datenschutz</a></span></div>
+    <span>© 2026 B_77 — Vertriebsberatung</span>
+    <span class="footer__r">Wallhausenstraße 1 · 57072 Siegen · <a href="/impressum">Impressum &amp; Datenschutz</a></span>
   </footer>
-<script src="script.js?v=20260621d"></script>
+
+  <script src="monolith.js?v=mono1"></script>
 </body>
 </html>
