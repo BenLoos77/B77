@@ -189,3 +189,148 @@ p+p{margin-top:1.1em;}
   .reveal{opacity:1 !important;transform:none !important;transition:none !important;}
   .il-row,.il-arr{transition:none !important;}
 }
+
+/* ============================================================
+   VERTRIEBS-CHECK (Quiz) — Monolith
+   Reines Schwarz/Weiß · eckig (radius ≤2px) · 1px-Linien
+   Ausgewählte Option = invertiert · Balken: schwarz auf #DDDDDD
+   ============================================================ */
+
+/* Intro: Feature-Spalten (wie .stat, aber 1px-Oberkante) */
+.check-feats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+  margin:clamp(40px,6vw,64px) 0 clamp(36px,5vw,48px);border-top:1px solid var(--line);}
+.check-feat{border-left:1px solid var(--line);padding:24px clamp(18px,2vw,28px) 4px;}
+.check-feat:first-child{border-left:none;}
+.check-feat .l{font-family:var(--mono);font-weight:600;font-size:12px;letter-spacing:0.04em;
+  text-transform:uppercase;color:var(--mute);margin-bottom:10px;}
+.check-feat .t{font-family:var(--sans);font-weight:400;font-size:clamp(15px,1.5vw,17px);
+  line-height:1.5;color:var(--text-2);max-width:34ch;}
+
+/* Phasen-Umschaltung */
+.check-phase{display:none;}
+.check-phase.active{display:block;}
+
+/* Buttons (CTA + Outline), eckig, S/W */
+.check-phase .btn{display:inline-flex;align-items:center;gap:12px;font-family:var(--mono);
+  font-weight:600;font-size:13px;letter-spacing:0.04em;text-transform:uppercase;
+  border:1px solid var(--ink);border-radius:2px;padding:16px 26px;cursor:pointer;
+  background:var(--ink);color:var(--paper);transition:background .25s,color .25s;}
+.check-phase .btn--primary{background:var(--ink);color:var(--paper);}
+.check-phase .btn--primary:hover{background:var(--paper);color:var(--ink);}
+.check-phase .btn--outline{background:var(--paper);color:var(--ink);}
+.check-phase .btn--outline:hover{background:var(--ink);color:var(--paper);}
+.check-phase .btn--lg{padding:18px 30px;font-size:13px;}
+.check-phase .btn .arr{font-family:var(--sans);}
+
+/* Quiz-Kopf: Dimension + Fragenzähler (Mono-Labels) */
+.q-top{display:flex;justify-content:space-between;align-items:center;gap:16px;
+  margin-bottom:14px;font-family:var(--mono);font-weight:600;font-size:13px;
+  letter-spacing:0.04em;text-transform:uppercase;color:var(--mute);}
+.q-top .dim{color:var(--ink);}
+
+/* Fortschritts-Balken: schwarz auf hellgrau */
+.q-bar{height:4px;background:var(--line);border-radius:2px;overflow:hidden;
+  margin-bottom:clamp(40px,6vw,60px);}
+.q-bar i{display:block;height:100%;background:var(--ink);transition:width .3s ease;}
+
+/* Frage */
+.q-text{font-family:var(--sans);font-weight:800;font-size:clamp(28px,3.6vw,52px);
+  line-height:1.12;letter-spacing:-0.025em;margin:0 0 clamp(36px,5vw,50px);
+  max-width:18ch;color:var(--ink);}
+
+/* Antwort-Optionen */
+.q-opts{display:flex;flex-direction:column;gap:10px;max-width:720px;}
+.q-opt{display:flex;align-items:center;gap:18px;width:100%;text-align:left;
+  padding:18px 22px;background:var(--paper);color:var(--ink);
+  border:1px solid var(--ink);border-radius:2px;cursor:pointer;
+  font-family:var(--sans);font-size:17px;font-weight:600;letter-spacing:-0.01em;
+  transition:background .15s,color .15s;}
+.q-opt:hover{background:var(--ink);color:var(--paper);}
+.q-opt.sel{background:var(--ink);color:var(--paper);}      /* gewählt = invertiert */
+.q-opt .on{font-family:var(--mono);font-weight:600;font-size:13px;color:var(--mute);
+  min-width:22px;transition:color .15s;}
+.q-opt:hover .on,.q-opt.sel .on{color:var(--paper);}
+
+/* Aktionen unter dem Quiz */
+.q-actions{display:flex;align-items:center;gap:24px;margin-top:clamp(36px,5vw,44px);}
+.q-back,.q-cancel{background:none;border:none;cursor:pointer;font-family:var(--mono);
+  letter-spacing:0.04em;text-transform:uppercase;}
+.q-back{font-size:13px;font-weight:600;color:var(--ink);}
+.q-back:hover{text-decoration:underline;}
+.q-cancel{font-size:12px;font-weight:500;color:var(--mute);text-decoration:underline;}
+.q-cancel:hover{color:var(--ink);}
+
+/* Ergebnis: Score-Kopf */
+.score-head{display:grid;grid-template-columns:auto 1fr;gap:clamp(28px,4vw,48px);
+  align-items:center;background:var(--paper);color:var(--ink);
+  border:1px solid var(--ink);border-radius:2px;padding:clamp(32px,4vw,48px);
+  margin-bottom:24px;}
+.score-head .big{font-family:var(--sans);font-weight:800;font-size:clamp(80px,11vw,150px);
+  letter-spacing:-0.04em;line-height:0.9;color:var(--ink);text-align:center;}
+.score-head .u{font-family:var(--mono);font-weight:600;font-size:12px;letter-spacing:0.04em;
+  text-transform:uppercase;color:var(--mute);margin-top:6px;text-align:center;}
+.score-head h2{font-family:var(--sans);font-weight:700;font-size:clamp(28px,3.2vw,48px);
+  letter-spacing:-0.02em;line-height:1.04;margin:0 0 14px;color:var(--ink);}
+.score-head .desc{font-family:var(--sans);font-weight:400;font-size:clamp(16px,1.6vw,18px);
+  line-height:1.55;color:var(--text-2);margin:0;max-width:560px;}
+
+/* Ergebnis: Dimensionen */
+.dims{background:var(--paper);border:1px solid var(--ink);border-radius:2px;
+  padding:clamp(28px,4vw,44px);margin-bottom:24px;}
+.dimrow{margin-bottom:24px;}
+.dimrow:last-child{margin-bottom:0;}
+.dimrow .top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:10px;}
+.dimrow .name{font-family:var(--sans);font-weight:700;font-size:clamp(16px,1.7vw,19px);
+  letter-spacing:-0.01em;color:var(--ink);}
+.dimrow .val{font-family:var(--mono);font-weight:600;font-size:14px;color:var(--ink);white-space:nowrap;}
+.dimrow .track{height:8px;background:var(--line);border-radius:2px;overflow:hidden;}
+.dimrow .track i{display:block;height:100%;background:var(--ink);}
+/* Schwache Dimension (<60): über Mono-Hinweis markiert, nicht über Farbe */
+.dimrow.weak .val::after{content:" · Hebel";color:var(--mute);}
+
+/* Ergebnis: Empfehlungen */
+.recs{margin-bottom:clamp(32px,5vw,40px);}
+.rec{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;
+  padding:28px 0;border-top:1px solid var(--line);}
+.rec h3{font-family:var(--sans);font-weight:700;font-size:clamp(20px,2.2vw,24px);
+  letter-spacing:-0.01em;margin:0 0 8px;color:var(--ink);}
+.rec p{font-family:var(--sans);font-weight:400;font-size:clamp(15px,1.5vw,16px);
+  line-height:1.55;color:var(--text-2);margin:0;}
+.rec a{font-family:var(--mono);font-weight:600;font-size:13px;letter-spacing:0.04em;
+  text-transform:uppercase;color:var(--ink);white-space:nowrap;
+  border-bottom:1px solid var(--ink);padding-bottom:4px;}
+.rec a:hover{color:var(--mute);border-color:var(--mute);}
+
+/* Ergebnis: Aktionsleiste */
+.result-actions{display:flex;flex-wrap:wrap;gap:16px;align-items:center;
+  border-top:1px solid var(--line);padding-top:36px;}
+
+/* Quiz-Breadcrumb + Eyebrow (Mono, S/W) */
+.check-breadcrumb{display:flex;align-items:center;gap:12px;font-family:var(--mono);
+  font-weight:600;font-size:12.5px;letter-spacing:0.04em;text-transform:uppercase;
+  color:var(--mute);margin-bottom:clamp(28px,4vw,40px);flex-wrap:wrap;}
+.check-breadcrumb a{color:var(--mute);}
+.check-breadcrumb a:hover{color:var(--ink);}
+.check-breadcrumb .cur{color:var(--ink);}
+.check-kicker{font-family:var(--mono);font-weight:600;font-size:13px;letter-spacing:0.04em;
+  text-transform:uppercase;color:var(--mute);margin:0 0 24px;}
+
+/* Quiz-Responsive */
+@media(max-width:900px){
+  .check-feats{grid-template-columns:1fr;}
+  .check-feat{border-left:none;border-top:1px solid var(--line);padding-top:20px;}
+  .check-feat:first-child{border-top:none;}
+  .score-head{grid-template-columns:1fr;text-align:center;}
+  .score-head .desc{margin:0 auto;}
+  .rec{grid-template-columns:1fr;gap:14px;}
+  .q-text{max-width:none;}
+}
+
+/* Druck (PDF-Report): Navigation, Footer, Steuer-Buttons ausblenden */
+@media print{
+  .nav,.footer,.b77-noprint{display:none !important;}
+  body{background:#fff;color:#000;}
+  .check-phase{display:none !important;}
+  #phase-result.active{display:block !important;}
+  .section{border-top:none;}
+}
