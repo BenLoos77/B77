@@ -79,7 +79,21 @@
     });
   }
 
-  function init() { initDecode(); initReveal(); initNav(); }
+  /* ---- 4) Floating-Nav: über dem Poster transparent, ab dem hellen Bereich solide ---- */
+  function initFloatingNav() {
+    var nav = document.querySelector(".nav--floating");
+    if (!nav) return;
+    var hero = document.querySelector(".hero-poster");
+    function upd() {
+      var th = hero ? hero.offsetHeight - nav.offsetHeight - 4 : 240;
+      nav.classList.toggle("is-solid", (window.scrollY || window.pageYOffset) > th);
+    }
+    upd();
+    window.addEventListener("scroll", upd, { passive: true });
+    window.addEventListener("resize", upd, { passive: true });
+  }
+
+  function init() { initDecode(); initReveal(); initNav(); initFloatingNav(); }
   if (document.readyState === "loading")
     document.addEventListener("DOMContentLoaded", init);
   else init();
