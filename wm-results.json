@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-22T02:10:11+02:00",
+  "updated": "2026-06-22T07:31:42+02:00",
   "matches": [
     {
       "home": "MEX",
@@ -344,12 +344,21 @@
       "date": "2026-06-21"
     },
     {
+      "home": "NZL",
+      "away": "EGY",
+      "hs": 1,
+      "as": 3,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-22"
+    },
+    {
       "home": "URU",
       "away": "CPV",
       "hs": 2,
       "as": 2,
-      "live": true,
-      "status": "IN_PLAY",
+      "live": false,
+      "status": "FINISHED",
       "date": "2026-06-22"
     }
   ]
