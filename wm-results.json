@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-23T21:19:39+02:00",
+  "updated": "2026-06-23T23:08:57+02:00",
   "matches": [
     {
       "home": "MEX",
@@ -378,6 +378,15 @@
       "live": false,
       "status": "FINISHED",
       "date": "2026-06-22"
+    },
+    {
+      "home": "ENG",
+      "away": "GHA",
+      "hs": 0,
+      "as": 0,
+      "live": true,
+      "status": "PAUSED",
+      "date": "2026-06-23"
     },
     {
       "home": "JOR",
