@@ -224,7 +224,7 @@ p+p{margin-top:1.1em;}
   will-change:transform;animation:poLineUp 1.2s cubic-bezier(.16,1,.3,1) both;}
 .hb__title .l:nth-child(1) i{animation-delay:.30s;}
 .hb__title .l:nth-child(2) i{animation-delay:.44s;}
-.hb__lead{max-width:48ch;padding:0 var(--gutter);margin:clamp(72px,16vh,220px) 0 0;
+.hb__lead{max-width:48ch;padding:0 var(--gutter);margin:clamp(72px,16vh,220px) 0 clamp(58px,8vh,104px);
   font-family:var(--sans);font-weight:400;font-size:clamp(17px,1.7vw,22px);line-height:1.5;color:#cfcfcf;}
 .hb__lead strong{color:var(--paper);font-weight:700;}
 .hb__foot{display:flex;justify-content:space-between;align-items:center;gap:20px;
