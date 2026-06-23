@@ -72,8 +72,10 @@
     var burger = document.querySelector(".nav__burger");
     var menu = document.querySelector(".nav__mobile");
     if (!burger || !menu) return;
+    var nav = burger.closest(".nav");
     burger.addEventListener("click", function () {
       var open = menu.classList.toggle("is-open");
+      if (nav) nav.classList.toggle("nav--menu-open", open);
       burger.textContent = open ? "Schließen" : "Menü";
       burger.setAttribute("aria-expanded", open ? "true" : "false");
     });
