@@ -219,13 +219,24 @@ p+p{margin-top:1.1em;}
 .nav--floating:not(.is-solid) .nav__place{color:#9a9a9a;}
 .nav--floating:not(.is-solid) .nav__burger{color:#F2F2F2;border-color:rgba(255,255,255,0.4);}
 .nav--floating.is-solid{background:var(--paper);border-bottom-color:var(--ink);}
-@keyframes poFade{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
-@keyframes poTitle{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
-.hero-poster .pf1{animation:poFade 1s ease .12s both;}
-.hero-poster .pf2{animation:poFade 1s ease .26s both;}
-.hero-poster .pf3{animation:poFade 1.1s ease .4s both;}
-.hero-poster .pt{animation:poTitle 1.1s cubic-bezier(.2,.7,.2,1) .2s both;}
-.hero-poster .pcredit{animation:poFade 1.1s ease .62s both;}
+/* Edle Choreografie: maskiertes Zeilen-Reveal des Titels, sanfte gestaffelte
+   Einblendungen (expo-out), lebendiger Dunst (Driften) + Glow (Pulsieren). */
+@keyframes poFade{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes poLineUp{from{transform:translateY(115%);}to{transform:translateY(0);}}
+@keyframes poSmokeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes poDrift{0%,100%{transform:translate3d(0,0,0) scale(1);}50%{transform:translate3d(-1%,-1.6%,0) scale(1.045);}}
+@keyframes poGlowPulse{0%,100%{opacity:1;}50%{opacity:.66;}}
+.hero-poster .po-title{line-height:0.82;}
+.hero-poster .po-line{display:block;overflow:hidden;padding:0.06em 0;margin:-0.06em 0;}
+.hero-poster .po-line-in{display:block;transform:translateY(115%);will-change:transform;
+  animation:poLineUp 1.2s cubic-bezier(.16,1,.3,1) both;}
+.hero-poster .po-line:nth-child(1) .po-line-in{animation-delay:.36s;}
+.hero-poster .po-line:nth-child(2) .po-line-in{animation-delay:.52s;}
+.hero-poster .pf2{animation:poFade 1.1s cubic-bezier(.16,1,.3,1) .28s both;}
+.hero-poster .pf1{animation:poFade 1.2s cubic-bezier(.16,1,.3,1) .92s both;}
+.hero-poster .pcredit{animation:poFade 1.2s cubic-bezier(.16,1,.3,1) 1.08s both;}
+.hero-poster .po-smoke{opacity:0;animation:poSmokeIn 1.8s ease .1s both, poDrift 28s ease-in-out 1.9s infinite;}
+.hero-poster .po-glow{opacity:0;animation:poSmokeIn 2.2s ease .2s both, poGlowPulse 10s ease-in-out 2.4s infinite;}
 @media(max-width:760px){
   .hero-poster .po-names{font-size:15px!important;}
   .hero-poster .po-title{font-size:27vw!important;}
@@ -233,7 +244,8 @@ p+p{margin-top:1.1em;}
   .hero-poster .hp-links{display:none!important;}
 }
 @media(prefers-reduced-motion:reduce){
-  .hero-poster .pf1,.hero-poster .pf2,.hero-poster .pf3,.hero-poster .pt,.hero-poster .pcredit{
+  .hero-poster .pf1,.hero-poster .pf2,.hero-poster .pcredit,
+  .hero-poster .po-line-in,.hero-poster .po-smoke,.hero-poster .po-glow{
     animation:none!important;opacity:1!important;transform:none!important;}
 }
 
