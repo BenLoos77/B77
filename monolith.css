@@ -204,6 +204,13 @@ p+p{margin-top:1.1em;}
 .prose p strong{font-weight:800;color:var(--ink);}
 .prose .first{font-size:clamp(20px,2vw,26px);color:var(--ink);font-weight:500;line-height:1.4;}
 
+/* ---------- Figur / Bild (gerahmt, Monolith) ---------- */
+.figure{margin:0;padding:0 var(--gutter);}
+.figure__img{width:100%;height:auto;display:block;border:1px solid var(--line);}
+.figure__cap{margin-top:14px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:12px;letter-spacing:0.04em;text-transform:uppercase;color:var(--mute);}
+.figure__cap span:last-child{text-align:right;}
+
 /* ---------- Hero-Poster (Startseite) ---------- */
 .hero-poster{position:relative;min-height:100vh;background:#0A0A0A;color:#F2F2F2;
   font-family:var(--sans);display:flex;flex-direction:column;overflow:hidden;}
