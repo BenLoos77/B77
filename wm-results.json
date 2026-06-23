@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-22T07:31:42+02:00",
+  "updated": "2026-06-23T03:23:57+02:00",
   "matches": [
     {
       "home": "MEX",
@@ -344,6 +344,24 @@
       "date": "2026-06-21"
     },
     {
+      "home": "ARG",
+      "away": "AUT",
+      "hs": 2,
+      "as": 0,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-22"
+    },
+    {
+      "home": "FRA",
+      "away": "IRQ",
+      "hs": 3,
+      "as": 0,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-22"
+    },
+    {
       "home": "NZL",
       "away": "EGY",
       "hs": 1,
@@ -360,6 +378,15 @@
       "live": false,
       "status": "FINISHED",
       "date": "2026-06-22"
+    },
+    {
+      "home": "NOR",
+      "away": "SEN",
+      "hs": 3,
+      "as": 1,
+      "live": true,
+      "status": "IN_PLAY",
+      "date": "2026-06-23"
     }
   ]
 }
