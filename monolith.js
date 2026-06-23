@@ -83,7 +83,7 @@
   function initFloatingNav() {
     var nav = document.querySelector(".nav--floating");
     if (!nav) return;
-    var hero = document.querySelector(".hero-poster");
+    var hero = document.querySelector(".hero-poster, .hb");
     function upd() {
       var th = hero ? hero.offsetHeight - nav.offsetHeight - 4 : 240;
       nav.classList.toggle("is-solid", (window.scrollY || window.pageYOffset) > th);

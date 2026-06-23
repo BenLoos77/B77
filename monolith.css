@@ -211,6 +211,29 @@ p+p{margin-top:1.1em;}
   font-family:var(--mono);font-size:12px;letter-spacing:0.04em;text-transform:uppercase;color:var(--mute);}
 .figure__cap span:last-child{text-align:right;}
 
+/* ---------- Hero (Startseite, Monolith — invertierte Sektion 00) ---------- */
+.hb{position:relative;min-height:100vh;overflow:hidden;background:var(--ink);color:var(--paper);
+  display:flex;flex-direction:column;justify-content:space-between;}
+.hb__top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;
+  padding:clamp(96px,11vh,140px) var(--gutter) 0;
+  font-family:var(--mono);font-size:clamp(11px,1vw,13px);letter-spacing:0.08em;text-transform:uppercase;color:var(--mute);}
+.hb__top .r{color:#f2f2f2;}
+.hb__title{margin:0;padding-left:var(--gutter);font-weight:800;text-transform:uppercase;
+  letter-spacing:-0.04em;line-height:0.82;font-size:clamp(60px,17vw,260px);color:var(--paper);}
+.hb__title .l{display:block;overflow:hidden;padding:.06em 0;margin:-.06em 0;}
+.hb__title .l i{display:block;font-style:normal;white-space:nowrap;transform:translateY(115%);
+  will-change:transform;animation:poLineUp 1.2s cubic-bezier(.16,1,.3,1) both;}
+.hb__title .l:nth-child(1) i{animation-delay:.30s;}
+.hb__title .l:nth-child(2) i{animation-delay:.44s;}
+.hb__lead{max-width:48ch;padding:clamp(26px,4vh,46px) var(--gutter) 0;
+  font-family:var(--sans);font-weight:400;font-size:clamp(17px,1.7vw,22px);line-height:1.5;color:#cfcfcf;}
+.hb__lead strong{color:var(--paper);font-weight:700;}
+.hb__foot{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;
+  border-top:1px solid rgba(255,255,255,0.16);
+  margin:clamp(40px,6vh,90px) var(--gutter) clamp(28px,4vh,44px);padding-top:20px;
+  font-family:var(--mono);font-size:clamp(10px,0.9vw,12px);letter-spacing:0.08em;text-transform:uppercase;color:var(--mute);}
+.hb__foot img{height:22px;width:auto;display:block;}
+
 /* ---------- Hero-Poster (Startseite) ---------- */
 .hero-poster{position:relative;min-height:100vh;background:#0A0A0A;color:#F2F2F2;
   font-family:var(--sans);display:flex;flex-direction:column;overflow:hidden;}
@@ -252,7 +275,8 @@ p+p{margin-top:1.1em;}
 }
 @media(prefers-reduced-motion:reduce){
   .hero-poster .pf1,.hero-poster .pf2,.hero-poster .pcredit,
-  .hero-poster .po-line-in,.hero-poster .po-smoke,.hero-poster .po-glow{
+  .hero-poster .po-line-in,.hero-poster .po-smoke,.hero-poster .po-glow,
+  .hb__title .l i{
     animation:none!important;opacity:1!important;transform:none!important;}
 }
 
