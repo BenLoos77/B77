@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-23T01:10:37+02:00",
+  "updated": "2026-06-23T03:23:57+02:00",
   "matches": [
     {
       "home": "MEX",
@@ -355,10 +355,10 @@
     {
       "home": "FRA",
       "away": "IRQ",
-      "hs": 1,
+      "hs": 3,
       "as": 0,
-      "live": true,
-      "status": "PAUSED",
+      "live": false,
+      "status": "FINISHED",
       "date": "2026-06-22"
     },
     {
@@ -378,6 +378,15 @@
       "live": false,
       "status": "FINISHED",
       "date": "2026-06-22"
+    },
+    {
+      "home": "NOR",
+      "away": "SEN",
+      "hs": 3,
+      "as": 1,
+      "live": true,
+      "status": "IN_PLAY",
+      "date": "2026-06-23"
     }
   ]
 }
