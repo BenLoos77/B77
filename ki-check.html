@@ -1,311 +1,128 @@
 <!DOCTYPE html>
-<html lang="de" data-theme="dark">
+<html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KI-Check | B_77 Vertriebsberatung</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/override.css?v=4">
-  <meta name="description" content="Wo steht Ihr Vertrieb beim Thema KI? Strukturiertes Lagebild Ihrer KI-Reife in 12 Minuten – kostenlos, mit Handlungsempfehlungen und PDF-Report.">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://b77.de/ki-check">
-  <style>
-    .check-wrap { max-width: 900px; margin: 0 auto; padding: 60px 40px 120px; }
-    .check-intro h1 { font-family: "Inter Tight", sans-serif; font-weight: 800; font-size: clamp(48px, 8vw, 96px); line-height: .92; letter-spacing: -.04em; margin: 0 0 32px; color: var(--ink); }
-    .check-intro p { font-size: 17px; line-height: 1.7; color: var(--ink-dim); margin-bottom: 18px; }
-    .check-intro p.lead { font-size: 21px; line-height: 1.5; color: var(--ink); margin-bottom: 32px; }
-    .check-intro p strong { color: var(--ink); font-weight: 700; }
-    .check-intro .start-btn { display: inline-flex; align-items: center; gap: 14px; padding: 20px 40px; background: #00F5FF; color: #0A0A0A; font-size: 14px; letter-spacing: .15em; text-transform: uppercase; font-weight: 700; border: 2px solid #00F5FF; text-decoration: none; transition: all .3s; margin: 24px 0 16px; cursor: pointer; font-family: inherit; }
-    .check-intro .start-btn:hover { background: var(--bg); color: #00F5FF; transform: translateY(-2px); box-shadow: 0 10px 25px -10px rgba(0,245,255,.5); }
-    .check-intro .disclaimer { font-size: 12px; color: var(--ink-mute); margin-top: 8px; padding: 16px; background: var(--bg-2); border-left: 3px solid var(--line); }
-    .check-progress { margin-bottom: 40px; }
-    .check-progress-bar { width: 100%; height: 3px; background: var(--line); position: relative; overflow: hidden; }
-    .check-progress-fill { position: absolute; top: 0; left: 0; height: 100%; background: #00F5FF; transition: width .4s cubic-bezier(.2,.8,.2,1); width: 0%; }
-    .check-progress-meta { display: flex; justify-content: space-between; margin-top: 14px; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-mute); font-weight: 600; }
-    .check-progress-phase { color: #00F5FF; }
-    .check-question { padding: 40px 0; }
-    .check-q-phase { font-size: 11px; letter-spacing: .25em; text-transform: uppercase; color: #00F5FF; font-weight: 700; margin-bottom: 16px; }
-    .check-q-text { font-family: "Inter Tight", sans-serif; font-weight: 700; font-size: clamp(24px, 3vw, 36px); line-height: 1.15; letter-spacing: -.02em; color: var(--ink); margin-bottom: 32px; }
-    .check-q-hint { font-size: 15px; color: var(--ink-dim); margin-bottom: 32px; line-height: 1.6; }
-    .check-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 40px; }
-    .check-option { display: flex; align-items: flex-start; gap: 16px; padding: 18px 22px; background: var(--bg-panel); border: 1px solid var(--line); cursor: pointer; transition: all .2s; text-align: left; font-family: inherit; color: inherit; font-size: 15px; line-height: 1.5; }
-    .check-option:hover { border-color: var(--ink); background: var(--bg-2); }
-    .check-option.selected { border-color: #00F5FF; background: var(--bg-panel); }
-    .check-option-marker { flex-shrink: 0; width: 20px; height: 20px; border: 2px solid var(--line); border-radius: 50%; margin-top: 1px; transition: all .2s; position: relative; }
-    .check-option.selected .check-option-marker { border-color: #00F5FF; }
-    .check-option.selected .check-option-marker::after { content: ""; position: absolute; top: 50%; left: 50%; width: 8px; height: 8px; background: #00F5FF; border-radius: 50%; transform: translate(-50%, -50%); }
-    .check-nav { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-top: 24px; border-top: 1px solid var(--line); }
-    .check-btn { padding: 14px 28px; font-size: 12px; letter-spacing: .15em; text-transform: uppercase; font-weight: 600; font-family: inherit; cursor: pointer; transition: all .25s; border: 1px solid var(--ink); background: transparent; color: var(--ink); }
-    .check-btn:hover { background: var(--ink); color: var(--bg); }
-    .check-btn-primary { background: #00F5FF; color: #0A0A0A; border-color: #00F5FF; }
-    .check-btn-primary:hover { background: var(--bg); color: #00F5FF; }
-    .check-btn:disabled { opacity: .35; cursor: not-allowed; }
-    .check-result h2 { font-family: "Inter Tight", sans-serif; font-weight: 800; font-size: clamp(36px, 5vw, 60px); line-height: 1.05; letter-spacing: -.03em; margin: 0 0 24px; }
-    .check-score-wrap { padding: 40px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin: 40px 0; text-align: center; }
-    .check-score { font-family: "Inter Tight", sans-serif; font-weight: 800; font-size: clamp(72px, 12vw, 140px); line-height: 1; letter-spacing: -.04em; color: #00F5FF; }
-    .check-score-label { font-size: 11px; letter-spacing: .25em; text-transform: uppercase; color: var(--ink-mute); margin-top: 16px; font-weight: 600; }
-    .check-level { font-family: "Inter Tight", sans-serif; font-weight: 700; font-size: 28px; letter-spacing: -.015em; margin: 24px 0 8px; color: var(--ink); }
-    .check-level-text { font-size: 16px; line-height: 1.6; color: var(--ink-dim); max-width: 620px; margin: 0 auto; }
-    .check-breakdown { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 32px 0; }
-    .check-breakdown-item { padding: 24px; background: var(--bg-panel); border: 1px solid var(--line); border-left: 3px solid #00F5FF; }
-    .check-breakdown-phase { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-mute); font-weight: 600; margin-bottom: 8px; }
-    .check-breakdown-score { font-family: "Inter Tight", sans-serif; font-weight: 700; font-size: 28px; color: var(--ink); letter-spacing: -.02em; }
-    .check-recommendations { margin: 40px 0; }
-    .check-recommendations h3 { font-family: "Inter Tight", sans-serif; font-weight: 700; font-size: 26px; margin-bottom: 24px; color: var(--ink); }
-    .check-rec-item { padding: 24px 0; border-top: 1px solid var(--line); }
-    .check-rec-item:last-child { border-bottom: 1px solid var(--line); }
-    .check-rec-num { font-size: 11px; letter-spacing: .2em; color: #00F5FF; font-weight: 700; margin-bottom: 8px; }
-    .check-rec-title { font-family: "Inter Tight", sans-serif; font-weight: 700; font-size: 19px; margin-bottom: 8px; color: var(--ink); }
-    .check-rec-text { font-size: 15px; line-height: 1.6; color: var(--ink-dim); }
-    .check-actions-result { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 40px; }
-    .check-actions-result a, .check-actions-result button { text-decoration: none; }
-    .hidden { display: none !important; }
-    @media (max-width: 720px) {
-      .check-wrap { padding: 40px 20px 80px; }
-      .check-breakdown { grid-template-columns: 1fr; }
-      .check-nav { flex-direction: column; align-items: stretch; }
-      .check-nav .check-btn { width: 100%; text-align: center; }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KI-Check – B_77</title>
+<meta name="description" content="Wo steht Ihr Vertrieb beim Thema KI? Strukturiertes Lagebild Ihrer KI-Reife in 21 Fragen – kostenlos, mit Handlungsempfehlungen und PDF-Report. Ohne Anmeldung.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="monolith.css?v=mono11">
+<link rel="canonical" href="https://b77.de/ki-check">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Benjamin Loos">
+<link rel="icon" type="image/png" href="/assets/B77_Logo_black.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://b77.de/ki-check">
+<meta property="og:title" content="KI-Check – B_77">
+<meta property="og:description" content="Wo steht Ihr Vertrieb beim Thema KI? Strukturiertes Lagebild Ihrer KI-Reife – kostenlos, mit Handlungsempfehlungen und PDF-Report.">
+<meta property="og:image" content="https://b77.de/assets/og-b77.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="de_DE">
+<meta property="og:site_name" content="B_77 Vertriebsberatung">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="KI-Check – B_77">
+<meta name="twitter:description" content="Wo steht Ihr Vertrieb beim Thema KI? Strukturiertes Lagebild Ihrer KI-Reife – kostenlos, mit Handlungsempfehlungen und PDF-Report.">
+<meta name="twitter:image" content="https://b77.de/assets/og-b77.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ProfessionalService","name":"B_77 Vertriebsberatung","alternateName":"B_77","description":"Vertriebsberatung für mittelständische Unternehmen in Siegen, NRW und deutschlandweit.","url":"https://b77.de","logo":"https://b77.de/assets/B77_Logo_black.png","image":"https://b77.de/assets/og-b77.png","email":"kontakt@b77.de","telephone":"+49-271-89027837","founder":{"@type":"Person","name":"Benjamin Loos"},"foundingDate":"2017","address":{"@type":"PostalAddress","streetAddress":"Wallhausenstraße 1","postalCode":"57072","addressLocality":"Siegen","addressRegion":"Nordrhein-Westfalen","addressCountry":"DE"},"areaServed":[{"@type":"City","name":"Siegen"},{"@type":"AdministrativeArea","name":"Nordrhein-Westfalen"},{"@type":"Country","name":"Deutschland"}],"serviceType":["Vertriebsberatung","KI im Vertrieb","Vertriebsoptimierung","Aktiver Vertrieb","Vertriebsaufbau"],"priceRange":"€€€","openingHours":"Mo-Fr 08:30-18:00"}
+</script>
+<style>.q-hint{font-family:var(--mono);font-size:13px;line-height:1.55;color:var(--mute);margin:12px 0 0;max-width:62ch;}</style>
+<script src="/css/analytics.js?v=mono11" defer></script>
 </head>
 <body>
 
-  <!-- WM-Banner -->
-  <div class="wm-banner" aria-hidden="true">
-    <span class="flag"></span>
-    <span>WM-Modus aktiv · Deutschland 2026</span>
-    <span class="flag"></span>
-  </div>
-
-  <!-- NAV -->
   <nav class="nav">
-    <a href="/" aria-label="B_77"><img src="" alt="B_77" class="logo-img" id="navLogo" /></a>
-    <ul class="nav-center">
-      <li><a href="/ueber">Über B_77</a></li>
-      <li><a href="/ki-im-vertrieb">KI im Vertrieb</a></li>
-      <li><a href="/kontakt">Kontakt</a></li>
-    </ul>
-    <div class="nav-right">
-      <div class="theme-tabs" role="tablist" aria-label="Theme auswählen">
-        <button data-theme="dark" aria-label="Dark-Modus"><span class="label-full">Dark</span></button>
-        <button data-theme="light" aria-label="Light-Modus"><span class="label-full">Light</span></button>
-        <button data-theme="wm" aria-label="WM-Modus" title="WM-Edition"><span class="flag-mini"></span><span class="label-full">WM</span></button>
-      </div>
-      <a href="/kontakt" class="nav-cta">Gespräch</a>
+    <a class="nav__brand" href="/"><img src="/assets/B77_Logo_black.png" alt="B_77 Vertriebsberatung"></a>
+    <div class="nav__links">
+      <a href="/ueber">Über</a>
+      <a href="/#leistungen">Leistungen</a>
+      <a href="/ki-im-vertrieb">KI im Vertrieb</a>
+      <a href="/kontakt">Kontakt</a>
+    </div>
+    <div class="nav__place">Siegen, DE →</div>
+    <button class="nav__burger" aria-label="Menü" aria-expanded="false">Menü</button>
+    <div class="nav__mobile">
+      <a href="/#leistungen">Leistungen</a>
+      <a href="/ki-im-vertrieb">KI im Vertrieb</a>
+      <a href="/kontakt">Kontakt</a>
+      <a href="/ueber">Über B_77</a>
     </div>
   </nav>
 
-  <main class="check-wrap">
+  <div id="vc">
 
-    <section id="check-intro" class="check-intro">
-      <h1>KI-Check.</h1>
-      <p class="lead">Wo steht Ihr Vertrieb beim Thema Künstliche Intelligenz heute wirklich?</p>
-      <p><strong>21 Fragen aus der Praxis</strong>, entlang der sechs Phasen Ihres Vertriebsprozesses – von der Lead-Recherche bis zur Nachbetreuung. Sie bekommen ein strukturiertes Lagebild Ihrer KI-Reife, mit konkreten Handlungsempfehlungen je Phase und einem PDF-Report zum Download.</p>
-      <p>Kein Hype, keine Werbung, keine Anmeldung. Ihre Angaben bleiben lokal in Ihrem Browser.</p>
-      <button class="start-btn" id="btn-start">KI-Check starten →</button>
-      <div class="disclaimer">Dieser digitale Check ersetzt nicht den vollständigen B_77 KI-Audit vor Ort. Er ist als Selbsteinschätzung gedacht, die ein erstes Lagebild schafft – ideal als Vorbereitung für ein Erstgespräch.</div>
-    </section>
-
-    <section id="check-questions" class="hidden">
-      <div class="check-progress">
-        <div class="check-progress-bar"><div class="check-progress-fill" id="progress-fill"></div></div>
-        <div class="check-progress-meta">
-          <span><span id="q-current">1</span> / <span id="q-total">21</span></span>
-          <span class="check-progress-phase" id="q-phase-label">Phase 01 – Lead &amp; Recherche</span>
+  <!-- Phase 1: Intro -->
+  <div id="phase-intro" class="check-phase active">
+    <section class="section section--first page-head">
+      <div class="corners wrap"><span>KI-Check – Kostenlos · ~12 Min · Sofort-Ergebnis</span><span class="r">01</span></div>
+      <h1 class="display">KI-Check.</h1>
+      <div class="hero__grid">
+        <div class="label">Worum es geht</div>
+        <p class="body lead"><strong>21 Fragen entlang Ihres Vertriebsprozesses.</strong> Sie erhalten ein strukturiertes Lagebild Ihrer KI-Reife – mit konkreten Handlungsempfehlungen, wo Digitalisierung in Ihrem Vertrieb wirklich Hebel hat. Inklusive PDF-Report. Ohne Anmeldung, ohne Haken.</p>
+      </div>
+      <div class="wrap">
+        <div class="check-feats">
+          <div class="check-feat"><div class="l">6 Phasen</div><div class="t">Lead &amp; Recherche, Erstansprache, Qualifizierung, Angebot, Verhandlung, Nachbetreuung.</div></div>
+          <div class="check-feat"><div class="l">Sofort-Score</div><div class="t">KI-Reife-Wert und Profil über alle sechs Vertriebsphasen direkt im Browser.</div></div>
+          <div class="check-feat"><div class="l">Lokal &amp; privat</div><div class="t">Ihre Angaben bleiben im Browser. Keine Übertragung, keine Anmeldung.</div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+          <button id="check-start" class="btn btn--primary btn--lg"><span class="lbl">KI-Check starten</span> <span class="arr">→</span></button>
+          <button id="check-reset-intro" class="q-cancel" style="display:none;">Von vorn beginnen</button>
         </div>
       </div>
-      <div class="check-question">
-        <div class="check-q-phase" id="q-phase"></div>
-        <div class="check-q-text" id="q-text"></div>
-        <div class="check-q-hint" id="q-hint"></div>
-        <div class="check-options" id="q-options"></div>
-      </div>
-      <div class="check-nav">
-        <button class="check-btn" id="btn-back">← Zurück</button>
-        <button class="check-btn check-btn-primary" id="btn-next" disabled>Weiter →</button>
+    </section>
+  </div>
+
+  <!-- Phase 2: Quiz -->
+  <div id="phase-quiz" class="check-phase">
+    <section class="section section--first" style="min-height:70vh;">
+      <div class="wrap" style="max-width:980px;">
+        <div class="q-top"><span class="dim"></span><span class="qnum"></span></div>
+        <div class="q-bar"><i style="width:0%"></i></div>
+        <h2 class="q-text"></h2>
+        <p class="q-hint"></p>
+        <div class="q-opts"></div>
+        <div class="q-actions">
+          <button class="q-back">← Zurück</button>
+          <button class="q-cancel b77-noprint">Check abbrechen</button>
+        </div>
       </div>
     </section>
+  </div>
 
-    <section id="check-result" class="check-result hidden">
-      <div class="check-q-phase">Ihr Ergebnis</div>
-      <h2>Ihre KI-Reife im Vertrieb.</h2>
-      <div class="check-score-wrap">
-        <div class="check-score" id="result-score">0</div>
-        <div class="check-score-label">von 100 Punkten</div>
-        <div class="check-level" id="result-level"></div>
-        <div class="check-level-text" id="result-level-text"></div>
-      </div>
-      <div class="check-q-phase">Aufschlüsselung nach Phasen</div>
-      <div class="check-breakdown" id="result-breakdown"></div>
-      <div class="check-recommendations">
-        <h3>Drei konkrete Handlungsempfehlungen.</h3>
-        <div id="result-recommendations"></div>
-      </div>
-      <div class="check-actions-result">
-        <button class="check-btn check-btn-primary" id="btn-print">Als PDF speichern</button>
-        <a href="/kontakt" class="check-btn">Erstgespräch vereinbaren →</a>
-        <button class="check-btn" id="btn-restart">Check neu starten</button>
+  <!-- Phase 3: Ergebnis -->
+  <div id="phase-result" class="check-phase">
+    <section class="section section--first page-head">
+      <div class="corners wrap b77-noprint"><span><a href="/">Start</a> / KI-Check · Ergebnis</span><span class="r">02</span></div>
+      <p class="check-kicker">Ihr KI-Check · Ergebnis</p>
+      <div class="wrap">
+        <div class="score-head">
+          <div><div class="big" id="r-score">0</div><div class="u">von 100 Punkten KI-Reife</div></div>
+          <div><p class="check-kicker" style="margin-bottom:12px;">Einordnung</p><h2 id="r-tier">–</h2><p class="desc" id="r-tier-desc">–</p></div>
+        </div>
+        <div class="dims"><p class="check-kicker" style="margin-bottom:30px;">Ihr Profil über 6 Vertriebsphasen</p><div id="r-dims"></div></div>
+        <div class="recs"><p class="check-kicker" style="margin:20px 0 24px;">Ihre drei größten Hebel</p><div id="r-recs"></div></div>
+        <div class="result-actions b77-noprint">
+          <a class="btn btn--primary btn--lg" href="/kontakt">Ergebnis besprechen <span class="arr">→</span></a>
+          <button id="r-print" class="btn btn--outline btn--lg">Als PDF speichern</button>
+          <button id="r-restart" class="q-cancel">Check erneut starten</button>
+        </div>
       </div>
     </section>
+  </div>
 
-  </main>
+  </div>
 
-  <footer>
-    <div class="foot-brand">
-      <img src="" alt="B_77" class="foot-logo" id="footLogo" />
-      <p>Vertriebsberatung für mittelständische Unternehmen. Wir machen Unternehmen vertriebsaktiv.</p>
-    </div>
-    <div>
-      <h6>Adresse</h6>
-      <ul>
-        <li>Wallhausenstraße 1</li>
-        <li>57072 Siegen</li>
-        <li>Germany</li>
-      </ul>
-    </div>
-    <div>
-      <h6>Kontakt</h6>
-      <ul>
-        <li><a href="mailto:kontakt@b77.de">kontakt@b77.de</a></li>
-        <li><a href="tel:+4927189027837">+49 271 890 27 837</a></li>
-      </ul>
-    </div>
-    <div>
-      <h6>Navigation</h6>
-      <ul>
-        <li><a href="/ueber">Über B_77</a></li>
-        <li><a href="/ki-im-vertrieb">KI im Vertrieb</a></li>
-        <li><a href="/kontakt">Kontakt</a></li>
-      </ul>
-    </div>
-    <div class="legal">
-      <span>© 2026 B_77 – Alle Rechte vorbehalten.</span>
-      <a href="/impressum">Impressum · Datenschutz</a>
-    </div>
+  <footer class="footer b77-noprint">
+    <span>© 2026 B_77 – Vertriebsberatung</span>
+    <span class="footer__r">Wallhausenstraße 1 · 57072 Siegen · <a href="/impressum">Impressum &amp; Datenschutz</a></span>
   </footer>
 
-  <script>
-    const questions = [
-      { phase: 1, label: "Phase 01 – Lead & Recherche", text: "Wie identifizieren Sie heute neue Zielkunden?", hint: "Bewertet wird, wie systematisch Sie Lead-Quellen erschließen.", options: [ { text: "Wir warten auf eingehende Anfragen und Empfehlungen", score: 0 }, { text: "Manuelle Recherche durch Vertriebsmitarbeiter (LinkedIn, Branchenverzeichnisse)", score: 1 }, { text: "Strukturierte Listen aus CRM und gekauften Datenquellen", score: 2 }, { text: "Wir nutzen KI-Tools für automatisierte Account-Anreicherung", score: 3 } ] },
-      { phase: 1, label: "Phase 01 – Lead & Recherche", text: "Wie viel Zeit verbringt ein Vertriebsmitarbeiter pro Woche mit Account-Recherche?", hint: "Recherche-Zeit ist meist der größte Hebel für KI-Einsatz.", options: [ { text: "Mehr als 8 Stunden", score: 0 }, { text: "4 bis 8 Stunden", score: 1 }, { text: "1 bis 4 Stunden", score: 2 }, { text: "Unter 1 Stunde – KI übernimmt das meiste", score: 3 } ] },
-      { phase: 1, label: "Phase 01 – Lead & Recherche", text: "Wie aktuell ist Ihre Datenbasis zu potenziellen Kunden?", hint: "Veraltete Daten kosten Conversion und Vertrauen.", options: [ { text: "Nicht gepflegt oder stark veraltet", score: 0 }, { text: "Manuelle Updates, sporadisch", score: 1 }, { text: "Halbjährliche bis quartalsweise Aktualisierung", score: 2 }, { text: "Kontinuierlich aktualisiert durch automatisierte Datenfeeds", score: 3 } ] },
-      { phase: 2, label: "Phase 02 – Erstansprache", text: "Wie personalisieren Sie Ihre Erstansprache (E-Mail, LinkedIn)?", hint: "Personalisierung entscheidet über Antwortraten – manuell vs. KI-gestützt.", options: [ { text: "Standard-Templates für alle Empfänger", score: 0 }, { text: "Manuelle Anpassung pro Person (Name, Unternehmen)", score: 1 }, { text: "Manuelle Recherche mit personalisiertem Aufhänger", score: 2 }, { text: "KI-generierte Outreach mit echter Recherche-Tiefe", score: 3 } ] },
-      { phase: 2, label: "Phase 02 – Erstansprache", text: "Wie hoch ist Ihre durchschnittliche Antwortrate bei Cold Outreach?", hint: "Mittelstands-Benchmark 2026: 8–12% mit Personalisierung, 18–25% mit KI-Tiefe.", options: [ { text: "Unter 3 Prozent oder unbekannt", score: 0 }, { text: "3 bis 8 Prozent", score: 1 }, { text: "8 bis 15 Prozent", score: 2 }, { text: "Über 15 Prozent", score: 3 } ] },
-      { phase: 2, label: "Phase 02 – Erstansprache", text: "Wie ist Ihre Follow-up-Sequenz strukturiert?", hint: "Konsequente Follow-ups sind der größte Pipeline-Hebel.", options: [ { text: "Ad-hoc, abhängig von Mitarbeiter-Disziplin", score: 0 }, { text: "Manuelle Wiedervorlagen im CRM", score: 1 }, { text: "Automatisierte E-Mail-Sequenzen", score: 2 }, { text: "KI-gesteuerte Sequenz mit Verhaltens-Triggern", score: 3 } ] },
-      { phase: 2, label: "Phase 02 – Erstansprache", text: "Wie definieren Sie Ihre Zielgruppen-Ansprache?", hint: "Segmentierung bestimmt, wie zielgerichtet KI eingesetzt werden kann.", options: [ { text: "Eine einheitliche Ansprache für alle", score: 0 }, { text: "Grobe Segmentierung nach Branche/Größe", score: 1 }, { text: "Klar definierte Personas mit eigenen Botschaften", score: 2 }, { text: "Dynamische Segmente, KI-optimiert in Echtzeit", score: 3 } ] },
-      { phase: 3, label: "Phase 03 – Qualifizierung", text: "Wie qualifizieren Sie eingehende Leads?", hint: "Schnelle Qualifizierung verkürzt den Sales Cycle erheblich.", options: [ { text: "Alle Leads laufen ungefiltert an den Vertrieb", score: 0 }, { text: "Manuelle Vorqualifizierung durch SDR-Team oder Innendienst", score: 1 }, { text: "Lead-Scoring im CRM mit definierten Kriterien", score: 2 }, { text: "KI-Scoring mit Verhaltens- und Firmensignalen", score: 3 } ] },
-      { phase: 3, label: "Phase 03 – Qualifizierung", text: "Nutzen Sie Chatbots oder Conversational AI auf Ihrer Website?", hint: "Chatbots übernehmen Erstberatung und vorqualifizieren rund um die Uhr.", options: [ { text: "Nein, nur Kontaktformular", score: 0 }, { text: "Einfacher Live-Chat während Bürozeiten", score: 1 }, { text: "Regelbasierter Chatbot für Standardfragen", score: 2 }, { text: "KI-Chatbot mit dynamischer Qualifizierungs-Logik", score: 3 } ] },
-      { phase: 3, label: "Phase 03 – Qualifizierung", text: "Wie analysieren Sie Buying Center und Entscheider?", hint: "Wer entscheidet wirklich? Wer beeinflusst still?", options: [ { text: "Wir sprechen mit dem ersten Ansprechpartner und hoffen", score: 0 }, { text: "Wir fragen aktiv nach weiteren Stakeholdern", score: 1 }, { text: "Strukturiertes Buying-Center-Mapping pro Account", score: 2 }, { text: "KI-gestützte Analyse aus LinkedIn-Daten und Org-Charts", score: 3 } ] },
-      { phase: 4, label: "Phase 04 – Angebot", text: "Wie lange braucht ein Angebot bei Ihnen vom Anfrage-Eingang bis zum Versand?", hint: "Geschwindigkeit ist heute ein Wettbewerbsfaktor.", options: [ { text: "Länger als eine Woche", score: 0 }, { text: "3 bis 7 Werktage", score: 1 }, { text: "1 bis 2 Werktage", score: 2 }, { text: "Unter 24 Stunden – durch teils automatisierte Erstellung", score: 3 } ] },
-      { phase: 4, label: "Phase 04 – Angebot", text: "Wie greifen Vertriebsmitarbeiter auf Produktdaten, Preise und Verfügbarkeiten zu?", hint: "RAG-Systeme reduzieren Angebotsfehler dramatisch.", options: [ { text: "Anrufe bei Kollegen, Excel-Listen, ERP-Suche", score: 0 }, { text: "CRM mit verlinkten Dokumenten und Preislisten", score: 1 }, { text: "Eigenes Angebots-Tool mit Produktkatalog-Integration", score: 2 }, { text: "RAG-System oder KI-Assistent mit Echtzeit-Datenzugriff", score: 3 } ] },
-      { phase: 4, label: "Phase 04 – Angebot", text: "Wie sind Ihre Angebote inhaltlich aufgebaut?", hint: "Standardisierte, datengestützte Angebote performen messbar besser.", options: [ { text: "Jeder Vertriebler hat seine eigene Vorlage", score: 0 }, { text: "Einheitliches Layout, manuell befüllt", score: 1 }, { text: "Vorlagen mit dynamischen Textbausteinen", score: 2 }, { text: "KI-generierter Angebotstext, angepasst pro Kunde", score: 3 } ] },
-      { phase: 5, label: "Phase 05 – Verhandlung", text: "Wie bereiten Sie Verhandlungstermine vor?", hint: "Vorbereitungs-Qualität korreliert direkt mit Closing Rate.", options: [ { text: "Aus dem Bauch, mit dem was wir wissen", score: 0 }, { text: "Standardisiertes Briefing aus CRM-Notizen", score: 1 }, { text: "Strukturierter Briefing-Prozess mit Kollegen-Input", score: 2 }, { text: "KI-generierte Briefings inkl. Verhandlungshebel und Risiken", score: 3 } ] },
-      { phase: 5, label: "Phase 05 – Verhandlung", text: "Werden Vertriebsgespräche systematisch ausgewertet?", hint: "Conversation Intelligence ist ab 10+ Vertriebsmitarbeitern ein echter Hebel.", options: [ { text: "Nein, jeder verlässt sich auf das eigene Gefühl", score: 0 }, { text: "Gelegentliches Coaching durch den Vorgesetzten", score: 1 }, { text: "Strukturiertes Peer-Review oder Coaching-System", score: 2 }, { text: "Conversation Intelligence wie Gong oder MS Copilot", score: 3 } ] },
-      { phase: 5, label: "Phase 05 – Verhandlung", text: "Wie genau ist Ihr Sales Forecast?", hint: "KI-Forecasts erreichen Mittelstands-Benchmarks von 85–92% Genauigkeit.", options: [ { text: "Wir machen keinen verlässlichen Forecast", score: 0 }, { text: "Forecast-Genauigkeit unter 60 Prozent", score: 1 }, { text: "Forecast-Genauigkeit 60–80 Prozent", score: 2 }, { text: "Forecast-Genauigkeit über 80 Prozent", score: 3 } ] },
-      { phase: 5, label: "Phase 05 – Verhandlung", text: "Wie gehen Sie mit Einwänden im Vertriebsgespräch um?", hint: "Strukturiertes Einwandmanagement ist gut, KI-Coaching macht es planbar.", options: [ { text: "Erfahrungsbasiert, jeder Vertriebler macht es anders", score: 0 }, { text: "Wir haben dokumentierte Einwand-Antworten", score: 1 }, { text: "Regelmäßige Trainings mit Rollenspielen", score: 2 }, { text: "KI-gestütztes Coaching basierend auf Call-Analyse", score: 3 } ] },
-      { phase: 6, label: "Phase 06 – Nachbetreuung", text: "Wie systematisch betreuen Sie Bestandskunden für Cross- und Upselling?", hint: "Bestandskunden-Wachstum ist oft der unterschätzte Hebel.", options: [ { text: "Anlassbezogen, wenn wir Kapazitäten haben", score: 0 }, { text: "Jährliche Account-Reviews mit Top-Kunden", score: 1 }, { text: "Strukturierter Account-Plan mit definierten Touchpoints", score: 2 }, { text: "KI-getriebene Nachfass-Logik mit Predictive Signals", score: 3 } ] },
-      { phase: 6, label: "Phase 06 – Nachbetreuung", text: "Erfassen Sie Nutzungs- oder Verbrauchsdaten Ihrer Produkte/Leistungen beim Kunden?", hint: "Predictive Maintenance erzeugt Service- und Cross-Selling-Anlässe automatisch.", options: [ { text: "Nein", score: 0 }, { text: "Teilweise, manuelle Auswertung", score: 1 }, { text: "Ja, mit Dashboards für Vertrieb und Service", score: 2 }, { text: "Ja, mit KI-Vorhersage auf Service-/Cross-Selling-Bedarf", score: 3 } ] },
-      { phase: 6, label: "Phase 06 – Nachbetreuung", text: "Wie messen Sie Kundenzufriedenheit?", hint: "Frühzeitige Signale verhindern Abwanderung.", options: [ { text: "Wir merken es, wenn Kunden abspringen", score: 0 }, { text: "Sporadische NPS- oder Zufriedenheits-Umfragen", score: 1 }, { text: "Regelmäßige strukturierte Erhebungen mit Maßnahmen", score: 2 }, { text: "KI-Sentiment-Analyse aus Calls und E-Mails", score: 3 } ] },
-      { phase: 6, label: "Phase 06 – Nachbetreuung", text: "Wie aktivieren Sie Empfehlungen durch zufriedene Kunden?", hint: "Empfehlungs-Akquise hat die höchsten Conversion-Raten – und wird selten systematisch betrieben.", options: [ { text: "Wir freuen uns, wenn jemand uns empfiehlt", score: 0 }, { text: "Wir fragen aktiv nach Empfehlungen am Projektende", score: 1 }, { text: "Strukturiertes Referenz-Programm mit Anreizen", score: 2 }, { text: "KI-identifizierte Promotoren mit automatisierter Empfehlungs-Logik", score: 3 } ] }
-    ];
-    let currentQ = 0;
-    let answers = new Array(questions.length).fill(null);
-    const elIntro = document.getElementById('check-intro');
-    const elQuestions = document.getElementById('check-questions');
-    const elResult = document.getElementById('check-result');
-    const elProgressFill = document.getElementById('progress-fill');
-    const elCurrent = document.getElementById('q-current');
-    const elTotal = document.getElementById('q-total');
-    const elPhaseLabel = document.getElementById('q-phase-label');
-    const elPhase = document.getElementById('q-phase');
-    const elText = document.getElementById('q-text');
-    const elHint = document.getElementById('q-hint');
-    const elOptions = document.getElementById('q-options');
-    const elBack = document.getElementById('btn-back');
-    const elNext = document.getElementById('btn-next');
-    elTotal.textContent = questions.length;
-    document.getElementById('btn-start').addEventListener('click', () => { elIntro.classList.add('hidden'); elQuestions.classList.remove('hidden'); renderQuestion(); window.scrollTo({top: 0, behavior: 'smooth'}); });
-    function renderQuestion() {
-      const q = questions[currentQ];
-      elCurrent.textContent = currentQ + 1;
-      elProgressFill.style.width = ((currentQ + 1) / questions.length * 100) + '%';
-      elPhaseLabel.textContent = q.label;
-      elPhase.textContent = q.label;
-      elText.textContent = q.text;
-      elHint.textContent = q.hint || '';
-      elOptions.innerHTML = '';
-      q.options.forEach((opt, idx) => {
-        const btn = document.createElement('button');
-        btn.className = 'check-option' + (answers[currentQ] === idx ? ' selected' : '');
-        btn.innerHTML = '<span class="check-option-marker"></span><span>' + opt.text + '</span>';
-        btn.addEventListener('click', () => { answers[currentQ] = idx; renderQuestion(); });
-        elOptions.appendChild(btn);
-      });
-      elBack.disabled = currentQ === 0;
-      elNext.disabled = answers[currentQ] === null;
-      elNext.textContent = currentQ === questions.length - 1 ? 'Ergebnis ansehen →' : 'Weiter →';
-    }
-    elBack.addEventListener('click', () => { if (currentQ > 0) { currentQ--; renderQuestion(); window.scrollTo({top:0,behavior:'smooth'}); } });
-    elNext.addEventListener('click', () => {
-      if (answers[currentQ] === null) return;
-      if (currentQ < questions.length - 1) { currentQ++; renderQuestion(); window.scrollTo({top:0,behavior:'smooth'}); }
-      else { showResult(); }
-    });
-    function showResult() {
-      elQuestions.classList.add('hidden');
-      elResult.classList.remove('hidden');
-      let totalScore = 0; let maxScore = questions.length * 3;
-      const phaseScores = {1:{s:0,m:0,n:"Lead & Recherche"},2:{s:0,m:0,n:"Erstansprache"},3:{s:0,m:0,n:"Qualifizierung"},4:{s:0,m:0,n:"Angebot"},5:{s:0,m:0,n:"Verhandlung"},6:{s:0,m:0,n:"Nachbetreuung"}};
-      answers.forEach((a, i) => { const q = questions[i]; const s = q.options[a].score; totalScore += s; phaseScores[q.phase].s += s; phaseScores[q.phase].m += 3; });
-      const pct = Math.round(totalScore / maxScore * 100);
-      document.getElementById('result-score').textContent = pct;
-      let level, levelText;
-      if (pct < 25) { level = "Einstieg"; levelText = "Ihr Vertrieb arbeitet überwiegend ohne KI-Unterstützung. Das größte Potenzial liegt genau hier – schon kleine Schritte bringen messbare Effekte."; }
-      else if (pct < 50) { level = "Aufbau"; levelText = "Erste KI-Bausteine sind erkennbar, aber das System ist noch nicht durchgängig. Jetzt entscheidet sich, ob aus Werkzeugen ein Prozess wird."; }
-      else if (pct < 75) { level = "Etabliert"; levelText = "Sie nutzen KI an mehreren Stellen im Vertriebsprozess. Der nächste Sprung kommt aus Integration und Datenqualität – nicht aus mehr Tools."; }
-      else { level = "Fortgeschritten"; levelText = "Sie gehören zu den KI-affinen Vertriebsorganisationen im Mittelstand. Der Fokus verschiebt sich von Adoption zu Differenzierung."; }
-      document.getElementById('result-level').textContent = level;
-      document.getElementById('result-level-text').textContent = levelText;
-      const bd = document.getElementById('result-breakdown');
-      bd.innerHTML = '';
-      Object.keys(phaseScores).forEach(k => {
-        const p = phaseScores[k]; const pPct = Math.round(p.s / p.m * 100);
-        const div = document.createElement('div');
-        div.className = 'check-breakdown-item';
-        div.innerHTML = '<div class="check-breakdown-phase">Phase 0' + k + ' – ' + p.n + '</div><div class="check-breakdown-score">' + pPct + '<span style="font-size:14px;color:var(--ink-mute);font-weight:500;letter-spacing:.05em;text-transform:none"> / 100</span></div>';
-        bd.appendChild(div);
-      });
-      const phasesByScore = Object.keys(phaseScores).map(k => ({ k: k, ...phaseScores[k], pct: phaseScores[k].s / phaseScores[k].m })).sort((a,b) => a.pct - b.pct);
-      const recs = {
-        1: { title: "Lead-Recherche automatisieren", text: "Starten Sie mit einem Tool wie HubSpot Breeze oder Apollo.io. Ziel: Account-Recherche von Stunden auf Minuten reduzieren. Erste messbare Effekte typischerweise nach 4–6 Wochen." },
-        2: { title: "Erstansprache personalisieren – mit Recherche-Tiefe", text: "Setzen Sie Dealcode (DACH/DSGVO-konform) oder vergleichbare Tools ein, um Outreach-Sequenzen mit echter Personalisierung zu fahren. Antwortraten verdoppeln sich typischerweise." },
-        3: { title: "Lead-Qualifizierung und Buying-Center systematisieren", text: "Lead-Scoring im CRM einführen oder ausbauen, ergänzt um einen Chatbot wie moin.ai für die 24/7-Vorqualifizierung. Vertrieb spricht nur noch mit qualifizierten Leads." },
-        4: { title: "Angebotszeiten radikal verkürzen", text: "RAG-Setup oder Microsoft Copilot für Angebotsvorbereitung, kombiniert mit standardisierten Textbausteinen. Ziel: Angebot in unter 24 Stunden – bei konsistenter Qualität." },
-        5: { title: "Verhandlungs-Qualität messbar machen", text: "Conversation Intelligence wie Gong einführen. Coaching wird datengestützt, Forecast-Genauigkeit steigt typischerweise um 15–25 Prozentpunkte." },
-        6: { title: "Bestandskunden zum Wachstumsmotor machen", text: "Predictive-Maintenance-Daten und KI-Sentiment-Analyse nutzen, um Cross-Selling- und Service-Leads automatisch zu erzeugen. Größter unterschätzter Hebel." }
-      };
-      const r = document.getElementById('result-recommendations');
-      r.innerHTML = '';
-      phasesByScore.slice(0,3).forEach((p, idx) => {
-        const rec = recs[p.k];
-        const div = document.createElement('div');
-        div.className = 'check-rec-item';
-        div.innerHTML = '<div class="check-rec-num">– 0' + (idx+1) + ' · Phase 0' + p.k + '</div><div class="check-rec-title">' + rec.title + '</div><div class="check-rec-text">' + rec.text + '</div>';
-        r.appendChild(div);
-      });
-      window.scrollTo({top:0,behavior:'smooth'});
-    }
-    document.getElementById('btn-print').addEventListener('click', () => window.print());
-    document.getElementById('btn-restart').addEventListener('click', () => {
-      currentQ = 0; answers.fill(null);
-      elResult.classList.add('hidden');
-      elIntro.classList.remove('hidden');
-      window.scrollTo({top:0,behavior:'smooth'});
-    });
-  </script>
-  <script src="css/scripts.js"></script>
+  <script src="ki-check.js?v=mono11"></script>
+  <script src="monolith.js?v=mono11"></script>
 </body>
 </html>
