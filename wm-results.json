@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-24T22:09:38+02:00",
+  "updated": "2026-06-24T23:46:03+02:00",
   "matches": [
     {
       "home": "MEX",
@@ -418,10 +418,10 @@
     {
       "home": "BIH",
       "away": "QAT",
-      "hs": 2,
+      "hs": 3,
       "as": 1,
-      "live": true,
-      "status": "PAUSED",
+      "live": false,
+      "status": "FINISHED",
       "date": "2026-06-24"
     },
     {
@@ -437,6 +437,15 @@
       "home": "PAN",
       "away": "CRO",
       "hs": 0,
+      "as": 1,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-24"
+    },
+    {
+      "home": "SUI",
+      "away": "CAN",
+      "hs": 2,
       "as": 1,
       "live": false,
       "status": "FINISHED",
