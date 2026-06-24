@@ -41,7 +41,12 @@
   .regel__prose p strong{font-weight:800;color:var(--ink);}
   .prose--cols{max-width:none;columns:2;column-gap:clamp(28px,3.2vw,56px);}
   .prose--cols p{break-inside:avoid;}
-  @media(max-width:760px){.regel{grid-template-columns:1fr;gap:28px;}.regel__prose{columns:1;}.prose--cols{columns:1;}}
+  .commit{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(26px,4vw,72px);align-items:center;margin-top:clamp(44px,6vw,88px);}
+  .commit__statement{font-family:var(--sans);font-weight:800;font-size:clamp(38px,5.5vw,88px);line-height:0.9;letter-spacing:-0.03em;text-transform:uppercase;color:var(--ink);}
+  .commit__label{font-family:var(--mono);font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--mute);margin-bottom:clamp(12px,1.8vw,18px);}
+  .commit__body p{font-family:var(--sans);font-weight:400;font-size:clamp(18px,1.8vw,23px);line-height:1.5;color:var(--text-2);max-width:48ch;margin:0;}
+  .commit__body em{font-style:italic;color:var(--ink);font-weight:600;}
+  @media(max-width:760px){.regel{grid-template-columns:1fr;gap:28px;}.regel__prose{columns:1;}.prose--cols{columns:1;}.commit{grid-template-columns:1fr;gap:20px;}}
 </style>
 <script src="/css/analytics.js?v=mono11" defer></script>
 </head>
@@ -168,6 +173,13 @@
       <img class="figure__img" src="/assets/Studio2.jpg?v=bw1" alt="B_77 Studio in Siegen – Detail des hellen, reduzierten Arbeitsraums" loading="lazy" width="2000" height="1493">
       <figcaption class="figure__cap"><span>B_77 Studio · Siegen</span><span>Reduziert, hell, ohne Ablenkung</span></figcaption>
     </figure>
+    <div class="wrap commit">
+      <div class="commit__statement">Nicht das Ob.<br>Nur das Wie.</div>
+      <div class="commit__body">
+        <div class="commit__label">Studio Commitment</div>
+        <p>Wer ins B_77 Studio eingeladen ist, ist committed. Hier diskutieren wir nicht, <em>ob</em> wir Ihren Vertrieb aktivieren – sondern nur, <em>wie</em>.</p>
+      </div>
+    </div>
   </section>
 
   <!-- Kontakt -->
