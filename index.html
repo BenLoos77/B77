@@ -69,6 +69,34 @@
   #b77-nein .s { opacity:0; max-width:760px; margin-top:24px; font-weight:400; font-size:clamp(17px,1.9vw,26px); line-height:1.4; color:#b6b3ad; }
   #b77-nein .b { opacity:0; display:flex; gap:14px; margin-top:clamp(28px,4vh,46px); }
   #b77-nein .note { position:absolute; left:60px; bottom:36px; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.22em; color:#3f3e3a; }
+  #b77-nein .b { flex-wrap:wrap; }
+  #b77-nein-funnel, #b77-nein-check-view { width:100%; }
+  #b77-nein-check-view { display:none; max-width:780px; }
+  #b77-nein .b77-btn--ghost { background:transparent; border-color:transparent; color:#6c6a66; padding-left:4px; padding-right:18px; }
+  #b77-nein .b77-btn--ghost:hover { border-color:transparent; color:#cfcdc8; }
+  #b77-nein-funnel .s { max-width:840px; }
+  .nein-einwand { margin-top:22px; }
+  .nein-einwand:first-child { margin-top:2px; }
+  .ne-q { display:block; font-family:'Newsreader',serif; font-style:italic; font-weight:500; font-size:clamp(19px,2.1vw,30px); line-height:1.22; letter-spacing:0; color:#f5f4f2; }
+  .ne-a { display:block; margin-top:7px; font-family:'Archivo',sans-serif; font-size:clamp(14px,1.3vw,18px); font-weight:300; line-height:1.5; color:#928f89; }
+  .b77c-top { display:flex; justify-content:space-between; align-items:baseline; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.22em; color:#6c6a66; }
+  .b77c-bar { height:2px; background:rgba(245,244,242,0.12); margin:15px 0 30px; }
+  .b77c-bar i { display:block; height:100%; width:0%; background:#f5f4f2; transition:width .35s ease; }
+  .b77c-q { font-weight:600; font-size:clamp(22px,2.9vw,40px); line-height:1.18; letter-spacing:-0.012em; color:#f5f4f2; }
+  .b77c-opts { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-top:30px; }
+  .b77c-opt { text-align:left; background:transparent; border:1px solid rgba(245,244,242,0.2); color:#cfcdc8; font-family:'Archivo',sans-serif; font-size:15px; font-weight:500; padding:16px 18px; cursor:pointer; display:flex; align-items:center; gap:13px; transition:border-color .18s ease, background .18s ease, color .18s ease; }
+  .b77c-opt:hover { border-color:rgba(245,244,242,0.55); background:rgba(245,244,242,0.04); color:#f5f4f2; }
+  .b77c-opt .n { font-family:'Space Mono',monospace; font-size:11px; color:#6c6a66; }
+  .b77c-foot { display:flex; gap:26px; margin-top:26px; }
+  .b77-link { background:transparent; border:0; color:#6c6a66; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; cursor:pointer; padding:0; transition:color .18s ease; }
+  .b77-link:hover { color:#cfcdc8; }
+  #b77c-result { display:none; }
+  /* Check-Ansicht wird nicht über die computeNein-Staffel animiert -> Opazität zurücksetzen */
+  #b77-nein-check-view .k, #b77-nein-check-view .s, #b77-nein-check-view .b { opacity:1; transform:none; }
+  .b77c-score { display:flex; align-items:baseline; gap:20px; margin:4px 0 2px; }
+  .b77c-score b { font-weight:700; font-size:clamp(46px,7vw,96px); line-height:1; letter-spacing:-0.03em; color:#f5f4f2; }
+  .b77c-score span { font-family:'Space Mono',monospace; font-size:13px; letter-spacing:0.14em; color:#aeaca7; }
+  @media (max-width:640px){ .b77c-opts{ grid-template-columns:1fr; } }
   #b77-fade { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:#0b0b0c; opacity:0; pointer-events:none; z-index:12; }
   #b77-fade span { font-family:'Space Mono',monospace; font-size:13px; letter-spacing:0.3em; color:#cfcdc8; }
   #b77-replay { position:absolute; right:30px; bottom:30px; opacity:0; pointer-events:none; background:transparent; border:1px solid rgba(245,244,242,0.28); color:#cfcdc8; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; padding:9px 16px; cursor:pointer; z-index:11; transition:border-color .2s ease, color .2s ease; }
@@ -105,14 +133,41 @@
 
   <!-- NEIN-Platzhalter: ersetze diesen Block durch deine eigene Seite/Route -->
   <div id="b77-nein">
-    <div class="k">— ANTWORT: NEIN</div>
-    <div class="t">Verstanden.</div>
-    <div class="s">Der Markt bestimmt nicht Ihr Ergebnis. Ihr Marktanteil tut es – und der entsteht durch Initiative, nicht durch Abwarten.</div>
-    <div class="b">
-      <button id="b77-nein-back" class="b77-btn">← ZURÜCK</button>
-      <button id="b77-nein-home" class="b77-btn b77-btn--primary">ZU B77.DE →</button>
+    <!-- Funnel: die Einwände + Abzweige -->
+    <div id="b77-nein-funnel">
+      <div class="k">— ANTWORT: NEIN</div>
+      <div class="t">Auch gut.<br>Ehrlich ist besser als höflich.</div>
+      <div class="s">
+        <div class="nein-einwand"><span class="ne-q">„Mein Vertrieb läuft längst perfekt."</span><span class="ne-a">Dann Glückwunsch — es ist tatsächlich alles getan. In dem Fall können wir nichts für Sie tun. Ehrlich nicht.</span></div>
+        <div class="nein-einwand"><span class="ne-q">„Ich will gerade nichts verändern."</span><span class="ne-a">Verständlich. Aber ohne volles Commitment helfen wir Ihnen nicht — halbe Sachen sind nichts für uns.</span></div>
+      </div>
+      <div class="b">
+        <button id="b77-nein-doch" class="b77-btn b77-btn--primary">DOCH — LOS GEHT'S →</button>
+        <button id="b77-nein-check" class="b77-btn">VERTRIEBS-CHECK · 3 MIN →</button>
+        <button id="b77-nein-home" class="b77-btn b77-btn--ghost">ZU B77.DE</button>
+      </div>
     </div>
-    <div class="note">PLATZHALTER · DIESE SEITE BAUST DU PER CODE</div>
+
+    <!-- Inline-Check: läuft direkt hier, ohne Weiterleitung -->
+    <div id="b77-nein-check-view">
+      <div id="b77c-quiz">
+        <div class="b77c-top"><span id="b77c-dim">VERTRIEBS-CHECK</span><span id="b77c-num">01 / 06</span></div>
+        <div class="b77c-bar"><i id="b77c-fill"></i></div>
+        <div id="b77c-q" class="b77c-q"></div>
+        <div id="b77c-opts" class="b77c-opts"></div>
+        <div class="b77c-foot"><button id="b77c-back" class="b77-link">← ZURÜCK</button><button id="b77c-abort" class="b77-link">ABBRECHEN</button></div>
+      </div>
+      <div id="b77c-result">
+        <div class="k">— IHR SOFORT-BEFUND</div>
+        <div class="b77c-score"><b id="b77c-pct">0%</b><span id="b77c-tier"></span></div>
+        <div id="b77c-verdict" class="s"></div>
+        <div class="b">
+          <a id="b77c-full" class="b77-btn b77-btn--primary" href="/vertriebs-check">VOLLER CHECK · 25 FRAGEN →</a>
+          <a class="b77-btn" href="/kontakt">GESPRÄCH →</a>
+          <button id="b77c-doch" class="b77-btn b77-btn--ghost">DOCH STARTEN →</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div id="b77-fade"><span>→ B77.DE</span></div>
@@ -237,13 +292,82 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
   function goHome() { try { window.location.href = CFG.homeUrl || 'https://b77.de'; } catch (e) {} }
   function removeOverlay() { root.style.display = 'none'; if (root.parentNode) root.parentNode.removeChild(root); }
   function finishYes() { if (CFG.mode === 'overlay') removeOverlay(); else goHome(); }
+  // „Doch"-Pfad von der NEIN-Seite: im Overlay-Modus sanft wegblenden und die Startseite freigeben.
+  function fadeDismiss() { answered(); if (CFG.mode === 'overlay') { root.style.transition = 'opacity .55s ease'; root.style.opacity = '0'; setTimeout(removeOverlay, 600); } else goHome(); }
+
+  /* ---------- Inline-Vertriebs-Check (läuft direkt auf der NEIN-Seite) ---------- */
+  var CHK = {
+    scale: ['Nein', 'Teilweise', 'Größtenteils', 'Ja, voll'],
+    q: [
+      { dim: 'POSITIONIERUNG', t: 'Unsere Zielkunden und unser Nutzenversprechen sind im Vertrieb glasklar.' },
+      { dim: 'PROZESS', t: 'Unser Vertriebsprozess ist von Erstkontakt bis Abschluss klar definiert.' },
+      { dim: 'MARKTBEARBEITUNG', t: 'Wir sprechen neue Entscheider systematisch an — statt auf Anfragen zu warten.' },
+      { dim: 'DATEN & STEUERUNG', t: 'Wir steuern den Vertrieb mit verlässlichen Zahlen, nicht aus dem Bauch.' },
+      { dim: 'KONSEQUENZ', t: 'Angebote werden bei uns konsequent und zeitnah nachverfolgt.' },
+      { dim: 'FÜHRUNG', t: 'Vertrieb ist bei uns Chefsache und wird aktiv nachgehalten.' }
+    ],
+    idx: 0, ans: []
+  };
+  function chkRenderQ() {
+    var q = CHK.q[CHK.idx], n = CHK.q.length;
+    $('b77c-dim').textContent = q.dim;
+    $('b77c-num').textContent = (CHK.idx + 1 < 10 ? '0' : '') + (CHK.idx + 1) + ' / 0' + n;
+    $('b77c-fill').style.width = Math.round((CHK.idx / n) * 100) + '%';
+    $('b77c-q').textContent = q.t;
+    var opts = $('b77c-opts'); opts.innerHTML = '';
+    CHK.scale.forEach(function (label, val) {
+      var b = document.createElement('button');
+      b.className = 'b77c-opt'; b.type = 'button';
+      b.innerHTML = '<span class="n">' + val + '</span><span>' + label + '</span>';
+      b.addEventListener('click', function () { chkAnswer(val); });
+      opts.appendChild(b);
+    });
+    $('b77c-back').style.visibility = CHK.idx > 0 ? 'visible' : 'hidden';
+  }
+  function chkAnswer(val) {
+    CHK.ans[CHK.idx] = val;
+    if (CHK.idx >= CHK.q.length - 1) chkResult();
+    else { CHK.idx++; chkRenderQ(); }
+  }
+  function chkResult() {
+    var sum = 0; for (var i = 0; i < CHK.q.length; i++) sum += (CHK.ans[i] || 0);
+    var pct = Math.round((sum / (CHK.q.length * 3)) * 100);
+    var tier, verdict;
+    if (pct < 40) { tier = 'REAKTIV'; verdict = 'Ihr Vertrieb verwaltet überwiegend Nachfrage. Der Hebel durch Struktur und aktive Marktbearbeitung ist riesig — sicher, dass „längst perfekt" stimmt?'; }
+    else if (pct < 70) { tier = 'IM AUFBAU'; verdict = 'Das Fundament steht in Teilen. Aber die Lücken bremsen genau das planbare Wachstum, das Sie wollen.'; }
+    else if (pct < 90) { tier = 'STRUKTURIERT'; verdict = 'Solide aufgestellt. Jetzt geht es um das letzte Drittel — Feinarbeit, die im Markt den Unterschied macht.'; }
+    else { tier = 'VERTRIEBSAKTIV'; verdict = 'Respekt — Sie gestalten Ihren Markt aktiv. Dann reden wir nicht über das Ob, sondern über Feinjustierung.'; }
+    $('b77c-pct').textContent = pct + '%';
+    $('b77c-tier').textContent = tier;
+    $('b77c-verdict').textContent = verdict;
+    $('b77c-quiz').style.display = 'none';
+    $('b77c-result').style.display = 'block';
+  }
+  function chkStart() {
+    CHK.idx = 0; CHK.ans = [];
+    $('b77-nein-funnel').style.display = 'none';
+    $('b77-nein-check-view').style.display = 'block';
+    $('b77c-result').style.display = 'none';
+    $('b77c-quiz').style.display = 'block';
+    chkRenderQ();
+  }
+  function chkBackToFunnel() {
+    $('b77-nein-check-view').style.display = 'none';
+    $('b77-nein-funnel').style.display = 'block';
+  }
 
   function wire() {
     $('b77-yes').addEventListener('click', onYes);
     $('b77-no').addEventListener('click', onNo);
     el.replay.addEventListener('click', startFlow);
-    $('b77-nein-back').addEventListener('click', startFlow);
-    $('b77-nein-home').addEventListener('click', goHome);
+    // NEIN-Funnel
+    $('b77-nein-doch').addEventListener('click', fadeDismiss);
+    $('b77-nein-check').addEventListener('click', chkStart);
+    $('b77-nein-home').addEventListener('click', fadeDismiss);
+    // Inline-Check
+    $('b77c-back').addEventListener('click', function () { if (CHK.idx > 0) { CHK.idx--; chkRenderQ(); } });
+    $('b77c-abort').addEventListener('click', chkBackToFunnel);
+    $('b77c-doch').addEventListener('click', fadeDismiss);
   }
 
   /* ---------- Feuer? Nein — Momentum-Auflösung (weiße Streifen) ---------- */
