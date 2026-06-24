@@ -31,11 +31,9 @@
 </script>
 <style>
   .regel{display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);gap:clamp(28px,5vw,80px);align-items:center;}
-  .regel__col{border-top:1px solid var(--ink);padding-top:clamp(16px,2vw,26px);}
-  .regel__cap{font-family:var(--mono);font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--mute);}
-  .regel__big{display:flex;align-items:baseline;gap:clamp(8px,1.6vw,22px);margin:clamp(10px,1.6vw,18px) 0;}
-  .regel__num{font-family:var(--sans);font-weight:800;font-size:clamp(150px,24vw,330px);line-height:0.78;letter-spacing:-0.05em;color:var(--ink);}
-  .regel__unit{font-family:var(--sans);font-weight:800;font-size:clamp(30px,4.2vw,60px);line-height:0.9;letter-spacing:-0.02em;text-transform:uppercase;}
+  .regel__logo{display:flex;align-items:center;gap:clamp(10px,1.8vw,26px);}
+  .regel__num{font-family:var(--sans);font-weight:800;font-size:clamp(150px,25vw,340px);line-height:0.72;letter-spacing:-0.05em;color:var(--ink);}
+  .regel__word{font-family:var(--sans);font-weight:800;font-size:clamp(28px,3.6vw,56px);line-height:0.9;letter-spacing:-0.01em;text-transform:uppercase;color:var(--ink);}
   .regel__prose{max-width:54ch;}
   .regel__prose p{font-family:var(--sans);font-weight:400;font-size:clamp(17px,1.7vw,21px);line-height:1.55;color:var(--text-2);margin:0 0 1em;}
   .regel__prose p.first{font-size:clamp(20px,2vw,26px);color:var(--ink);font-weight:500;line-height:1.4;}
@@ -120,12 +118,11 @@
 
   <!-- Das Ziel / 6-Monats-Regel -->
   <section class="section" data-reveal>
-    <div class="corners wrap"><span>Die B_77 6-Monats-Regel</span><span class="r">06</span></div>
+    <div class="corners wrap"><span>B_77 Versprechen</span><span class="r">06</span></div>
     <div class="wrap regel">
-      <div class="regel__col">
-        <div class="regel__cap">Maximale Mandatslaufzeit</div>
-        <div class="regel__big"><span class="regel__num">6</span><span class="regel__unit">Monate</span></div>
-        <div class="regel__cap">Dann läuft Ihr Vertrieb – ohne uns.</div>
+      <div class="regel__logo">
+        <span class="regel__num">6</span>
+        <span class="regel__word">Monats-<br>Regel</span>
       </div>
       <div class="regel__prose">
         <p class="first">Wir sind an dauerhaften Beziehungen interessiert – nicht an Dauermandaten. Deshalb gilt bei B_77 die 6-Monats-Regel: Ein Mandat läuft höchstens sechs Monate. Unser Versprechen für diese Zeit ist klar – wir übergeben Ihnen einen aktiven, operativ funktionierenden Vertrieb, den Ihr Team selbstständig weiterführt.</p>
