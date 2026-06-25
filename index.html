@@ -106,12 +106,10 @@
   #b77-replay:hover { border-color:rgba(245,244,242,0.6); color:#f5f4f2; }
   #b77-progtrack { position:absolute; left:0; bottom:0; height:2px; width:100%; background:rgba(255,255,255,0.05); z-index:5; }
   #b77-progress { height:100%; width:0%; background:#f5f4f2; }
-  /* Hero: Geister-Folio „77" + dezente Positionsangabe */
+  /* Hero: dezentes Geister-Folio „77" */
   .hb__folio { position:absolute; right:-1.5%; bottom:-5%; width:clamp(320px,54vw,760px); aspect-ratio:446/310;
-    background:url(/assets/B77_77_white.png) right bottom/contain no-repeat; opacity:.055; pointer-events:none; z-index:0; }
-  .hb__coord { position:absolute; right:var(--gutter); top:47%; z-index:1; pointer-events:none;
-    font-family:var(--mono); font-size:11px; letter-spacing:0.12em; color:rgba(255,255,255,0.32); white-space:nowrap; }
-  .hb > *:not(.hb__folio):not(.hb__coord) { position:relative; z-index:1; }
+    background:url(/assets/B77_77_white.png) right bottom/contain no-repeat; opacity:.035; pointer-events:none; z-index:0; }
+  .hb > *:not(.hb__folio) { position:relative; z-index:1; }
 </style>
 </head>
 <body>
@@ -500,7 +498,6 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
   <!-- HERO (Monolith – invertierte Sektion 00) -->
   <section class="hb">
     <div class="hb__folio" aria-hidden="true"></div>
-    <span class="hb__coord" aria-hidden="true">51.8722° N · 8.0214° E</span>
     <div class="hb__top"><span>Wir machen Unternehmen</span><span class="r">01</span></div>
     <h1 class="hb__title"><span class="l"><i>Vertriebs-</i></span><span class="l"><i>aktiv.</i></span></h1>
     <p class="hb__lead"><strong>Vertriebsaktiv</strong> zu sein bedeutet, Märkte bewusst zu bearbeiten, Zielkunden systematisch zu gewinnen und Abschlüsse nicht dem Zufall zu überlassen. Es schafft Steuerbarkeit – weil Unternehmen ihren Marktanteil aktiv gestalten, statt auf Anfragen zu warten.</p>
