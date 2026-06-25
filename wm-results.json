@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-25T06:34:35+02:00",
+  "updated": "2026-06-26T00:07:57+02:00",
   "matches": [
     {
       "home": "MEX",
@@ -452,10 +452,28 @@
       "date": "2026-06-24"
     },
     {
+      "home": "CUR",
+      "away": "CIV",
+      "hs": 0,
+      "as": 2,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-25"
+    },
+    {
       "home": "CZE",
       "away": "MEX",
       "hs": 0,
       "as": 3,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-25"
+    },
+    {
+      "home": "ECU",
+      "away": "GER",
+      "hs": 2,
+      "as": 1,
       "live": false,
       "status": "FINISHED",
       "date": "2026-06-25"
