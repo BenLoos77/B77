@@ -74,9 +74,12 @@
   #b77-nein-check-view { display:none; max-width:780px; }
   #b77-nein .b77-btn--ghost { background:transparent; border-color:transparent; color:#6c6a66; padding-left:4px; padding-right:18px; }
   #b77-nein .b77-btn--ghost:hover { border-color:transparent; color:#cfcdc8; }
-  #b77-nein-funnel .s { max-width:840px; }
-  .nein-einwand { margin-top:22px; }
-  .nein-einwand:first-child { margin-top:2px; }
+  #b77-nein-funnel .s { max-width:860px; }
+  .nein-lead { margin:0; font-family:'Archivo',sans-serif; font-weight:300; font-size:clamp(16px,1.6vw,22px); line-height:1.5; color:#cfcdc8; max-width:800px; }
+  .nein-guess { margin:clamp(22px,3.4vh,34px) 0 6px; font-family:'Archivo',sans-serif; font-weight:400; font-size:clamp(15px,1.4vw,19px); color:#928f89; }
+  .nein-guess b { color:#f5f4f2; font-weight:700; }
+  .nein-einwand { display:flex; gap:16px; margin-top:18px; }
+  .ne-lbl { flex:0 0 auto; width:30px; height:30px; margin-top:3px; display:flex; align-items:center; justify-content:center; font-family:'Space Mono',monospace; font-size:13px; font-weight:700; color:#cfcdc8; border:1px solid rgba(245,244,242,0.28); }
   .ne-q { display:block; font-family:'Newsreader',serif; font-style:italic; font-weight:500; font-size:clamp(19px,2.1vw,30px); line-height:1.22; letter-spacing:0; color:#f5f4f2; }
   .ne-a { display:block; margin-top:7px; font-family:'Archivo',sans-serif; font-size:clamp(14px,1.3vw,18px); font-weight:300; line-height:1.5; color:#928f89; }
   .b77c-top { display:flex; justify-content:space-between; align-items:baseline; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.22em; color:#6c6a66; }
@@ -136,15 +139,17 @@
     <!-- Funnel: die Einwände + Abzweige -->
     <div id="b77-nein-funnel">
       <div class="k">— ANTWORT: NEIN</div>
-      <div class="t">Auch gut.<br>Ehrlich ist besser als höflich.</div>
+      <div class="t">Schade.</div>
       <div class="s">
-        <div class="nein-einwand"><span class="ne-q">„Mein Vertrieb läuft längst perfekt."</span><span class="ne-a">Dann Glückwunsch — es ist tatsächlich alles getan. In dem Fall können wir nichts für Sie tun. Ehrlich nicht.</span></div>
-        <div class="nein-einwand"><span class="ne-q">„Ich will gerade nichts verändern."</span><span class="ne-a">Verständlich. Aber ohne volles Commitment helfen wir Ihnen nicht — halbe Sachen sind nichts für uns.</span></div>
+        <p class="nein-lead">Dass wir uns gerade nicht kennenlernen. Wenn Sie Ihren Vertrieb zu einem anderen Zeitpunkt aktivieren möchten, freuen wir uns, von Ihnen zu hören.</p>
+        <p class="nein-guess">Wir mutmaßen, dass Sie aktuell mit <b>A</b> oder <b>B</b> antworten würden, oder?</p>
+        <div class="nein-einwand"><span class="ne-lbl">A</span><div class="ne-body"><span class="ne-q">„Mein Vertrieb läuft längst perfekt!"</span><span class="ne-a">Dann Glückwunsch — es ist tatsächlich alles getan. In dem Fall können wir nichts für Sie tun. Ehrlich nicht.</span></div></div>
+        <div class="nein-einwand"><span class="ne-lbl">B</span><div class="ne-body"><span class="ne-q">„Ich will gerade nichts verändern."</span><span class="ne-a">Verständlich. Aber ohne volles Commitment können wir Ihnen nicht helfen — halbe Sachen sind nichts für uns.</span></div></div>
       </div>
       <div class="b">
-        <button id="b77-nein-doch" class="b77-btn b77-btn--primary">DOCH — LOS GEHT'S →</button>
-        <button id="b77-nein-check" class="b77-btn">VERTRIEBS-CHECK · 3 MIN →</button>
-        <button id="b77-nein-home" class="b77-btn b77-btn--ghost">ZU B77.DE</button>
+        <a id="b77-nein-kontakt" class="b77-btn b77-btn--primary" href="/kontakt">DOCH — REDEN WIR →</a>
+        <button id="b77-nein-check" class="b77-btn">VERTRIEB SELBST EINSCHÄTZEN →</button>
+        <button id="b77-nein-home" class="b77-btn b77-btn--ghost">WEITER ZU B77.DE</button>
       </div>
     </div>
 
@@ -361,7 +366,7 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
     $('b77-no').addEventListener('click', onNo);
     el.replay.addEventListener('click', startFlow);
     // NEIN-Funnel
-    $('b77-nein-doch').addEventListener('click', fadeDismiss);
+    $('b77-nein-kontakt').addEventListener('click', function () { answered(); }); // Link navigiert selbst zu /kontakt; Intro nicht erneut zeigen
     $('b77-nein-check').addEventListener('click', chkStart);
     $('b77-nein-home').addEventListener('click', fadeDismiss);
     // Inline-Check
