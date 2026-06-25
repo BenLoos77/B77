@@ -109,6 +109,8 @@
   /* Hero: lebendiger Partikel-Hintergrund — das JA-Dissolve „landet" hier */
   #hb-bg { position:absolute; inset:0; width:100%; height:100%; z-index:0; pointer-events:none; display:block; }
   .hb > *:not(#hb-bg) { position:relative; z-index:1; }
+  /* Pixel-Schweif, der dem Mauszeiger über die ganze Startseite folgt */
+  #px-trail { position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:45; }
 </style>
 </head>
 <body>
@@ -757,6 +759,58 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
     }
     document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else if (visible) start(); });
     if (!reduce) start();
+  })();
+  </script>
+
+  <!-- Pixel-Schweif hinter dem Mauszeiger (ganze Startseite) -->
+  <canvas id="px-trail" aria-hidden="true"></canvas>
+  <script>
+  (function () {
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) return;
+    var cv = document.getElementById('px-trail'); if (!cv) return;
+    var ctx = cv.getContext('2d');
+    var dpr = Math.min(2, window.devicePixelRatio || 1), W = 0, H = 0;
+    var ps = [], raf = 0, lx = null, ly = null;
+
+    function rnd(a, b) { return a + Math.random() * (b - a); }
+    function resize() { W = window.innerWidth; H = window.innerHeight; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+    resize();
+    var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(resize, 200); });
+
+    function spawn(x, y, vx, vy) {
+      ps.push({
+        x: x + rnd(-3, 3), y: y + rnd(-3, 3),
+        vx: -vx * 0.05 + rnd(-0.35, 0.35), vy: -vy * 0.05 + rnd(-0.35, 0.35),
+        s: rnd(4, 13), h: rnd(1.5, 4), life: 1, decay: rnd(0.016, 0.032)
+      });
+      if (ps.length > 240) ps.shift();
+    }
+    function onMove(e) {
+      var x = e.clientX, y = e.clientY;
+      if (lx != null) {
+        var dx = x - lx, dy = y - ly, dist = Math.sqrt(dx * dx + dy * dy);
+        var n = Math.min(4, 1 + Math.floor(dist / 9));        // schnellere Bewegung -> dichterer Schweif
+        for (var k = 0; k < n; k++) { var t = k / n; spawn(lx + dx * t, ly + dy * t, dx, dy); }
+      }
+      lx = x; ly = y;
+      if (!raf) raf = requestAnimationFrame(frame);
+    }
+    window.addEventListener('mousemove', onMove, { passive: true });
+
+    function frame() {
+      ctx.clearRect(0, 0, W, H);
+      for (var i = ps.length - 1; i >= 0; i--) {
+        var p = ps[i];
+        p.x += p.vx; p.y += p.vy; p.vy += 0.012; p.life -= p.decay;   // leichter „Fall"
+        if (p.life <= 0) { ps.splice(i, 1); continue; }
+        var a = p.life * p.life;                                       // weiches Ausblenden
+        var s = p.s * (0.4 + 0.6 * p.life);                            // schrumpft leicht
+        ctx.fillStyle = 'rgba(18,18,19,' + (a * 0.5).toFixed(3) + ')'; ctx.fillRect(p.x, p.y + s, s, p.h);  // Seite (3D-Hauch)
+        ctx.fillStyle = 'rgba(245,244,242,' + (a * 0.62).toFixed(3) + ')'; ctx.fillRect(p.x, p.y, s, s);    // Deckfläche
+      }
+      raf = ps.length ? requestAnimationFrame(frame) : 0;             // hält an, wenn der Schweif verflogen ist
+    }
   })();
   </script>
 
