@@ -658,10 +658,10 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
     function smooth(v) { v = clamp(v); return v * v * (3 - 2 * v); }
     function hash(i, j) { var x = Math.sin(i * 127.1 + j * 311.7) * 43758.5453; return x - Math.floor(x); }
 
-    // wie weit ein Feld aus dem Schwarz „aufgetaucht" ist: Ecke unten-rechts voll, oben/links bleibt schwarz (Text frei)
+    // wie weit ein Feld aus dem Schwarz „aufgetaucht" ist: beginnt weit links, wird nach rechts/unten voll
     function emerge(cx, cy) {
-      var gx = clamp((cx / W - 0.30) / 0.70);
-      var gy = clamp((cy / H - 0.10) / 0.90);
+      var gx = clamp((cx / W - 0.04) / 0.66);
+      var gy = clamp((cy / H - 0.12) / 0.88);
       return smooth(gx) * smooth(gy);
     }
     // wogendes Höhenfeld 0..1
@@ -682,9 +682,10 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
 
     function draw(stillFrame) {
       var now = performance.now();
-      var grow = stillFrame ? 1 : smooth((now - t0) / 1700);   // Relief wächst aus der Fläche
+      var elapsed = (now - t0) / 1000;                          // Sekunden seit Start
       var tm = stillFrame ? 0 : now * 0.0009;
-      var maxH = C * 1.9, cols = Math.ceil(W / C) + 1, rows = Math.ceil(H / C) + 1;
+      var maxH = C * 2.0, GAP = Math.max(2, Math.round(C * 0.16)), cz = C - GAP;
+      var cols = Math.ceil(W / C) + 1, rows = Math.ceil(H / C) + 1;
       // Maus weich nachführen + Aktivität ein-/ausblenden
       ptr.x += (ptr.tx - ptr.x) * 0.2; ptr.y += (ptr.ty - ptr.y) * 0.2;
       ptr.act += ((ptr.inside ? 1 : 0) - ptr.act) * 0.08;
@@ -699,23 +700,27 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
           if (g < 0.05) continue;
           var hsh = hash(i, j);
           if (g < 0.55 && hsh > g * 1.7) continue;             // geditherte, „pixelige" Auftauch-Kante
-          var hn = flow(cx, cy, tm);                            // Höhe 0..1
+          // Aufbau-Animation: legt sich von links nach rechts in den Hintergrund
+          var appear = stillFrame ? 1 : smooth((elapsed - (cx / W) * 1.05) / 0.7);
+          if (appear <= 0.01) continue;
+          var hn = flow(cx, cy, tm);
+          var hq = Math.round(hn * 7) / 7;                      // gestufte Höhe -> klarere Struktur
           // Maus-Einfluss: Voxel in Cursor-Nähe steigen auf und leuchten (nur wo Feld vorhanden -> g)
           var infl = 0;
           if (useM) {
             var dx = cx + C * 0.5 - ptr.x, dy = cy + C * 0.5 - ptr.y, dd = dx * dx + dy * dy;
             if (dd < R2) { var f = 1 - Math.sqrt(dd) / R; infl = f * f * ptr.act * g; }
           }
-          var h = maxH * (0.12 + 0.88 * hn) * g * grow + maxH * 1.5 * infl;
-          var tg = Math.round((26 + 120 * hn) * (0.18 + 0.82 * g) + 120 * infl);   // Top heller = höher
-          if (tg > 240) tg = 240;
+          var h = (maxH * (0.08 + 0.92 * hq) * g + maxH * 1.6 * infl) * appear;
+          var tg = Math.round(((22 + 132 * hq) * (0.16 + 0.84 * g) + 130 * infl) * appear);   // Top heller = höher
+          if (tg > 244) tg = 244;
           if (tg < 1) continue;
-          var sg = Math.round(tg * 0.42);                       // Seitenfläche dunkler -> 3D
-          var topY = cy - h;
+          var sg = Math.round(tg * 0.34);                       // Seitenfläche deutlich dunkler -> stärkeres 3D
+          var ox = cx + GAP * 0.5, topY = cy - h;
           // Seitenfläche (Höhe) ...
-          if (h > 0.5) { ctx.fillStyle = 'rgb(' + sg + ',' + sg + ',' + sg + ')'; ctx.fillRect(cx, topY + C, C + 0.7, h + 0.7); }
-          // ... Deckfläche
-          ctx.fillStyle = 'rgb(' + tg + ',' + tg + ',' + tg + ')'; ctx.fillRect(cx, topY, C + 0.7, C + 0.7);
+          if (h > 0.5) { ctx.fillStyle = 'rgb(' + sg + ',' + sg + ',' + sg + ')'; ctx.fillRect(ox, topY + cz, cz + 0.6, h + 0.6); }
+          // ... Deckfläche (mit Lücke -> abgesetzte Pixel)
+          ctx.fillStyle = 'rgb(' + tg + ',' + tg + ',' + tg + ')'; ctx.fillRect(ox, topY, cz + 0.6, cz + 0.6);
         }
       }
     }
