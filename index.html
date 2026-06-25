@@ -677,13 +677,13 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
       cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       t0 = performance.now();
-      if (reduce) draw(true);
+      if (reduce) draw(true); else start();                    // Einflug nach (Re-)Layout neu zeichnen
     }
 
     function draw(stillFrame) {
       var now = performance.now();
       var elapsed = (now - t0) / 1000;                          // Sekunden seit Start
-      var tm = stillFrame ? 0 : now * 0.0009;
+      var tm = 0;                                               // Höhenfeld eingefroren — kein Dauer-Wogen
       var maxH = C * 2.0, GAP = Math.max(2, Math.round(C * 0.16)), cz = C - GAP;
       var cols = Math.ceil(W / C) + 1, rows = Math.ceil(H / C) + 1;
       // Maus weich nachführen + Aktivität ein-/ausblenden
@@ -725,7 +725,13 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
       }
     }
 
-    function frame() { draw(false); raf = requestAnimationFrame(frame); }
+    function frame() {
+      draw(false);
+      // Loop läuft nur während des Einflugs und solange die Maus noch wirkt — sonst einfrieren
+      var building = (performance.now() - t0) < 2200;
+      if (building || ptr.inside || ptr.act > 0.004) { raf = requestAnimationFrame(frame); }
+      else { raf = 0; }
+    }
     function start() { if (raf || reduce) return; raf = requestAnimationFrame(frame); }
     function stop() { if (raf) { cancelAnimationFrame(raf); raf = 0; } }
 
@@ -736,13 +742,14 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
       ptr.inside = (x >= 0 && x <= W && y >= 0 && y <= H);
       ptr.tx = x; ptr.ty = y;
       if (ptr.x < -9000) { ptr.x = x; ptr.y = y; }              // erstes Mal: hart setzen statt von weit her einschweben
+      if (ptr.inside && visible) start();                       // Loop aufwecken, wenn die Maus übers Feld kommt
     }
     resize();
     var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(resize, 200); });
     if (!reduce) {
       window.addEventListener('mousemove', onMove, { passive: true });
       window.addEventListener('touchmove', onMove, { passive: true });
-      hb.addEventListener('mouseleave', function () { ptr.inside = false; });
+      hb.addEventListener('mouseleave', function () { ptr.inside = false; if (visible) start(); });  // Loop läuft aus, bis der Bump abgeklungen ist
     }
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible) start(); else stop(); }, { threshold: 0 }).observe(hb);
