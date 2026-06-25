@@ -106,6 +106,9 @@
   #b77-replay:hover { border-color:rgba(245,244,242,0.6); color:#f5f4f2; }
   #b77-progtrack { position:absolute; left:0; bottom:0; height:2px; width:100%; background:rgba(255,255,255,0.05); z-index:5; }
   #b77-progress { height:100%; width:0%; background:#f5f4f2; }
+  /* Hero: lebendiger Partikel-Hintergrund — das JA-Dissolve „landet" hier */
+  #hb-bg { position:absolute; inset:0; width:100%; height:100%; z-index:0; pointer-events:none; display:block; }
+  .hb > *:not(#hb-bg) { position:relative; z-index:1; }
 </style>
 </head>
 <body>
@@ -493,6 +496,7 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
 
   <!-- HERO (Monolith – invertierte Sektion 00) -->
   <section class="hb">
+    <canvas id="hb-bg" aria-hidden="true"></canvas>
     <div class="hb__top"><span>Wir machen Unternehmen</span><span class="r">01</span></div>
     <h1 class="hb__title"><span class="l"><i>Vertriebs-</i></span><span class="l"><i>aktiv.</i></span></h1>
     <p class="hb__lead"><strong>Vertriebsaktiv</strong> zu sein bedeutet, Märkte bewusst zu bearbeiten, Zielkunden systematisch zu gewinnen und Abschlüsse nicht dem Zufall zu überlassen. Es schafft Steuerbarkeit – weil Unternehmen ihren Marktanteil aktiv gestalten, statt auf Anfragen zu warten.</p>
@@ -638,6 +642,73 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
     <span>© 2026 B_77 – Vertriebsberatung</span>
     <span class="footer__r">Wallhausenstraße 1 · 57072 Siegen · <a href="/impressum">Impressum &amp; Datenschutz</a></span>
   </footer>
+
+  <!-- Hero: lebendiger Partikel-Hintergrund (driftende Streifen im Intro-Look) -->
+  <script>
+  (function () {
+    var cv = document.getElementById('hb-bg'); if (!cv) return;
+    var hb = cv.closest('.hb'); var ctx = cv.getContext('2d');
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var W = 1, H = 1, dpr = Math.min(2, window.devicePixelRatio || 1), parts = [], raf = 0, visible = true;
+
+    function rnd(a, b) { return a + Math.random() * (b - a); }
+    function seed() {
+      // Partikelzahl an Fläche koppeln, gedeckelt fürs Performance-Budget
+      var n = Math.max(36, Math.min(150, Math.round(W * H / 16000)));
+      parts = [];
+      for (var i = 0; i < n; i++) {
+        parts.push({
+          x: Math.random() * W, y: Math.random() * H,
+          vx: rnd(0.06, 0.4),                 // sanfte Rechtsdrift — echot die Dissolve-Streifen
+          vy: rnd(-0.05, 0.05),
+          len: rnd(0, 22),                    // einige Partikel als kurze Streifen
+          r: rnd(0.4, 1.5),
+          a: rnd(0.05, 0.22)
+        });
+      }
+    }
+    function resize() {
+      var r = hb.getBoundingClientRect();
+      W = Math.max(1, r.width); H = Math.max(1, r.height);
+      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      seed();
+      if (reduce) drawStatic();
+    }
+    function drawStatic() {
+      ctx.clearRect(0, 0, W, H);
+      for (var i = 0; i < parts.length; i++) { var p = parts[i]; ctx.fillStyle = 'rgba(245,244,242,' + (p.a * 0.7).toFixed(3) + ')'; ctx.fillRect(p.x, p.y, p.r, p.r); }
+    }
+    function frame() {
+      // sanfter Nachzieh-Effekt: statt löschen mit halbtransparentem Ink füllen -> kurze Schweife
+      ctx.fillStyle = 'rgba(15,15,16,0.16)';
+      ctx.fillRect(0, 0, W, H);
+      for (var i = 0; i < parts.length; i++) {
+        var p = parts[i];
+        p.x += p.vx; p.y += p.vy;
+        if (p.x - p.len > W + 4) { p.x = -p.len - rnd(0, 40); p.y = Math.random() * H; }
+        if (p.y < -4) p.y = H + 4; else if (p.y > H + 4) p.y = -4;
+        ctx.globalAlpha = p.a;
+        ctx.fillStyle = '#f5f4f2';
+        if (p.len > 6) { ctx.fillRect(p.x - p.len, p.y, p.len, p.r); }   // Streifen
+        else { ctx.fillRect(p.x, p.y, p.r, p.r); }                       // Punkt
+      }
+      ctx.globalAlpha = 1;
+      raf = requestAnimationFrame(frame);
+    }
+    function start() { if (raf || reduce) return; raf = requestAnimationFrame(frame); }
+    function stop() { if (raf) { cancelAnimationFrame(raf); raf = 0; } }
+
+    resize();
+    var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(resize, 200); });
+    // nur animieren, solange der Hero sichtbar ist
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible) start(); else stop(); }, { threshold: 0 }).observe(hb);
+    }
+    document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else if (visible) start(); });
+    if (!reduce) start();
+  })();
+  </script>
 
   <script src="monolith.js?v=mono11"></script>
 </body>
