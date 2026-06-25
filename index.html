@@ -651,6 +651,8 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var W = 1, H = 1, dpr = Math.min(2, window.devicePixelRatio || 1);
     var raf = 0, visible = true, t0 = 0, C = 24;
+    // Maus: geglättete Position + Aktivität (Voxel reagieren in der Nähe)
+    var ptr = { x: -9999, y: -9999, tx: -9999, ty: -9999, inside: false, act: 0 };
 
     function clamp(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
     function smooth(v) { v = clamp(v); return v * v * (3 - 2 * v); }
@@ -681,8 +683,12 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
     function draw(stillFrame) {
       var now = performance.now();
       var grow = stillFrame ? 1 : smooth((now - t0) / 1700);   // Relief wächst aus der Fläche
-      var tm = stillFrame ? 0 : now * 0.0006;
+      var tm = stillFrame ? 0 : now * 0.0009;
       var maxH = C * 1.9, cols = Math.ceil(W / C) + 1, rows = Math.ceil(H / C) + 1;
+      // Maus weich nachführen + Aktivität ein-/ausblenden
+      ptr.x += (ptr.tx - ptr.x) * 0.2; ptr.y += (ptr.ty - ptr.y) * 0.2;
+      ptr.act += ((ptr.inside ? 1 : 0) - ptr.act) * 0.08;
+      var R = Math.max(150, W * 0.17), R2 = R * R, useM = ptr.act > 0.01;
       ctx.clearRect(0, 0, W, H);
       // Reihen von oben nach unten -> vordere (untere) Voxel überdecken die hinteren korrekt
       for (var j = 0; j < rows; j++) {
@@ -694,8 +700,15 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
           var hsh = hash(i, j);
           if (g < 0.55 && hsh > g * 1.7) continue;             // geditherte, „pixelige" Auftauch-Kante
           var hn = flow(cx, cy, tm);                            // Höhe 0..1
-          var h = maxH * (0.12 + 0.88 * hn) * g * grow;
-          var tg = Math.round((26 + 120 * hn) * (0.18 + 0.82 * g));   // Top heller = höher
+          // Maus-Einfluss: Voxel in Cursor-Nähe steigen auf und leuchten (nur wo Feld vorhanden -> g)
+          var infl = 0;
+          if (useM) {
+            var dx = cx + C * 0.5 - ptr.x, dy = cy + C * 0.5 - ptr.y, dd = dx * dx + dy * dy;
+            if (dd < R2) { var f = 1 - Math.sqrt(dd) / R; infl = f * f * ptr.act * g; }
+          }
+          var h = maxH * (0.12 + 0.88 * hn) * g * grow + maxH * 1.5 * infl;
+          var tg = Math.round((26 + 120 * hn) * (0.18 + 0.82 * g) + 120 * infl);   // Top heller = höher
+          if (tg > 240) tg = 240;
           if (tg < 1) continue;
           var sg = Math.round(tg * 0.42);                       // Seitenfläche dunkler -> 3D
           var topY = cy - h;
@@ -711,8 +724,21 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
     function start() { if (raf || reduce) return; raf = requestAnimationFrame(frame); }
     function stop() { if (raf) { cancelAnimationFrame(raf); raf = 0; } }
 
+    function onMove(e) {
+      var p = e.touches && e.touches[0] ? e.touches[0] : e;
+      var r = hb.getBoundingClientRect();
+      var x = p.clientX - r.left, y = p.clientY - r.top;
+      ptr.inside = (x >= 0 && x <= W && y >= 0 && y <= H);
+      ptr.tx = x; ptr.ty = y;
+      if (ptr.x < -9000) { ptr.x = x; ptr.y = y; }              // erstes Mal: hart setzen statt von weit her einschweben
+    }
     resize();
     var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(resize, 200); });
+    if (!reduce) {
+      window.addEventListener('mousemove', onMove, { passive: true });
+      window.addEventListener('touchmove', onMove, { passive: true });
+      hb.addEventListener('mouseleave', function () { ptr.inside = false; });
+    }
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible) start(); else stop(); }, { threshold: 0 }).observe(hb);
     }
