@@ -106,21 +106,12 @@
   #b77-replay:hover { border-color:rgba(245,244,242,0.6); color:#f5f4f2; }
   #b77-progtrack { position:absolute; left:0; bottom:0; height:2px; width:100%; background:rgba(255,255,255,0.05); z-index:5; }
   #b77-progress { height:100%; width:0%; background:#f5f4f2; }
-  /* Hero: dezente Vermessungs-Signatur (Passmarken, Fadenkreuz, Koordinaten, Skala) */
-  .hb__survey { position:absolute; inset:0; z-index:0; pointer-events:none; }
-  .hb__survey span { position:absolute; }
-  .hb__survey .m { width:15px; height:15px; border:0 solid rgba(255,255,255,0.34); }
-  .hb__survey .tl { top:24px; left:24px; border-left-width:1px; border-top-width:1px; }
-  .hb__survey .tr { top:24px; right:24px; border-right-width:1px; border-top-width:1px; }
-  .hb__survey .bl { bottom:24px; left:24px; border-left-width:1px; border-bottom-width:1px; }
-  .hb__survey .br { bottom:24px; right:24px; border-right-width:1px; border-bottom-width:1px; }
-  .hb__survey .cx, .hb__survey .cy { background:rgba(255,255,255,0.3); }
-  .hb__survey .cx { right:13%; top:26%; width:22px; height:1px; }
-  .hb__survey .cy { right:calc(13% + 10px); top:calc(26% - 10px); width:1px; height:21px; }
-  .hb__survey .coord { right:6%; top:60%; font-family:var(--mono); font-size:11px; letter-spacing:0.12em; color:rgba(255,255,255,0.3); white-space:nowrap; }
-  .hb__survey .scale { right:26px; top:50%; display:flex; flex-direction:column; align-items:flex-end; gap:9px; }
-  .hb__survey .scale b { height:1px; background:rgba(255,255,255,0.26); }
-  .hb > *:not(.hb__survey) { position:relative; z-index:1; }
+  /* Hero: Geister-Folio „77" + dezente Positionsangabe */
+  .hb__folio { position:absolute; right:-1.5%; bottom:-5%; width:clamp(320px,54vw,760px); aspect-ratio:446/310;
+    background:url(/assets/B77_77_white.png) right bottom/contain no-repeat; opacity:.055; pointer-events:none; z-index:0; }
+  .hb__coord { position:absolute; right:var(--gutter); top:47%; z-index:1; pointer-events:none;
+    font-family:var(--mono); font-size:11px; letter-spacing:0.12em; color:rgba(255,255,255,0.32); white-space:nowrap; }
+  .hb > *:not(.hb__folio):not(.hb__coord) { position:relative; z-index:1; }
 </style>
 </head>
 <body>
@@ -508,12 +499,8 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
 
   <!-- HERO (Monolith – invertierte Sektion 00) -->
   <section class="hb">
-    <div class="hb__survey" aria-hidden="true">
-      <span class="m tl"></span><span class="m tr"></span><span class="m bl"></span><span class="m br"></span>
-      <span class="cx"></span><span class="cy"></span>
-      <span class="coord">51.8722° N · 8.0214° E</span>
-      <span class="scale"><b style="width:12px"></b><b style="width:7px"></b><b style="width:12px"></b><b style="width:7px"></b><b style="width:12px"></b></span>
-    </div>
+    <div class="hb__folio" aria-hidden="true"></div>
+    <span class="hb__coord" aria-hidden="true">51.8722° N · 8.0214° E</span>
     <div class="hb__top"><span>Wir machen Unternehmen</span><span class="r">01</span></div>
     <h1 class="hb__title"><span class="l"><i>Vertriebs-</i></span><span class="l"><i>aktiv.</i></span></h1>
     <p class="hb__lead"><strong>Vertriebsaktiv</strong> zu sein bedeutet, Märkte bewusst zu bearbeiten, Zielkunden systematisch zu gewinnen und Abschlüsse nicht dem Zufall zu überlassen. Es schafft Steuerbarkeit – weil Unternehmen ihren Marktanteil aktiv gestalten, statt auf Anfragen zu warten.</p>
