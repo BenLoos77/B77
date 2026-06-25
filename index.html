@@ -660,8 +660,8 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
 
     // wie weit ein Feld aus dem Schwarz „aufgetaucht" ist: beginnt weit links, wird nach rechts/unten voll
     function emerge(cx, cy) {
-      var gx = clamp((cx / W - 0.04) / 0.66);
-      var gy = clamp((cy / H - 0.12) / 0.88);
+      var gx = clamp((cx / W + 0.02) / 0.64);     // beginnt noch etwas weiter links
+      var gy = clamp((cy / H + 0.06) / 0.9);      // zieht oben (links) etwas höher
       return smooth(gx) * smooth(gy);
     }
     // wogendes Höhenfeld 0..1
@@ -716,11 +716,12 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
           if (tg > 244) tg = 244;
           if (tg < 1) continue;
           var sg = Math.round(tg * 0.34);                       // Seitenfläche deutlich dunkler -> stärkeres 3D
-          var ox = cx + GAP * 0.5, topY = cy - h;
+          var tw = cz * (0.5 + hash(i + 53, j + 17) * 0.7);     // Kachelgröße pro Zelle variieren (stabil)
+          var ox = cx + (C - tw) * 0.5, topY = cy - h;          // in der Zelle zentriert
           // Seitenfläche (Höhe) ...
-          if (h > 0.5) { ctx.fillStyle = 'rgb(' + sg + ',' + sg + ',' + sg + ')'; ctx.fillRect(ox, topY + cz, cz + 0.6, h + 0.6); }
-          // ... Deckfläche (mit Lücke -> abgesetzte Pixel)
-          ctx.fillStyle = 'rgb(' + tg + ',' + tg + ',' + tg + ')'; ctx.fillRect(ox, topY, cz + 0.6, cz + 0.6);
+          if (h > 0.5) { ctx.fillStyle = 'rgb(' + sg + ',' + sg + ',' + sg + ')'; ctx.fillRect(ox, topY + tw, tw + 0.6, h + 0.6); }
+          // ... Deckfläche (unterschiedlich groß -> lebendigeres Raster)
+          ctx.fillStyle = 'rgb(' + tg + ',' + tg + ',' + tg + ')'; ctx.fillRect(ox, topY, tw + 0.6, tw + 0.6);
         }
       }
     }
