@@ -643,43 +643,38 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
     <span class="footer__r">Wallhausenstraße 1 · 57072 Siegen · <a href="/impressum">Impressum &amp; Datenschutz</a></span>
   </footer>
 
-  <!-- Hero: B_77 setzt sich aus Partikeln zusammen (Intro-Effekt im Hintergrund) -->
+  <!-- Hero: abstrakter Partikel-Schwarm setzt sich aus dem Einflug zusammen (Intro-Effekt, kein Logo) -->
   <script>
   (function () {
     var cv = document.getElementById('hb-bg'); if (!cv) return;
     var hb = cv.closest('.hb'); var ctx = cv.getContext('2d');
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var W = 1, H = 1, dpr = Math.min(2, window.devicePixelRatio || 1);
-    var parts = [], raf = 0, visible = true, ready = false, t0 = 0, ar = 0.416;
-    var DOT = 0.42;                 // Gesamt-Deckkraft der Partikel (dezent hinter dem Titel)
-
-    var img = new Image();
-    img.onload = function () { ar = (img.naturalHeight / img.naturalWidth) || 0.416; ready = true; resize(); start(); };
-    img.onerror = function () { ready = false; };
-    img.src = '/assets/B77_Logo_white.png';
+    var parts = [], raf = 0, visible = true, ready = true, t0 = 0;
+    var DOT = 0.34;                 // Gesamt-Deckkraft (dezent hinter dem Titel)
 
     function rnd(a, b) { return a + Math.random() * (b - a); }
 
-    // Logo in ein Punktraster zerlegen + Partikel mit Start (von links) und Ziel (Logo) bauen
-    function sample() {
-      var lw = Math.min(W * 0.62, 760), lh = lw * ar;
-      var lx = (W - lw) / 2, ly = (H - lh) / 2;
-      var w = Math.max(2, Math.round(lw)), h = Math.max(2, Math.round(lh));
-      var off = document.createElement('canvas'); off.width = w; off.height = h;
-      var o = off.getContext('2d'); o.drawImage(img, 0, 0, w, h);
-      var d = o.getImageData(0, 0, w, h).data;
-      var step = Math.max(4, Math.round(lw / 78));
+    // Abstraktes Feld: weiches Band quer durch den Hero, Dichte mittig, nach oben/unten ausdünnend.
+    // Partikel fliegen von links ein und setzen sich zu diesem Schwarm zusammen — kein Logo.
+    function build() {
       parts = [];
-      for (var y = 0; y < h; y += step) for (var x = 0; x < w; x += step) {
-        if (d[(y * w + x) * 4 + 3] > 120) {
-          var tx = lx + x, ty = ly + y;
+      var cy = H * 0.5, bandH = H * 0.62;
+      var x0 = W * 0.04, x1 = W * 0.96, span = x1 - x0;
+      var step = Math.max(17, Math.round(W / 58));
+      for (var gy = cy - bandH / 2; gy <= cy + bandH / 2; gy += step) {
+        for (var gx = x0; gx <= x1; gx += step) {
+          var ny = (gy - cy) / (bandH * 0.5);                 // -1..1
+          if (Math.random() > Math.exp(-ny * ny * 1.9) * 0.92) continue;  // weiche vertikale Dichte
+          var tx = gx + (Math.random() - 0.5) * step * 1.1;
+          var ty = gy + (Math.random() - 0.5) * step * 1.1;
           var sx = -40 - Math.random() * W * 0.5;
           parts.push({
-            tx: tx, ty: ty, sx: sx, sy: ty + (Math.random() - 0.5) * H * 0.18,
+            tx: tx, ty: ty, sx: sx, sy: ty + (Math.random() - 0.5) * H * 0.2,
             x: sx, y: ty, px: sx, py: ty,
-            release: 200 + ((tx - lx) / lw) * 900 + Math.random() * 170,
-            dur: 700 + Math.random() * 460, r: 0.7 + Math.random() * 0.9,
-            phase: Math.random() * 6.283, amp: 0.6 + Math.random() * 1.3
+            release: 200 + ((tx - x0) / span) * 900 + Math.random() * 220,
+            dur: 720 + Math.random() * 520, r: 0.6 + Math.random() * 1.0,
+            amp: 4 + Math.random() * 5
           });
         }
       }
@@ -689,8 +684,7 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
       W = Math.max(1, r.width); H = Math.max(1, r.height);
       cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      if (!ready) return;
-      sample(); t0 = performance.now();
+      build(); t0 = performance.now();
       if (reduce) drawStatic();
     }
     function drawStatic() {
@@ -700,7 +694,7 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
       ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
     }
     function frame() {
-      var now = performance.now(), t = now - t0;
+      var now = performance.now(), t = now - t0, bt = now * 0.0007;
       ctx.clearRect(0, 0, W, H);
       ctx.globalCompositeOperation = 'lighter'; ctx.lineCap = 'round';
       for (var i = 0; i < parts.length; i++) {
@@ -708,16 +702,15 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
         if (lo <= 0) continue;                       // noch nicht „abgeflogen"
         var pr = Math.min(1, lo / p.dur);
         p.px = p.x; p.py = p.y;
-        if (pr < 1) {                                 // Einflug zum Ziel
+        if (pr < 1) {                                 // Einflug
           var e = 1 - Math.pow(1 - pr, 3);
           p.x = p.sx + (p.tx - p.sx) * e; p.y = p.sy + (p.ty - p.sy) * e;
-        } else {                                      // sanftes „Atmen" am Ziel
-          var bt = now * 0.0011;
-          p.x = p.tx + Math.sin(bt + p.phase) * p.amp;
-          p.y = p.ty + Math.cos(bt * 0.9 + p.phase) * p.amp * 0.7;
+        } else {                                      // wogendes, abstraktes Fließen (ortskohärent = Strömung)
+          p.x = p.tx + Math.sin(bt + p.tx * 0.010 + p.ty * 0.006) * p.amp;
+          p.y = p.ty + Math.cos(bt * 0.85 + p.ty * 0.011 + p.tx * 0.004) * p.amp * 0.8;
         }
         var s = Math.sqrt((p.x - p.px) * (p.x - p.px) + (p.y - p.py) * (p.y - p.py));
-        if (s > 1.2) { ctx.strokeStyle = '#f5f4f2'; ctx.globalAlpha = Math.min(0.32, s / 80) * DOT * 2; ctx.lineWidth = p.r * 1.2; ctx.beginPath(); ctx.moveTo(p.px, p.py); ctx.lineTo(p.x, p.y); ctx.stroke(); }
+        if (s > 1.2) { ctx.strokeStyle = '#f5f4f2'; ctx.globalAlpha = Math.min(0.3, s / 80) * DOT * 2; ctx.lineWidth = p.r * 1.2; ctx.beginPath(); ctx.moveTo(p.px, p.py); ctx.lineTo(p.x, p.y); ctx.stroke(); }
         ctx.fillStyle = '#f5f4f2'; ctx.globalAlpha = Math.min(1, pr * 1.7) * DOT; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283); ctx.fill();
       }
       ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
@@ -726,11 +719,13 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
     function start() { if (raf || reduce || !ready) return; raf = requestAnimationFrame(frame); }
     function stop() { if (raf) { cancelAnimationFrame(raf); raf = 0; } }
 
+    resize();
     var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(resize, 200); });
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible) start(); else stop(); }, { threshold: 0 }).observe(hb);
     }
     document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else if (visible) start(); });
+    if (!reduce) start();
   })();
   </script>
 
