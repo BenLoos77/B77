@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-26T01:46:12+02:00",
+  "updated": "2026-06-26T04:07:03+02:00",
   "matches": [
     {
       "home": "MEX",
@@ -9,15 +9,6 @@
       "live": false,
       "status": "FINISHED",
       "date": "2026-06-11"
-    },
-    {
-      "home": "CAN",
-      "away": "BIH",
-      "hs": 1,
-      "as": 1,
-      "live": false,
-      "status": "FINISHED",
-      "date": "2026-06-12"
     },
     {
       "home": "KOR",
@@ -508,6 +499,15 @@
     {
       "home": "JPN",
       "away": "SWE",
+      "hs": 1,
+      "as": 1,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-26"
+    },
+    {
+      "home": "PAR",
+      "away": "AUS",
       "hs": 0,
       "as": 0,
       "live": true,
@@ -517,8 +517,17 @@
     {
       "home": "TUN",
       "away": "NED",
+      "hs": 1,
+      "as": 3,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-26"
+    },
+    {
+      "home": "TUR",
+      "away": "USA",
       "hs": 0,
-      "as": 2,
+      "as": 0,
       "live": true,
       "status": "IN_PLAY",
       "date": "2026-06-26"
