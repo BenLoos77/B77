@@ -110,10 +110,9 @@
   .hb__folio { position:absolute; right:-1.5%; bottom:-5%; width:clamp(320px,54vw,760px); aspect-ratio:446/310;
     background:url(/assets/B77_77_white.png?v=2) right bottom/contain no-repeat; opacity:.035; pointer-events:none; z-index:0; }
   .hb > *:not(.hb__folio) { position:relative; z-index:1; }
-  /* Studio-Teaser (randabfallendes Bild) */
-  .studio__media { display:block; margin-top:clamp(28px,4vw,52px); overflow:hidden; }
-  .studio__media img { width:100%; height:clamp(420px,64vh,760px); object-fit:cover; object-position:center 40%; display:block; filter:grayscale(1); transition:transform .9s cubic-bezier(.16,1,.3,1); }
-  .studio__media:hover img { transform:scale(1.035); }
+  /* Studio-Teaser (ganzes Bild, im Inhaltsraster) */
+  .studio__media { display:block; margin-top:clamp(28px,4vw,52px); padding:0 var(--gutter); }
+  .studio__media img { width:100%; height:auto; display:block; filter:grayscale(1); border:1px solid var(--line); }
   .studio__cap { display:flex; justify-content:space-between; align-items:flex-end; gap:24px 48px; flex-wrap:wrap; margin-top:clamp(20px,2.4vw,30px); }
   .studio__lead { max-width:54ch; margin:0; font-family:var(--sans); font-weight:400; font-size:clamp(17px,1.7vw,22px); line-height:1.5; color:var(--ink); }
 </style>
@@ -513,27 +512,15 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
     </div>
   </section>
 
-  <!-- Studio (Teaser) -->
-  <section class="section studio" data-reveal>
-    <div class="corners wrap"><span>Das Studio · Siegen</span><span class="r">02</span></div>
-    <a class="studio__media" href="/ueber#studio" aria-label="Mehr über das B_77 Studio">
-      <img src="/assets/Studio.jpg?v=bw2" alt="B_77 Studio in Siegen – heller Raum mit freitragender Treppe und Lichtschacht von oben" loading="lazy" width="2000" height="1500">
-    </a>
-    <div class="studio__cap wrap">
-      <p class="studio__lead">Ein geschlossener Raum für ehrlichen Austausch – persönlich, im Klartext, mit der Zeit, die Ihr Vertrieb braucht.</p>
-      <a class="btn-mono" href="/ueber#studio">Das Studio →</a>
-    </div>
-  </section>
-
   <!-- Manifest -->
   <section class="section manifest-sec" data-reveal>
-    <div class="corners wrap"><span>Haltung</span><span class="r">03</span></div>
+    <div class="corners wrap"><span>Haltung</span><span class="r">02</span></div>
     <p class="manifest">Der Markt bestimmt nicht Ihr Ergebnis. Ihr Marktanteil tut es – und der entsteht durch Initiative, nicht durch Abwarten.</p>
   </section>
 
   <!-- Leistungen (Index-Liste, Decode-Hover) -->
   <section class="section" id="leistungen" data-reveal>
-    <div class="corners wrap"><span>Leistungen</span><span class="r">04</span></div>
+    <div class="corners wrap"><span>Leistungen</span><span class="r">03</span></div>
     <div class="il">
       <a class="il-row" href="/vertriebsstrategie">
         <span class="il-idx">01</span>
@@ -565,6 +552,18 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
         <div class="il-main"><span class="il-title">Digitalisierung</span><div class="il-desc">KI im Vertrieb – ohne Hype, mit Ergebnis. Wo Digitalisierung Arbeit abnimmt und Abschlüsse näher bringt: von Lead-Recherche bis Angebot. Mit Quoodix und dem KI-Check.</div></div>
         <span class="il-arr">→</span>
       </a>
+    </div>
+  </section>
+
+  <!-- Studio (Teaser) -->
+  <section class="section studio" data-reveal>
+    <div class="corners wrap"><span>Das Studio · Siegen</span><span class="r">04</span></div>
+    <a class="studio__media" href="/ueber#studio" aria-label="Mehr über das B_77 Studio">
+      <img src="/assets/Studio.jpg?v=bw2" alt="B_77 Studio in Siegen – heller Raum mit freitragender Treppe und Lichtschacht von oben" loading="lazy" width="2000" height="1500">
+    </a>
+    <div class="studio__cap wrap">
+      <p class="studio__lead">Ein geschlossener Raum für ehrlichen Austausch – persönlich, im Klartext, mit der Zeit, die Ihr Vertrieb braucht.</p>
+      <a class="btn-mono" href="/ueber#studio">Das Studio →</a>
     </div>
   </section>
 
