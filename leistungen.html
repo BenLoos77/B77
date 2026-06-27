@@ -50,7 +50,9 @@
   .section--ink .regel__prose p{color:rgba(255,255,255,0.74);}
   .section--ink .regel__prose p.first{color:var(--paper);}
   .section--ink .regel__prose p strong{color:var(--paper);}
-  @media(max-width:760px){.regel{grid-template-columns:1fr;gap:28px;}.regel__prose{columns:1;}.max180__word{font-size:clamp(52px,15vw,104px);}}
+  .trailer-sec{border-top:1px solid var(--ink);}
+  .trailer-embed{display:block;width:100%;height:clamp(520px,72vh,680px);border:0;}
+  @media(max-width:760px){.regel{grid-template-columns:1fr;gap:28px;}.regel__prose{columns:1;}.max180__word{font-size:clamp(52px,15vw,104px);}.trailer-embed{height:clamp(440px,80vh,560px);}}
   .prose--cols{max-width:none;columns:2;column-gap:clamp(28px,3.2vw,56px);}
   .prose--cols p{break-inside:avoid;}
   @media(max-width:760px){.prose--cols{columns:1;}}
@@ -152,16 +154,14 @@
     </div>
   </section>
 
-  <!-- Plakat -->
-  <section class="plakat" data-reveal>
-    <div class="corners wrap"><span>Strategie + Umsetzung aus einer Hand</span><span class="r">05</span></div>
-    <h2 class="display">Aktiver Vertrieb schafft Ergebnis.</h2>
-    <p class="plakat__sub">Wir liefern keine Konzepte zum Ablegen, sondern aktivieren Ihren Vertrieb – und übergeben nach maximal sechs Monaten ein funktionierendes System, das Ihr Team selbst weiterführt.</p>
+  <!-- Trailer: Vertrieb aktivieren (eingebettete Animation) -->
+  <section class="trailer-sec" data-reveal>
+    <iframe class="trailer-embed" src="/trailer-button.html" title="B_77 – Vertrieb aktivieren · der Ablauf in 40 Sekunden" loading="lazy"></iframe>
   </section>
 
   <!-- CTA -->
   <section class="section kontakt" data-reveal>
-    <div class="corners wrap"><span>Nächster Schritt</span><span class="r">06</span></div>
+    <div class="corners wrap"><span>Nächster Schritt</span><span class="r">05</span></div>
     <h2 class="display">Reden wir.</h2>
     <p class="body lead" style="padding:0 var(--gutter);margin-bottom:clamp(28px,4vw,44px);">Welche Leistung zu Ihnen passt, klären wir am besten im Gespräch.</p>
     <div class="kontakt__links">
