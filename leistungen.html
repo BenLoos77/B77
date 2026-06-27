@@ -45,6 +45,11 @@
   .max180__meta{display:flex;flex-direction:column;font-family:var(--mono);padding-top:0.2em;}
   .max180__num{font-weight:700;font-size:clamp(18px,2.1vw,31px);letter-spacing:0.02em;line-height:0.9;color:var(--ink);}
   .max180__unit{margin-top:0.55em;font-size:clamp(11px,1vw,14px);letter-spacing:0.4em;text-transform:uppercase;color:var(--mute);}
+  .section--ink .max180__word,.section--ink .max180__num{color:var(--paper);}
+  .section--ink .max180__unit{color:rgba(255,255,255,0.55);}
+  .section--ink .regel__prose p{color:rgba(255,255,255,0.74);}
+  .section--ink .regel__prose p.first{color:var(--paper);}
+  .section--ink .regel__prose p strong{color:var(--paper);}
   @media(max-width:760px){.regel{grid-template-columns:1fr;gap:28px;}.regel__prose{columns:1;}.max180__word{font-size:clamp(52px,15vw,104px);}}
   .prose--cols{max-width:none;columns:2;column-gap:clamp(28px,3.2vw,56px);}
   .prose--cols p{break-inside:avoid;}
@@ -124,7 +129,7 @@
   </section>
 
   <!-- Das Ziel / MAX 180 -->
-  <section class="section" data-reveal>
+  <section class="section section--ink" data-reveal>
     <div class="corners wrap"><span>B_77 Versprechen</span><span class="r">03</span></div>
     <div class="wrap regel">
       <div class="max180" aria-label="Max 180 Tage">
