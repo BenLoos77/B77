@@ -40,13 +40,12 @@
   .regel__prose p:last-child{margin-bottom:0;}
   .regel__prose p.first{font-size:clamp(18px,1.7vw,22px);color:var(--ink);font-weight:500;line-height:1.45;}
   .regel__prose p strong{font-weight:800;color:var(--ink);}
-  .max180{display:inline-flex;align-items:stretch;gap:clamp(14px,1.8vw,32px);}
-  .max180__word{position:relative;font-family:var(--sans);font-weight:800;font-size:clamp(96px,17vw,224px);line-height:0.74;letter-spacing:-0.045em;color:var(--ink);padding-bottom:0.2em;}
-  .max180__bar{position:absolute;left:47%;right:-0.04em;bottom:0;height:0.12em;background:var(--ink);}
-  .max180__meta{display:flex;flex-direction:column;font-family:var(--mono);padding-top:0.14em;}
-  .max180__num{font-weight:700;font-size:clamp(24px,3vw,46px);letter-spacing:0.02em;line-height:0.9;color:var(--ink);}
-  .max180__unit{margin-top:0.55em;font-size:clamp(12px,1.2vw,16px);letter-spacing:0.42em;text-transform:uppercase;color:var(--mute);}
-  @media(max-width:760px){.regel{grid-template-columns:1fr;gap:28px;}.regel__prose{columns:1;}.max180__word{font-size:clamp(76px,20vw,150px);}}
+  .max180{display:inline-flex;align-items:flex-start;gap:clamp(12px,1.5vw,26px);}
+  .max180__word{font-family:var(--sans);font-weight:800;font-size:clamp(58px,9.5vw,136px);line-height:0.8;letter-spacing:-0.035em;color:var(--ink);}
+  .max180__meta{display:flex;flex-direction:column;font-family:var(--mono);padding-top:0.2em;}
+  .max180__num{font-weight:700;font-size:clamp(18px,2.1vw,31px);letter-spacing:0.02em;line-height:0.9;color:var(--ink);}
+  .max180__unit{margin-top:0.55em;font-size:clamp(11px,1vw,14px);letter-spacing:0.4em;text-transform:uppercase;color:var(--mute);}
+  @media(max-width:760px){.regel{grid-template-columns:1fr;gap:28px;}.regel__prose{columns:1;}.max180__word{font-size:clamp(52px,15vw,104px);}}
   .prose--cols{max-width:none;columns:2;column-gap:clamp(28px,3.2vw,56px);}
   .prose--cols p{break-inside:avoid;}
   @media(max-width:760px){.prose--cols{columns:1;}}
@@ -129,7 +128,7 @@
     <div class="corners wrap"><span>B_77 Versprechen</span><span class="r">03</span></div>
     <div class="wrap regel">
       <div class="max180" aria-label="Max 180 Tage">
-        <span class="max180__word">MAX<i class="max180__bar" aria-hidden="true"></i></span>
+        <span class="max180__word">MAX</span>
         <span class="max180__meta"><span class="max180__num">180</span><span class="max180__unit">Tage</span></span>
       </div>
       <div class="regel__prose">
