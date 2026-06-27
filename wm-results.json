@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-27T23:40:48+02:00",
+  "updated": "2026-06-28T00:52:19+02:00",
   "matches": [
     {
       "home": "MEX",
@@ -569,6 +569,15 @@
       "date": "2026-06-27"
     },
     {
+      "home": "CRO",
+      "away": "GHA",
+      "hs": 2,
+      "as": 1,
+      "live": true,
+      "status": "IN_PLAY",
+      "date": "2026-06-27"
+    },
+    {
       "home": "EGY",
       "away": "IRN",
       "hs": 1,
@@ -590,7 +599,7 @@
       "home": "PAN",
       "away": "ENG",
       "hs": 0,
-      "as": 0,
+      "as": 2,
       "live": true,
       "status": "IN_PLAY",
       "date": "2026-06-27"
