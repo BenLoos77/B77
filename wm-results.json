@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-28T22:04:33+02:00",
+  "updated": "2026-06-28T23:20:04+02:00",
   "matches": [
     {
       "home": "MEX",
@@ -653,9 +653,9 @@
       "home": "RSA",
       "away": "CAN",
       "hs": 0,
-      "as": 0,
-      "live": true,
-      "status": "PAUSED",
+      "as": 1,
+      "live": false,
+      "status": "FINISHED",
       "date": "2026-06-28"
     }
   ]
