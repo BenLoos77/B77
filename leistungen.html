@@ -177,5 +177,33 @@
   </footer>
 
   <script src="monolith.js?v=mono11"></script>
+  <script>
+  /* Trailer: Poster invertieren (schwarz) + Auto-Play beim Scroll ins Sichtfeld.
+     Gesteuert vom Parent in den iframe hinein, weil der Bundle das Dokument neu schreibt. */
+  (function () {
+    var sec = document.querySelector('.trailer-sec'); if (!sec) return;
+    var frame = sec.querySelector('.trailer-embed'); if (!frame) return;
+    var WHITE = ['rgb(255, 255, 255)', 'rgb(250, 249, 245)'], DARK = ['rgb(10, 10, 10)', 'rgb(0, 0, 0)'];
+    function fdoc() { try { return frame.contentDocument; } catch (e) { return null; } }
+    function posterBtn(d) { var s = d.querySelector('.tr-start'); return (s && s.getClientRects().length > 0) ? s : null; }
+    function paintPoster() {
+      var d = fdoc(); if (!d || !d.body || !posterBtn(d)) return;            // nur im Poster-Zustand
+      d.documentElement.style.background = '#0A0A0A'; d.body.style.background = '#0A0A0A';
+      var win = d.defaultView, all = d.body.getElementsByTagName('*');
+      for (var i = 0; i < all.length; i++) {
+        var e = all[i], cs = win.getComputedStyle(e);
+        if (WHITE.indexOf(cs.backgroundColor) > -1) e.style.setProperty('background-color', '#0A0A0A', 'important');
+        if (DARK.indexOf(cs.color) > -1) e.style.setProperty('color', '#FFFFFF', 'important');
+        if (parseFloat(cs.borderTopWidth) > 0 && DARK.indexOf(cs.borderTopColor) > -1) e.style.setProperty('border-color', '#FFFFFF', 'important');
+      }
+    }
+    var played = false;
+    function tryPlay() { if (played) return; var d = fdoc(); if (!d) return; var s = posterBtn(d); if (s) { played = true; s.click(); } }
+    function inView() { var r = sec.getBoundingClientRect(); return r.top < (window.innerHeight * 0.55) && r.bottom > 80; }
+    function tick() { paintPoster(); if (!played && inView()) tryPlay(); }
+    setInterval(tick, 150);
+    tick();
+  })();
+  </script>
 </body>
 </html>
