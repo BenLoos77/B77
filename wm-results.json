@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-28T01:52:08+02:00",
+  "updated": "2026-06-28T04:12:31+02:00",
   "matches": [
     {
       "home": "MEX",
@@ -612,6 +612,33 @@
       "live": false,
       "status": "FINISHED",
       "date": "2026-06-27"
+    },
+    {
+      "home": "COD",
+      "away": "UZB",
+      "hs": 3,
+      "as": 1,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-28"
+    },
+    {
+      "home": "COL",
+      "away": "POR",
+      "hs": 0,
+      "as": 0,
+      "live": false,
+      "status": "FINISHED",
+      "date": "2026-06-28"
+    },
+    {
+      "home": "JOR",
+      "away": "ARG",
+      "hs": 0,
+      "as": 0,
+      "live": true,
+      "status": "IN_PLAY",
+      "date": "2026-06-28"
     }
   ]
 }
