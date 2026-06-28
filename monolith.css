@@ -309,7 +309,7 @@ p+p{margin-top:1.1em;}
   .nav__links,.nav__place{display:none;}
   .nav__burger{display:inline-block;}
   .nav__mobile{grid-column:1 / -1;flex-direction:column;gap:2px;padding-top:14px;}
-  .nav__mobile.is-open{display:flex;}
+  .nav__mobile.is-open{display:flex;max-height:calc(100vh - 100px);max-height:calc(100dvh - 100px);overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;}
   .nav__mobile a{font-family:var(--mono);font-size:14px;text-transform:uppercase;
     letter-spacing:0.04em;padding:14px 0;border-top:1px solid var(--line);}
   .hero__grid,.ki-grid{grid-template-columns:1fr;}
