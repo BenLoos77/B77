@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-29T20:23:48+02:00",
+  "updated": "2026-06-29T22:29:01+02:00",
   "matches": [
     {
       "home": "MEX",
@@ -661,10 +661,10 @@
     {
       "home": "BRA",
       "away": "JPN",
-      "hs": 1,
+      "hs": 2,
       "as": 1,
-      "live": true,
-      "status": "IN_PLAY",
+      "live": false,
+      "status": "FINISHED",
       "date": "2026-06-29"
     }
   ]
