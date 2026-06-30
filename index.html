@@ -242,15 +242,19 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
   logoImg.src = el.logo.getAttribute('src');
 
   function boot() {
+    var started = false;
     var go = function () {
+      if (started) return; started = true;
       S.ar = (logoImg.naturalHeight / logoImg.naturalWidth) || 0.416;
       splitStatement(); resize();
       window.addEventListener('resize', function () { clearTimeout(S._rt); S._rt = setTimeout(resize, 200); });
       wire(); startFlow();
       requestAnimationFrame(loop);
     };
-    if (document.fonts && document.fonts.ready) { document.fonts.ready.then(go); setTimeout(go, 1200); }
-    else go();
+    // Sofort starten – die Animation braucht die Webfonts am Anfang nicht (Logo ist Canvas,
+    // Text erscheint erst ~5 s später). Fonts lösen nur noch eine Neuvermessung aus, keinen Neustart.
+    go();
+    if (document.fonts && document.fonts.ready) { document.fonts.ready.then(function () { try { resize(); } catch (e) {} }); }
   }
   var booted = false; var _go = boot; boot = function () { if (booted) return; booted = true; _go(); };
 
