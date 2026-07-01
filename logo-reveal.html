@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B_77 — Logo Reveal (Experiment)</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  html,body{margin:0;padding:0;}
+  *{box-sizing:border-box;}
+  #stage{
+    position:fixed; inset:0; overflow:hidden;
+    background:#0b0b0c; color:#f5f4f2;
+    font-family:'JetBrains Mono', ui-monospace, monospace;
+  }
+  #canvas{position:absolute; inset:0; width:100%; height:100%; display:block;}
+  .hint{
+    position:absolute; left:0; right:0; bottom:26px; text-align:center;
+    font-size:11px; letter-spacing:0.22em; text-transform:uppercase;
+    color:#56544f; z-index:5; user-select:none;
+  }
+  .replay{
+    position:absolute; right:24px; bottom:22px; z-index:6;
+    font:inherit; font-size:11px; letter-spacing:0.14em; text-transform:uppercase;
+    color:#9a9a9a; background:transparent; border:1px solid #2a2a2c;
+    padding:9px 16px; border-radius:2px; cursor:pointer; transition:.2s;
+  }
+  .replay:hover{color:#f5f4f2; border-color:#4a4a4c;}
+</style>
+</head>
+<body>
+  <div id="stage">
+    <canvas id="canvas"></canvas>
+    <div class="hint">B_77 · Logo Reveal · Experiment — [Leertaste] / Klick = Replay</div>
+    <button class="replay" id="replay">↺ Replay</button>
+  </div>
+
+  <img id="logo" src="/assets/b77-intro-logo.png" alt="" style="display:none">
+
+<script>
+/* ================================================================
+   TIMINGS & LOOK — hier kannst du frei herumspielen.
+   Alle Zeiten in Millisekunden.
+   ================================================================ */
+var CFG = {
+  logoWidthVW : 0.46,   // Logobreite als Anteil der Viewport-Breite (max 760px)
+  logoMaxPx   : 760,
+  logoYAnchor : 0.50,   // vertikale Mitte des Logos (0=oben, 1=unten)
+  dotColor    : '#f5f4f2',
+  bg          : '#0b0b0c',
+
+  // Phase 1 — Zusammensetzen aus Punkten (von links einfliegend)
+  assembleBase   : 260,   // Grund-Verzögerung
+  assembleSweep  : 900,   // Zeitversatz links→rechts (Sweep-Effekt)
+  assembleJitter : 150,   // zufällige Streuung pro Punkt
+  assembleDur    : 640,   // Flugdauer pro Punkt (+ zufällig)
+  assembleDurRnd : 380,
+
+  // Phase 2 — Halten (fertiges Punkte-Logo steht still)
+  holdMs      : 750,
+
+  // Phase 3 — nach oben rausfahren
+  riseMs      : 1300,   // Dauer des Hochfahrens
+  riseDistVH  : 0.85,   // Strecke nach oben als Anteil der Viewport-Höhe
+  riseFadeAt  : 0.55,   // ab welchem Rise-Fortschritt (0..1) ausgeblendet wird
+  riseSpread  : 0.10,   // leichtes Auffächern beim Hochfahren (0 = bleibt kompakt)
+
+  loopPause   : 700     // Pause vor Auto-Replay (0 = kein Auto-Replay)
+};
+
+(function(){
+  var stage = document.getElementById('stage');
+  stage.style.background = CFG.bg;
+  var canvas = document.getElementById('canvas'), ctx = canvas.getContext('2d');
+  var logoImg = document.getElementById('logo');
+
+  var S = { W:1, H:1, ar:0.416, parts:[], ambient:[], t0:0, running:false };
+
+  var clamp = function(v){ return v<0?0:v>1?1:v; };
+  // deterministischer Pseudo-Zufall pro Index, damit Replays identisch aussehen
+  function rnd(i){ var x = Math.sin(i*12.9898)*43758.5453; return x - Math.floor(x); }
+
+  function resize(){
+    var r = stage.getBoundingClientRect();
+    S.W = Math.max(1, r.width); S.H = Math.max(1, r.height);
+    var dpr = Math.min(2, window.devicePixelRatio || 1);
+    canvas.width = Math.round(S.W*dpr); canvas.height = Math.round(S.H*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    S.ar = (logoImg.naturalHeight / logoImg.naturalWidth) || 0.416;
+    S.lw = Math.min(S.W*CFG.logoWidthVW, CFG.logoMaxPx);
+    S.lh = S.lw * S.ar;
+    if (S.lh > S.H*0.5){ S.lh = S.H*0.5; S.lw = S.lh/S.ar; }
+    S.lx = (S.W - S.lw)/2;
+    S.ly = S.H*CFG.logoYAnchor - S.lh/2;
+    buildSamples(); initAmbient();
+  }
+
+  function buildSamples(){
+    var w = Math.max(2, Math.round(S.lw)), h = Math.max(2, Math.round(S.lh));
+    var off = document.createElement('canvas'); off.width=w; off.height=h;
+    var o = off.getContext('2d'); o.drawImage(logoImg,0,0,w,h);
+    var d = o.getImageData(0,0,w,h).data;
+    var pts=[], step = Math.max(3, Math.round(S.lw/100));
+    for (var y=0;y<h;y+=step) for (var x=0;x<w;x+=step)
+      if (d[(y*w+x)*4+3] > 120) pts.push([S.lx+x, S.ly+y]);
+    S.parts = pts.map(function(p,i){
+      var tx=p[0], ty=p[1];
+      var sweep = (tx - S.lx)/Math.max(1,S.lw);           // 0 links … 1 rechts
+      var sx = -40 - rnd(i)*S.W*0.55;
+      var sy = ty + (rnd(i+7)-0.5)*S.H*0.18;
+      return {
+        tx:tx, ty:ty, sx:sx, sy:sy, x:sx, y:ty, px:sx, py:ty,
+        release: CFG.assembleBase + sweep*CFG.assembleSweep + rnd(i+3)*CFG.assembleJitter,
+        dur: CFG.assembleDur + rnd(i+11)*CFG.assembleDurRnd,
+        r: 0.7 + rnd(i+5)*0.9,
+        spread: (rnd(i+13)-0.5)                             // Richtung fürs Auffächern
+      };
+    });
+  }
+
+  function initAmbient(){
+    S.ambient=[];
+    for (var i=0;i<64;i++) S.ambient.push({
+      x:rnd(i*3.1)*S.W, y:rnd(i*7.7)*S.H,
+      vx:(rnd(i*1.3)-0.5)*0.16, vy:(rnd(i*2.9)-0.5)*0.16,
+      r:rnd(i*5.5)*1.0+0.3, a:rnd(i*9.2)*0.16+0.03
+    });
+  }
+
+  function drawAmbient(){
+    ctx.save(); ctx.globalCompositeOperation='lighter';
+    for (var i=0;i<S.ambient.length;i++){
+      var a=S.ambient[i];
+      a.x+=a.vx; a.y+=a.vy;
+      if(a.x<0)a.x+=S.W; if(a.x>S.W)a.x-=S.W; if(a.y<0)a.y+=S.H; if(a.y>S.H)a.y-=S.H;
+      ctx.fillStyle='#f5f4f2'; ctx.globalAlpha=a.a;
+      ctx.beginPath(); ctx.arc(a.x,a.y,a.r,0,6.283); ctx.fill();
+    }
+    ctx.restore();
+  }
+
+  // Ende der Zusammensetz-Phase (letzter Punkt sitzt)
+  function assembleEnd(){
+    var m=0;
+    for(var i=0;i<S.parts.length;i++){ var p=S.parts[i]; var e=p.release+p.dur; if(e>m)m=e; }
+    return m;
+  }
+
+  function draw(now){
+    if(!S.running) return;
+    var t = now - S.t0;
+    ctx.clearRect(0,0,S.W,S.H);
+    drawAmbient();
+
+    var aEnd = S.aEnd;
+    var riseStart = aEnd + CFG.holdMs;
+    var riseP = clamp((t - riseStart)/CFG.riseMs);          // 0..1 Hochfahren
+    // ease-in (beschleunigt nach oben, wie ein Start)
+    var riseE = riseP*riseP;
+    var offY = -riseE * S.H * CFG.riseDistVH;
+    var groupAlpha = 1 - clamp((riseP - CFG.riseFadeAt)/(1 - CFG.riseFadeAt));
+
+    ctx.lineCap='round'; ctx.globalCompositeOperation='lighter';
+    for (var i=0;i<S.parts.length;i++){
+      var p=S.parts[i];
+      var lo = t - p.release;
+      var pr, e;
+      if (lo <= 0){ // noch nicht gestartet
+        p.px=p.x; p.py=p.y; p.x=p.sx; p.y=p.sy; pr=0;
+      } else {
+        pr = Math.min(1, lo/p.dur); e = 1 - Math.pow(1-pr,3);
+        p.px=p.x; p.py=p.y;
+        p.x = p.sx + (p.tx - p.sx)*e;
+        p.y = p.sy + (p.ty - p.sy)*e;
+      }
+      // Hochfahren: gesamte Gruppe nach oben + leichtes Auffächern
+      var offX = offY * CFG.riseSpread * p.spread;   // offY<0 → symmetrisches Auffächern
+      var drawX = p.x + offX;
+      var drawY = p.y + offY;
+
+      // Streak (Bewegungsspur beim Einfliegen)
+      var s = Math.sqrt((p.x-p.px)*(p.x-p.px)+(p.y-p.py)*(p.y-p.py));
+      if (s > 1.2 && riseP < 0.5){
+        ctx.strokeStyle=CFG.dotColor;
+        ctx.globalAlpha=Math.min(0.4, s/70)*groupAlpha;
+        ctx.lineWidth=p.r*1.2;
+        ctx.beginPath(); ctx.moveTo(p.px+offX, p.py+offY); ctx.lineTo(drawX, drawY); ctx.stroke();
+      }
+      ctx.fillStyle=CFG.dotColor;
+      ctx.globalAlpha=Math.min(1, pr*1.7)*groupAlpha;
+      ctx.beginPath(); ctx.arc(drawX, drawY, p.r, 0, 6.283); ctx.fill();
+    }
+    ctx.globalCompositeOperation='source-over'; ctx.globalAlpha=1;
+
+    var done = riseStart + CFG.riseMs + 120;
+    if (t > done){
+      S.running=false;
+      if (CFG.loopPause>0) setTimeout(start, CFG.loopPause);
+    } else {
+      requestAnimationFrame(draw);
+    }
+  }
+
+  function start(){
+    S.aEnd = assembleEnd();
+    // Startzustand zurücksetzen
+    for(var i=0;i<S.parts.length;i++){ var p=S.parts[i]; p.x=p.sx; p.y=p.sy; p.px=p.sx; p.py=p.sy; }
+    S.running=true; S.t0=performance.now();
+    requestAnimationFrame(draw);
+  }
+
+  function boot(){
+    resize();
+    window.addEventListener('resize', function(){ clearTimeout(S._rt); S._rt=setTimeout(function(){ resize(); }, 200); });
+    document.getElementById('replay').addEventListener('click', function(){ S.running=false; start(); });
+    document.addEventListener('keydown', function(e){ if(e.code==='Space'){ e.preventDefault(); S.running=false; start(); } });
+    start();
+  }
+
+  if (logoImg.complete && logoImg.naturalWidth) boot();
+  else { logoImg.onload=boot; logoImg.onerror=boot; }
+})();
+</script>
+</body>
+</html>
