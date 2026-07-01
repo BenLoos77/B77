@@ -57,15 +57,18 @@ var CFG = {
   assembleDurRnd : 380,
 
   // Phase 2 — Halten (fertiges Punkte-Logo steht still)
-  holdMs      : 750,
+  holdMs      : 700,
 
-  // Phase 3 — nach oben rausfahren
-  riseMs      : 1300,   // Dauer des Hochfahrens
-  riseDistVH  : 0.85,   // Strecke nach oben als Anteil der Viewport-Höhe
-  riseFadeAt  : 0.55,   // ab welchem Rise-Fortschritt (0..1) ausgeblendet wird
-  riseSpread  : 0.10,   // leichtes Auffächern beim Hochfahren (0 = bleibt kompakt)
+  // Phase 3 — nach oben andocken (Logo verkleinert sich in die Header-Position)
+  dockMs        : 1100,   // Dauer der Dock-Bewegung
+  dockWidthVW   : 0.12,   // Breite des angedockten Logos (Anteil Viewport-Breite)
+  dockWidthMin  : 120,
+  dockWidthMax  : 190,
+  dockGutterVW  : 0.045,  // linker/rechter Rand
+  dockTopVH     : 0.05,   // Abstand von oben
+  headerFadeAt  : 0.55,   // ab welchem Dock-Fortschritt Header-Linie + Label einblenden
 
-  loopPause   : 700     // Pause vor Auto-Replay (0 = kein Auto-Replay)
+  loopPause   : 1500    // Pause vor Auto-Replay (0 = kein Auto-Replay)
 };
 
 (function(){
@@ -92,6 +95,13 @@ var CFG = {
     if (S.lh > S.H*0.5){ S.lh = S.H*0.5; S.lw = S.lh/S.ar; }
     S.lx = (S.W - S.lw)/2;
     S.ly = S.H*CFG.logoYAnchor - S.lh/2;
+    // Angedockte Header-Position (oben links) + Kennwerte für Header-Linie/Label
+    S.gutter = Math.max(24, S.W*CFG.dockGutterVW);
+    S.dockW = Math.min(CFG.dockWidthMax, Math.max(CFG.dockWidthMin, S.W*CFG.dockWidthVW));
+    S.dockH = S.dockW * S.ar;
+    S.dockX = S.gutter;
+    S.dockY = Math.max(22, S.H*CFG.dockTopVH);
+    S.ruleY = S.dockY + S.dockH + 16;
     buildSamples(); initAmbient();
   }
 
@@ -153,12 +163,10 @@ var CFG = {
     drawAmbient();
 
     var aEnd = S.aEnd;
-    var riseStart = aEnd + CFG.holdMs;
-    var riseP = clamp((t - riseStart)/CFG.riseMs);          // 0..1 Hochfahren
-    // ease-in (beschleunigt nach oben, wie ein Start)
-    var riseE = riseP*riseP;
-    var offY = -riseE * S.H * CFG.riseDistVH;
-    var groupAlpha = 1 - clamp((riseP - CFG.riseFadeAt)/(1 - CFG.riseFadeAt));
+    var dockStart = aEnd + CFG.holdMs;
+    var dockP = clamp((t - dockStart)/CFG.dockMs);          // 0..1 Andocken
+    var dockE = dockP<0.5 ? 2*dockP*dockP : 1 - Math.pow(-2*dockP+2,2)/2;  // ease-in-out
+    var dockScale = S.dockW / S.lw;
 
     ctx.lineCap='round'; ctx.globalCompositeOperation='lighter';
     for (var i=0;i<S.parts.length;i++){
@@ -173,26 +181,41 @@ var CFG = {
         p.x = p.sx + (p.tx - p.sx)*e;
         p.y = p.sy + (p.ty - p.sy)*e;
       }
-      // Hochfahren: gesamte Gruppe nach oben + leichtes Auffächern
-      var offX = offY * CFG.riseSpread * p.spread;   // offY<0 → symmetrisches Auffächern
-      var drawX = p.x + offX;
-      var drawY = p.y + offY;
+      // Andocken: von der zusammengesetzten Position in die verkleinerte Header-Position
+      var dxT = S.dockX + (p.tx - S.lx)*dockScale;
+      var dyT = S.dockY + (p.ty - S.ly)*dockScale;
+      var drawX = p.x + (dxT - p.tx)*dockE;
+      var drawY = p.y + (dyT - p.ty)*dockE;
+      var rad = p.r * (1 - dockE*(1 - dockScale));
+      if (rad < 0.45) rad = 0.45;
 
-      // Streak (Bewegungsspur beim Einfliegen)
+      // Streak (Bewegungsspur) nur beim Einfliegen
       var s = Math.sqrt((p.x-p.px)*(p.x-p.px)+(p.y-p.py)*(p.y-p.py));
-      if (s > 1.2 && riseP < 0.5){
+      if (s > 1.2 && dockP <= 0){
         ctx.strokeStyle=CFG.dotColor;
-        ctx.globalAlpha=Math.min(0.4, s/70)*groupAlpha;
+        ctx.globalAlpha=Math.min(0.4, s/70);
         ctx.lineWidth=p.r*1.2;
-        ctx.beginPath(); ctx.moveTo(p.px+offX, p.py+offY); ctx.lineTo(drawX, drawY); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(p.px,p.py); ctx.lineTo(p.x,p.y); ctx.stroke();
       }
       ctx.fillStyle=CFG.dotColor;
-      ctx.globalAlpha=Math.min(1, pr*1.7)*groupAlpha;
-      ctx.beginPath(); ctx.arc(drawX, drawY, p.r, 0, 6.283); ctx.fill();
+      ctx.globalAlpha=Math.min(1, pr*1.7);
+      ctx.beginPath(); ctx.arc(drawX, drawY, rad, 0, 6.283); ctx.fill();
     }
     ctx.globalCompositeOperation='source-over'; ctx.globalAlpha=1;
 
-    var done = riseStart + CFG.riseMs + 120;
+    // Header-Elemente (Trennlinie + Ort-Label) gegen Ende des Dockens einblenden
+    var hf = clamp((dockP - CFG.headerFadeAt)/(1 - CFG.headerFadeAt));
+    if (hf > 0){
+      ctx.globalAlpha = hf;
+      ctx.strokeStyle = '#2a2a2c'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(S.gutter, S.ruleY); ctx.lineTo(S.W - S.gutter, S.ruleY); ctx.stroke();
+      ctx.fillStyle = '#9a9a9a'; ctx.font = '11px "JetBrains Mono", ui-monospace, monospace';
+      ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+      ctx.fillText('SIEGEN, DE →', S.W - S.gutter, S.dockY + S.dockH/2);
+      ctx.textAlign = 'left'; ctx.globalAlpha = 1;
+    }
+
+    var done = dockStart + CFG.dockMs + 250;   // angedockter Zustand bleibt bis zum Replay stehen
     if (t > done){
       S.running=false;
       if (CFG.loopPause>0) setTimeout(start, CFG.loopPause);
