@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-02T03:25:14+02:00",
+  "updated": "2026-07-02T07:38:57+02:00",
   "matches": [
     {
       "home": "MEX",
@@ -733,10 +733,10 @@
     {
       "home": "USA",
       "away": "BIH",
-      "hs": 1,
+      "hs": 2,
       "as": 0,
-      "live": true,
-      "status": "IN_PLAY",
+      "live": false,
+      "status": "FINISHED",
       "date": "2026-07-02"
     }
   ]
