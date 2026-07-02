@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B_77 — Hero Dots (Experiment)</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="monolith.css?v=mono13">
+<style>
+  /* Hero: dezentes Geister-Folio „77" (aus index.html übernommen) */
+  .hb__folio{position:absolute; right:-1.5%; bottom:-5%; width:clamp(320px,54vw,760px); aspect-ratio:446/310;
+    background:url(/assets/B77_77_white.png?v=2) right bottom/contain no-repeat; opacity:.035; pointer-events:none; z-index:0;}
+  .hb > *:not(.hb__folio){position:relative; z-index:1;}
+
+  /* Punkte-Canvas über dem Titel */
+  #dots{position:absolute; inset:0; z-index:2; pointer-events:none;}
+  /* Der echte Titel bleibt im DOM (SEO/Screenreader), wird aber unsichtbar sobald die Punkte übernehmen */
+  .hb__title.is-dots{visibility:hidden;}
+
+  .rvp{position:absolute; right:24px; bottom:20px; z-index:6;
+    font-family:var(--mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase;
+    color:#9a9a9a; background:transparent; border:1px solid rgba(255,255,255,0.18);
+    padding:9px 15px; border-radius:2px; cursor:pointer; transition:.2s;}
+  .rvp:hover{color:#fff; border-color:rgba(255,255,255,0.45);}
+  .tag{position:absolute; left:var(--gutter); bottom:22px; z-index:6;
+    font-family:var(--mono); font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:#56544f;}
+</style>
+</head>
+<body>
+
+  <!-- HERO (Monolith – invertierte Sektion 00) — 1:1 aus index.html -->
+  <section class="hb">
+    <div class="hb__folio" aria-hidden="true"></div>
+    <div class="hb__top"><span>Wir machen Unternehmen</span><span class="r">01</span></div>
+    <h1 class="hb__title"><span class="l"><i>Vertriebs-</i></span><span class="l"><i>aktiv.</i></span></h1>
+    <p class="hb__lead"><strong>Vertriebsaktiv</strong> zu sein bedeutet, Märkte bewusst zu bearbeiten, Zielkunden systematisch zu gewinnen und Abschlüsse nicht dem Zufall zu überlassen. Es schafft Steuerbarkeit – weil Unternehmen ihren Marktanteil aktiv gestalten, statt auf Anfragen zu warten.</p>
+    <div class="hb__foot">
+      <span>KI Powered</span>
+      <span class="hb__sig">Vertriebsberatung für den Mittelstand</span>
+    </div>
+    <canvas id="dots"></canvas>
+    <span class="tag">Hero Dots · Experiment</span>
+    <button class="rvp" id="replay">↺ Replay</button>
+  </section>
+
+<script>
+(function(){
+  var hb    = document.querySelector('.hb');
+  var title = document.querySelector('.hb__title');
+  var lineEls = [].slice.call(document.querySelectorAll('.hb__title .l i'));
+  var cv = document.getElementById('dots'), ctx = cv.getContext('2d');
+  var S = { W:0, H:0, parts:[], t0:0, raf:0 };
+
+  function rnd(i){ var x = Math.sin(i*12.9898)*43758.5453; return x - Math.floor(x); }
+
+  function sizeCanvas(){
+    var r = hb.getBoundingClientRect();
+    S.W = r.width; S.H = r.height;
+    var dpr = Math.min(2, window.devicePixelRatio || 1);
+    cv.width = Math.round(r.width*dpr); cv.height = Math.round(r.height*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    return r;
+  }
+
+  // Sampelt beide Titelzeilen 1:1 (gleiche Schrift/Größe) in Punkte,
+  // zentriert auf die exakte Position der echten Textzeilen.
+  function build(){
+    var hbRect = hb.getBoundingClientRect();
+    var cs = getComputedStyle(title);
+    var fs = parseFloat(cs.fontSize);
+    var weight = cs.fontWeight || '800';
+    var fam = cs.fontFamily || '"Hanken Grotesk", sans-serif';
+    var ls = -0.04 * fs;                    // letter-spacing -0.04em
+    var step = Math.max(3, Math.round(fs/44));   // Punktdichte
+    var pts = [];
+
+    lineEls.forEach(function(el, li){
+      var rect = el.getBoundingClientRect();
+      var text = (el.textContent || '').toUpperCase();
+      var pad = Math.ceil(fs*0.5);
+
+      var off = document.createElement('canvas');
+      var o = off.getContext('2d');
+      o.font = weight + ' ' + fs + 'px ' + fam;
+      if ('letterSpacing' in o) o.letterSpacing = ls + 'px';
+      var tw = Math.ceil(o.measureText(text).width);
+      off.width = tw + pad*2;
+      off.height = Math.ceil(fs*1.4) + pad*2;
+      // Kontext nach Resize neu setzen (Canvas-Resize löscht State)
+      o = off.getContext('2d');
+      o.font = weight + ' ' + fs + 'px ' + fam;
+      if ('letterSpacing' in o) o.letterSpacing = ls + 'px';
+      o.textBaseline = 'alphabetic';
+      o.fillStyle = '#fff';
+      o.fillText(text, pad, pad + fs);
+
+      var d = o.getImageData(0,0,off.width,off.height).data;
+      var raw = [], minx=1e9, miny=1e9, maxx=-1, maxy=-1;
+      for (var y=0;y<off.height;y+=step) for (var x=0;x<off.width;x+=step){
+        if (d[(y*off.width+x)*4+3] > 120){
+          raw.push([x,y]);
+          if(x<minx)minx=x; if(x>maxx)maxx=x; if(y<miny)miny=y; if(y>maxy)maxy=y;
+        }
+      }
+      if (raw.length===0) return;
+      // Der echte Titel ist LINKSBÜNDIG (display:block): Glyph-Linkskante an Textstart legen (1:1),
+      // vertikal auf die Zeilenmitte zentrieren.
+      var gcy = (miny+maxy)/2;
+      var dlx = (rect.left - hbRect.left);              // Textstart (Gutter)
+      var dcy = (rect.top  - hbRect.top ) + rect.height/2;
+      raw.forEach(function(p){
+        pts.push({ tx: dlx + (p[0]-minx), ty: dcy + (p[1]-gcy), li: li });
+      });
+    });
+
+    S.parts = pts.map(function(p,i){
+      var sweep = p.tx / Math.max(1, S.W);          // links→rechts
+      var sx = -50 - rnd(i)*S.W*0.5;
+      var sy = p.ty + (rnd(i+7)-0.5)*S.H*0.10;
+      return {
+        tx:p.tx, ty:p.ty, sx:sx, sy:sy, x:sx, y:sy, px:sx, py:sy,
+        release: 160 + sweep*680 + rnd(i+3)*170,
+        dur: 620 + rnd(i+11)*380,
+        r: 0.85 + rnd(i+5)*1.05
+      };
+    });
+  }
+
+  function drawStatic(){
+    ctx.clearRect(0,0,S.W,S.H);
+    ctx.globalCompositeOperation='source-over'; ctx.globalAlpha=1; ctx.fillStyle='#f5f4f2';
+    for (var i=0;i<S.parts.length;i++){ var p=S.parts[i]; ctx.beginPath(); ctx.arc(p.tx,p.ty,p.r,0,6.283); ctx.fill(); }
+  }
+
+  function loop(now){
+    var t = now - S.t0;
+    ctx.clearRect(0,0,S.W,S.H);
+    ctx.lineCap='round'; ctx.globalCompositeOperation='lighter';
+    var allDone = true;
+    for (var i=0;i<S.parts.length;i++){
+      var p = S.parts[i];
+      var lo = t - p.release;
+      if (lo <= 0){ allDone=false; continue; }
+      var pr = Math.min(1, lo/p.dur); if (pr<1) allDone=false;
+      var e = 1 - Math.pow(1-pr,3);
+      p.px=p.x; p.py=p.y;
+      p.x = p.sx + (p.tx-p.sx)*e;
+      p.y = p.sy + (p.ty-p.sy)*e;
+      var s = Math.sqrt((p.x-p.px)*(p.x-p.px)+(p.y-p.py)*(p.y-p.py));
+      if (s>1.2){ ctx.strokeStyle='#f5f4f2'; ctx.globalAlpha=Math.min(0.4,s/70); ctx.lineWidth=p.r*1.2;
+        ctx.beginPath(); ctx.moveTo(p.px,p.py); ctx.lineTo(p.x,p.y); ctx.stroke(); }
+      ctx.fillStyle='#f5f4f2'; ctx.globalAlpha=Math.min(1, pr*1.7);
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,6.283); ctx.fill();
+    }
+    ctx.globalCompositeOperation='source-over'; ctx.globalAlpha=1;
+    if (allDone) drawStatic();
+    else S.raf = requestAnimationFrame(loop);
+  }
+
+  function start(){
+    cancelAnimationFrame(S.raf);
+    sizeCanvas();
+    build();
+    title.classList.add('is-dots');
+    for (var i=0;i<S.parts.length;i++){ var p=S.parts[i]; p.x=p.sx; p.y=p.sy; p.px=p.sx; p.py=p.sy; }
+    S.t0 = performance.now();
+    S.raf = requestAnimationFrame(loop);
+  }
+
+  function boot(){
+    start();
+    document.getElementById('replay').addEventListener('click', start);
+    var rt;
+    window.addEventListener('resize', function(){ clearTimeout(rt); rt=setTimeout(function(){ sizeCanvas(); build(); drawStatic(); }, 200); });
+  }
+
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(boot); setTimeout(boot, 1500); }
+  else window.addEventListener('load', boot);
+  // Doppel-Boot verhindern
+  var booted=false; var _b=boot; boot=function(){ if(booted)return; booted=true; _b(); };
+})();
+</script>
+</body>
+</html>
