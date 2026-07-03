@@ -52,7 +52,7 @@ GA wird erst nach "Akzeptieren" im Cookie-Banner geladen. DSGVO-konform.
 1. business.google.com → Unternehmen hinzufügen
 2. Name: B_77 Vertriebsberatung
 3. Kategorie: Unternehmensberater
-4. Adresse: Wallhausenstraße 1, 57072 Siegen
+4. Adresse: Unter dem Klingelschacht 18, 57074 Siegen
 5. Servicegebiet: NRW, Hessen, deutschlandweit
 6. Verifizierung per Postkarte (5-14 Tage)
 

@@ -54,8 +54,8 @@
     "url": "https://b77.de",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Wallhausenstraße 1",
-      "postalCode": "57072",
+      "streetAddress": "Unter dem Klingelschacht 18",
+      "postalCode": "57074",
       "addressLocality": "Siegen",
       "addressCountry": "DE"
     },
@@ -1476,7 +1476,7 @@
 <div id="modalHost"></div>
 
 <footer class="foot">
-  B_77 GmbH &nbsp;//&nbsp; Wallhausenstraße 1 &nbsp;//&nbsp; 57072 Siegen &nbsp;//&nbsp; <a href="https://www.b77.de">www.b77.de</a> &nbsp;//&nbsp; <a href="mailto:kontakt@b77.de">kontakt@b77.de</a> &nbsp;//&nbsp; <a href="tel:+4927189027837">+49 271 890 27 837</a>
+  B_77 GmbH &nbsp;//&nbsp; Unter dem Klingelschacht 18 &nbsp;//&nbsp; 57074 Siegen &nbsp;//&nbsp; <a href="https://www.b77.de">www.b77.de</a> &nbsp;//&nbsp; <a href="mailto:kontakt@b77.de">kontakt@b77.de</a> &nbsp;//&nbsp; <a href="tel:+4927189027837">+49 271 890 27 837</a>
 </footer>
 
 <script>
@@ -5148,7 +5148,7 @@ function generatePdf() {
   const today = new Date().toLocaleDateString("de-DE", { day: "2-digit", month: "long", year: "numeric" });
   doc.text("Erstellt am " + today, margin, 260);
   doc.text("www.b77.de · kontakt@b77.de · +49 271 890 27 837", margin, 268);
-  doc.text("B_77 GmbH · Wallhausenstraße 1 · 57072 Siegen", margin, 276);
+  doc.text("B_77 GmbH · Unter dem Klingelschacht 18 · 57074 Siegen", margin, 276);
 
   // Neue Seite für Inhalt
   doc.addPage();
@@ -5422,7 +5422,7 @@ function generatePdf() {
 
   doc.setFontSize(9);
   doc.setTextColor(180);
-  doc.text("B_77 GmbH · Wallhausenstraße 1 · 57072 Siegen", margin, 270);
+  doc.text("B_77 GmbH · Unter dem Klingelschacht 18 · 57074 Siegen", margin, 270);
 
   // Save
   const filename = "B77-Vertriebs-Check-" + (new Date().toISOString().slice(0,10)) + ".pdf";
