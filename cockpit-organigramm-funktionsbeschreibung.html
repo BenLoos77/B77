@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B_77 Cockpit · Organigramm — Funktionsbeschreibung</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="/assets/B77_Logo_black.png">
+<style>
+  /* ============================================================
+     B_77 — Design-System „MONOLITH"
+     Reines Schwarz/Weiß · Hanken Grotesk + JetBrains Mono
+     ============================================================ */
+  :root{
+    --ink:#0F0F0F;
+    --paper:#FFFFFF;
+    --text-2:#333333;
+    --mute:#9A9A9A;
+    --mute-d:#555555;
+    --line:#DDDDDD;
+    --line-soft:#ECECEC;
+    --field:#F6F6F6;
+    --sans:'Hanken Grotesk',-apple-system,system-ui,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,monospace;
+    --gutter:40px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-weight:400;line-height:1.5;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;}
+  ::selection{background:var(--ink);color:var(--paper);}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+
+  /* ---------- Topbar ---------- */
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+    padding:18px var(--gutter);border-bottom:1px solid var(--ink);position:sticky;top:0;background:var(--paper);z-index:40;}
+  .brand{font-family:var(--mono);font-weight:600;font-size:13px;letter-spacing:0.04em;text-transform:uppercase;
+    color:var(--ink);display:flex;align-items:center;gap:11px;}
+  .brand-logo{height:21px;width:auto;}
+  .brand-sep{color:var(--mute);}
+  .tb-actions{display:flex;gap:8px;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-weight:600;font-size:12px;
+    letter-spacing:0.06em;text-transform:uppercase;padding:11px 16px;background:var(--paper);color:var(--ink);
+    border:1px solid var(--ink);border-radius:1px;transition:background .2s,color .2s;}
+  .btn:hover{background:var(--ink);color:var(--paper);}
+  .btn--solid{background:var(--ink);color:var(--paper);}
+  .btn--solid:hover{background:var(--paper);color:var(--ink);}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 var(--gutter);}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:clamp(50px,7vw,96px) 0 clamp(34px,4vw,54px);}
+  .eyebrow{font-family:var(--mono);font-weight:600;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--mute);margin-bottom:20px;}
+  .hero h1{font-family:var(--sans);font-weight:800;letter-spacing:-0.04em;line-height:0.84;
+    font-size:clamp(48px,9vw,116px);text-transform:none;}
+  .hero .lead{font-size:clamp(16px,1.8vw,21px);color:var(--text-2);max-width:64ch;margin-top:24px;line-height:1.45;}
+  .meta{margin-top:26px;display:flex;flex-wrap:wrap;gap:8px;font-family:var(--mono);font-size:11px;
+    letter-spacing:0.05em;text-transform:uppercase;color:var(--mute);}
+  .meta span{border:1px solid var(--line);border-radius:2px;padding:5px 11px;background:var(--paper);}
+
+  /* ---------- Section frame ---------- */
+  .section{padding:clamp(48px,6vw,84px) 0;border-top:1px solid var(--ink);position:relative;}
+  .corners{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:clamp(28px,4vw,46px);
+    font-family:var(--mono);font-weight:600;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;color:var(--mute);}
+  .corners .r{color:var(--ink);}
+  .h2{font-family:var(--sans);font-weight:800;letter-spacing:-0.03em;line-height:0.92;
+    font-size:clamp(30px,4.6vw,58px);margin-bottom:12px;}
+  .sec-intro{color:var(--text-2);max-width:70ch;font-size:15.5px;line-height:1.55;}
+
+  /* ---------- Surface overview ---------- */
+  .surface{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:34px;border:1px solid var(--line);border-radius:3px;overflow:hidden;}
+  .surf{padding:20px 18px;border-left:1px solid var(--line);}
+  .surf:first-child{border-left:none;}
+  .surf .sl{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--mute);margin-bottom:10px;}
+  .surf .st{font-weight:700;font-size:16px;color:var(--ink);margin-bottom:7px;letter-spacing:-0.01em;}
+  .surf p{font-size:13px;color:var(--mute-d);line-height:1.5;}
+
+  /* ---------- Feature grid (hover-invert + index numbers) ---------- */
+  .features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:30px;}
+  .feat{position:relative;overflow:hidden;background:var(--paper);border:1px solid var(--line);border-radius:3px;
+    padding:24px 22px 26px;transition:background .25s,color .25s,border-color .25s;}
+  .feat:hover{background:var(--ink);border-color:var(--ink);color:var(--paper);}
+  .feat .gi{position:absolute;top:10px;right:16px;font-family:var(--sans);font-weight:800;font-size:64px;line-height:1;
+    letter-spacing:-0.04em;color:var(--line-soft);pointer-events:none;transition:color .25s;}
+  .feat:hover .gi{color:rgba(255,255,255,.16);}
+  .feat .fl{position:relative;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:0.1em;
+    text-transform:uppercase;color:var(--mute);margin-bottom:12px;transition:color .25s;}
+  .feat .ft{position:relative;font-weight:700;font-size:18px;letter-spacing:-0.015em;color:var(--ink);margin-bottom:9px;transition:color .25s;}
+  .feat .fb{position:relative;font-size:13.5px;color:var(--text-2);line-height:1.55;transition:color .25s;}
+  .feat .fb b{color:var(--ink);font-weight:700;transition:color .25s;}
+  .feat:hover .fl{color:rgba(255,255,255,.55);}
+  .feat:hover .ft,.feat:hover .fb b{color:var(--paper);}
+  .feat:hover .fb{color:rgba(255,255,255,.82);}
+  .feat .chips{position:relative;margin-top:13px;display:flex;flex-wrap:wrap;gap:6px;}
+  .feat .chips span{font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;
+    color:var(--mute-d);border:1px solid var(--line);border-radius:2px;padding:3px 7px;transition:color .25s,border-color .25s;}
+  .feat:hover .chips span{color:var(--paper);border-color:rgba(255,255,255,.35);}
+
+  /* ---------- Field reference table ---------- */
+  .fieldtable{margin-top:30px;border:1px solid var(--ink);border-radius:3px;overflow:hidden;}
+  .ftrow{display:grid;grid-template-columns:230px 1fr;gap:0;border-top:1px solid var(--line);transition:background .2s,color .2s;}
+  .ftrow:first-child{border-top:none;}
+  .ftrow:hover{background:var(--ink);color:var(--paper);}
+  .ftrow .k{padding:14px 18px;font-weight:700;font-size:14px;color:inherit;display:flex;align-items:center;gap:9px;letter-spacing:-0.01em;}
+  .ftrow .k .dot{width:7px;height:7px;background:var(--ink);flex:none;transition:background .2s;}
+  .ftrow:hover .k .dot{background:var(--paper);}
+  .ftrow .v{padding:14px 18px;font-size:13.5px;color:var(--text-2);border-left:1px solid var(--line);transition:color .2s,border-color .2s;}
+  .ftrow:hover .v{color:rgba(255,255,255,.85);border-left-color:rgba(255,255,255,.25);}
+  .ftrow .v code{font-family:var(--mono);font-size:12px;color:var(--ink);background:var(--field);padding:1px 6px;border-radius:3px;}
+  .ftrow:hover .v code{color:var(--ink);}
+
+  /* ---------- Legend ---------- */
+  .legend{display:flex;flex-wrap:wrap;gap:18px 30px;align-items:center;margin-top:22px;
+    border:1px solid var(--line);border-radius:3px;padding:20px 22px;}
+  .key{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--text-2);}
+  .swatch{width:26px;height:16px;border-radius:2px;flex:none;}
+  .sw-lead{background:var(--ink);}
+  .sw-fn{background:var(--paper);border:1px solid var(--line);border-top:3px solid var(--ink);}
+  .sw-role{background:var(--paper);border:1px solid var(--line-soft);}
+  .star-key{color:var(--ink);font-size:15px;}
+
+  /* ---------- Code block ---------- */
+  .code{margin-top:26px;background:var(--field);border:1px solid var(--line);border-radius:3px;
+    padding:22px 24px;overflow-x:auto;font-family:var(--mono);font-size:12.5px;line-height:1.7;color:var(--text-2);}
+  .code .c-key{color:var(--ink);font-weight:600;}
+  .code .c-mut{color:var(--mute);}
+  .note{margin-top:18px;font-size:13px;color:var(--mute-d);border-left:2px solid var(--ink);padding-left:14px;line-height:1.55;}
+  .note b{color:var(--ink);}
+  .note code{font-family:var(--mono);font-size:12px;background:var(--field);padding:1px 6px;border-radius:3px;color:var(--ink);}
+
+  /* ---------- Footer wordmark ---------- */
+  .foot{border-top:1px solid var(--ink);padding:46px 0 34px;overflow:hidden;}
+  .foot .ghost{font-family:var(--sans);font-weight:800;font-size:clamp(96px,23vw,320px);line-height:0.8;
+    letter-spacing:-0.05em;color:var(--line-soft);user-select:none;pointer-events:none;white-space:nowrap;}
+  .foot .fmeta{font-family:var(--mono);font-size:11px;letter-spacing:0.05em;text-transform:uppercase;color:var(--mute);margin-top:18px;}
+
+  @media(max-width:980px){
+    .surface{grid-template-columns:repeat(2,1fr);}
+    .surf:nth-child(3){border-left:none;}
+    .surf:nth-child(n+3){border-top:1px solid var(--line);}
+    .features{grid-template-columns:repeat(2,1fr);}
+  }
+  @media(max-width:680px){
+    :root{--gutter:22px;}
+    .surface{grid-template-columns:1fr;}
+    .surf{border-left:none;border-top:1px solid var(--line);}
+    .surf:first-child{border-top:none;}
+    .features{grid-template-columns:1fr;}
+    .ftrow{grid-template-columns:1fr;}
+    .ftrow .v{border-left:none;border-top:1px solid var(--line);}
+    .ftrow:hover .v{border-top-color:rgba(255,255,255,.25);}
+  }
+  @media print{
+    body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .topbar{position:static;}
+    .tb-actions{display:none;}
+    .feat:hover{background:#fff;color:inherit;border-color:var(--line);}
+    .feat:hover .fl{color:var(--mute);}
+    .feat:hover .ft,.feat:hover .fb,.feat:hover .fb b{color:inherit;}
+    .feat:hover .gi{color:var(--line-soft);}
+    .ftrow:hover{background:#fff;color:inherit;}
+    .ftrow:hover .k .dot{background:var(--ink);}
+    .ftrow:hover .v{color:var(--text-2);}
+    .feat,.surf,.section,.fieldtable{break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand"><img src="/assets/B77_Logo_black.png" alt="B_77" class="brand-logo"><span class="brand-sep">·</span> Cockpit · Funktionsbeschreibung</div>
+    <div class="tb-actions">
+      <a class="btn" href="/cockpit-organigramm.html">Zum Organigramm</a>
+      <button class="btn btn--solid" onclick="window.print()">Drucken / PDF</button>
+    </div>
+  </header>
+
+  <div class="wrap">
+
+    <!-- HERO -->
+    <section class="hero">
+      <p class="eyebrow">B_77 Cockpit · Modul-Dokumentation</p>
+      <h1>Interaktives<br>Organigramm</h1>
+      <p class="lead">Ein eigenständiges Cockpit-Modul, mit dem Kund:innen ihre Vertriebsorganisation
+        per Drag-&-Drop aufbauen: Abteilungen und Funktionen anordnen, Personen mit Profil hinterlegen,
+        Positionsfit bewerten und Verantwortlichkeiten sichtbar machen.</p>
+      <div class="meta">
+        <span>Modul: Organigramm</span>
+        <span>Status: Autark / lokal</span>
+        <span>Speicherung: localStorage + JSON</span>
+        <span>Stand: Juni 2026</span>
+      </div>
+    </section>
+
+    <!-- ÜBERBLICK -->
+    <section class="section">
+      <div class="corners"><span>Aufbau</span><span class="r">01 — Oberfläche</span></div>
+      <h2 class="h2">Vier Bereiche</h2>
+      <p class="sec-intro">Die Oberfläche ist bewusst schlank gehalten: links die Vorrats-Bibliothek,
+        in der Mitte das Board, ein Seitenpanel für Personen und eine Werkzeugleiste oben.</p>
+      <div class="surface">
+        <div class="surf"><div class="sl">Links</div><div class="st">Bibliothek</div><p>Vorrat an Abteilungen — jede mit ihren typischen Funktionen darunter. Quelle fürs Drag-&-Drop.</p></div>
+        <div class="surf"><div class="sl">Mitte</div><div class="st">Board / Canvas</div><p>Die Vertriebsleitung an der Spitze, darunter die Abteilungen mit Funktionen und Personen.</p></div>
+        <div class="surf"><div class="sl">Rechts</div><div class="st">Personen-Panel</div><p>Seitlich einfahrendes Panel zum Erfassen aller Angaben einer Person.</p></div>
+        <div class="surf"><div class="sl">Oben</div><div class="st">Werkzeugleiste</div><p>Abteilung hinzufügen, Drucken/PDF, Export, Import, Muster und Leeren — plus Auto-Save-Status.</p></div>
+      </div>
+    </section>
+
+    <!-- FUNKTIONEN -->
+    <section class="section">
+      <div class="corners"><span>Leistungsumfang</span><span class="r">02 — Funktionen</span></div>
+      <h2 class="h2">Was das Modul kann</h2>
+      <p class="sec-intro">Neun Kernfunktionen — vom Aufbau über die Pflege bis zur Auswertung und Sicherung.</p>
+
+      <div class="features">
+
+        <article class="feat">
+          <div class="gi">01</div>
+          <div class="fl">Orientierung</div>
+          <div class="ft">Bibliothek mit Zuordnung</div>
+          <div class="fb">Jede Abteilung zeigt ihre zugehörigen Funktionen eingerückt darunter — so ist sofort klar, <b>was wohin gehört</b>. Ganz oben steht die „Leere Abteilung" für freie Strukturen.</div>
+        </article>
+
+        <article class="feat">
+          <div class="gi">02</div>
+          <div class="fl">Aufbau</div>
+          <div class="ft">Drag-&-Drop-Board</div>
+          <div class="fb">Erst die <b>Abteilung</b> in den oberen Bereich ziehen (sie kommt leer), dann ihre <b>Funktionen einzeln</b> hineinziehen. Gültige Drop-Zonen werden hervorgehoben.</div>
+          <div class="chips"><span>Abteilungen sortieren</span><span>Funktionen verschieben</span></div>
+        </article>
+
+        <article class="feat">
+          <div class="gi">03</div>
+          <div class="fl">Ergänzen</div>
+          <div class="ft">Frei hinzufügen & benennen</div>
+          <div class="fb">Über <b>„+ Abteilung"</b> und <b>„+ Funktion"</b> öffnet sich sofort ein Fenster zum Benennen. Eigene Bezeichnungen sind jederzeit möglich.</div>
+        </article>
+
+        <article class="feat">
+          <div class="gi">04</div>
+          <div class="fl">Profil</div>
+          <div class="ft">Personen erfassen</div>
+          <div class="fb">Je Funktion beliebig viele Personen mit <b>Name</b>, <b>Verantwortung</b>, <b>Ausbildung</b> und <b>Länge der Zugehörigkeit</b> — erfasst im Seitenpanel.</div>
+        </article>
+
+        <article class="feat">
+          <div class="gi">05</div>
+          <div class="fl">Bewertung</div>
+          <div class="ft">Positionsfit in %</div>
+          <div class="fb">Ein <b>Regler</b> bewertet die Eignung der Person für ihre Position (0–100 %). Der Wert erscheint als Balken direkt auf der Personenkarte.</div>
+        </article>
+
+        <article class="feat">
+          <div class="gi">06</div>
+          <div class="fl">Führung</div>
+          <div class="ft">Leiter:in per Stern</div>
+          <div class="fb">Ein <b>★ Stern</b> markiert die Leitung einer Abteilung — maximal eine pro Abteilung. Sie wird im Abteilungskopf namentlich hervorgehoben.</div>
+        </article>
+
+        <article class="feat">
+          <div class="gi">07</div>
+          <div class="fl">Gliederung</div>
+          <div class="ft">Abteilungsfarbe</div>
+          <div class="fb">Jede Abteilung kann optional eine <b>Farbe</b> bekommen (Kopf-Oberkante). Standard bleibt neutral — für ruhige, einheitliche Organigramme.</div>
+        </article>
+
+        <article class="feat">
+          <div class="gi">08</div>
+          <div class="fl">Kopfbereich</div>
+          <div class="ft">Alles frei editierbar</div>
+          <div class="fb">Titel, Bereich, Beschreibung sowie <b>Branche, Typ, Reichweite, Stand</b> und die Vertriebsleitung sind direkt anklickbar und überschreibbar.</div>
+        </article>
+
+        <article class="feat">
+          <div class="gi">09</div>
+          <div class="fl">Sicherung</div>
+          <div class="ft">Speichern & Teilen</div>
+          <div class="fb"><b>Auto-Save</b> lokal im Browser. <b>Export/Import</b> als JSON, <b>Drucken/PDF</b>, <b>Muster</b> lädt ein Beispiel, <b>Leeren</b> startet neu.</div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- PERSONENFELDER -->
+    <section class="section">
+      <div class="corners"><span>Detail</span><span class="r">03 — Personenfelder</span></div>
+      <h2 class="h2">Pro Person</h2>
+      <p class="sec-intro">Diese Angaben lassen sich im Personen-Panel hinterlegen.</p>
+      <div class="fieldtable">
+        <div class="ftrow"><div class="k"><span class="dot"></span>Name</div><div class="v">Vor- und Nachname der Person.</div></div>
+        <div class="ftrow"><div class="k"><span class="dot"></span>Verantwortung</div><div class="v">Aufgaben- und Verantwortungsbereich in der Funktion.</div></div>
+        <div class="ftrow"><div class="k"><span class="dot"></span>Ausbildung</div><div class="v">Qualifikation / Abschluss, z. B. „Dipl.-Kffr." oder „B.A. Sales".</div></div>
+        <div class="ftrow"><div class="k"><span class="dot"></span>Zugehörigkeit</div><div class="v">Länge der Zugehörigkeit, z. B. „seit 2018 · 8 Jahre".</div></div>
+        <div class="ftrow"><div class="k"><span class="dot"></span>Positionsfit</div><div class="v">Regler <code>0–100 %</code> — Eignung für die Position. Sichtbar als Balken.</div></div>
+        <div class="ftrow"><div class="k"><span class="dot"></span>Kommentar</div><div class="v">Freitext für Notiz, Potenzial oder Entwicklungsbedarf.</div></div>
+        <div class="ftrow"><div class="k"><span class="dot"></span>Leitung (★)</div><div class="v">Schalter „Als Leiter:in markieren" — max. eine pro Abteilung.</div></div>
+      </div>
+
+      <div class="legend">
+        <div class="key"><span class="swatch sw-lead"></span>Vertriebsleitung</div>
+        <div class="key"><span class="swatch sw-fn"></span>Abteilung / Funktionsbereich</div>
+        <div class="key"><span class="swatch sw-role"></span>Funktion &amp; Personen</div>
+        <div class="key"><span class="star-key">★</span>Leiter:in der Abteilung</div>
+      </div>
+    </section>
+
+    <!-- DATENMODELL -->
+    <section class="section">
+      <div class="corners"><span>Technik</span><span class="r">04 — Datenmodell</span></div>
+      <h2 class="h2">Ein JSON-Objekt</h2>
+      <p class="sec-intro">Der gesamte Zustand ist ein einziges, sauber strukturiertes JSON-Objekt —
+        identisch für Auto-Save, Export/Import und die spätere Anbindung ans Cockpit-Backend.</p>
+      <div class="code"><span class="c-mut">// vollständiger Zustand des Organigramms</span><br>
+{<br>
+&nbsp;&nbsp;<span class="c-key">meta</span>: { eyebrow, title, subline, chips: [ … ] },<br>
+&nbsp;&nbsp;<span class="c-key">apex</span>: { code, title, role },&nbsp;&nbsp;<span class="c-mut">// Vertriebsleitung</span><br>
+&nbsp;&nbsp;<span class="c-key">departments</span>: [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id, code, name, color,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-key">functions</span>: [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ id, name, <span class="c-key">persons</span>: [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ id, name, responsibility, education,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tenure, fit, comment, isLeader }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;] }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;]<br>
+}</div>
+      <p class="note"><b>Autark heute, anschlussfähig morgen.</b> Aktuell speichert das Modul lokal im Browser
+        (kein Server). Für das Cockpit-Backend wird dasselbe JSON-Objekt einfach pro Konto in einer
+        <code>jsonb</code>-Spalte abgelegt — ohne Umbau der Datenstruktur.</p>
+    </section>
+
+  </div>
+
+  <footer class="foot">
+    <div class="wrap">
+      <div class="ghost">B_77</div>
+      <div class="fmeta">B_77 Cockpit · Modul Organigramm · Funktionsbeschreibung · Stand Juni 2026</div>
+    </div>
+  </footer>
+
+</body>
+</html>
