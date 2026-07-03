@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-03T01:54:23+02:00",
+  "updated": "2026-07-03T03:48:17+02:00",
   "matches": [
     {
       "home": "MEX",
@@ -751,10 +751,10 @@
     {
       "home": "POR",
       "away": "CRO",
-      "hs": 0,
-      "as": 0,
-      "live": true,
-      "status": "IN_PLAY",
+      "hs": 2,
+      "as": 1,
+      "live": false,
+      "status": "FINISHED",
       "date": "2026-07-03"
     }
   ]
