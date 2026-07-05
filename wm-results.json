@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-05T01:13:56+02:00",
+  "updated": "2026-07-05T22:44:57+02:00",
   "matches": [
     {
       "home": "MEX",
@@ -810,6 +810,15 @@
       "live": false,
       "status": "FINISHED",
       "date": "2026-07-04"
+    },
+    {
+      "home": "BRA",
+      "away": "NOR",
+      "hs": 0,
+      "as": 0,
+      "live": true,
+      "status": "IN_PLAY",
+      "date": "2026-07-05"
     }
   ]
 }
