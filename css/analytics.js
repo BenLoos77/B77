@@ -114,6 +114,57 @@
     }
   }
 
+  // ============================================================
+  // EVENT-TRACKING (Conversions)
+  // Feuert NUR wenn GA geladen ist (= nach ausdrücklicher Zustimmung). Vorher passiert nichts.
+  // ============================================================
+  function track(name, params) {
+    if (window.gaLoaded && typeof window.gtag === 'function') {
+      try { window.gtag('event', name, params || {}); } catch (e) {}
+    }
+  }
+
+  function initEvents() {
+    // Klick-Events: Telefon, E-Mail, Magazin, Kontakt-CTA
+    document.addEventListener('click', function (e) {
+      var a = e.target && e.target.closest ? e.target.closest('a,button') : null;
+      if (!a) return;
+      var href = (a.getAttribute && a.getAttribute('href')) || '';
+      var txt = (a.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 80);
+      if (href.indexOf('tel:') === 0) track('click_phone', { phone: href.slice(4) });
+      else if (href.indexOf('mailto:') === 0) track('click_email', { email: href.slice(7) });
+      else if (href.indexOf('sales-intelligence.b77.de') !== -1) track('click_magazin', { link_url: href });
+      else if (href.indexOf('/kontakt') !== -1) track('click_cta', { cta_text: txt, link_url: href });
+    }, true);
+
+    // Kontaktformular abgeschickt -> Lead (GA4-Empfehlungsevent)
+    var form = document.getElementById('contact-form');
+    if (form) form.addEventListener('submit', function () { track('generate_lead', { method: 'contact_form' }); });
+
+    // Vertriebs-Check gestartet
+    var cs = document.getElementById('check-start');
+    if (cs) cs.addEventListener('click', function () { track('check_start', {}); });
+
+    // Vertriebs-Check abgeschlossen (Ergebnis-Phase wird sichtbar)
+    var res = document.getElementById('phase-result');
+    if (res && window.MutationObserver) {
+      var fired = false;
+      new MutationObserver(function () {
+        if (!fired && res.classList.contains('active')) {
+          fired = true;
+          var sc = document.getElementById('r-score');
+          track('check_complete', sc ? { score: (sc.textContent || '').trim() } : {});
+        }
+      }).observe(res, { attributes: true, attributeFilter: ['class'] });
+    }
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initEvents);
+  else initEvents();
+
+  // öffentliche API fürs manuelle Tracken (z.B. aus anderen Skripten)
+  window.b77Track = track;
+
   // Init
   const consent = getConsent();
   if (consent === 'accepted') {
