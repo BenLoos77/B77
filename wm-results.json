@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-08T01:32:01+02:00",
+  "updated": "2026-07-09T22:56:22+02:00",
   "matches": [
     {
       "home": "MEX",
@@ -864,6 +864,15 @@
       "live": false,
       "status": "FINISHED",
       "date": "2026-07-07"
+    },
+    {
+      "home": "FRA",
+      "away": "MAR",
+      "hs": 0,
+      "as": 0,
+      "live": true,
+      "status": "PAUSED",
+      "date": "2026-07-09"
     }
   ]
 }
