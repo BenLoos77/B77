@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-11T23:38:02+02:00",
+  "updated": "2026-07-12T00:28:13+02:00",
   "matches": [
     {
       "home": "MEX",
@@ -877,8 +877,8 @@
     {
       "home": "NOR",
       "away": "ENG",
-      "hs": 0,
-      "as": 0,
+      "hs": 2,
+      "as": 1,
       "live": true,
       "status": "IN_PLAY",
       "date": "2026-07-11"
