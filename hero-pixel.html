@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B_77 — Hero: Pixel-Feld (Experiment)</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="monolith.css?v=mono13">
+<style>
+  .ph{position:relative; min-height:100vh; min-height:100dvh; overflow:hidden;
+    background:#0B0B0C; color:#F5F4F2; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center; isolation:isolate;}
+  #px{position:absolute; inset:0; z-index:0; display:block;}
+  .ph__veil{position:absolute; inset:0; z-index:1; pointer-events:none;
+    background:radial-gradient(circle at 50% 42%, rgba(11,11,12,0.12) 0%, rgba(11,11,12,0.30) 48%, #0B0B0C 88%);}
+  .ph__title,.ph__lead,.ph__cta{position:relative; z-index:2;}
+
+  .ph__top{position:absolute; top:0; left:0; right:0; z-index:3;
+    display:flex; justify-content:space-between; padding:26px clamp(20px,4vw,48px);
+    font-family:var(--mono); font-size:clamp(11px,1vw,13px); letter-spacing:0.08em;
+    text-transform:uppercase; color:#8A8A85;}
+
+  .ph__title{margin:0; padding:0 clamp(16px,4vw,40px); font-weight:800;
+    text-transform:uppercase; letter-spacing:-0.04em; line-height:0.86;
+    font-size:clamp(52px,13vw,190px);}
+  .ph__title .em{display:block; font-family:'Newsreader',serif; font-style:italic;
+    font-weight:300; text-transform:none; letter-spacing:-0.01em;}
+
+  .ph__lead{max-width:52ch; margin:clamp(22px,3vh,34px) auto 0; padding:0 24px;
+    font-family:var(--sans); font-weight:400; font-size:clamp(15px,1.5vw,20px);
+    line-height:1.55; color:#CFCECB;}
+
+  .ph__cta{margin-top:clamp(26px,3.4vh,40px); display:inline-flex; gap:12px;}
+  .ph__cta a{font-family:var(--mono); font-size:12px; letter-spacing:0.14em;
+    text-transform:uppercase; color:#0B0B0C; background:#F5F4F2; text-decoration:none;
+    padding:14px 22px; border:1px solid #F5F4F2; transition:.2s;}
+  .ph__cta a.ghost{background:transparent; color:#F5F4F2; border-color:rgba(245,244,242,0.35);}
+  .ph__cta a:hover{background:#F5F4F2; color:#0B0B0C; border-color:#F5F4F2;}
+  .ph__cta a.ghost:hover{background:rgba(245,244,242,0.08); color:#F5F4F2;}
+
+  .ph__foot{position:absolute; bottom:0; left:0; right:0; z-index:3;
+    display:flex; justify-content:center; gap:clamp(20px,4vw,54px);
+    padding:22px 24px; font-family:var(--mono); font-size:clamp(10px,0.9vw,12px);
+    letter-spacing:0.12em; text-transform:uppercase; color:#7C7C77;}
+  .ph__foot b{color:#F5F4F2; font-weight:600;}
+
+  .tag{position:absolute; left:clamp(20px,4vw,48px); bottom:22px; z-index:4;
+    font-family:var(--mono); font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:#56544f;}
+</style>
+</head>
+<body>
+  <section class="ph">
+    <canvas id="px" aria-hidden="true"></canvas>
+    <div class="ph__veil" aria-hidden="true"></div>
+
+    <div class="ph__top"><span>Vertriebsberatung · seit 2017</span><span>Siegen, DE →</span></div>
+
+    <h1 class="ph__title">Vertriebs-<span class="em">aktiv.</span></h1>
+    <p class="ph__lead">Märkte bewusst bearbeiten, Zielkunden systematisch gewinnen, Abschlüsse nicht dem Zufall überlassen.</p>
+    <div class="ph__cta">
+      <a href="/kontakt">Erstgespräch →</a>
+      <a class="ghost" href="/leistungen">Leistungen</a>
+    </div>
+
+    <div class="ph__foot"><span><b>25+</b> Jahre</span><span><b>50+</b> Mandate</span><span><b>DACH</b>-weit aktiv</span></div>
+    <span class="tag">Hero · Pixel-Feld · Experiment</span>
+  </section>
+
+<script>
+(function(){
+  var cv = document.getElementById('px'), ctx = cv.getContext('2d'), wrap = cv.parentElement;
+  var COLORS = ['#3E3E40','#525254','#686A6C','#828486','#F5F4F2'];  /* Graustufen + gelegentlich hell */
+  var GAP = 8, SPEED = 0.001 * 34;
+  var pixels = [], raf = 0, last = performance.now();
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function rnd(a,b){ return Math.random()*(b-a)+a; }
+
+  function make(x,y,color){
+    var maxSize = rnd(0.9,3), minSize = 0.6;
+    var p = { x:x, y:y, color:color, size:rnd(minSize,maxSize), minSize:minSize, maxInt:3,
+      maxSize:maxSize, speed:rnd(0.015,0.06), reverse:Math.random()<0.5 };
+    p.draw = function(){ var off = p.maxInt*0.5 - p.size*0.5; ctx.fillStyle = p.color; ctx.fillRect(p.x+off, p.y+off, p.size, p.size); };
+    p.step = function(){
+      if (p.size >= p.maxSize) p.reverse = true; else if (p.size <= p.minSize) p.reverse = false;
+      p.size += p.reverse ? -p.speed : p.speed;
+      p.draw();
+    };
+    return p;
+  }
+
+  function init(){
+    var r = wrap.getBoundingClientRect(), w = Math.floor(r.width), h = Math.floor(r.height);
+    var dpr = Math.min(2, window.devicePixelRatio || 1);
+    cv.width = w*dpr; cv.height = h*dpr; cv.style.width = w+'px'; cv.style.height = h+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    pixels = [];
+    for (var x=0;x<w;x+=GAP) for (var y=0;y<h;y+=GAP){
+      pixels.push(make(x, y, COLORS[(Math.random()*COLORS.length)|0]));
+    }
+    ctx.clearRect(0,0,cv.width,cv.height);
+    for (var i=0;i<pixels.length;i++) pixels[i].draw();   /* sofort sichtbar, auch ohne rAF / bei reduced motion */
+  }
+  function loop(){
+    raf = requestAnimationFrame(loop);
+    var now = performance.now(), el = now - last;
+    if (el < 1000/60) return;
+    last = now - (el % (1000/60));
+    ctx.clearRect(0,0,cv.width,cv.height);
+    for (var i=0;i<pixels.length;i++) pixels[i].step();
+  }
+  function start(){ cancelAnimationFrame(raf); if (reduced) return; last = performance.now(); raf = requestAnimationFrame(loop); }
+
+  var rt, lastW = 0, lastH = 0;
+  function rebuild(){
+    var r = wrap.getBoundingClientRect();
+    var w = Math.floor(r.width), h = Math.floor(r.height);
+    if (w < 2 || h < 2) return;                 // Pane (noch) ohne Größe -> später erneut
+    if (w === lastW && h === lastH) return;      // keine echte Änderung
+    lastW = w; lastH = h;
+    init(); start();
+  }
+  function schedule(){ clearTimeout(rt); rt = setTimeout(rebuild, 150); }
+
+  if ('ResizeObserver' in window){ new ResizeObserver(schedule).observe(wrap); }
+  window.addEventListener('resize', schedule);
+  window.addEventListener('load', rebuild);
+  rebuild();
+})();
+</script>
+</body>
+</html>
