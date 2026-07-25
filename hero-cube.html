@@ -11,45 +11,18 @@
 <link rel="stylesheet" href="monolith.css?v=mono13">
 <style>
   .hc{position:relative; min-height:100vh; min-height:100dvh; overflow:hidden;
-    background:#0B0B0C; color:#F5F4F2; display:grid;
-    grid-template-columns:1.05fr 0.95fr; align-items:center; gap:clamp(24px,4vw,64px);
-    padding:clamp(88px,12vh,140px) clamp(20px,4vw,64px) clamp(60px,8vh,92px);}
-  .hc__veil{position:absolute; inset:0; z-index:0; pointer-events:none;
-    background:radial-gradient(circle at 72% 46%, rgba(245,244,242,0.05) 0%, rgba(11,11,12,0) 42%);}
-  .hc__left,.hc__stage{position:relative; z-index:1;}
+    background:#0B0B0C; color:#F5F4F2; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center; isolation:isolate;}
 
-  .hc__top{position:absolute; top:0; left:0; right:0; z-index:2;
-    display:flex; justify-content:space-between; padding:26px clamp(20px,4vw,64px);
-    font-family:var(--mono); font-size:clamp(11px,1vw,13px); letter-spacing:0.08em;
-    text-transform:uppercase; color:#8A8A85;}
-
-  .hc__kick{font-family:var(--mono); font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
-    color:#8A8A85; margin:0 0 clamp(18px,2.4vh,26px);}
-  .hc__title{margin:0; font-family:var(--sans); font-weight:800; text-transform:uppercase;
-    letter-spacing:-0.04em; line-height:0.86; font-size:clamp(46px,7vw,104px);}
-  .hc__title .em{font-family:'Newsreader',serif; font-style:italic; font-weight:300;
-    text-transform:none; letter-spacing:-0.01em;}
-  .hc__lead{max-width:44ch; margin:clamp(20px,3vh,30px) 0 0; font-family:var(--sans); font-weight:400;
-    font-size:clamp(15px,1.5vw,19px); line-height:1.55; color:#CFCECB;}
-  .hc__cta{margin-top:clamp(24px,3.4vh,36px); display:flex; gap:12px; flex-wrap:wrap;}
-  .hc__cta a{font-family:var(--mono); font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
-    text-decoration:none; padding:14px 22px; border:1px solid #F5F4F2; transition:.2s;
-    color:#0B0B0C; background:#F5F4F2;}
-  .hc__cta a.ghost{background:transparent; color:#F5F4F2; border-color:rgba(245,244,242,0.35);}
-  .hc__cta a:hover{background:#F5F4F2; color:#0B0B0C;}
-  .hc__cta a.ghost:hover{background:rgba(245,244,242,0.08); color:#F5F4F2;}
-
-  /* ---- 3D-Würfel (reines CSS) ---- */
-  .hc__stage{display:flex; align-items:center; justify-content:center;
-    perspective:1200px; perspective-origin:50% 42%;}
-  .cube{--s:clamp(200px,26vw,380px); position:relative; width:var(--s); height:var(--s);
-    transform-style:preserve-3d; animation:cubeSpin 30s linear infinite;}
-  .face{position:absolute; width:var(--s); height:var(--s); display:flex; align-items:center;
-    justify-content:center; border:1px solid rgba(245,244,242,0.18);
-    background:rgba(245,244,242,0.02); backdrop-filter:blur(1px);
+  /* ===== Hintergrund-Ebene: großer 3D-Würfel ===== */
+  .hc__bg{position:absolute; inset:0; z-index:0; display:flex; align-items:center; justify-content:center;
+    perspective:900px; perspective-origin:50% 48%; pointer-events:none;}
+  .cube{--s:clamp(440px,66vw,1040px); position:relative; width:var(--s); height:var(--s);
+    transform-style:preserve-3d; animation:cubeSpin 44s linear infinite; will-change:transform;}
+  .face{position:absolute; width:var(--s); height:var(--s); display:flex; align-items:center; justify-content:center;
+    border:1px solid rgba(245,244,242,0.10); background:rgba(245,244,242,0.010);
     font-family:var(--sans); font-weight:800; text-transform:uppercase; letter-spacing:-0.02em;
-    font-size:clamp(20px,3vw,40px); color:#F5F4F2;}
-  .face .mono{font-family:var(--mono); font-weight:500; font-size:11px; letter-spacing:0.16em; color:#8A8A85;}
+    font-size:clamp(38px,7vw,104px); color:rgba(245,244,242,0.14);}
   .f-front {transform:translateZ(calc(var(--s)/2));}
   .f-back  {transform:rotateY(180deg) translateZ(calc(var(--s)/2));}
   .f-right {transform:rotateY(90deg)  translateZ(calc(var(--s)/2));}
@@ -57,43 +30,52 @@
   .f-top   {transform:rotateX(90deg)  translateZ(calc(var(--s)/2));}
   .f-bottom{transform:rotateX(-90deg) translateZ(calc(var(--s)/2));}
   @keyframes cubeSpin{
-    from{transform:rotateX(-24deg) rotateY(0deg);}
-    to  {transform:rotateX(-24deg) rotateY(360deg);}
+    0%  {transform:rotateX(-20deg) rotateY(0deg);}
+    50% {transform:rotateX(-14deg) rotateY(180deg);}
+    100%{transform:rotateX(-20deg) rotateY(360deg);}
   }
-  @media(prefers-reduced-motion:reduce){ .cube{animation:none; transform:rotateX(-24deg) rotateY(-32deg);} }
+  @media(prefers-reduced-motion:reduce){ .cube{animation:none; transform:rotateX(-18deg) rotateY(-28deg);} }
 
-  .hc__foot{position:absolute; bottom:0; left:0; right:0; z-index:2;
+  /* Vignette: hält den Claim lesbar, blendet den Würfel an den Rändern weich aus */
+  .hc__veil{position:absolute; inset:0; z-index:1; pointer-events:none;
+    background:radial-gradient(circle at 50% 46%, rgba(11,11,12,0.42) 0%, rgba(11,11,12,0.20) 34%, rgba(11,11,12,0.72) 100%);}
+
+  /* ===== Vordergrund ===== */
+  .hc__top{position:absolute; top:0; left:0; right:0; z-index:3;
+    display:flex; justify-content:space-between; padding:26px clamp(20px,4vw,64px);
+    font-family:var(--mono); font-size:clamp(11px,1vw,13px); letter-spacing:0.08em;
+    text-transform:uppercase; color:#8A8A85;}
+
+  .hc__content{position:relative; z-index:2; padding:0 clamp(18px,4vw,40px);}
+  .hc__kick{font-family:var(--mono); font-size:clamp(11px,1vw,13px); letter-spacing:0.16em;
+    text-transform:uppercase; color:#9A9A95; margin:0 0 clamp(14px,2vh,22px);}
+  .hc__title{margin:0; font-family:var(--sans); font-weight:800; text-transform:uppercase;
+    letter-spacing:-0.04em; line-height:0.84; font-size:clamp(54px,13vw,184px);
+    text-shadow:0 6px 40px rgba(11,11,12,0.55);}
+  .hc__title .em{display:block; font-family:'Newsreader',serif; font-style:italic; font-weight:300;
+    text-transform:none; letter-spacing:-0.01em;}
+  .hc__lead{max-width:50ch; margin:clamp(20px,3vh,30px) auto 0; font-family:var(--sans); font-weight:400;
+    font-size:clamp(15px,1.5vw,20px); line-height:1.55; color:#D6D5D1;}
+  .hc__cta{margin-top:clamp(24px,3.4vh,38px); display:inline-flex; gap:12px; flex-wrap:wrap; justify-content:center;}
+  .hc__cta a{font-family:var(--mono); font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
+    text-decoration:none; padding:14px 22px; border:1px solid #F5F4F2; transition:.2s;
+    color:#0B0B0C; background:#F5F4F2;}
+  .hc__cta a.ghost{background:transparent; color:#F5F4F2; border-color:rgba(245,244,242,0.35);}
+  .hc__cta a:hover{background:#F5F4F2; color:#0B0B0C;}
+  .hc__cta a.ghost:hover{background:rgba(245,244,242,0.08); color:#F5F4F2;}
+
+  .hc__foot{position:absolute; bottom:0; left:0; right:0; z-index:3;
     display:flex; justify-content:space-between; align-items:center; gap:20px;
     padding:22px clamp(20px,4vw,64px); font-family:var(--mono); font-size:clamp(10px,0.9vw,12px);
     letter-spacing:0.12em; text-transform:uppercase; color:#7C7C77;}
   .hc__foot b{color:#F5F4F2; font-weight:600;}
   .tag{font-family:var(--mono); font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:#56544f;}
-
-  @media(max-width:860px){
-    .hc{grid-template-columns:1fr; justify-items:start; gap:clamp(36px,6vh,56px);
-      padding-top:clamp(96px,16vh,150px);}
-    .hc__stage{justify-self:center;}
-    .cube{--s:clamp(180px,52vw,300px);}
-    .hc__foot{flex-direction:column; gap:6px; align-items:flex-start;}
-  }
+  @media(max-width:620px){ .hc__foot{flex-direction:column; gap:6px; align-items:flex-start;} }
 </style>
 </head>
 <body>
   <section class="hc">
-    <div class="hc__veil" aria-hidden="true"></div>
-    <div class="hc__top"><span>Vertriebsberatung · seit 2017</span><span>Siegen, DE →</span></div>
-
-    <div class="hc__left">
-      <p class="hc__kick">Wir machen Unternehmen</p>
-      <h1 class="hc__title">Vertriebs-<br><span class="em">aktiv.</span></h1>
-      <p class="hc__lead">Märkte bewusst bearbeiten, Zielkunden systematisch gewinnen, Abschlüsse nicht dem Zufall überlassen.</p>
-      <div class="hc__cta">
-        <a href="/kontakt">Erstgespräch →</a>
-        <a class="ghost" href="/leistungen">Leistungen</a>
-      </div>
-    </div>
-
-    <div class="hc__stage" aria-hidden="true">
+    <div class="hc__bg" aria-hidden="true">
       <div class="cube">
         <div class="face f-front">Aktiv</div>
         <div class="face f-right">Strategie</div>
@@ -101,6 +83,19 @@
         <div class="face f-left">Wachstum</div>
         <div class="face f-top">B_77</div>
         <div class="face f-bottom">Planbar</div>
+      </div>
+    </div>
+    <div class="hc__veil" aria-hidden="true"></div>
+
+    <div class="hc__top"><span>Vertriebsberatung · seit 2017</span><span>Siegen, DE →</span></div>
+
+    <div class="hc__content">
+      <p class="hc__kick">Wir machen Unternehmen</p>
+      <h1 class="hc__title">Vertriebs-<span class="em">aktiv.</span></h1>
+      <p class="hc__lead">Märkte bewusst bearbeiten, Zielkunden systematisch gewinnen, Abschlüsse nicht dem Zufall überlassen.</p>
+      <div class="hc__cta">
+        <a href="/kontakt">Erstgespräch →</a>
+        <a class="ghost" href="/leistungen">Leistungen</a>
       </div>
     </div>
 
