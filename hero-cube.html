@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>B_77 — Hero: 3D-Würfel (Experiment)</title>
+<title>B_77 — Hero: 3D-Textraum (Experiment)</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,44 +14,44 @@
     background:#0B0B0C; color:#F5F4F2; display:flex; flex-direction:column;
     align-items:center; justify-content:center; text-align:center; isolation:isolate;}
 
-  /* ===== Hintergrund-Ebene: großer 3D-Würfel ===== */
-  .hc__bg{position:absolute; inset:0; z-index:0; display:flex; align-items:center; justify-content:center;
-    perspective:900px; perspective-origin:50% 48%; pointer-events:none;}
-  .cube{--s:clamp(440px,66vw,1040px); position:relative; width:var(--s); height:var(--s);
-    transform-style:preserve-3d; animation:cubeSpin 44s linear infinite; will-change:transform;}
-  .face{position:absolute; width:var(--s); height:var(--s); display:flex; align-items:center; justify-content:center;
-    border:1px solid rgba(245,244,242,0.10); background:rgba(245,244,242,0.010);
-    font-family:var(--sans); font-weight:800; text-transform:uppercase; letter-spacing:-0.02em;
-    font-size:clamp(38px,7vw,104px); color:rgba(245,244,242,0.14);}
-  .f-front {transform:translateZ(calc(var(--s)/2));}
-  .f-back  {transform:rotateY(180deg) translateZ(calc(var(--s)/2));}
-  .f-right {transform:rotateY(90deg)  translateZ(calc(var(--s)/2));}
-  .f-left  {transform:rotateY(-90deg) translateZ(calc(var(--s)/2));}
-  .f-top   {transform:rotateX(90deg)  translateZ(calc(var(--s)/2));}
-  .f-bottom{transform:rotateX(-90deg) translateZ(calc(var(--s)/2));}
-  @keyframes cubeSpin{
-    0%  {transform:rotateX(-20deg) rotateY(0deg);}
-    50% {transform:rotateX(-14deg) rotateY(180deg);}
-    100%{transform:rotateX(-20deg) rotateY(360deg);}
-  }
-  @media(prefers-reduced-motion:reduce){ .cube{animation:none; transform:rotateX(-18deg) rotateY(-28deg);} }
+  /* ===== 3D-Raum: Schrift läuft an den Innenwänden entlang ===== */
+  .room{position:absolute; inset:0; z-index:0; overflow:hidden;
+    perspective:640px; perspective-origin:50% 48%; pointer-events:none;}
+  .wall{position:absolute; display:flex; align-items:center; overflow:hidden;
+    font-family:var(--sans); font-weight:800; text-transform:uppercase; letter-spacing:-0.01em;
+    white-space:nowrap; color:rgba(245,244,242,0.17); font-size:14vh; line-height:1;}
+  .track{display:flex; flex:none; will-change:transform;}
+  .track span{padding-right:0.5em; flex:none;}
 
-  /* Vignette: hält den Claim lesbar, blendet den Würfel an den Rändern weich aus */
+  /* Seitenwände (hinges an den Bildschirmrändern, kippen nach hinten -> Fluchtpunkt Mitte) */
+  .wall-l{left:0; top:-60%; height:220%; width:170vw; transform-origin:left center; transform:rotateY(60deg);}
+  .wall-r{right:0; top:-60%; height:220%; width:170vw; transform-origin:right center; transform:rotateY(-60deg); justify-content:flex-end;}
+  /* Boden + Decke */
+  .wall-t{top:0; left:-35%; width:170vw; height:64vh; transform-origin:center top; transform:rotateX(-60deg); color:rgba(245,244,242,0.10);}
+  .wall-b{bottom:0; left:-35%; width:170vw; height:64vh; transform-origin:center bottom; transform:rotateX(60deg); color:rgba(245,244,242,0.10);}
+
+  /* Der TEXT-Track scrollt innerhalb der (feststehenden) Wand -> läuft perspektivisch in die Tiefe */
+  .track{animation:run 34s linear infinite;}
+  .wall-r .track, .wall-b .track{animation-direction:reverse;}
+  .wall-t .track, .wall-b .track{animation-duration:46s;}
+  @keyframes run{from{transform:translateX(0);} to{transform:translateX(-33.333%);}}
+  @media(prefers-reduced-motion:reduce){ .track{animation:none;} }
+
+  /* Vignette: Fluchtpunkt-Tiefe + Lesbarkeit des Claims */
   .hc__veil{position:absolute; inset:0; z-index:1; pointer-events:none;
-    background:radial-gradient(circle at 50% 46%, rgba(11,11,12,0.42) 0%, rgba(11,11,12,0.20) 34%, rgba(11,11,12,0.72) 100%);}
+    background:radial-gradient(circle at 50% 48%, rgba(11,11,12,0.68) 0%, rgba(11,11,12,0.30) 30%, rgba(11,11,12,0.66) 100%);}
 
   /* ===== Vordergrund ===== */
   .hc__top{position:absolute; top:0; left:0; right:0; z-index:3;
     display:flex; justify-content:space-between; padding:26px clamp(20px,4vw,64px);
     font-family:var(--mono); font-size:clamp(11px,1vw,13px); letter-spacing:0.08em;
     text-transform:uppercase; color:#8A8A85;}
-
   .hc__content{position:relative; z-index:2; padding:0 clamp(18px,4vw,40px);}
   .hc__kick{font-family:var(--mono); font-size:clamp(11px,1vw,13px); letter-spacing:0.16em;
     text-transform:uppercase; color:#9A9A95; margin:0 0 clamp(14px,2vh,22px);}
   .hc__title{margin:0; font-family:var(--sans); font-weight:800; text-transform:uppercase;
     letter-spacing:-0.04em; line-height:0.84; font-size:clamp(54px,13vw,184px);
-    text-shadow:0 6px 40px rgba(11,11,12,0.55);}
+    text-shadow:0 6px 46px rgba(11,11,12,0.7);}
   .hc__title .em{display:block; font-family:'Newsreader',serif; font-style:italic; font-weight:300;
     text-transform:none; letter-spacing:-0.01em;}
   .hc__lead{max-width:50ch; margin:clamp(20px,3vh,30px) auto 0; font-family:var(--sans); font-weight:400;
@@ -75,15 +75,11 @@
 </head>
 <body>
   <section class="hc">
-    <div class="hc__bg" aria-hidden="true">
-      <div class="cube">
-        <div class="face f-front">Aktiv</div>
-        <div class="face f-right">Strategie</div>
-        <div class="face f-back">Vertrieb</div>
-        <div class="face f-left">Wachstum</div>
-        <div class="face f-top">B_77</div>
-        <div class="face f-bottom">Planbar</div>
-      </div>
+    <div class="room" aria-hidden="true">
+      <div class="wall wall-l"><div class="track"><span>Vertrieb · Strategie · Wachstum · Aktiv · Planbar · </span><span>Vertrieb · Strategie · Wachstum · Aktiv · Planbar · </span><span>Vertrieb · Strategie · Wachstum · Aktiv · Planbar · </span></div></div>
+      <div class="wall wall-r"><div class="track"><span>Steuerbar · Marktanteil · Abschluss · Wachstum · </span><span>Steuerbar · Marktanteil · Abschluss · Wachstum · </span><span>Steuerbar · Marktanteil · Abschluss · Wachstum · </span></div></div>
+      <div class="wall wall-t"><div class="track"><span>B_77 · Vertriebsaktiv · </span><span>B_77 · Vertriebsaktiv · </span><span>B_77 · Vertriebsaktiv · </span></div></div>
+      <div class="wall wall-b"><div class="track"><span>Siegen · DACH-weit · Seit 2017 · </span><span>Siegen · DACH-weit · Seit 2017 · </span><span>Siegen · DACH-weit · Seit 2017 · </span></div></div>
     </div>
     <div class="hc__veil" aria-hidden="true"></div>
 
@@ -101,7 +97,7 @@
 
     <div class="hc__foot">
       <span><b>25+</b> Jahre&nbsp;&nbsp;·&nbsp;&nbsp;<b>50+</b> Mandate&nbsp;&nbsp;·&nbsp;&nbsp;<b>DACH</b>-weit</span>
-      <span class="tag">Hero · 3D-Würfel · Experiment</span>
+      <span class="tag">Hero · 3D-Textraum · Experiment</span>
     </div>
   </section>
 </body>
