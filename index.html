@@ -124,7 +124,19 @@
   .ph{position:relative; min-height:100vh; min-height:100dvh; overflow:hidden;
     background:#0B0B0C; color:#F5F4F2; display:flex; flex-direction:column;
     align-items:center; justify-content:center; text-align:center; isolation:isolate;}
-  #px{position:absolute; inset:0; z-index:0; display:block;}
+  .stars{position:absolute; inset:0; z-index:0; overflow:hidden;
+    background:radial-gradient(ellipse at 50% 100%, #191a1d 0%, #0B0B0C 68%);}
+  .stars__inner{position:absolute; inset:0; will-change:transform;}
+  .star-layer{position:absolute; top:0; left:0; width:100%; height:2000px;}
+  .star-layer i{position:absolute; left:0; top:0; width:1px; height:1px; border-radius:50%; background:transparent;}
+  .star-layer i.b{top:2000px;}
+  .sl1{animation:starScroll 60s linear infinite;}
+  .sl2{animation:starScroll 120s linear infinite;}
+  .sl2 i{width:2px; height:2px;}
+  .sl3{animation:starScroll 180s linear infinite;}
+  .sl3 i{width:3px; height:3px;}
+  @keyframes starScroll{from{transform:translateY(0);} to{transform:translateY(-2000px);}}
+  @media(prefers-reduced-motion:reduce){ .sl1,.sl2,.sl3{animation:none;} }
   .ph__veil{position:absolute; inset:0; z-index:1; pointer-events:none;
     background:radial-gradient(circle at 50% 42%, rgba(11,11,12,0.12) 0%, rgba(11,11,12,0.30) 48%, #0B0B0C 88%);}
   .ph__content{position:relative; z-index:2; padding:0 clamp(16px,4vw,40px);}
@@ -543,7 +555,13 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
 
   <!-- HERO (Monolith – Pixel-Feld, Sektion 00) -->
   <section class="ph">
-    <canvas id="px" aria-hidden="true"></canvas>
+    <div class="stars" aria-hidden="true">
+      <div class="stars__inner" id="starfield">
+        <div class="star-layer sl1"><i></i><i class="b"></i></div>
+        <div class="star-layer sl2"><i></i><i class="b"></i></div>
+        <div class="star-layer sl3"><i></i><i class="b"></i></div>
+      </div>
+    </div>
     <div class="ph__veil" aria-hidden="true"></div>
     <div class="ph__content">
       <p class="ph__kick">Wir machen Unternehmen</p>
@@ -713,61 +731,19 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
 
   <script src="monolith.js?v=mono14"></script>
   <script>
-  /* HERO Pixel-Feld */
+  /* HERO Sternenfeld */
   (function(){
-    var cv = document.getElementById('px'); if (!cv) return;
-    var ctx = cv.getContext('2d'), wrap = cv.parentElement;
-    var COLORS = ['#3E3E40','#525254','#686A6C','#828486','#F5F4F2'];
-    var GAP = 8;
-    var pixels = [], raf = 0, last = performance.now();
+    var field = document.getElementById('starfield'); if (!field) return;
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    function rnd(a,b){ return Math.random()*(b-a)+a; }
-    function make(x,y,color){
-      var maxSize = rnd(0.9,3), minSize = 0.6;
-      var p = { x:x, y:y, color:color, size:rnd(minSize,maxSize), minSize:minSize, maxInt:3,
-        maxSize:maxSize, speed:rnd(0.015,0.06), reverse:Math.random()<0.5 };
-      p.draw = function(){ var off = p.maxInt*0.5 - p.size*0.5; ctx.fillStyle = p.color; ctx.fillRect(p.x+off, p.y+off, p.size, p.size); };
-      p.step = function(){
-        if (p.size >= p.maxSize) p.reverse = true; else if (p.size <= p.minSize) p.reverse = false;
-        p.size += p.reverse ? -p.speed : p.speed;
-        p.draw();
-      };
-      return p;
-    }
-    function init(){
-      var r = wrap.getBoundingClientRect(), w = Math.floor(r.width), h = Math.floor(r.height);
-      var dpr = Math.min(2, window.devicePixelRatio || 1);
-      cv.width = w*dpr; cv.height = h*dpr; cv.style.width = w+'px'; cv.style.height = h+'px';
-      ctx.setTransform(dpr,0,0,dpr,0,0);
-      pixels = [];
-      for (var x=0;x<w;x+=GAP) for (var y=0;y<h;y+=GAP){
-        pixels.push(make(x, y, COLORS[(Math.random()*COLORS.length)|0]));
-      }
-      ctx.clearRect(0,0,cv.width,cv.height);
-      for (var i=0;i<pixels.length;i++) pixels[i].draw();
-    }
-    function loop(){
-      raf = requestAnimationFrame(loop);
-      var now = performance.now(), el = now - last;
-      if (el < 1000/60) return;
-      last = now - (el % (1000/60));
-      ctx.clearRect(0,0,cv.width,cv.height);
-      for (var i=0;i<pixels.length;i++) pixels[i].step();
-    }
-    function start(){ cancelAnimationFrame(raf); if (reduced) return; last = performance.now(); raf = requestAnimationFrame(loop); }
-    var rt, lastW = 0, lastH = 0;
-    function rebuild(){
-      var r = wrap.getBoundingClientRect(), w = Math.floor(r.width), h = Math.floor(r.height);
-      if (w < 2 || h < 2) return;
-      if (w === lastW && h === lastH) return;
-      lastW = w; lastH = h;
-      init(); start();
-    }
-    function schedule(){ clearTimeout(rt); rt = setTimeout(rebuild, 150); }
-    if ('ResizeObserver' in window){ new ResizeObserver(schedule).observe(wrap); }
-    window.addEventListener('resize', schedule);
-    window.addEventListener('load', rebuild);
-    rebuild();
+    var counts = [900, 380, 180];
+    var cols = ['rgba(245,244,242,0.5)','rgba(245,244,242,0.78)','rgba(245,244,242,0.96)'];
+    function gen(n, c){ var s = []; for (var i=0;i<n;i++){ s.push((Math.floor(Math.random()*2600))+'px '+(Math.floor(Math.random()*2000))+'px '+c); } return s.join(', '); }
+    var layers = field.querySelectorAll('.star-layer');
+    for (var k=0;k<layers.length;k++){ var sh = gen(counts[k], cols[k]); var dots = layers[k].querySelectorAll('i'); dots[0].style.boxShadow = sh; dots[1].style.boxShadow = sh; }
+    if (reduced) return;
+    var tx=0, ty=0, cx=0, cy=0, F=0.02;
+    window.addEventListener('mousemove', function(e){ tx = -(e.clientX - window.innerWidth/2)*F; ty = -(e.clientY - window.innerHeight/2)*F; }, {passive:true});
+    (function raf(){ cx += (tx-cx)*0.06; cy += (ty-cy)*0.06; field.style.transform = 'translate('+cx.toFixed(1)+'px,'+cy.toFixed(1)+'px)'; requestAnimationFrame(raf); })();
   })();
   </script>
 </body>
