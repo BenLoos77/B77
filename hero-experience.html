@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B_77 — Hero: Monolith (Experiment)</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Newsreader:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  :root{--mono:'JetBrains Mono',ui-monospace,monospace; --sans:'Hanken Grotesk',system-ui,sans-serif;}
+  .xh{position:relative; min-height:100vh; min-height:100dvh; width:100%; background:#020202;
+    color:#F5F4F2; overflow:hidden; display:flex; flex-direction:column;}
+  #xh-gl{position:absolute; inset:0; z-index:0; pointer-events:none;}
+  #xh-gl canvas{display:block; width:100%!important; height:100%!important;}
+  .xh__grain{position:absolute; inset:0; z-index:1; pointer-events:none; opacity:0.5;
+    background:radial-gradient(ellipse at 50% 40%, rgba(2,2,2,0) 0%, rgba(2,2,2,0.35) 60%, #020202 100%);}
+
+  .xh__grid{position:relative; z-index:10; display:flex; flex-direction:column; gap:40px;
+    width:100%; min-height:100vh; min-height:100dvh; padding:clamp(28px,5vw,80px); align-items:stretch;}
+  .xh__left{flex:1; min-width:0; display:flex; flex-direction:column; justify-content:space-between; gap:44px;}
+  .xh__brand{display:flex; align-items:center; gap:11px;}
+  .dot{position:relative; width:9px; height:9px; background:#F5F4F2; border-radius:50%;}
+  .dot::after{content:""; position:absolute; inset:0; border-radius:50%; background:#F5F4F2;
+    animation:ping 2.4s cubic-bezier(0,0,0.2,1) infinite; opacity:.4;}
+  @keyframes ping{75%,100%{transform:scale(2.6); opacity:0;}}
+  .xh__brand span{font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase;}
+
+  .xh__headline{max-width:60rem; padding-right:6%;}
+  .xh__headline h1{margin:0; font-family:var(--sans); font-weight:900; text-transform:uppercase;
+    line-height:0.86; letter-spacing:-0.045em; font-size:clamp(3.4rem,9.4vw,11rem); color:#F5F4F2;}
+  .text-outline{color:transparent; -webkit-text-stroke:1.4px rgba(245,244,242,0.85);}
+  .xh__tag{margin:26px 0 0; max-width:34rem; font-family:var(--mono); font-size:11px;
+    text-transform:uppercase; letter-spacing:0.3em; line-height:1.9; color:rgba(245,244,242,0.42);}
+  .xh__tag i{font-family:'Newsreader',serif; font-style:italic; letter-spacing:0.02em; text-transform:none;
+    font-size:14px; color:rgba(245,244,242,0.7);}
+
+  .xh__cta{display:inline-flex; align-items:center; gap:22px; background:none; border:0; cursor:pointer; padding:0; width:fit-content;}
+  .xh__cta .ring{width:54px; height:54px; border-radius:50%; border:1px solid rgba(245,244,242,0.18);
+    display:flex; align-items:center; justify-content:center; transition:background .5s ease; flex:none;}
+  .xh__cta .ring svg{stroke:#F5F4F2; transition:stroke .5s ease;}
+  .xh__cta:hover .ring{background:#F5F4F2;}
+  .xh__cta:hover .ring svg{stroke:#020202;}
+  .xh__cta span{font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:#F5F4F2;}
+
+  .xh__deck{width:100%; display:flex; flex-direction:column; gap:14px;}
+  .cell{padding:24px 26px; border-radius:14px; border:1px solid rgba(245,244,242,0.09);
+    background:rgba(245,244,242,0.028); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);}
+  .cell .id{display:block; margin-bottom:12px; font-family:var(--mono); font-size:9px;
+    letter-spacing:0.18em; text-transform:uppercase; color:rgba(245,244,242,0.28);}
+  .cell .big{display:flex; justify-content:space-between; align-items:flex-end;}
+  .cell h4{margin:0; font-family:var(--sans); font-weight:800; font-size:clamp(22px,2.4vw,30px); letter-spacing:-0.02em;}
+  .bar{height:2px; width:80px; background:rgba(245,244,242,0.08); border-radius:2px; overflow:hidden;}
+  .bar i{display:block; height:100%; width:40%; background:#F5F4F2; animation:load 2.6s ease-in-out infinite;}
+  @keyframes load{0%{transform:translateX(-120%);}100%{transform:translateX(320%);}}
+  .rows{margin-top:14px; display:flex; flex-direction:column; gap:11px;}
+  .rows .r{display:flex; justify-content:space-between; font-family:var(--mono); font-size:10px; color:rgba(245,244,242,0.5);}
+  .rows hr{border:0; border-top:1px solid rgba(245,244,242,0.07); margin:0;}
+  .cell p{margin:10px 0 0; font-family:var(--sans); font-size:14px; font-weight:500; line-height:1.5; color:rgba(245,244,242,0.72);}
+  .cell p i{font-family:'Newsreader',serif; font-style:italic; color:#F5F4F2;}
+
+  .tag-exp{position:absolute; left:clamp(28px,5vw,80px); bottom:20px; z-index:11;
+    font-family:var(--mono); font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:#3a3a3a;}
+
+  @media(min-width:900px){
+    .xh__grid{flex-direction:row; gap:clamp(30px,4vw,64px);}
+    .xh__deck{width:clamp(300px,28vw,400px); flex:none; justify-content:center;}
+    .xh__headline{transform:translateY(-1.5rem);}
+    .xh__cta{transform:translateY(-4rem);}
+  }
+</style>
+</head>
+<body>
+  <section class="xh" id="xh">
+    <div id="xh-gl" aria-hidden="true"></div>
+    <div class="xh__grain" aria-hidden="true"></div>
+
+    <div class="xh__grid" id="xh-reveal">
+      <div class="xh__left">
+        <div class="xh__brand"><span class="dot"></span><span>B_77 — Vertriebsberatung</span></div>
+
+        <div class="xh__headline">
+          <h1>Vertriebs-<br><span class="text-outline">aktiv.</span></h1>
+          <p class="xh__tag">Wir aktivieren Vertrieb — mit Strategie, System und Steuerbarkeit. <i>Planbar statt Zufall.</i></p>
+        </div>
+
+        <button class="xh__cta" id="xh-cta" onclick="location.href='/kontakt'">
+          <span class="ring"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Erstgespräch</span>
+        </button>
+      </div>
+
+      <div class="xh__deck">
+        <div class="cell">
+          <span class="id">001 // Verfügbarkeit</span>
+          <div class="big"><h4>Offen</h4><div class="bar"><i></i></div></div>
+        </div>
+        <div class="cell">
+          <span class="id">002 // In Zahlen</span>
+          <div class="rows">
+            <div class="r"><span>Erfahrung</span><span>25+ Jahre</span></div>
+            <hr>
+            <div class="r"><span>Mandate</span><span>50+ · DACH-weit</span></div>
+          </div>
+        </div>
+        <div class="cell">
+          <span class="id">003 // Fokus</span>
+          <p>Aktiver Vertrieb für den Mittelstand — von Strategie bis <i>Abschluss</i>.</p>
+        </div>
+      </div>
+    </div>
+
+    <span class="tag-exp">Hero · Monolith · Experiment</span>
+  </section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+(function(){
+  var mount = document.getElementById('xh-gl');
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Three.js: Liquid-Hintergrund + Monolith ---------- */
+  if (window.THREE && mount){
+    var W = mount.clientWidth || window.innerWidth, H = mount.clientHeight || window.innerHeight;
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(35, W/H, 0.1, 400); camera.position.set(0,0,60);
+    var renderer = new THREE.WebGLRenderer({antialias:true, alpha:true});
+    renderer.setPixelRatio(Math.min(2, window.devicePixelRatio||1));
+    renderer.setSize(W,H);
+    mount.appendChild(renderer.domElement);
+
+    /* Liquid-Shader-Fläche (sehr dunkel, subtile Wellen) – weit hinten */
+    var bgUniforms = { uTime:{value:0}, uMouse:{value:new THREE.Vector2(0,0)} };
+    var bgMat = new THREE.ShaderMaterial({
+      transparent:true, depthWrite:false, uniforms:bgUniforms,
+      vertexShader:"varying vec2 vUv; void main(){ vUv=uv; gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0); }",
+      fragmentShader:"uniform float uTime; uniform vec2 uMouse; varying vec2 vUv;"+
+        "void main(){ vec2 uv=vUv; float t=uTime*0.15; vec2 m=uMouse*0.1;"+
+        "float c=smoothstep(0.0,1.0,(sin(uv.x*8.0+t+m.x*12.0)+sin(uv.y*6.0-t+m.y*12.0))*0.5+0.5);"+
+        "gl_FragColor=vec4(mix(vec3(0.006),vec3(0.055),c),1.0); }"
+    });
+    var bgGeo = new THREE.PlaneGeometry(1,1);
+    var bg = new THREE.Mesh(bgGeo, bgMat); bg.position.z = -30; scene.add(bg);
+    function sizeBg(){
+      var dist = camera.position.z - bg.position.z;
+      var h = 2*Math.tan(THREE.MathUtils.degToRad(camera.fov/2))*dist;
+      bg.scale.set(h*camera.aspect*1.1, h*1.1, 1);
+    }
+
+    /* Licht */
+    scene.add(new THREE.AmbientLight(0xffffff, 0.35));
+    var spot = new THREE.SpotLight(0xffffff, 3); spot.position.set(50,50,50); scene.add(spot);
+    var p1 = new THREE.PointLight(0xffffff, 2.4); p1.position.set(-45,18,38); scene.add(p1);
+    var p2 = new THREE.PointLight(0xbfc3ff, 1.6); p2.position.set(18,-42,26); scene.add(p2);
+
+    /* Monolith: verformter, metallischer Ikosaeder */
+    var geo = new THREE.IcosahedronGeometry(13, 6);
+    var mat = new THREE.MeshStandardMaterial({color:0x0c0c0d, metalness:0.92, roughness:0.16});
+    var distShader = null;
+    var NOISE = "vec3 mod289(vec3 x){return x-floor(x*(1.0/289.0))*289.0;}vec4 mod289(vec4 x){return x-floor(x*(1.0/289.0))*289.0;}vec4 permute(vec4 x){return mod289(((x*34.0)+1.0)*x);}vec4 taylorInvSqrt(vec4 r){return 1.79284291400159-0.85373472095314*r;}"+
+      "float snoise(vec3 v){const vec2 C=vec2(1.0/6.0,1.0/3.0);const vec4 D=vec4(0.0,0.5,1.0,2.0);vec3 i=floor(v+dot(v,C.yyy));vec3 x0=v-i+dot(i,C.xxx);vec3 g=step(x0.yzx,x0.xyz);vec3 l=1.0-g;vec3 i1=min(g.xyz,l.zxy);vec3 i2=max(g.xyz,l.zxy);vec3 x1=x0-i1+C.xxx;vec3 x2=x0-i2+C.yyy;vec3 x3=x0-D.yyy;i=mod289(i);vec4 p=permute(permute(permute(i.z+vec4(0.0,i1.z,i2.z,1.0))+i.y+vec4(0.0,i1.y,i2.y,1.0))+i.x+vec4(0.0,i1.x,i2.x,1.0));float n_=0.142857142857;vec3 ns=n_*D.wyz-D.xzx;vec4 j=p-49.0*floor(p*ns.z*ns.z);vec4 x_=floor(j*ns.z);vec4 y_=floor(j-7.0*x_);vec4 x=x_*ns.x+ns.yyyy;vec4 y=y_*ns.x+ns.yyyy;vec4 h=1.0-abs(x)-abs(y);vec4 b0=vec4(x.xy,y.xy);vec4 b1=vec4(x.zw,y.zw);vec4 s0=floor(b0)*2.0+1.0;vec4 s1=floor(b1)*2.0+1.0;vec4 sh=-step(h,vec4(0.0));vec4 a0=b0.xzyw+s0.xzyw*sh.xxyy;vec4 a1=b1.xzyw+s1.xzyw*sh.zzww;vec3 p0=vec3(a0.xy,h.x);vec3 p1=vec3(a0.zw,h.y);vec3 p2=vec3(a1.xy,h.z);vec3 p3=vec3(a1.zw,h.w);vec4 norm=taylorInvSqrt(vec4(dot(p0,p0),dot(p1,p1),dot(p2,p2),dot(p3,p3)));p0*=norm.x;p1*=norm.y;p2*=norm.z;p3*=norm.w;vec4 mm=max(0.6-vec4(dot(x0,x0),dot(x1,x1),dot(x2,x2),dot(x3,x3)),0.0);mm=mm*mm;return 42.0*dot(mm*mm,vec4(dot(p0,x0),dot(p1,x1),dot(p2,x2),dot(p3,x3)));}";
+    mat.onBeforeCompile = function(shader){
+      shader.uniforms.uTime = {value:0};
+      shader.uniforms.uDistort = {value:0.4};
+      shader.vertexShader = "uniform float uTime; uniform float uDistort;\n"+NOISE+"\n"+shader.vertexShader;
+      shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>',
+        '#include <begin_vertex>\n float nn = snoise(position*0.16 + uTime*0.45);\n transformed += normalize(position) * nn * uDistort * 4.2;');
+      distShader = shader;
+    };
+    var mono = new THREE.Mesh(geo, mat); scene.add(mono);
+
+    function resize(){
+      W = mount.clientWidth || window.innerWidth; H = mount.clientHeight || window.innerHeight;
+      camera.aspect = W/H; camera.updateProjectionMatrix();
+      renderer.setSize(W,H); sizeBg();
+    }
+    sizeBg();
+    var mouse = new THREE.Vector2(0,0);
+    window.addEventListener('mousemove', function(e){
+      mouse.x = (e.clientX/window.innerWidth)*2-1; mouse.y = -((e.clientY/window.innerHeight)*2-1);
+    }, {passive:true});
+    window.addEventListener('resize', resize);
+
+    var clock = new THREE.Clock();
+    function frame(){
+      requestAnimationFrame(frame);
+      var t = clock.getElapsedTime();
+      bgUniforms.uTime.value = t;
+      bgUniforms.uMouse.value.lerp(mouse, 0.05);
+      if (distShader) distShader.uniforms.uTime.value = t;
+      if (!reduced){
+        mono.rotation.y = t*0.25;
+        mono.position.y = Math.sin(t*1.2)*1.1;
+        mono.rotation.x = Math.sin(t*0.6)*0.14;
+      }
+      renderer.render(scene, camera);
+    }
+    frame();
+  }
+
+  /* ---------- GSAP: Reveal + magnetischer CTA ---------- */
+  if (window.gsap && !reduced){
+    gsap.fromTo('#xh-reveal', {filter:'blur(26px)', opacity:0, scale:1.02}, {filter:'blur(0px)', opacity:1, scale:1, duration:2.0, ease:'expo.out'});
+    gsap.from('.cell', {x:60, opacity:0, stagger:0.1, duration:1.3, ease:'power4.out', delay:0.8, clearProps:'all'});
+    var cta = document.getElementById('xh-cta');
+    if (cta){
+      window.addEventListener('mousemove', function(e){
+        var r = cta.getBoundingClientRect(), mx=r.left+r.width/2, my=r.top+r.height/2;
+        var d = Math.hypot(e.clientX-mx, e.clientY-my);
+        if (d < 160) gsap.to(cta, {x:(e.clientX-mx)*0.35, y:(e.clientY-my)*0.35, duration:0.6});
+        else gsap.to(cta, {x:0, y:0, duration:0.8, ease:'elastic.out(1,0.3)'});
+      }, {passive:true});
+    }
+  }
+})();
+</script>
+</body>
+</html>
