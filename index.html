@@ -459,15 +459,16 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
     setOp(el.counter, clamp((t - 400) / 500) * (1 - clamp((t - 4300) / 500)));
     el.progress.style.width = (clamp(t / 4200) * 100).toFixed(1) + '%';
     setOp(el.progtrack, 1 - clamp((t - 4300) / 500));
-    var TS = 5300, STAG = 24, WD = 520, ch = S.chars, n = ch.length;
-    for (var k = 0; k < n; k++) { var pp = clamp((t - (TS + k * STAG)) / WD); var ee = eOut(pp); var c = ch[k]; c.style.opacity = Math.min(1, pp * 1.25).toFixed(3); c.style.transform = 'translateY(' + ((1 - ee) * 38).toFixed(2) + 'px) scale(' + (0.92 + 0.08 * ee).toFixed(3) + ')'; c.style.filter = 'blur(' + ((1 - pp) * 8).toFixed(2) + 'px)'; }
-    var wordsEnd = TS + Math.max(0, n - 1) * STAG + WD;
-    var rp = clamp((t - (wordsEnd - 80)) / 700); setOp(el.rule, rp); el.rule.style.transform = 'scaleX(' + eOut(rp).toFixed(3) + ')';
-    var qStart = wordsEnd + 360; var qp = clamp((t - qStart) / 800);
-    setOp(el.question, qp); el.question.style.transform = 'translateY(' + (10 * (1 - eOut(qp))).toFixed(2) + 'px)';
-    var linesEnd = qStart + 800;
-    var bStart = linesEnd + 220; var bp = clamp((t - bStart) / 600); setOp(el.btns, bp); el.btns.style.transform = 'translateY(' + (16 * (1 - eOut(bp))).toFixed(2) + 'px)';
-    var gateTime = bStart + 700;
+    /* Variante B: alles auf einmal einblenden (Fade + sanftes Aufsteigen + Weichzeichner) */
+    var TS = 5300, WD = 820, ch = S.chars, n = ch.length;
+    for (var k = 0; k < n; k++) { ch[k].style.opacity = '1'; ch[k].style.transform = 'none'; ch[k].style.filter = 'none'; }
+    var sp0 = clamp((t - TS) / WD), es0 = eOut(sp0);
+    var ty0 = ((1 - es0) * 24).toFixed(2), bl0 = ((1 - es0) * 7).toFixed(2), op0 = es0.toFixed(3);
+    el.statement.style.opacity = op0; el.statement.style.transform = 'translateY(' + ty0 + 'px)'; el.statement.style.filter = 'blur(' + bl0 + 'px)';
+    setOp(el.rule, es0); el.rule.style.transform = 'scaleX(1)';
+    el.question.style.opacity = op0; el.question.style.transform = 'translateY(' + ty0 + 'px)'; el.question.style.filter = 'blur(' + bl0 + 'px)';
+    el.btns.style.opacity = op0; el.btns.style.transform = 'translateY(' + ty0 + 'px)';
+    var gateTime = TS + WD;
     if (t >= gateTime && !S.gateReady) { S.gateReady = true; el.btns.style.pointerEvents = 'auto'; setOp(el.replay, 1); el.replay.style.pointerEvents = 'auto'; }
   }
 
