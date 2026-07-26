@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap');
+
 /* ============================================================
    B_77 — Design-System „MONOLITH"
    Reines Schwarz/Weiß · keine Akzentfarbe · Typografie trägt alles
-   Hanken Grotesk (Display/Text) · JetBrains Mono (Labels)
+   Geist (Display/Text, Suisse-nah, Book/Medium) · Geist Mono (Labels)
    ============================================================ */
 
 :root{
@@ -11,8 +13,8 @@
   --mute:#9A9A9A;     /* Labels, Meta, Hilfstext */
   --line:#DDDDDD;     /* feine Trennlinien innerhalb von Sektionen */
   --gutter:40px;
-  --sans:'Hanken Grotesk',-apple-system,system-ui,sans-serif;
-  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --sans:'Geist',-apple-system,system-ui,sans-serif;
+  --mono:'Geist Mono',ui-monospace,monospace;
 }
 
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -38,15 +40,15 @@ img{max-width:100%;display:block;}
 .corners .r{text-align:right;}
 
 /* ---------- Typografie ---------- */
-.display{font-family:var(--sans);font-weight:800;font-size:clamp(72px,20.5vw,400px);
+.display{font-family:var(--sans);font-weight:500;font-size:clamp(72px,20.5vw,400px);
   letter-spacing:-0.04em;line-height:0.82;white-space:nowrap;padding-left:36px;}
-.h2{font-family:var(--sans);font-weight:700;font-size:clamp(28px,4vw,58px);
+.h2{font-family:var(--sans);font-weight:500;font-size:clamp(28px,4vw,58px);
   letter-spacing:-0.02em;line-height:1.04;}
 .manifest{font-family:var(--sans);font-weight:500;font-size:clamp(26px,4.6vw,72px);
   letter-spacing:-0.02em;line-height:1.1;text-align:justify;text-justify:inter-word;}
 .body{font-family:var(--sans);font-weight:400;font-size:clamp(17px,1.7vw,21px);
   line-height:1.5;color:var(--text-2);}
-.body strong{font-weight:800;color:var(--ink);}
+.body strong{font-weight:600;color:var(--ink);}
 .label{font-family:var(--mono);font-weight:600;font-size:13px;letter-spacing:0.04em;
   text-transform:uppercase;color:var(--mute);}
 .lead{max-width:62ch;}
@@ -137,7 +139,7 @@ p+p{margin-top:1.1em;}
 .il-idx{font-family:var(--mono);font-weight:600;font-size:14px;color:var(--mute);
   letter-spacing:0.04em;transition:color .35s;}
 .il-main{min-width:0;}
-.il-title{font-family:var(--sans);font-weight:700;font-size:clamp(24px,3.4vw,46px);
+.il-title{font-family:var(--sans);font-weight:500;font-size:clamp(24px,3.4vw,46px);
   letter-spacing:-0.02em;line-height:1.04;display:block;}
 .il-desc{font-family:var(--sans);font-weight:400;font-size:clamp(15px,1.5vw,18px);
   line-height:1.45;color:var(--text-2);max-width:64ch;margin-top:10px;transition:color .35s;}
@@ -162,7 +164,7 @@ p+p{margin-top:1.1em;}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);}
 .stat{padding:clamp(28px,3.5vw,48px) clamp(20px,2.4vw,40px);border-left:1px solid var(--line);}
 .stat:first-child{border-left:none;}
-.stat__num{font-family:var(--sans);font-weight:800;font-size:clamp(64px,9vw,148px);
+.stat__num{font-family:var(--sans);font-weight:500;font-size:clamp(64px,9vw,148px);
   letter-spacing:-0.04em;line-height:0.9;}
 .stat__lbl{font-family:var(--mono);font-weight:600;font-size:12px;letter-spacing:0.04em;
   text-transform:uppercase;color:var(--mute);margin:18px 0 8px;}
@@ -178,7 +180,7 @@ p+p{margin-top:1.1em;}
 .kontakt .display{margin:clamp(24px,4vw,48px) 0 clamp(40px,6vw,72px);}
 .kontakt__links{display:flex;flex-wrap:wrap;gap:clamp(28px,5vw,80px);padding:0 var(--gutter);}
 .kontakt__item .label{margin-bottom:8px;}
-.kontakt__item a,.kontakt__item span{font-family:var(--sans);font-weight:700;
+.kontakt__item a,.kontakt__item span{font-family:var(--sans);font-weight:500;
   font-size:clamp(20px,2.2vw,30px);letter-spacing:-0.01em;color:var(--ink);
   display:inline-block;position:relative;}
 .kontakt__item a::after{content:"";position:absolute;left:0;bottom:2px;width:100%;height:1px;
@@ -197,12 +199,12 @@ p+p{margin-top:1.1em;}
 .page-head{padding-top:clamp(40px,6vw,80px);padding-bottom:clamp(40px,6vw,72px);}
 /* Unterseiten-Titel: Typo wie der Startseiten-Hero (Versalien, schwer, eng, gross),
    im Seitenrand, zweizeilig umbrechend/trennend, mit Luft zum Lead */
-.page-head .display{margin-top:clamp(24px,4vw,48px);text-transform:uppercase;font-weight:800;
+.page-head .display{margin-top:clamp(24px,4vw,48px);text-transform:uppercase;font-weight:500;
   letter-spacing:-0.04em;line-height:0.82;font-size:clamp(46px,10vw,176px);
   padding:0 var(--gutter);white-space:normal;overflow-wrap:break-word;hyphens:auto;-webkit-hyphens:auto;}
 .page-head .hero__grid{margin-top:clamp(44px,6vw,80px);}
 .prose{padding:0 var(--gutter);max-width:72ch;}
-.prose h2{font-family:var(--sans);font-weight:700;font-size:clamp(22px,2.4vw,32px);
+.prose h2{font-family:var(--sans);font-weight:600;font-size:clamp(22px,2.4vw,32px);
   letter-spacing:-0.01em;margin:1.6em 0 0.5em;}
 .prose p{font-family:var(--sans);font-weight:400;font-size:clamp(17px,1.7vw,21px);
   line-height:1.55;color:var(--text-2);}
@@ -220,7 +222,7 @@ p+p{margin-top:1.1em;}
 .expert{display:grid;grid-template-columns:0.82fr 1.18fr;gap:clamp(28px,4.5vw,72px);align-items:center;padding:0 var(--gutter);}
 .expert__img{margin:0;}
 .expert__img img{width:100%;height:auto;display:block;border:1px solid var(--line);}
-.expert__name{font-family:var(--sans);font-weight:800;letter-spacing:-0.02em;font-size:clamp(30px,3.4vw,48px);line-height:1;margin:0;color:var(--ink);}
+.expert__name{font-family:var(--sans);font-weight:500;letter-spacing:-0.02em;font-size:clamp(30px,3.4vw,48px);line-height:1;margin:0;color:var(--ink);}
 .expert__role{font-family:var(--mono);font-size:clamp(12px,1vw,14px);letter-spacing:0.08em;text-transform:uppercase;color:var(--mute);margin:14px 0 clamp(24px,3vw,36px);}
 .expert__lead{font-family:var(--sans);font-weight:400;font-size:clamp(18px,1.8vw,23px);line-height:1.5;color:var(--text-2);max-width:56ch;margin:0;}
 .expert__lead strong{color:var(--ink);font-weight:700;}
@@ -501,7 +503,7 @@ p+p{margin-top:1.1em;}
   letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.55);}
 .lc--light .lc-nr{color:var(--mute);}
 .lc-body{position:relative;z-index:1;}
-.lc-title{font-family:var(--sans);font-weight:700;font-size:clamp(21px,2.1vw,30px);
+.lc-title{font-family:var(--sans);font-weight:600;font-size:clamp(21px,2.1vw,30px);
   line-height:1;letter-spacing:-.02em;text-transform:uppercase;}
 .lc--feature .lc-title{font-size:clamp(30px,3.2vw,46px);}
 .lc-tag{margin-top:12px;font-size:13px;line-height:1.5;max-width:24em;color:rgba(255,255,255,.72);}
