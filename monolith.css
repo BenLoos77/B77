@@ -175,6 +175,9 @@ p+p{margin-top:1.1em;}
 .ki-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,80px);
   padding:0 var(--gutter);align-items:start;}
 .ki-grid .body{max-width:54ch;}
+.mag-subline{margin:clamp(12px,1.6vw,18px) 0 0; font-family:var(--mono); font-weight:500;
+  font-size:clamp(12px,1.15vw,14px); letter-spacing:0.14em; text-transform:uppercase; color:var(--mute);}
+.section--ink .mag-subline{color:rgba(245,244,242,0.55);}
 
 /* ---------- Kontakt ---------- */
 .kontakt .display{margin:clamp(24px,4vw,48px) 0 clamp(40px,6vw,72px);}
