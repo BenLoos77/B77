@@ -120,38 +120,49 @@
   .studio__lead { max-width:54ch; margin:0; font-family:var(--sans); font-weight:400; font-size:clamp(17px,1.7vw,22px); line-height:1.5; color:var(--ink); }
 </style>
 <style>
-  /* ===== HERO: Pixel-Feld (Sektion 00) ===== */
+  /* ===== HERO: Editorial (unten-links), ASCII-Hintergrund ===== */
   .ph{position:relative; min-height:100vh; min-height:100dvh; overflow:hidden;
-    background:#0B0B0C; color:#F5F4F2; display:flex; flex-direction:column;
-    align-items:center; justify-content:center; text-align:center; isolation:isolate;}
+    background:#0B0B0C; color:#F5F4F2; display:flex; align-items:flex-end;
+    text-align:left; isolation:isolate;}
   /* ASCII-Zeichenfeld-Hintergrund (Canvas2D); Farbverlauf als Fallback */
   .ph__gl{position:absolute; inset:0; z-index:0; pointer-events:none;
-    background:radial-gradient(ellipse at 50% 62%, #141518 0%, #0B0B0C 74%);}
+    background:radial-gradient(ellipse at 72% 52%, #141518 0%, #0B0B0C 76%);}
   .ph__gl canvas{display:block; width:100%!important; height:100%!important;}
-  /* Lesbarkeits-Schleier: dunkler hinter der Headline, Zeichen aussen sichtbar */
+  /* Lesbarkeits-Schleier: dunkel links (hinter dem Text), Zeichen rechts sichtbar */
   .ph__veil{position:absolute; inset:0; z-index:1; pointer-events:none;
-    background:radial-gradient(ellipse 68% 48% at 50% 44%, rgba(11,11,12,0.78) 0%, rgba(11,11,12,0.34) 58%, rgba(11,11,12,0) 100%);}
-  .ph__content{position:relative; z-index:2; padding:0 clamp(16px,4vw,40px);}
+    background:linear-gradient(88deg, rgba(11,11,12,0.86) 0%, rgba(11,11,12,0.46) 40%, rgba(11,11,12,0) 72%),
+      linear-gradient(0deg, rgba(11,11,12,0.72) 0%, rgba(11,11,12,0) 44%);}
+  .ph__content{position:relative; z-index:2; width:100%;
+    padding:clamp(32px,5vw,84px); display:flex; flex-direction:column; gap:clamp(20px,3vh,34px);}
   .ph__kick{font-family:var(--mono); font-size:clamp(11px,1vw,13px); letter-spacing:0.16em;
-    text-transform:uppercase; color:#9A9A95; margin:0 0 clamp(14px,2vh,22px);}
+    text-transform:uppercase; color:#9A9A95; margin:0;}
   .ph__title{margin:0; font-family:var(--sans); font-weight:500; text-transform:uppercase;
-    letter-spacing:-0.04em; line-height:0.86; font-size:clamp(52px,13vw,190px);}
+    letter-spacing:-0.04em; line-height:0.85; font-size:clamp(46px,10vw,150px);}
   .ph__title .em{display:block; font-family:var(--sans); font-style:normal; font-weight:500;
     text-transform:uppercase; letter-spacing:-0.04em;}
-  .ph__lead{max-width:52ch; margin:clamp(22px,3vh,34px) auto 0; font-family:var(--sans); font-weight:400;
-    font-size:clamp(15px,1.5vw,20px); line-height:1.55; color:#CFCECB;}
-  .ph__lead strong{color:#F5F4F2; font-weight:700;}
-  .ph__cta{margin-top:clamp(26px,3.4vh,40px); display:inline-flex; gap:12px; flex-wrap:wrap; justify-content:center;}
+  .ph__foot{display:flex; align-items:flex-end; justify-content:space-between;
+    gap:clamp(24px,4vw,52px); flex-wrap:wrap;}
+  .ph__foot-l{display:flex; flex-direction:column; gap:clamp(18px,2.4vh,26px); max-width:48ch;}
+  .ph__lead{margin:0; font-family:var(--sans); font-weight:400;
+    font-size:clamp(15px,1.4vw,19px); line-height:1.55; color:#CFCECB;}
+  .ph__lead strong{color:#F5F4F2; font-weight:600;}
+  .ph__cta{display:inline-flex; gap:12px; flex-wrap:wrap;}
   .ph__cta a{font-family:var(--mono); font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
     color:#0B0B0C; background:#F5F4F2; text-decoration:none; padding:14px 22px; border:1px solid #F5F4F2; transition:.2s;}
   .ph__cta a.ghost{background:transparent; color:#F5F4F2; border-color:rgba(245,244,242,0.35);}
   .ph__cta a:hover{background:#F5F4F2; color:#0B0B0C; border-color:#F5F4F2;}
   .ph__cta a.ghost:hover{background:rgba(245,244,242,0.08); color:#F5F4F2;}
-  .ph__foot{position:absolute; bottom:0; left:0; right:0; z-index:3;
-    display:flex; justify-content:center; gap:clamp(20px,4vw,54px);
-    padding:22px 24px; font-family:var(--mono); font-size:clamp(10px,0.9vw,12px);
-    letter-spacing:0.12em; text-transform:uppercase; color:#7C7C77;}
-  .ph__foot b{color:#F5F4F2; font-weight:600;}
+  .ph__stats{display:flex; gap:clamp(18px,2.5vw,44px); flex-wrap:wrap; padding-bottom:4px;
+    font-family:var(--mono); font-size:clamp(10px,0.9vw,12px);
+    letter-spacing:0.12em; text-transform:uppercase; color:#8a8a85;}
+  .ph__stats span{white-space:nowrap;}
+  .ph__stats b{color:#F5F4F2; font-weight:600;}
+  @media(max-width:760px){
+    /* Mobil: Inhalt fuellt fast die volle Breite -> Schleier von unten kraeftiger,
+       damit Lead/CTA klar ueber den Zeichen liegen */
+    .ph__veil{background:linear-gradient(0deg, rgba(11,11,12,0.94) 0%, rgba(11,11,12,0.72) 34%, rgba(11,11,12,0) 66%);}
+    .ph__foot{gap:22px;}
+  }
 </style>
 </head>
 <body>
@@ -552,13 +563,17 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
     <div class="ph__content">
       <p class="ph__kick">Wir machen Unternehmen</p>
       <h1 class="ph__title">Vertriebs-<span class="em">aktiv.</span></h1>
-      <p class="ph__lead"><strong>Vertriebsaktiv</strong> zu sein bedeutet: Märkte bewusst bearbeiten, Zielkunden systematisch gewinnen, Abschlüsse nicht dem Zufall überlassen.</p>
-      <div class="ph__cta">
-        <a href="/kontakt">Erstgespräch →</a>
-        <a class="ghost" href="/leistungen">Leistungen</a>
+      <div class="ph__foot">
+        <div class="ph__foot-l">
+          <p class="ph__lead"><strong>Vertriebsaktiv</strong> zu sein bedeutet: Märkte bewusst bearbeiten, Zielkunden systematisch gewinnen, Abschlüsse nicht dem Zufall überlassen.</p>
+          <div class="ph__cta">
+            <a href="/kontakt">Erstgespräch →</a>
+            <a class="ghost" href="/leistungen">Leistungen</a>
+          </div>
+        </div>
+        <div class="ph__stats"><span><b>25+</b> Jahre</span><span><b>50+</b> Mandate</span><span><b>DACH</b>-weit aktiv</span></div>
       </div>
     </div>
-    <div class="ph__foot"><span><b>25+</b> Jahre</span><span><b>50+</b> Mandate</span><span><b>DACH</b>-weit aktiv</span></div>
   </section>
 
   <!-- Manifest -->
