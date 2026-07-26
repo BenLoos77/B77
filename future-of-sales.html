@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="monolith.css?v=mono17">
+<link rel="stylesheet" href="monolith.css?v=mono18">
 <link rel="canonical" href="https://b77.de/future-of-sales">
 <meta name="robots" content="index, follow">
 <meta name="author" content="Benjamin Loos">
@@ -99,7 +99,7 @@
           <a class="fos-inline" href="#szenario">Zum Szenario</a>
         </div>
       </div>
-      <div class="fos-hero-robot" id="fos-robot" aria-hidden="true"></div>
+      <div class="fos-hero-robot" id="fos-robot" data-spline="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode" aria-hidden="true"></div>
     </div>
   </section>
 
@@ -191,44 +191,6 @@
     <span class="footer__r"><strong>Büro:</strong> Unter dem Klingelschacht 18, 57074 Siegen · <a href="/impressum">Impressum &amp; Datenschutz</a></span>
   </footer>
 
-  <script src="monolith.js?v=mono17"></script>
-
-  <!-- Hero: Spline-3D-Roboter (lazy, Badge entfernt) -->
-  <script>
-  (function(){
-    var mount = document.getElementById('fos-robot');
-    if (!mount) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    var loaded = false;
-    function load(){
-      if (loaded) return; loaded = true;
-      var s = document.createElement('script');
-      s.type = 'module';
-      s.src = 'https://unpkg.com/@splinetool/viewer/build/spline-viewer.js';
-      document.head.appendChild(s);
-      var v = document.createElement('spline-viewer');
-      v.setAttribute('url', 'https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode');
-      v.setAttribute('loading-anim-type', 'spinner-small-dark');
-      mount.appendChild(v);
-      function killBadge(){
-        try{
-          var root = v.shadowRoot;
-          if (!root) return false;
-          var logo = root.querySelector('#logo') || root.querySelector('a[href*="spline.design"]');
-          if (logo){ logo.remove(); return true; }
-        }catch(e){}
-        return false;
-      }
-      v.addEventListener('load', killBadge);
-      var tries = 0, iv = setInterval(function(){ if (killBadge() || ++tries > 50) clearInterval(iv); }, 120);
-    }
-    if ('IntersectionObserver' in window){
-      var io = new IntersectionObserver(function(entries){
-        entries.forEach(function(e){ if (e.isIntersecting){ load(); io.disconnect(); } });
-      }, { rootMargin: '300px' });
-      io.observe(mount);
-    } else { load(); }
-  })();
-  </script>
+  <script src="monolith.js?v=mono18"></script>
 </body>
 </html>

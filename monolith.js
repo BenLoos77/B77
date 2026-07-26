@@ -154,7 +154,66 @@
     (function loop(now){ mouse.x=lerp(mouse.x,target.x,LERP); mouse.y=lerp(mouse.y,target.y,LERP); draw(now||0); requestAnimationFrame(loop); })(performance.now());
   }
 
-  function init() { initDecode(); initReveal(); initNav(); initFloatingNav(); initGrid(); }
+  /* ---- 6) Spline-3D einbetten (robust, kein First-Load-Race) ----
+     Jedes Element mit data-spline="<szene-url>" bekommt einen <spline-viewer>.
+     Wichtig: Der Viewer wird erst erzeugt, wenn das Custom-Element definiert ist
+     (customElements.whenDefined) — sonst rendert er beim ersten (kalten) Laden
+     nicht. Nach dem Laden: Badge entfernen + Resize-Nudge fuer korrekte Groesse. */
+  function initSpline() {
+    var mounts = document.querySelectorAll("[data-spline]");
+    if (!mounts.length) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    var scriptAdded = false;
+    function ensureScript() {
+      if (scriptAdded) return;
+      if (window.customElements && customElements.get("spline-viewer")) return;
+      scriptAdded = true;
+      var s = document.createElement("script");
+      s.type = "module";
+      s.src = "https://unpkg.com/@splinetool/viewer@1/build/spline-viewer.js";
+      document.head.appendChild(s);
+    }
+
+    function mountOne(el) {
+      if (el.__splined) return;
+      el.__splined = true;
+      ensureScript();
+      function go() {
+        var v = document.createElement("spline-viewer");
+        v.setAttribute("url", el.getAttribute("data-spline"));
+        v.setAttribute("loading-anim-type", "none");
+        el.appendChild(v);
+        function killBadge() {
+          try {
+            var root = v.shadowRoot;
+            if (!root) return false;
+            var logo = root.querySelector("#logo") || root.querySelector('a[href*="spline.design"]');
+            if (logo) { logo.remove(); return true; }
+          } catch (e) {}
+          return false;
+        }
+        v.addEventListener("load", function () {
+          killBadge();
+          try { window.dispatchEvent(new Event("resize")); } catch (e) {}
+        });
+        var tries = 0, iv = setInterval(function () { if (killBadge() || ++tries > 60) clearInterval(iv); }, 100);
+      }
+      if (window.customElements) { customElements.whenDefined("spline-viewer").then(go); }
+      else { go(); }
+    }
+
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { mountOne(e.target); io.unobserve(e.target); } });
+      }, { rootMargin: "400px" });
+      Array.prototype.forEach.call(mounts, function (el) { io.observe(el); });
+    } else {
+      Array.prototype.forEach.call(mounts, mountOne);
+    }
+  }
+
+  function init() { initDecode(); initReveal(); initNav(); initFloatingNav(); initGrid(); initSpline(); }
   if (document.readyState === "loading")
     document.addEventListener("DOMContentLoaded", init);
   else init();
