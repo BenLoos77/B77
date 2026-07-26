@@ -776,10 +776,11 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
 
   <script src="monolith.js?v=mono18"></script>
   <script>
-  /* HERO: ASCII-Zeichenfeld (Canvas2D). Die animierten Zeichen formen einen
-     geschwungenen, nach oben-rechts zeigenden Wachstums-Pfeil; das Shimmer-
-     Wellenfeld laeuft innerhalb der Pfeilform weiter. Monolith-Look: helle
-     Zeichen auf Dunkel. Faellt still auf den Farbverlauf zurueck. */
+  /* HERO: ASCII-Zeichenfeld (Canvas2D). Mehrphasige Animation aus den Zeichen:
+     1) Wachstums-Pfeil baut sich von unten auf, 2) oben angekommen fallen die
+     Elemente herab, 3) daraus waechst von unten eine Umsatzkurve aus 12 Balken
+     (Monate) mit aufsteigenden, krummen Zahlen (8–24 Mio €). Balken/Pfeil/Kurve
+     aus Elementen; Zahlen + Monate als klare Labels. Monolith: hell auf dunkel. */
   (function(){
     var mount = document.getElementById('ph-gl');
     if (!mount) return;
@@ -789,100 +790,100 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
     if (!ctx) return;
     mount.appendChild(canvas);
 
-    var RAMP = " .·:-+=*oxX%#@";
-    var LAST = RAMP.length - 1;
-    var CONTRAST = 1.5;
-    var ANIM_I = 0.60;
-    var SPEED = 0.9;
+    var RAMP = " .·:-+=*oxX%#@", LAST = RAMP.length - 1, CONTRAST = 1.5, ANIM_I = 0.6;
+    var AB1=3.8, AH=4.3, AF1=6.6, CB0=5.0, CB1=9.8, CH1=12.8, CF1=15.2, CYCLE=15.2;
+    var MONTHS=["JAN","FEB","MÄR","APR","MAI","JUN","JUL","AUG","SEP","OKT","NOV","DEZ"];
+    var VALS=[8.3,9.6,10.8,11.7,13.2,14.5,15.9,17.4,18.8,20.7,22.9,24.6], MAXV=26;
+    var W,H,dpr,cell,cols,rows,amask=null,shaft=[],head=null,charFont='';
+    var baseY,barMaxH,x0,x1,slot,barW;
 
-    var W, H, dpr, cell, cols, rows, shaft = [], head = null;
+    function cbez(a,b,c,d,t){var m=1-t;return{x:m*m*m*a.x+3*m*m*t*b.x+3*m*t*t*c.x+t*t*t*d.x,y:m*m*m*a.y+3*m*m*t*b.y+3*m*t*t*c.y+t*t*t*d.y};}
+    function distSeg(px,py,a,b){var dx=b.x-a.x,dy=b.y-a.y,l2=dx*dx+dy*dy;var t=l2?((px-a.x)*dx+(py-a.y)*dy)/l2:0;t=t<0?0:t>1?1:t;return Math.hypot(px-(a.x+t*dx),py-(a.y+t*dy));}
+    function sgn(p,a,b){return (p.x-b.x)*(a.y-b.y)-(a.x-b.x)*(p.y-b.y);}
+    function inTri(p,A,B,C){var d1=sgn(p,A,B),d2=sgn(p,B,C),d3=sgn(p,C,A);return !(((d1<0)||(d2<0)||(d3<0))&&((d1>0)||(d2>0)||(d3>0)));}
+    function clamp01(x){return x<0?0:x>1?1:x;}
+    function smooth(x){x=clamp01(x);return x*x*(3-2*x);}
+    function rnd(gx,gy){var s=Math.sin(gx*12.9898+gy*78.233)*43758.5453;return s-Math.floor(s);}
 
-    function cbez(a,b,c,d,t){ var m=1-t; return {
-      x:m*m*m*a.x+3*m*m*t*b.x+3*m*t*t*c.x+t*t*t*d.x,
-      y:m*m*m*a.y+3*m*m*t*b.y+3*m*t*t*c.y+t*t*t*d.y }; }
-    function distSeg(px,py,a,b){ var dx=b.x-a.x,dy=b.y-a.y,l2=dx*dx+dy*dy;
-      var t=l2?((px-a.x)*dx+(py-a.y)*dy)/l2:0; t=t<0?0:t>1?1:t;
-      return Math.hypot(px-(a.x+t*dx), py-(a.y+t*dy)); }
-    function sgn(p,a,b){ return (p.x-b.x)*(a.y-b.y)-(a.x-b.x)*(p.y-b.y); }
-    function inTri(p,A,B,C){ var d1=sgn(p,A,B),d2=sgn(p,B,C),d3=sgn(p,C,A);
-      return !(((d1<0)||(d2<0)||(d3<0)) && ((d1>0)||(d2>0)||(d3>0))); }
-
-    function buildPath(){
-      shaft = [];
-      function P(x,y){ return { x:x*W, y:(1-y)*H }; }   /* yUp 0..1 (unten..oben) */
-      var p0=P(0.08,0.26), p1=P(0.30,0.03), p2=P(0.55,0.24), p3=P(0.70,0.60);
-      var baseHW=0.028*H, N=170;
-      for (var i=0;i<=N;i++){ var t=i/N, q=cbez(p0,p1,p2,p3,t);
-        shaft.push({ x:q.x, y:q.y, hw:baseHW*(0.62+0.85*t) }); }
-      var end=P(0.70,0.60), pe=cbez(p0,p1,p2,p3,0.975);
-      var dir=Math.atan2(end.y-pe.y, end.x-pe.x);
-      var tipLen=0.205*H, halfW=0.125*H;
-      var nx=Math.cos(dir+Math.PI/2), ny=Math.sin(dir+Math.PI/2);
-      head={ t:{x:end.x+Math.cos(dir)*tipLen, y:end.y+Math.sin(dir)*tipLen},
-             a:{x:end.x+nx*halfW, y:end.y+ny*halfW},
-             b:{x:end.x-nx*halfW, y:end.y-ny*halfW} };
+    function buildArrow(){
+      shaft=[];function P(x,y){return{x:x*W,y:(1-y)*H};}
+      var p0=P(0.08,0.30),p1=P(0.30,0.07),p2=P(0.55,0.28),p3=P(0.70,0.62);
+      var baseHW=0.026*H,N=150;
+      for(var i=0;i<=N;i++){var t=i/N,q=cbez(p0,p1,p2,p3,t);shaft.push({x:q.x,y:q.y,hw:baseHW*(0.62+0.85*t)});}
+      var end=P(0.70,0.62),pe=cbez(p0,p1,p2,p3,0.975),dir=Math.atan2(end.y-pe.y,end.x-pe.x);
+      var tipLen=0.19*H,halfW=0.115*H,nx=Math.cos(dir+Math.PI/2),ny=Math.sin(dir+Math.PI/2);
+      head={t:{x:end.x+Math.cos(dir)*tipLen,y:end.y+Math.sin(dir)*tipLen},a:{x:end.x+nx*halfW,y:end.y+ny*halfW},b:{x:end.x-nx*halfW,y:end.y-ny*halfW}};
+      amask=new Float32Array(cols*rows);
+      for(var gy=0;gy<rows;gy++)for(var gx=0;gx<cols;gx++){
+        var px=gx*cell+cell*0.5,py=gy*cell+cell*0.5,p={x:px,y:py},v=0;
+        if(head&&inTri(p,head.t,head.a,head.b))v=1;
+        else{var m=1e9,hw=0;for(var i=0;i<shaft.length-1;i++){var d=distSeg(px,py,shaft[i],shaft[i+1]);if(d<m){m=d;hw=(shaft[i].hw+shaft[i+1].hw)/2;}}var soft=0.016*H;v=m>hw+soft?0:(m<=hw?1:1-(m-hw)/soft);}
+        amask[gy*cols+gx]=v;
+      }
     }
-    function arrowMask(px,py){
-      var p={x:px,y:py};
-      if (head && inTri(p,head.t,head.a,head.b)) return 1;
-      var m=1e9, hw=0;
-      for (var i=0;i<shaft.length-1;i++){ var d=distSeg(px,py,shaft[i],shaft[i+1]);
-        if (d<m){ m=d; hw=(shaft[i].hw+shaft[i+1].hw)/2; } }
-      var soft=0.016*H;
-      if (m>hw+soft) return 0; if (m<=hw) return 1; return 1-(m-hw)/soft;
-    }
+    function buildChart(){ baseY=0.42*H; var topPad=0.085*H; barMaxH=baseY-topPad; x0=0.055*W; x1=0.965*W; slot=(x1-x0)/12; barW=slot*0.54; }
 
     function setup(){
-      W = mount.clientWidth || window.innerWidth;
-      H = mount.clientHeight || window.innerHeight;
-      dpr = Math.min(1.5, window.devicePixelRatio || 1);
-      cell = W < 700 ? 12 : 9;
-      canvas.width = Math.round(W*dpr); canvas.height = Math.round(H*dpr);
-      canvas.style.width = W+'px'; canvas.style.height = H+'px';
-      ctx.setTransform(dpr,0,0,dpr,0,0);
-      cols = Math.ceil(W/cell); rows = Math.ceil(H/cell);
-      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-      ctx.font = cell + "px 'Geist Mono','JetBrains Mono',ui-monospace,monospace";
-      buildPath();
+      W=mount.clientWidth||window.innerWidth; H=mount.clientHeight||window.innerHeight;
+      dpr=Math.min(1.5,window.devicePixelRatio||1); cell=W<700?12:9;
+      canvas.width=Math.round(W*dpr); canvas.height=Math.round(H*dpr);
+      canvas.style.width=W+'px'; canvas.style.height=H+'px'; ctx.setTransform(dpr,0,0,dpr,0,0);
+      cols=Math.ceil(W/cell); rows=Math.ceil(H/cell);
+      ctx.textAlign='center'; ctx.textBaseline='middle';
+      charFont=cell+"px 'Geist Mono','JetBrains Mono',ui-monospace,monospace";
+      buildArrow(); buildChart();
     }
-    setup();
-    window.addEventListener('resize', setup, {passive:true});
+    setup(); window.addEventListener('resize',setup,{passive:true});
 
-    function field(nx, ny, t){
-      var w = Math.sin(nx*7.0 + t*0.7)
-            + Math.sin(ny*5.0 - t*0.5 + Math.sin(nx*4.0 + t*0.3)*1.2)
-            + Math.sin((nx*3.0 + ny*6.0) + t*0.6);
-      return (w/3.0)*0.5 + 0.5;
-    }
-    function draw(t){
+    function field(nx,ny,t){var w=Math.sin(nx*7+t*0.7)+Math.sin(ny*5-t*0.5+Math.sin(nx*4+t*0.3)*1.2)+Math.sin((nx*3+ny*6)+t*0.6);return (w/3)*0.5+0.5;}
+    function shim(gx,gy,t){var lum=field(gx/cols,gy/rows,t);lum+=Math.sin(t*2.4+gx*0.55+gy*0.8)*0.22*ANIM_I;lum=(lum-0.5)*CONTRAST+0.5;return lum*0.55+0.45;}
+    function putChar(gx,gy,px,py,t,a){var lum=shim(gx,gy,t)*a;if(lum<0.16)return;if(lum>1)lum=1;var ch=RAMP.charAt((lum*LAST)|0);if(ch===' ')return;ctx.fillStyle='rgba(245,244,242,'+(0.16+lum*0.55).toFixed(3)+')';ctx.fillText(ch,px,py);}
+
+    function draw(tc,t){
       ctx.clearRect(0,0,W,H);
-      for (var gy=0; gy<rows; gy++){
-        for (var gx=0; gx<cols; gx++){
-          var px = gx*cell + cell*0.5, py = gy*cell + cell*0.5;
-          var mk = arrowMask(px, py); if (mk <= 0) continue;
-          var lum = field(gx/cols, gy/rows, t);
-          lum += Math.sin(t*2.4 + gx*0.55 + gy*0.8) * 0.22 * ANIM_I;  /* shimmer */
-          lum = (lum-0.5)*CONTRAST + 0.5;
-          lum = lum*0.55 + 0.45; lum *= mk;
-          if (lum < 0.16) continue;
-          if (lum > 1) lum = 1;
-          var ch = RAMP.charAt((lum*LAST)|0);
-          if (ch === ' ') continue;
-          ctx.fillStyle = 'rgba(245,244,242,' + (0.16 + lum*0.55).toFixed(3) + ')';
-          ctx.fillText(ch, px, py);
+      ctx.font=charFont;
+      /* ---- Pfeil ---- */
+      if(tc<AF1){
+        var build=smooth(tc/AB1), frontY=H*(1.06-1.14*build), falling=tc>AH, fp=falling?clamp01((tc-AH)/(AF1-AH)):0;
+        for(var gy=0;gy<rows;gy++)for(var gx=0;gx<cols;gx++){
+          var mk=amask[gy*cols+gx]; if(mk<=0)continue;
+          var px=gx*cell+cell*0.5,py=gy*cell+cell*0.5,a=mk,dy=0;
+          if(!falling){a*=clamp01((py-frontY)/(0.09*H));}
+          else{var r=rnd(gx,gy),eff=clamp01((fp-r*0.28)/0.72);dy=eff*eff*(H*1.15);a*=(1-eff);if(py+dy>H+cell)continue;}
+          if(a<=0.02)continue; putChar(gx,gy,px,py+dy,t,a);
         }
+      }
+      /* ---- Chart ---- */
+      if(tc>=CB0){
+        var riseDur=1.15, stag=(CB1-CB0-riseDur)/11, chartFall=tc>CH1, cf=chartFall?clamp01((tc-CH1)/(CF1-CH1)):0, tops=[];
+        for(var i=0;i<12;i++){var rp=smooth(clamp01((tc-(CB0+i*stag))/riseDur));var h=barMaxH*(VALS[i]/MAXV)*rp;tops.push({cx:x0+slot*(i+0.5),topY:baseY-h,rp:rp});}
+        var g0=Math.floor(x0/cell),g1=Math.ceil(x1/cell),gBase=Math.floor(baseY/cell);
+        for(var gx=g0;gx<g1;gx++){
+          var px=gx*cell+cell*0.5,bi=Math.floor((px-x0)/slot); if(bi<0||bi>11)continue;
+          var b=tops[bi]; if(Math.abs(px-b.cx)>barW/2)continue;
+          for(var gy=Math.floor(b.topY/cell);gy<=gBase;gy++){
+            var py=gy*cell+cell*0.5; if(py<b.topY-cell||py>baseY)continue;
+            var a=1,dy=0;
+            if(chartFall){var r=rnd(gx,gy),eff=clamp01((cf-r*0.28)/0.72);dy=eff*eff*(H*1.1);a=(1-eff);if(py+dy>H+cell)continue;}
+            if(a<=0.02)continue; putChar(gx,gy,px,py+dy,t,a);
+          }
+        }
+        for(var i=0;i<11;i++){var A=tops[i],B=tops[i+1];if(A.rp<0.05||B.rp<0.05)continue;
+          for(var s=0;s<10;s++){var u=s/10,px=A.cx+(B.cx-A.cx)*u,py=(A.topY+(B.topY-A.topY)*u)-cell*0.7,gx=Math.round(px/cell),gy=Math.round(py/cell),a=Math.min(A.rp,B.rp);if(chartFall)a*=(1-cf);if(a<=0.05)continue;putChar(gx,gy,px,py,t,a*0.9);}}
+        var numPx=Math.max(12,W*0.0112),monPx=Math.max(11,W*0.0104),baseFade=chartFall?(1-cf):1;
+        for(var i=0;i<12;i++){var b=tops[i],an=clamp01((b.rp-0.55)/0.4)*baseFade;
+          if(an>0.03){ctx.font='600 '+numPx+"px 'Geist Mono','JetBrains Mono',ui-monospace,monospace";ctx.fillStyle='rgba(245,244,242,'+(0.85*an).toFixed(3)+')';ctx.fillText(VALS[i].toFixed(1).replace('.',','),b.cx,b.topY-numPx*1.5);}
+          var am=b.rp*baseFade;
+          if(am>0.03){ctx.font=monPx+"px 'Geist Mono','JetBrains Mono',ui-monospace,monospace";ctx.fillStyle='rgba(245,244,242,'+(0.5*am).toFixed(3)+')';ctx.fillText(MONTHS[i],b.cx,baseY+monPx*1.5);}
+        }
+        var uFade=clamp01((tc-CB0-0.5)/1)*baseFade;
+        if(uFade>0.03){ctx.font=Math.max(10,W*0.0092)+"px 'Geist Mono','JetBrains Mono',ui-monospace,monospace";ctx.textAlign='left';ctx.fillStyle='rgba(245,244,242,'+(0.4*uFade).toFixed(3)+')';ctx.fillText('NETTOUMSATZ · MIO €',x0,baseY-barMaxH-numPx*1.2);ctx.textAlign='center';}
       }
     }
 
-    if (reduced){ draw(0); return; }
-    var start = null, last = 0;
-    function loop(ts){
-      requestAnimationFrame(loop);
-      if (start === null) start = ts;
-      if (ts - last < 33) return;      /* ~30 fps */
-      last = ts;
-      draw((ts - start) * 0.001 * SPEED);
-    }
+    if (reduced){ draw(12.6, 12.6); return; }
+    var start=null,last=0;
+    function loop(ts){requestAnimationFrame(loop);if(start===null)start=ts;if(ts-last<33)return;last=ts;var t=(ts-start)*0.001;draw(t%CYCLE,t);}
     requestAnimationFrame(loop);
   })();
   </script>
