@@ -84,9 +84,9 @@
     var W = 0, H = 0, dpr = 1;
     var mouse = { x: -9999, y: -9999 }, target = { x: -9999, y: -9999 };
     var ripples = [];
-    var GC = "224,255,0";                              /* Neongelb */
-    var LB = [224,255,0,0.11], LA = [224,255,0,0.62];  /* Linie: Ruhe / aktiv */
-    var NB = [224,255,0,0.17], NA = [224,255,0,0.95];  /* Knoten: Ruhe / aktiv */
+    var GC = "15,15,15";                               /* Schwarzgrau (Monolith) */
+    var LB = [15,15,15,0.085], LA = [15,15,15,0.55];   /* Linie: Ruhe / aktiv */
+    var NB = [15,15,15,0.13],  NA = [15,15,15,0.9];    /* Knoten: Ruhe / aktiv */
     var staticMode = window.matchMedia("(prefers-reduced-motion: reduce)").matches
       || window.matchMedia("(hover: none)").matches;
 
