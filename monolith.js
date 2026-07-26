@@ -171,7 +171,7 @@
       scriptAdded = true;
       var s = document.createElement("script");
       s.type = "module";
-      s.src = "https://unpkg.com/@splinetool/viewer@1/build/spline-viewer.js";
+      s.src = "/assets/spline/spline-viewer.js";  /* selbst-gehostet (keine externe CDN, blocker-sicher) */
       document.head.appendChild(s);
     }
 
