@@ -868,6 +868,18 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
       v.setAttribute('url', 'https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode');
       v.setAttribute('loading-anim-type', 'spinner-small-dark');
       mount.appendChild(v);
+      // "Built with Spline"-Badge aus dem Shadow-DOM entfernen
+      function killBadge(){
+        try{
+          var root = v.shadowRoot;
+          if (!root) return false;
+          var logo = root.querySelector('#logo') || root.querySelector('a[href*="spline.design"]');
+          if (logo){ logo.remove(); return true; }
+        }catch(e){}
+        return false;
+      }
+      v.addEventListener('load', killBadge);
+      var tries = 0, iv = setInterval(function(){ if (killBadge() || ++tries > 50) clearInterval(iv); }, 120);
     }
     if ('IntersectionObserver' in window){
       var io = new IntersectionObserver(function(entries){
