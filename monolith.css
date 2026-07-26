@@ -137,7 +137,8 @@ p+p{margin-top:1.1em;}
 .il{border-top:1px solid var(--line);}
 .il-row{display:grid;grid-template-columns:minmax(48px,max-content) 1fr auto;align-items:start;gap:4px 26px;
   padding:clamp(20px,2.4vw,30px) var(--gutter);border-bottom:1px solid var(--line);
-  color:var(--ink);cursor:default;}
+  color:var(--ink);cursor:default;
+  transition:background .3s cubic-bezier(.2,.7,.2,1),color .3s;}
 .il-idx{font-family:var(--mono);font-weight:600;font-size:13px;color:var(--mute);
   letter-spacing:0.04em;line-height:1.6;white-space:nowrap;}
 .il-main{min-width:0;}
@@ -148,12 +149,13 @@ p+p{margin-top:1.1em;}
 .il-arr{font-family:var(--sans);font-weight:400;font-size:clamp(19px,1.9vw,24px);
   color:var(--mute);justify-self:end;line-height:1.3;
   transition:transform .3s cubic-bezier(.2,.7,.2,1),color .3s;}
-/* Nur echte Links sind interaktiv: Zeiger + schwarzer Flächen-Hover (ohne Buchstaben-Scramble) */
-a.il-row{cursor:pointer;transition:background .3s cubic-bezier(.2,.7,.2,1),color .3s;}
-a.il-row:hover{background:var(--ink);color:var(--paper);}
-a.il-row:hover .il-idx{color:var(--paper);}
-a.il-row:hover .il-desc{color:rgba(255,255,255,0.72);}
-a.il-row:hover .il-arr{color:var(--paper);transform:translateX(4px);}
+/* Schwarzer Flächen-Hover auf allen Aufzählungszeilen (ohne Buchstaben-Scramble).
+   Nur echte Links zeigen zusätzlich Zeiger + Pfeil. */
+a.il-row{cursor:pointer;}
+.il-row:hover{background:var(--ink);color:var(--paper);}
+.il-row:hover .il-idx{color:var(--paper);}
+.il-row:hover .il-desc{color:rgba(255,255,255,0.72);}
+.il-row:hover .il-arr{color:var(--paper);transform:translateX(4px);}
 
 /* ---------- Plakat (schwarze Kontrast-Sektion) ---------- */
 .plakat{background:var(--ink);color:var(--paper);border-top:1px solid var(--ink);
