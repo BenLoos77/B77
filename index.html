@@ -168,18 +168,25 @@
   /* ===== Top-Themen (Home) ===== */
   .tt-wrap{padding:0 var(--gutter);}
   .tt-feature{position:relative; overflow:hidden; border-radius:16px; color:var(--paper);
-    display:grid; grid-template-columns:1.5fr 1fr; gap:clamp(24px,4vw,64px); align-items:end;
-    padding:clamp(30px,4vw,60px); text-decoration:none;
+    display:grid; grid-template-columns:1.3fr 1fr; gap:clamp(20px,3vw,48px); align-items:stretch;
+    min-height:clamp(380px,40vw,470px); padding:clamp(30px,4vw,56px);
     background-image:radial-gradient(120% 130% at 100% 0%, #2a2a2a 0%, #161616 46%, #0f0f0f 100%);}
-  .tt-feature .col-l,.tt-feature .col-r{position:relative; z-index:1;}
-  .tt-feature .meta{font-family:var(--mono); font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:rgba(245,244,242,0.55); margin:0 0 clamp(18px,2.5vw,30px);}
-  .tt-feature h3{margin:0; font-family:var(--sans); font-weight:500; text-transform:uppercase; letter-spacing:-0.03em; line-height:0.92; font-size:clamp(38px,6vw,84px);}
-  .tt-feature .ex{margin:0; font-size:clamp(14px,1.3vw,17px); line-height:1.55; color:rgba(245,244,242,0.72); max-width:44ch;}
-  .tt-feature .cta{display:inline-flex; align-items:center; gap:10px; margin-top:22px; font-family:var(--mono); font-weight:600; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--paper);}
+  .tt-feature .col-l{position:relative; z-index:2; display:flex; flex-direction:column; justify-content:center;}
+  .tt-feature .meta{font-family:var(--mono); font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:rgba(245,244,242,0.55); margin:0 0 clamp(16px,2vw,24px);}
+  .tt-feature h3{margin:0; font-family:var(--sans); font-weight:500; text-transform:uppercase; letter-spacing:-0.03em; line-height:0.92; font-size:clamp(38px,5.4vw,78px);}
+  .tt-feature .ex{margin:clamp(16px,2vw,24px) 0 0; font-size:clamp(14px,1.3vw,17px); line-height:1.55; color:rgba(245,244,242,0.72); max-width:42ch;}
+  .tt-feature .cta{display:inline-flex; align-items:center; gap:10px; margin-top:26px; text-decoration:none; font-family:var(--mono); font-weight:600; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--paper);}
   .tt-feature .cta i{font-style:normal; transition:transform .3s;}
-  .tt-feature:hover .cta i{transform:translateX(5px);}
-  .tt-ghost{position:absolute; right:-4px; bottom:-42px; z-index:0; pointer-events:none; font-family:var(--sans); font-weight:700; font-size:clamp(160px,24vw,340px); line-height:.8; letter-spacing:-.05em; color:rgba(245,244,242,0.05);}
-  @media(max-width:820px){.tt-feature{grid-template-columns:1fr; gap:24px;}}
+  .tt-feature .cta:hover i{transform:translateX(5px);}
+  /* Roboter-Bühne rechts */
+  .tt-robot{position:relative; z-index:1; min-height:280px;}
+  .tt-robot spline-viewer,.tt-robot canvas{position:absolute!important; inset:0; width:100%!important; height:100%!important; display:block;}
+  .tt-robot::after{content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+    background:radial-gradient(60% 60% at 50% 45%, rgba(245,244,242,0.05), transparent 70%);}
+  @media(max-width:820px){
+    .tt-feature{grid-template-columns:1fr; gap:16px; min-height:0;}
+    .tt-robot{min-height:320px; order:2;}
+  }
 </style>
 </head>
 <body>
@@ -651,17 +658,15 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
   <section class="section" data-reveal>
     <div class="corners wrap"><span>Top-Themen</span><span class="r">3.5</span></div>
     <div class="tt-wrap">
-      <a class="tt-feature" href="/future-of-sales">
-        <span class="tt-ghost" aria-hidden="true">→</span>
+      <div class="tt-feature">
         <div class="col-l">
           <p class="meta">Schwerpunkt · Zukunft</p>
           <h3>Future of Sales</h3>
-        </div>
-        <div class="col-r">
           <p class="ex">Wenn Systeme mit Systemen verhandeln: Was die autonome Wirtschaft für Einkauf und Vertrieb im Mittelstand bedeutet – und der B_77 „Future of Sales“-Day.</p>
-          <span class="cta">Zum Thema <i>→</i></span>
+          <a class="cta" href="/future-of-sales">Zum Thema <i>→</i></a>
         </div>
-      </a>
+        <div class="col-r tt-robot" id="tt-robot" aria-hidden="true"></div>
+      </div>
     </div>
   </section>
 
@@ -843,6 +848,33 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
       draw((ts - start) * 0.001 * SPEED);
     }
     requestAnimationFrame(loop);
+  })();
+  </script>
+
+  <!-- Top-Themen: Spline-3D-Roboter (lazy, erst beim Scrollen in die Naehe) -->
+  <script>
+  (function(){
+    var mount = document.getElementById('tt-robot');
+    if (!mount) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var loaded = false;
+    function load(){
+      if (loaded) return; loaded = true;
+      var s = document.createElement('script');
+      s.type = 'module';
+      s.src = 'https://unpkg.com/@splinetool/viewer/build/spline-viewer.js';
+      document.head.appendChild(s);
+      var v = document.createElement('spline-viewer');
+      v.setAttribute('url', 'https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode');
+      v.setAttribute('loading-anim-type', 'spinner-small-dark');
+      mount.appendChild(v);
+    }
+    if ('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if (e.isIntersecting){ load(); io.disconnect(); } });
+      }, { rootMargin: '300px' });
+      io.observe(mount);
+    } else { load(); }
   })();
   </script>
 </body>
