@@ -199,6 +199,7 @@ a.il-row{cursor:pointer;}
 
 /* ---------- Footer ---------- */
 .footer{border-top:1px solid var(--ink);padding:32px var(--gutter);
+  position:relative;z-index:1;background:var(--paper);
   display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:16px;
   font-family:var(--mono);font-weight:500;font-size:13px;letter-spacing:0.04em;
   text-transform:uppercase;color:var(--mute);}
