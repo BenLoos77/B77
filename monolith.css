@@ -514,6 +514,21 @@ p+p{margin-top:1.1em;}
 .lc-cta i{font-style:normal;transition:transform .3s;}
 .lc:hover .lc-cta i{transform:translateX(4px);}
 
+/* Leistungen-Seite: Feature volle Breite oben + 6er-Raster darunter
+   (dieselben Kacheln wie Home, aber bewusst andere Anordnung) */
+.lmenu--bento{display:grid; grid-template-columns:1fr; gap:12px;
+  margin-top:clamp(8px,2vw,20px); padding:0 var(--gutter);}
+.lmenu--bento .lc--feature{min-height:240px;}
+@media(min-width:560px){
+  .lmenu--bento{grid-template-columns:repeat(2,1fr);}
+  .lmenu--bento .lc--feature{grid-column:1 / -1;}
+}
+@media(min-width:900px){
+  .lmenu--bento{grid-template-columns:repeat(3,1fr);}
+  .lmenu--bento .lc--feature{grid-column:1 / -1; width:auto; height:auto; min-height:300px;}
+  .lmenu--bento .lc--feature .lc-body{max-width:none;}
+}
+
 /* ---------- Magazin-Artikel als Karten (Home) ---------- */
 .mcards{display:grid;grid-template-columns:1fr;gap:1px;margin:clamp(28px,4vw,44px) var(--gutter) 0;
   background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.16);border-radius:14px;overflow:hidden;}
