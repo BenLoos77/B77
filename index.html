@@ -124,19 +124,10 @@
   .ph{position:relative; min-height:100vh; min-height:100dvh; overflow:hidden;
     background:#0B0B0C; color:#F5F4F2; display:flex; flex-direction:column;
     align-items:center; justify-content:center; text-align:center; isolation:isolate;}
-  .stars{position:absolute; inset:0; z-index:0; overflow:hidden;
-    background:radial-gradient(ellipse at 50% 100%, #191a1d 0%, #0B0B0C 68%);}
-  .stars__inner{position:absolute; inset:0; will-change:transform;}
-  .star-layer{position:absolute; top:0; left:0; width:100%; height:2000px;}
-  .star-layer i{position:absolute; left:0; top:0; width:1px; height:1px; border-radius:50%; background:transparent;}
-  .star-layer i.b{top:2000px;}
-  .sl1{animation:starScroll 60s linear infinite;}
-  .sl2{animation:starScroll 120s linear infinite;}
-  .sl2 i{width:2px; height:2px;}
-  .sl3{animation:starScroll 180s linear infinite;}
-  .sl3 i{width:3px; height:3px;}
-  @keyframes starScroll{from{transform:translateY(0);} to{transform:translateY(-2000px);}}
-  @media(prefers-reduced-motion:reduce){ .sl1,.sl2,.sl3{animation:none;} }
+  /* WebGL-Hintergrund (Liquid + metallischer Monolith); Farbverlauf als Fallback */
+  .ph__gl{position:absolute; inset:0; z-index:0; pointer-events:none;
+    background:radial-gradient(ellipse at 50% 62%, #17181c 0%, #0B0B0C 72%);}
+  .ph__gl canvas{display:block; width:100%!important; height:100%!important;}
   .ph__veil{position:absolute; inset:0; z-index:1; pointer-events:none;
     background:radial-gradient(circle at 50% 42%, rgba(11,11,12,0.12) 0%, rgba(11,11,12,0.30) 48%, #0B0B0C 88%);}
   .ph__content{position:relative; z-index:2; padding:0 clamp(16px,4vw,40px);}
@@ -555,13 +546,7 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
 
   <!-- HERO (Monolith – Pixel-Feld, Sektion 00) -->
   <section class="ph">
-    <div class="stars" aria-hidden="true">
-      <div class="stars__inner" id="starfield">
-        <div class="star-layer sl1"><i></i><i class="b"></i></div>
-        <div class="star-layer sl2"><i></i><i class="b"></i></div>
-        <div class="star-layer sl3"><i></i><i class="b"></i></div>
-      </div>
-    </div>
+    <div class="ph__gl" id="ph-gl" aria-hidden="true"></div>
     <div class="ph__veil" aria-hidden="true"></div>
     <div class="ph__content">
       <p class="ph__kick">Wir machen Unternehmen</p>
@@ -731,20 +716,76 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
   </footer>
 
   <script src="monolith.js?v=mono14"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script>
-  /* HERO Sternenfeld */
+  /* HERO: Liquid-Hintergrund + metallischer Monolith (WebGL). Fällt auf den
+     Farbverlauf-Hintergrund zurück, wenn Three.js/WebGL nicht verfügbar ist. */
   (function(){
-    var field = document.getElementById('starfield'); if (!field) return;
+    var mount = document.getElementById('ph-gl');
+    if (!mount || !window.THREE) return;
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var counts = [900, 380, 180];
-    var cols = ['rgba(245,244,242,0.5)','rgba(245,244,242,0.78)','rgba(245,244,242,0.96)'];
-    function gen(n, c){ var s = []; for (var i=0;i<n;i++){ s.push((Math.floor(Math.random()*2600))+'px '+(Math.floor(Math.random()*2000))+'px '+c); } return s.join(', '); }
-    var layers = field.querySelectorAll('.star-layer');
-    for (var k=0;k<layers.length;k++){ var sh = gen(counts[k], cols[k]); var dots = layers[k].querySelectorAll('i'); dots[0].style.boxShadow = sh; dots[1].style.boxShadow = sh; }
-    if (reduced) return;
-    var tx=0, ty=0, cx=0, cy=0, F=0.02;
-    window.addEventListener('mousemove', function(e){ tx = -(e.clientX - window.innerWidth/2)*F; ty = -(e.clientY - window.innerHeight/2)*F; }, {passive:true});
-    (function raf(){ cx += (tx-cx)*0.06; cy += (ty-cy)*0.06; field.style.transform = 'translate('+cx.toFixed(1)+'px,'+cy.toFixed(1)+'px)'; requestAnimationFrame(raf); })();
+    try {
+      var W = mount.clientWidth || window.innerWidth, H = mount.clientHeight || window.innerHeight;
+      var scene = new THREE.Scene();
+      var camera = new THREE.PerspectiveCamera(35, W/H, 0.1, 400); camera.position.set(0,0,60);
+      var renderer = new THREE.WebGLRenderer({antialias:true, alpha:true});
+      renderer.setPixelRatio(Math.min(2, window.devicePixelRatio||1));
+      renderer.setSize(W,H);
+      mount.appendChild(renderer.domElement);
+
+      /* Liquid-Shader-Fläche – sehr dunkle, ruhige Wellen, weit hinten */
+      var bgUniforms = { uTime:{value:0}, uMouse:{value:new THREE.Vector2(0,0)} };
+      var bgMat = new THREE.ShaderMaterial({
+        transparent:true, depthWrite:false, uniforms:bgUniforms,
+        vertexShader:"varying vec2 vUv; void main(){ vUv=uv; gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0); }",
+        fragmentShader:"uniform float uTime; uniform vec2 uMouse; varying vec2 vUv;"+
+          "void main(){ vec2 uv=vUv; float t=uTime*0.15; vec2 m=uMouse*0.1;"+
+          "float c=smoothstep(0.0,1.0,(sin(uv.x*8.0+t+m.x*12.0)+sin(uv.y*6.0-t+m.y*12.0))*0.5+0.5);"+
+          "gl_FragColor=vec4(mix(vec3(0.006),vec3(0.05),c),1.0); }"
+      });
+      var bg = new THREE.Mesh(new THREE.PlaneGeometry(1,1), bgMat); bg.position.z=-30; scene.add(bg);
+      function sizeBg(){ var dist=camera.position.z-bg.position.z; var h=2*Math.tan(THREE.MathUtils.degToRad(camera.fov/2))*dist; bg.scale.set(h*camera.aspect*1.1, h*1.1, 1); }
+
+      /* Licht */
+      scene.add(new THREE.AmbientLight(0xffffff, 0.35));
+      var spot = new THREE.SpotLight(0xffffff, 3); spot.position.set(50,50,50); scene.add(spot);
+      var p1 = new THREE.PointLight(0xffffff, 2.2); p1.position.set(-45,18,38); scene.add(p1);
+      var p2 = new THREE.PointLight(0xbfc3ff, 1.4); p2.position.set(18,-42,26); scene.add(p2);
+
+      /* Monolith: verformter, metallischer Ikosaeder */
+      var geo = new THREE.IcosahedronGeometry(13, 6);
+      var mat = new THREE.MeshStandardMaterial({color:0x0c0c0d, metalness:0.92, roughness:0.16});
+      var distShader = null;
+      var NOISE = "vec3 mod289(vec3 x){return x-floor(x*(1.0/289.0))*289.0;}vec4 mod289(vec4 x){return x-floor(x*(1.0/289.0))*289.0;}vec4 permute(vec4 x){return mod289(((x*34.0)+1.0)*x);}vec4 taylorInvSqrt(vec4 r){return 1.79284291400159-0.85373472095314*r;}"+
+        "float snoise(vec3 v){const vec2 C=vec2(1.0/6.0,1.0/3.0);const vec4 D=vec4(0.0,0.5,1.0,2.0);vec3 i=floor(v+dot(v,C.yyy));vec3 x0=v-i+dot(i,C.xxx);vec3 g=step(x0.yzx,x0.xyz);vec3 l=1.0-g;vec3 i1=min(g.xyz,l.zxy);vec3 i2=max(g.xyz,l.zxy);vec3 x1=x0-i1+C.xxx;vec3 x2=x0-i2+C.yyy;vec3 x3=x0-D.yyy;i=mod289(i);vec4 p=permute(permute(permute(i.z+vec4(0.0,i1.z,i2.z,1.0))+i.y+vec4(0.0,i1.y,i2.y,1.0))+i.x+vec4(0.0,i1.x,i2.x,1.0));float n_=0.142857142857;vec3 ns=n_*D.wyz-D.xzx;vec4 j=p-49.0*floor(p*ns.z*ns.z);vec4 x_=floor(j*ns.z);vec4 y_=floor(j-7.0*x_);vec4 x=x_*ns.x+ns.yyyy;vec4 y=y_*ns.x+ns.yyyy;vec4 h=1.0-abs(x)-abs(y);vec4 b0=vec4(x.xy,y.xy);vec4 b1=vec4(x.zw,y.zw);vec4 s0=floor(b0)*2.0+1.0;vec4 s1=floor(b1)*2.0+1.0;vec4 sh=-step(h,vec4(0.0));vec4 a0=b0.xzyw+s0.xzyw*sh.xxyy;vec4 a1=b1.xzyw+s1.xzyw*sh.zzww;vec3 p0=vec3(a0.xy,h.x);vec3 p1=vec3(a0.zw,h.y);vec3 p2=vec3(a1.xy,h.z);vec3 p3=vec3(a1.zw,h.w);vec4 norm=taylorInvSqrt(vec4(dot(p0,p0),dot(p1,p1),dot(p2,p2),dot(p3,p3)));p0*=norm.x;p1*=norm.y;p2*=norm.z;p3*=norm.w;vec4 mm=max(0.6-vec4(dot(x0,x0),dot(x1,x1),dot(x2,x2),dot(x3,x3)),0.0);mm=mm*mm;return 42.0*dot(mm*mm,vec4(dot(p0,x0),dot(p1,x1),dot(p2,x2),dot(p3,x3)));}";
+      mat.onBeforeCompile = function(shader){
+        shader.uniforms.uTime = {value:0};
+        shader.uniforms.uDistort = {value:0.4};
+        shader.vertexShader = "uniform float uTime; uniform float uDistort;\n"+NOISE+"\n"+shader.vertexShader;
+        shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>',
+          '#include <begin_vertex>\n float nn = snoise(position*0.16 + uTime*0.45);\n transformed += normalize(position) * nn * uDistort * 4.2;');
+        distShader = shader;
+      };
+      var mono = new THREE.Mesh(geo, mat); mono.position.set(0,-1,0); scene.add(mono);
+
+      function resize(){ W=mount.clientWidth||window.innerWidth; H=mount.clientHeight||window.innerHeight; camera.aspect=W/H; camera.updateProjectionMatrix(); renderer.setSize(W,H); sizeBg(); }
+      sizeBg();
+      var mouse = new THREE.Vector2(0,0);
+      window.addEventListener('mousemove', function(e){ mouse.x=(e.clientX/window.innerWidth)*2-1; mouse.y=-((e.clientY/window.innerHeight)*2-1); }, {passive:true});
+      window.addEventListener('resize', resize);
+
+      var clock = new THREE.Clock();
+      function frame(){
+        requestAnimationFrame(frame);
+        var t = clock.getElapsedTime();
+        bgUniforms.uTime.value = t;
+        bgUniforms.uMouse.value.lerp(mouse, 0.05);
+        if (distShader) distShader.uniforms.uTime.value = reduced ? 0.0 : t;
+        if (!reduced){ mono.rotation.y = t*0.22; mono.position.y = -1 + Math.sin(t*1.1)*1.0; mono.rotation.x = Math.sin(t*0.6)*0.12; }
+        renderer.render(scene, camera);
+      }
+      frame();
+    } catch(e){ /* WebGL nicht verfügbar → Farbverlauf-Hintergrund bleibt */ }
   })();
   </script>
 </body>
