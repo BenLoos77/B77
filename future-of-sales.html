@@ -49,15 +49,15 @@
   .fos-qnum{font-family:var(--mono);font-weight:700;font-size:13px;letter-spacing:0.14em;color:var(--mute);}
   .fos-body-2{display:flex;flex-direction:column;gap:1.1em;}
   /* Hero mit Roboter-Buehne */
-  .fos-hero-grid{display:grid; grid-template-columns:1.25fr 0.85fr; gap:clamp(24px,4vw,56px);
+  .fos-hero-grid{display:grid; grid-template-columns:1fr 1.15fr; gap:clamp(16px,2.5vw,44px);
     align-items:center; padding:0 var(--gutter); margin-top:clamp(8px,2vw,20px);}
   .fos-hero-grid .fos-h1,.fos-hero-grid .fos-sub,.fos-hero-grid .fos-cta{padding-left:0; padding-right:0;}
   .fos-hero-grid .fos-h1{margin-top:0;}
-  .fos-hero-robot{position:relative; min-height:clamp(320px,36vw,440px);}
+  .fos-hero-robot{position:relative; min-height:clamp(420px,52vw,660px);}
   .fos-hero-robot spline-viewer,.fos-hero-robot canvas{position:absolute!important; inset:0; width:100%!important; height:100%!important; display:block;}
   @media(max-width:900px){
-    .fos-hero-grid{grid-template-columns:1fr; gap:20px;}
-    .fos-hero-robot{min-height:320px;}
+    .fos-hero-grid{grid-template-columns:1fr; gap:16px;}
+    .fos-hero-robot{min-height:clamp(360px,82vw,480px);}
   }
 </style>
 <script type="application/ld+json">
