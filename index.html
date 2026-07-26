@@ -793,7 +793,8 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
     var RAMP = " .·:-+=*oxX%#@", LAST = RAMP.length - 1, CONTRAST = 1.5, ANIM_I = 0.6;
     var AB1=3.8, AH=4.3, AF1=6.6, CB0=5.0, CB1=9.8, CH1=12.8, CF1=15.2, CYCLE=15.2;
     var MONTHS=["JAN","FEB","MÄR","APR","MAI","JUN","JUL","AUG","SEP","OKT","NOV","DEZ"];
-    var VALS=[8.3,9.6,10.8,11.7,13.2,14.5,15.9,17.4,18.8,20.7,22.9,24.6], MAXV=26;
+    /* Monatswerte in Mio €, unregelmaessig schwankend zwischen 1,2 und 2,6 (krumm) */
+    var VALS=[1.7,2.3,1.9,2.6,2.1,1.3,2.2,2.6,1.8,2.4,1.6,2.3];
     var W,H,dpr,cell,cols,rows,amask=null,shaft=[],head=null,charFont='';
     var baseY,barMaxH,x0,x1,slot,barW;
 
@@ -821,7 +822,7 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
         amask[gy*cols+gx]=v;
       }
     }
-    function buildChart(){ baseY=0.42*H; var topPad=0.085*H; barMaxH=baseY-topPad; x0=0.055*W; x1=0.965*W; slot=(x1-x0)/12; barW=slot*0.54; }
+    function buildChart(){ baseY=0.90*H; barMaxH=0.60*H; x0=0.055*W; x1=0.965*W; slot=(x1-x0)/12; barW=slot*0.54; }
 
     function setup(){
       W=mount.clientWidth||window.innerWidth; H=mount.clientHeight||window.innerHeight;
@@ -856,7 +857,7 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
       /* ---- Chart ---- */
       if(tc>=CB0){
         var riseDur=1.15, stag=(CB1-CB0-riseDur)/11, chartFall=tc>CH1, cf=chartFall?clamp01((tc-CH1)/(CF1-CH1)):0, tops=[];
-        for(var i=0;i<12;i++){var rp=smooth(clamp01((tc-(CB0+i*stag))/riseDur));var h=barMaxH*(VALS[i]/MAXV)*rp;tops.push({cx:x0+slot*(i+0.5),topY:baseY-h,rp:rp});}
+        for(var i=0;i<12;i++){var rp=smooth(clamp01((tc-(CB0+i*stag))/riseDur));var h=barMaxH*(0.22+0.78*(VALS[i]-1.2)/1.4)*rp;tops.push({cx:x0+slot*(i+0.5),topY:baseY-h,rp:rp});}
         var g0=Math.floor(x0/cell),g1=Math.ceil(x1/cell),gBase=Math.floor(baseY/cell);
         for(var gx=g0;gx<g1;gx++){
           var px=gx*cell+cell*0.5,bi=Math.floor((px-x0)/slot); if(bi<0||bi>11)continue;
