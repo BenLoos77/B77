@@ -776,9 +776,10 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
 
   <script src="monolith.js?v=mono18"></script>
   <script>
-  /* HERO: ASCII-Zeichenfeld (Canvas2D). Prozedurales, animiertes Wellenfeld,
-     als Zeichen-Raster gerendert (renderMode "characters"). Monolith-Look:
-     helle Zeichen auf Dunkel. Faellt still auf den Farbverlauf zurueck. */
+  /* HERO: ASCII-Zeichenfeld (Canvas2D). Die animierten Zeichen formen einen
+     geschwungenen, nach oben-rechts zeigenden Wachstums-Pfeil; das Shimmer-
+     Wellenfeld laeuft innerhalb der Pfeilform weiter. Monolith-Look: helle
+     Zeichen auf Dunkel. Faellt still auf den Farbverlauf zurueck. */
   (function(){
     var mount = document.getElementById('ph-gl');
     if (!mount) return;
@@ -788,25 +789,61 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
     if (!ctx) return;
     mount.appendChild(canvas);
 
-    var RAMP = " .·:-+=*oxX%#@";  /* dunkel -> hell (charSet: standard) */
+    var RAMP = " .·:-+=*oxX%#@";
     var LAST = RAMP.length - 1;
-    var CONTRAST = 1.58;                /* contrast 158 */
-    var COVERAGE = 0.37;               /* 37 % der Zellen */
-    var ANIM_I = 0.60;                 /* animIntensity 60 */
-    var SPEED = 0.9;                   /* animSpeed 100 (shimmer) */
+    var CONTRAST = 1.5;
+    var ANIM_I = 0.60;
+    var SPEED = 0.9;
 
-    var W, H, dpr, cell, cols, rows;
+    var W, H, dpr, cell, cols, rows, shaft = [], head = null;
+
+    function cbez(a,b,c,d,t){ var m=1-t; return {
+      x:m*m*m*a.x+3*m*m*t*b.x+3*m*t*t*c.x+t*t*t*d.x,
+      y:m*m*m*a.y+3*m*m*t*b.y+3*m*t*t*c.y+t*t*t*d.y }; }
+    function distSeg(px,py,a,b){ var dx=b.x-a.x,dy=b.y-a.y,l2=dx*dx+dy*dy;
+      var t=l2?((px-a.x)*dx+(py-a.y)*dy)/l2:0; t=t<0?0:t>1?1:t;
+      return Math.hypot(px-(a.x+t*dx), py-(a.y+t*dy)); }
+    function sgn(p,a,b){ return (p.x-b.x)*(a.y-b.y)-(a.x-b.x)*(p.y-b.y); }
+    function inTri(p,A,B,C){ var d1=sgn(p,A,B),d2=sgn(p,B,C),d3=sgn(p,C,A);
+      return !(((d1<0)||(d2<0)||(d3<0)) && ((d1>0)||(d2>0)||(d3>0))); }
+
+    function buildPath(){
+      shaft = [];
+      function P(x,y){ return { x:x*W, y:(1-y)*H }; }   /* yUp 0..1 (unten..oben) */
+      var p0=P(0.08,0.26), p1=P(0.30,0.03), p2=P(0.55,0.24), p3=P(0.70,0.60);
+      var baseHW=0.028*H, N=170;
+      for (var i=0;i<=N;i++){ var t=i/N, q=cbez(p0,p1,p2,p3,t);
+        shaft.push({ x:q.x, y:q.y, hw:baseHW*(0.62+0.85*t) }); }
+      var end=P(0.70,0.60), pe=cbez(p0,p1,p2,p3,0.975);
+      var dir=Math.atan2(end.y-pe.y, end.x-pe.x);
+      var tipLen=0.205*H, halfW=0.125*H;
+      var nx=Math.cos(dir+Math.PI/2), ny=Math.sin(dir+Math.PI/2);
+      head={ t:{x:end.x+Math.cos(dir)*tipLen, y:end.y+Math.sin(dir)*tipLen},
+             a:{x:end.x+nx*halfW, y:end.y+ny*halfW},
+             b:{x:end.x-nx*halfW, y:end.y-ny*halfW} };
+    }
+    function arrowMask(px,py){
+      var p={x:px,y:py};
+      if (head && inTri(p,head.t,head.a,head.b)) return 1;
+      var m=1e9, hw=0;
+      for (var i=0;i<shaft.length-1;i++){ var d=distSeg(px,py,shaft[i],shaft[i+1]);
+        if (d<m){ m=d; hw=(shaft[i].hw+shaft[i+1].hw)/2; } }
+      var soft=0.016*H;
+      if (m>hw+soft) return 0; if (m<=hw) return 1; return 1-(m-hw)/soft;
+    }
+
     function setup(){
       W = mount.clientWidth || window.innerWidth;
       H = mount.clientHeight || window.innerHeight;
       dpr = Math.min(1.5, window.devicePixelRatio || 1);
-      cell = W < 700 ? 12 : 9;         /* cellSize 9 (Desktop), groesser mobil */
+      cell = W < 700 ? 12 : 9;
       canvas.width = Math.round(W*dpr); canvas.height = Math.round(H*dpr);
       canvas.style.width = W+'px'; canvas.style.height = H+'px';
       ctx.setTransform(dpr,0,0,dpr,0,0);
       cols = Math.ceil(W/cell); rows = Math.ceil(H/cell);
       ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
       ctx.font = cell + "px 'Geist Mono','JetBrains Mono',ui-monospace,monospace";
+      buildPath();
     }
     setup();
     window.addEventListener('resize', setup, {passive:true});
@@ -815,25 +852,24 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
       var w = Math.sin(nx*7.0 + t*0.7)
             + Math.sin(ny*5.0 - t*0.5 + Math.sin(nx*4.0 + t*0.3)*1.2)
             + Math.sin((nx*3.0 + ny*6.0) + t*0.6);
-      var lum = (w/3.0)*0.5 + 0.5;
-      var env = Math.pow(Math.max(0, Math.sin(ny*Math.PI)), 0.4);  /* Raender ruhiger */
-      return lum * (0.35 + 0.65*env);
+      return (w/3.0)*0.5 + 0.5;
     }
-
     function draw(t){
       ctx.clearRect(0,0,W,H);
       for (var gy=0; gy<rows; gy++){
-        var ny = gy/rows;
         for (var gx=0; gx<cols; gx++){
-          var lum = field(gx/cols, ny, t);
+          var px = gx*cell + cell*0.5, py = gy*cell + cell*0.5;
+          var mk = arrowMask(px, py); if (mk <= 0) continue;
+          var lum = field(gx/cols, gy/rows, t);
           lum += Math.sin(t*2.4 + gx*0.55 + gy*0.8) * 0.22 * ANIM_I;  /* shimmer */
           lum = (lum-0.5)*CONTRAST + 0.5;
-          if (lum < 1-COVERAGE) continue;
+          lum = lum*0.55 + 0.45; lum *= mk;
+          if (lum < 0.16) continue;
           if (lum > 1) lum = 1;
           var ch = RAMP.charAt((lum*LAST)|0);
           if (ch === ' ') continue;
-          ctx.fillStyle = 'rgba(245,244,242,' + (0.14 + lum*0.5).toFixed(3) + ')';
-          ctx.fillText(ch, gx*cell + cell*0.5, gy*cell + cell*0.5);
+          ctx.fillStyle = 'rgba(245,244,242,' + (0.16 + lum*0.55).toFixed(3) + ')';
+          ctx.fillText(ch, px, py);
         }
       }
     }
