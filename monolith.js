@@ -203,14 +203,30 @@
       else { go(); }
     }
 
-    if ("IntersectionObserver" in window) {
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) { if (e.isIntersecting) { mountOne(e.target); io.unobserve(e.target); } });
-      }, { rootMargin: "400px" });
-      Array.prototype.forEach.call(mounts, function (el) { io.observe(el); });
-    } else {
-      Array.prototype.forEach.call(mounts, mountOne);
-    }
+    // Robuste Ausloesung: sofort mounten wenn schon nahe am Viewport, sonst
+    // per IntersectionObserver + Scroll-Listener, und ein Timeout-Backstop,
+    // damit der Roboter garantiert laedt (auch wenn ein Trigger mal nicht feuert).
+    Array.prototype.forEach.call(mounts, function (el) {
+      function near() { var r = el.getBoundingClientRect(); return r.top < (window.innerHeight + 600) && r.bottom > -600; }
+      if (near()) { mountOne(el); return; }
+      var done = false, io = null;
+      function cleanup() {
+        window.removeEventListener("scroll", check);
+        window.removeEventListener("resize", check);
+        if (io) io.disconnect();
+      }
+      function fire() { if (done) return; done = true; cleanup(); mountOne(el); }
+      function check() { if (!done && near()) fire(); }
+      if ("IntersectionObserver" in window) {
+        io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { if (e.isIntersecting) fire(); });
+        }, { rootMargin: "500px" });
+        io.observe(el);
+      }
+      window.addEventListener("scroll", check, { passive: true });
+      window.addEventListener("resize", check, { passive: true });
+      setTimeout(fire, 3500); // Backstop
+    });
   }
 
   function init() { initDecode(); initReveal(); initNav(); initFloatingNav(); initGrid(); initSpline(); }
