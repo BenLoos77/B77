@@ -131,24 +131,27 @@ p+p{margin-top:1.1em;}
 .manifest-sec .corners{margin-bottom:clamp(40px,6vw,72px);}
 
 /* ---------- Index-Liste (Leistungen) ---------- */
+/* Aufzählung — einheitlich, ruhig, ohne Flächen-Hover.
+   Pfeil erscheint nur, wenn die Zeile ein Link ist (a.il-row); Nicht-Links
+   bekommen keinen Zeiger und keinen Pfeil. */
 .il{border-top:1px solid var(--line);}
-.il-row{display:grid;grid-template-columns:60px 1fr auto;align-items:center;gap:28px;
-  padding:clamp(26px,3.2vw,40px) var(--gutter);border-bottom:1px solid var(--line);
-  color:var(--ink);transition:background .35s cubic-bezier(.2,.7,.2,1),
-  color .35s cubic-bezier(.2,.7,.2,1),padding-left .35s cubic-bezier(.2,.7,.2,1);}
-.il-idx{font-family:var(--mono);font-weight:600;font-size:14px;color:var(--mute);
-  letter-spacing:0.04em;transition:color .35s;}
+.il-row{display:grid;grid-template-columns:minmax(48px,max-content) 1fr auto;align-items:start;gap:4px 26px;
+  padding:clamp(20px,2.4vw,30px) var(--gutter);border-bottom:1px solid var(--line);
+  color:var(--ink);cursor:default;}
+.il-idx{font-family:var(--mono);font-weight:600;font-size:13px;color:var(--mute);
+  letter-spacing:0.04em;line-height:1.6;white-space:nowrap;}
 .il-main{min-width:0;}
-.il-title{font-family:var(--sans);font-weight:500;font-size:clamp(24px,3.4vw,46px);
-  letter-spacing:-0.02em;line-height:1.04;display:block;}
-.il-desc{font-family:var(--sans);font-weight:400;font-size:clamp(15px,1.5vw,18px);
-  line-height:1.45;color:var(--text-2);max-width:64ch;margin-top:10px;transition:color .35s;}
-.il-arr{font-family:var(--sans);font-weight:400;font-size:clamp(22px,2.4vw,32px);
-  justify-self:end;transform:translateX(-8px);opacity:0;transition:transform .35s cubic-bezier(.2,.7,.2,1),opacity .35s;}
-.il-row:hover{background:var(--ink);color:var(--paper);padding-left:calc(var(--gutter) + 24px);}
-.il-row:hover .il-idx{color:var(--paper);}
-.il-row:hover .il-desc{color:rgba(255,255,255,0.72);}
-.il-row:hover .il-arr{transform:translateX(0);opacity:1;}
+.il-title{font-family:var(--sans);font-weight:500;font-size:clamp(20px,2.2vw,30px);
+  letter-spacing:-0.015em;line-height:1.14;display:block;}
+.il-desc{font-family:var(--sans);font-weight:400;font-size:clamp(14px,1.4vw,16px);
+  line-height:1.5;color:var(--text-2);max-width:66ch;margin-top:9px;}
+.il-arr{font-family:var(--sans);font-weight:400;font-size:clamp(19px,1.9vw,24px);
+  color:var(--mute);justify-self:end;line-height:1.3;
+  transition:transform .3s cubic-bezier(.2,.7,.2,1),color .3s;}
+/* Nur echte Links sind interaktiv: Zeiger + dezenter Pfeil-Nudge (kein Flächen-Fill) */
+a.il-row{cursor:pointer;}
+a.il-row:hover .il-title{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px;}
+a.il-row:hover .il-arr{transform:translateX(4px);color:var(--ink);}
 
 /* ---------- Plakat (schwarze Kontrast-Sektion) ---------- */
 .plakat{background:var(--ink);color:var(--paper);border-top:1px solid var(--ink);
@@ -322,9 +325,7 @@ p+p{margin-top:1.1em;}
   .stats{grid-template-columns:1fr;}
   .stat{border-left:none;border-top:1px solid var(--line);}
   .stat:first-child{border-top:none;}
-  .il-row{grid-template-columns:40px 1fr;gap:14px 16px;}
-  .il-arr{display:none;}
-  .il-row:hover{padding-left:calc(var(--gutter) + 14px);}
+  .il-row{grid-template-columns:minmax(34px,max-content) 1fr auto;gap:4px 14px;}
   .display{font-size:clamp(64px,22vw,150px);padding-left:0;white-space:normal;}
   .manifest{text-align:left;}
 }
