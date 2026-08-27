@@ -1,7 +1,7 @@
 :root{
     --stone:#EDEBE6; --paper:#FBFAF7; --cloud:#F3F1EC; --ink:#1C1A17; --muted:#8A867E; --line:#DED9CF;
-    --rose-deep:#131311; --rose-deep2:#232320; --rose:#E9FF00; --rose-line:#5F5C57;
-    --on-deep:#F1ECE4; --ghost:rgba(233,255,0,.16); --r:28px;
+    --rose-deep:#131311; --rose-deep2:#232320; --rose:#FFFF00; --rose-line:#5F5C57;
+    --on-deep:#F1ECE4; --ghost:rgba(255,255,0,.16); --r:28px;
     --grade:saturate(.42) contrast(1.18) brightness(.93) sepia(.12);
   }
   *{margin:0;padding:0;box-sizing:border-box}
@@ -72,7 +72,7 @@
   .card--rose .card__go{color:color-mix(in srgb,var(--on-deep) 70%,transparent)} .card--rose .card__go .a{color:var(--rose)}
   .card:hover .card__go .a{transform:translateX(5px)}
   .card__ghost{position:absolute;right:-6px;bottom:-40px;font-weight:800;font-size:11rem;line-height:.8;letter-spacing:-.05em;color:color-mix(in srgb,var(--rose-line) 13%,transparent);pointer-events:none}
-  .card--rose .card__ghost{color:var(--ghost)}
+  .card--rose .card__ghost{color:var(--rose)}
   .card blockquote{margin-top:18px;font-family:'Gambetta',Georgia,serif;font-style:italic;font-size:17px;line-height:1.35;color:#4A4740}
   .card--rose blockquote{color:color-mix(in srgb,var(--on-deep) 90%,transparent)}
 
