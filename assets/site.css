@@ -1,6 +1,6 @@
 :root{
     --stone:#EDEBE6; --paper:#FBFAF7; --cloud:#F3F1EC; --ink:#1C1A17; --muted:#8A867E; --line:#DED9CF;
-    --rose-deep:#131311; --rose-deep2:#232320; --rose:#E9FF00; --rose-line:#7E6E00;
+    --rose-deep:#131311; --rose-deep2:#232320; --rose:#E9FF00; --rose-line:#5F5C57;
     --on-deep:#F1ECE4; --ghost:rgba(233,255,0,.16); --r:28px;
     --grade:saturate(.42) contrast(1.18) brightness(.93) sepia(.12);
   }
