@@ -4,22 +4,7 @@
   'use strict';
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---- Neon-Scroll-Fortschrittsbalken ---- */
-  var bar = document.createElement('div');
-  bar.className = 'scrollbar';
-  bar.setAttribute('aria-hidden', 'true');
-  document.body.appendChild(bar);
-  function updBar() {
-    var st = window.scrollY || document.documentElement.scrollTop;
-    var h = document.documentElement.scrollHeight - window.innerHeight;
-    bar.style.width = (h > 0 ? Math.min(st / h * 100, 100) : 0) + '%';
-  }
-
-  if (reduce) {
-    updBar();
-    window.addEventListener('scroll', updBar, { passive: true });
-    return;
-  }
+  if (reduce) return;
 
   function inCheck(el) { return el.closest && el.closest('.checkpage'); }
 
@@ -94,8 +79,8 @@
     }
     ticking = false;
   }
-  function onScroll() { updBar(); if (!ticking) { ticking = true; requestAnimationFrame(px); } }
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(px); } }
   window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', function () { updBar(); px(); }, { passive: true });
-  updBar(); px();
+  window.addEventListener('resize', function () { px(); }, { passive: true });
+  px();
 })();
