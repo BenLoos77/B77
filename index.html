@@ -5,856 +5,213 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Vertriebsberatung Mittelstand Siegen – Mehr Anfragen mit B_77</title>
 <meta name="description" content="Vertriebsberatung für den Mittelstand: B_77 aktiviert Ihren Vertrieb mit Sales Intelligence und KI. Kostenloses Erstgespräch – seit 2017 in Siegen.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="monolith.css?v=mono30">
 <link rel="canonical" href="https://b77.de/">
-<meta name="robots" content="index, follow">
-<meta name="author" content="Benjamin Loos">
-<link rel="icon" type="image/png" href="/assets/B77_Logo_black.png">
+<link rel="icon" type="image/png" href="/assets/img/favicon.png">
+<meta name="theme-color" content="#EDEBE6">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="B_77">
 <meta property="og:url" content="https://b77.de/">
 <meta property="og:title" content="Vertriebsberatung Mittelstand Siegen – Mehr Anfragen mit B_77">
 <meta property="og:description" content="Vertriebsberatung für den Mittelstand: B_77 aktiviert Ihren Vertrieb mit Sales Intelligence und KI. Kostenloses Erstgespräch – seit 2017 in Siegen.">
 <meta property="og:image" content="https://b77.de/assets/og-b77.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:locale" content="de_DE">
-<meta property="og:site_name" content="B_77 Vertriebsberatung">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Vertriebsberatung Mittelstand Siegen – Mehr Anfragen mit B_77">
 <meta name="twitter:description" content="Vertriebsberatung für den Mittelstand: B_77 aktiviert Ihren Vertrieb mit Sales Intelligence und KI. Kostenloses Erstgespräch – seit 2017 in Siegen.">
 <meta name="twitter:image" content="https://b77.de/assets/og-b77.png">
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"ProfessionalService","name":"B_77 Vertriebsberatung","alternateName":"B_77","description":"Vertriebsberatung für mittelständische Unternehmen in Siegen, NRW und deutschlandweit.","url":"https://b77.de","logo":"https://b77.de/assets/B77_Logo_black.png","image":"https://b77.de/assets/og-b77.png","email":"kontakt@b77.de","telephone":"+49-271-89027837","founder":{"@type":"Person","name":"Benjamin Loos"},"foundingDate":"2017","address":{"@type":"PostalAddress","streetAddress":"Unter dem Klingelschacht 18","postalCode":"57074","addressLocality":"Siegen","addressRegion":"Nordrhein-Westfalen","addressCountry":"DE"},"areaServed":[{"@type":"City","name":"Siegen"},{"@type":"AdministrativeArea","name":"Nordrhein-Westfalen"},{"@type":"Country","name":"Deutschland"}],"serviceType":["Vertriebsberatung","Vertriebsoptimierung","Aktiver Vertrieb","Neukundengewinnung","Vertriebsaufbau"],"priceRange":"€€€","openingHours":"Mo-Fr 08:30-18:00"}
-</script>
-<script src="/css/analytics.js?v=ga3" defer></script>
-<!-- B_77 Intro: Fonts + Style -->
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  /* ============================================================
-     B_77 INTRO — eigenständiges Overlay (Vanilla JS, kein Framework)
-     Konfiguration ganz unten im <script> unter  window.B77_INTRO_CONFIG
-     ============================================================ */
-  html, body { margin:0; padding:0; }
-  #b77, #b77 * { box-sizing:border-box; }
-  #b77 {
-    position:fixed; inset:0; z-index:999999;
-    background:#0b0b0c; overflow:hidden;
-    font-family:'Archivo', sans-serif; color:#f5f4f2;
-  }
-  #b77-canvas { position:absolute; inset:0; width:100%; height:100%; display:block; }
-  #b77-logo { position:absolute; left:0; top:0; width:200px; height:auto; opacity:0; pointer-events:none; user-select:none; z-index:6; }
-  #b77-topbar { position:absolute; inset:0; opacity:0; pointer-events:none; z-index:5; }
-  #b77-loc { position:absolute; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#6c6a66; }
-  #b77-headrule { position:absolute; height:1px; background:rgba(245,244,242,0.10); }
-  #b77-content { position:absolute; top:50%; left:60px; transform:translateY(-50%); max-width:1000px; display:flex; flex-direction:column; align-items:flex-start; pointer-events:none; z-index:5; opacity:0; }
-  #b77-statement { font-weight:700; font-size:clamp(30px,4.3vw,60px); line-height:1.13; letter-spacing:-0.015em; color:#f5f4f2; }
-  #b77-statement .em { font-family:'Newsreader',serif; font-style:italic; font-weight:500; letter-spacing:0; }
-  #b77-statement img { height:0.95em; width:auto; vertical-align:-0.21em; }
-  #b77-rule { width:130px; height:2px; background:#f5f4f2; transform-origin:left center; transform:scaleX(0); opacity:0; margin:clamp(30px,4.4vh,52px) 0 clamp(22px,3vh,34px); }
-  #b77-question { opacity:0; max-width:700px; font-weight:300; font-size:clamp(15px,1.35vw,20px); color:#aeaca7; letter-spacing:0.012em; line-height:1.6; }
-  #b77-btns { display:flex; gap:14px; margin-top:clamp(22px,3vh,36px); opacity:0; pointer-events:none; }
-  .b77-btn { background:transparent; color:#cfcdc8; border:1px solid rgba(245,244,242,0.3); font-family:'Space Mono',monospace; font-size:13px; font-weight:700; letter-spacing:0.2em; padding:15px 42px; cursor:pointer; transition:border-color .2s ease, color .2s ease, transform .15s ease; }
-  .b77-btn:hover { border-color:rgba(245,244,242,0.65); color:#f5f4f2; }
-  .b77-btn--primary { background:#f5f4f2; color:#0b0b0c; border-color:#f5f4f2; }
-  .b77-btn--primary:hover { transform:translateY(-1px); color:#0b0b0c; }
-  #b77-counter { position:absolute; left:60px; bottom:36px; opacity:0; font-family:'Space Mono',monospace; font-size:12px; letter-spacing:0.04em; color:#6c6a66; z-index:5; }
-  #b77-counter b { color:#f5f4f2; font-weight:400; }
-  #b77-counter .sub { margin-top:6px; font-size:10px; letter-spacing:0.22em; color:#56544f; }
-  #b77-nein { position:absolute; inset:0; display:none; flex-direction:column; align-items:flex-start; justify-content:center; padding:0 60px; background:#0b0b0c; opacity:0; z-index:10; }
-  #b77-nein .k { opacity:0; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.3em; color:#6c6a66; margin-bottom:26px; }
-  #b77-nein .t { opacity:0; font-weight:700; font-size:clamp(34px,5vw,72px); line-height:1.04; letter-spacing:-0.02em; }
-  #b77-nein .s { opacity:0; max-width:760px; margin-top:24px; font-weight:400; font-size:clamp(17px,1.9vw,26px); line-height:1.4; color:#b6b3ad; }
-  #b77-nein .b { opacity:0; display:flex; gap:14px; margin-top:clamp(28px,4vh,46px); }
-  #b77-nein .note { position:absolute; left:60px; bottom:36px; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:0.22em; color:#3f3e3a; }
-  #b77-nein .b { flex-wrap:wrap; }
-  #b77-nein-funnel, #b77-nein-check-view { width:100%; }
-  #b77-nein-check-view { display:none; max-width:780px; }
-  #b77-nein .b77-btn--ghost { background:transparent; border-color:transparent; color:#6c6a66; padding-left:4px; padding-right:18px; }
-  #b77-nein .b77-btn--ghost:hover { border-color:transparent; color:#cfcdc8; }
-  #b77-nein-funnel .s { max-width:860px; }
-  .nein-lead { margin:0; font-family:'Archivo',sans-serif; font-weight:300; font-size:clamp(16px,1.6vw,22px); line-height:1.5; color:#cfcdc8; max-width:800px; }
-  .nein-guess { margin:clamp(22px,3.4vh,34px) 0 6px; font-family:'Archivo',sans-serif; font-weight:400; font-size:clamp(15px,1.4vw,19px); color:#928f89; }
-  .nein-guess b { color:#f5f4f2; font-weight:700; }
-  .nein-einwand { display:flex; gap:16px; margin-top:18px; }
-  .ne-lbl { flex:0 0 auto; width:30px; height:30px; margin-top:3px; display:flex; align-items:center; justify-content:center; font-family:'Space Mono',monospace; font-size:13px; font-weight:700; color:#cfcdc8; border:1px solid rgba(245,244,242,0.28); }
-  .ne-q { display:block; font-family:'Newsreader',serif; font-style:italic; font-weight:500; font-size:clamp(19px,2.1vw,30px); line-height:1.22; letter-spacing:0; color:#f5f4f2; }
-  .ne-a { display:block; margin-top:7px; font-family:'Archivo',sans-serif; font-size:clamp(14px,1.3vw,18px); font-weight:300; line-height:1.5; color:#928f89; }
-  .nein-mag { margin:clamp(22px,3vh,32px) 0 0; max-width:600px; font-family:'Archivo',sans-serif; font-weight:300; font-size:clamp(13px,1.1vw,15px); line-height:1.55; color:#7c7a75; }
-  .nein-mag a { color:#cfcdc8; text-decoration:none; border-bottom:1px solid rgba(245,244,242,0.3); padding-bottom:1px; white-space:nowrap; transition:color .2s ease, border-color .2s ease; }
-  .nein-mag a:hover { color:#f5f4f2; border-color:#f5f4f2; }
-  .b77c-top { display:flex; justify-content:space-between; align-items:baseline; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.22em; color:#6c6a66; }
-  .b77c-bar { height:2px; background:rgba(245,244,242,0.12); margin:15px 0 30px; }
-  .b77c-bar i { display:block; height:100%; width:0%; background:#f5f4f2; transition:width .35s ease; }
-  .b77c-q { font-weight:600; font-size:clamp(22px,2.9vw,40px); line-height:1.18; letter-spacing:-0.012em; color:#f5f4f2; }
-  .b77c-opts { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-top:30px; }
-  .b77c-opt { text-align:left; background:transparent; border:1px solid rgba(245,244,242,0.2); color:#cfcdc8; font-family:'Archivo',sans-serif; font-size:15px; font-weight:500; padding:16px 18px; cursor:pointer; display:flex; align-items:center; gap:13px; transition:border-color .18s ease, background .18s ease, color .18s ease; }
-  .b77c-opt:hover { border-color:rgba(245,244,242,0.55); background:rgba(245,244,242,0.04); color:#f5f4f2; }
-  .b77c-opt .n { font-family:'Space Mono',monospace; font-size:11px; color:#6c6a66; }
-  .b77c-foot { display:flex; gap:26px; margin-top:26px; }
-  .b77-link { background:transparent; border:0; color:#6c6a66; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; cursor:pointer; padding:0; transition:color .18s ease; }
-  .b77-link:hover { color:#cfcdc8; }
-  #b77c-result { display:none; }
-  /* Check-Ansicht wird nicht über die computeNein-Staffel animiert -> Opazität zurücksetzen */
-  #b77-nein-check-view .k, #b77-nein-check-view .s, #b77-nein-check-view .b { opacity:1; transform:none; }
-  .b77c-score { display:flex; align-items:baseline; gap:20px; margin:4px 0 2px; }
-  .b77c-score b { font-weight:700; font-size:clamp(46px,7vw,96px); line-height:1; letter-spacing:-0.03em; color:#f5f4f2; }
-  .b77c-score span { font-family:'Space Mono',monospace; font-size:13px; letter-spacing:0.14em; color:#aeaca7; }
-  @media (max-width:640px){ .b77c-opts{ grid-template-columns:1fr; } }
-  #b77-fade { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:#0b0b0c; opacity:0; pointer-events:none; z-index:12; }
-  #b77-fade span { font-family:'Space Mono',monospace; font-size:13px; letter-spacing:0.3em; color:#cfcdc8; }
-  #b77-replay { position:absolute; right:30px; bottom:30px; opacity:0; pointer-events:none; background:transparent; border:1px solid rgba(245,244,242,0.28); color:#cfcdc8; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; padding:9px 16px; cursor:pointer; z-index:11; transition:border-color .2s ease, color .2s ease; }
-  #b77-replay:hover { border-color:rgba(245,244,242,0.6); color:#f5f4f2; }
-  #b77-progtrack { position:absolute; left:0; bottom:0; height:2px; width:100%; background:rgba(255,255,255,0.05); z-index:5; }
-  #b77-progress { height:100%; width:0%; background:#f5f4f2; }
-  /* Hero: dezentes Geister-Folio „77" */
-  .hb__folio { position:absolute; right:-1.5%; bottom:-5%; width:clamp(320px,54vw,760px); aspect-ratio:446/310;
-    background:url(/assets/B77_77_white.png?v=2) right bottom/contain no-repeat; opacity:.035; pointer-events:none; z-index:0; }
-  .hb > *:not(.hb__folio) { position:relative; z-index:1; }
-  /* Studio-Teaser (ganzes Bild, im Inhaltsraster) */
-  .studio__media { display:block; margin-top:clamp(28px,4vw,52px); padding:0 var(--gutter); }
-  .studio__media img { width:100%; height:auto; display:block; filter:grayscale(1); border:1px solid var(--line); }
-  .studio__cap { display:flex; justify-content:space-between; align-items:flex-end; gap:24px 48px; flex-wrap:wrap; margin-top:clamp(20px,2.4vw,30px); }
-  .studio__lead { max-width:54ch; margin:0; font-family:var(--sans); font-weight:400; font-size:clamp(17px,1.7vw,22px); line-height:1.5; color:var(--ink); }
-</style>
-<style>
-  /* ===== HERO: Editorial (unten-links), ASCII-Hintergrund ===== */
-  .ph{position:relative; min-height:100vh; min-height:100dvh; overflow:hidden;
-    background:#FFFFFF; color:#0F0F0F; display:flex; align-items:flex-end;
-    text-align:left; isolation:isolate;}
-  /* ASCII-Zeichenfeld-Hintergrund (Canvas2D); Farbverlauf als Fallback */
-  .ph__gl{position:absolute; inset:0; z-index:0; pointer-events:none;
-    background:#FFFFFF;}
-  .ph__gl canvas{display:block; width:100%!important; height:100%!important;}
-  /* Lesbarkeits-Schleier: dunkel links (hinter dem Text), Zeichen rechts sichtbar */
-  .ph__veil{position:absolute; inset:0; z-index:1; pointer-events:none;
-    background:linear-gradient(88deg, rgba(255,255,255,0.86) 0%, rgba(255,255,255,0.46) 40%, rgba(255,255,255,0) 72%),
-      linear-gradient(0deg, rgba(255,255,255,0.72) 0%, rgba(255,255,255,0) 44%);}
-  .ph__content{position:relative; z-index:2; width:100%;
-    padding:clamp(32px,5vw,84px); padding-bottom:clamp(22px,2.8vw,44px); display:flex; flex-direction:column; gap:clamp(20px,3vh,34px);}
-  .ph__kick{font-family:var(--mono); font-size:clamp(11px,1vw,13px); letter-spacing:0.16em;
-    text-transform:uppercase; color:#6E6E6E; margin:0;}
-  .ph__title{margin:0; font-family:var(--sans); font-weight:800; text-transform:uppercase;
-    letter-spacing:-0.04em; line-height:0.85; font-size:clamp(46px,10vw,150px);}
-  .ph__title .em{display:block; font-family:var(--sans); font-style:normal; font-weight:800;
-    text-transform:uppercase; letter-spacing:-0.04em;}
-  .ph__foot{display:flex; align-items:flex-end; justify-content:space-between;
-    gap:clamp(24px,4vw,52px); flex-wrap:wrap;}
-  .ph__foot-l{display:flex; flex-direction:column; gap:clamp(18px,2.4vh,26px); max-width:48ch;}
-  .ph__lead{margin:0; font-family:var(--sans); font-weight:400;
-    font-size:clamp(15px,1.4vw,19px); line-height:1.55; color:#333333;}
-  .ph__lead strong{color:#0F0F0F; font-weight:700;}
-  .ph__cta{display:inline-flex; gap:12px; flex-wrap:wrap;}
-  .ph__cta a{font-family:var(--mono); font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
-    color:#FFFFFF; background:#0F0F0F; text-decoration:none; padding:14px 22px; border:1px solid #0F0F0F; transition:.2s;}
-  .ph__cta a.ghost{background:transparent; color:#0F0F0F; border-color:rgba(15,15,15,0.35);}
-  .ph__cta a:hover{background:transparent; color:#0F0F0F; border-color:#0F0F0F;}
-  .ph__cta a.ghost:hover{background:rgba(15,15,15,0.06); color:#0F0F0F;}
-  .ph__stats{display:flex; gap:clamp(18px,2.5vw,44px); flex-wrap:wrap; padding-bottom:4px;
-    font-family:var(--mono); font-size:clamp(10px,0.9vw,12px);
-    letter-spacing:0.12em; text-transform:uppercase; color:#6E6E6E;}
-  .ph__stats span{white-space:nowrap;}
-  .ph__stats b{color:#0F0F0F; font-weight:600;}
-  @media(max-width:760px){
-    /* Mobil: Inhalt fuellt fast die volle Breite -> Schleier von unten kraeftiger,
-       damit Lead/CTA klar ueber den Zeichen liegen */
-    .ph__veil{background:linear-gradient(0deg, rgba(255,255,255,0.94) 0%, rgba(255,255,255,0.72) 34%, rgba(255,255,255,0) 66%);}
-    .ph__foot{gap:22px;}
-  }
-</style>
-<style>
-  /* ===== Top-Themen (Home) ===== */
-  .tt-wrap{padding:0 var(--gutter);}
-  .tt-feature{position:relative; overflow:hidden; border-radius:16px; color:var(--paper);
-    display:grid; grid-template-columns:1.3fr 1fr; gap:clamp(20px,3vw,48px); align-items:stretch;
-    min-height:clamp(380px,40vw,470px); padding:clamp(30px,4vw,56px);
-    background-image:radial-gradient(120% 130% at 100% 0%, #2a2a2a 0%, #161616 46%, #0f0f0f 100%);}
-  .tt-feature .col-l{position:relative; z-index:2; display:flex; flex-direction:column; justify-content:center;}
-  .tt-feature .meta{font-family:var(--mono); font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:rgba(245,244,242,0.55); margin:0 0 clamp(16px,2vw,24px);}
-  .tt-feature h3{margin:0; font-family:var(--sans); font-weight:500; text-transform:uppercase; letter-spacing:-0.03em; line-height:0.92; font-size:clamp(38px,5.4vw,78px);}
-  .tt-feature .ex{margin:clamp(16px,2vw,24px) 0 0; font-size:clamp(14px,1.3vw,17px); line-height:1.55; color:rgba(245,244,242,0.72); max-width:42ch;}
-  .tt-feature .cta{display:inline-flex; align-items:center; gap:10px; margin-top:26px; text-decoration:none; font-family:var(--mono); font-weight:600; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--paper);}
-  .tt-feature .cta i{font-style:normal; transition:transform .3s;}
-  .tt-feature .cta:hover i{transform:translateX(5px);}
-  /* Roboter-Bühne rechts */
-  .tt-robot{position:relative; z-index:1; min-height:280px;}
-  .tt-robot spline-viewer,.tt-robot canvas{position:absolute!important; inset:0; width:100%!important; height:100%!important; display:block;}
-  .tt-robot::after{content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
-    background:radial-gradient(60% 60% at 50% 45%, rgba(245,244,242,0.05), transparent 70%);}
-  @media(max-width:820px){
-    .tt-feature{grid-template-columns:1fr; gap:16px; min-height:0;}
-    .tt-robot{min-height:320px; order:2;}
-  }
-  /* Zweite Top-Themen-Karte: Essay ohne Roboter, Pull-Quote rechts */
-  .tt-feature + .tt-feature{margin-top:clamp(16px,2vw,24px);}
-  .tt-feature--essay{min-height:clamp(300px,32vw,380px);
-    background-image:radial-gradient(120% 130% at 0% 100%, #242424 0%, #141414 48%, #0d0d0d 100%);}
-  .tt-feature--essay .quote{position:relative; z-index:2; display:flex; align-items:center;
-    font-family:var(--sans); font-weight:500; letter-spacing:-0.01em; line-height:1.28;
-    font-size:clamp(19px,2.1vw,30px); color:var(--paper); padding-left:clamp(20px,2.6vw,40px);
-    border-left:2px solid rgba(245,244,242,0.28);}
-  @media(max-width:820px){
-    .tt-feature--essay .quote{padding-left:18px; font-size:clamp(17px,4.6vw,22px); order:2;}
-  }
-</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"B_77 Vertriebsberatung","alternateName":"B_77","description":"Vertriebsberatung für mittelständische Unternehmen in Siegen, NRW und deutschlandweit.","url":"https://b77.de","logo":"https://b77.de/assets/B77_Logo_black.png","image":"https://b77.de/assets/og-b77.png","email":"kontakt@b77.de","telephone":"+49-271-89027837","founder":{"@type":"Person","name":"Benjamin Loos"},"foundingDate":"2017","address":{"@type":"PostalAddress","streetAddress":"Unter dem Klingelschacht 18","postalCode":"57074","addressLocality":"Siegen","addressRegion":"Nordrhein-Westfalen","addressCountry":"DE"},"areaServed":[{"@type":"City","name":"Siegen"},{"@type":"AdministrativeArea","name":"Nordrhein-Westfalen"},{"@type":"Country","name":"Deutschland"}],"serviceType":["Vertriebsberatung","Vertriebsoptimierung","Aktiver Vertrieb","Neukundengewinnung","Vertriebsaufbau"],"priceRange":"€€€","openingHours":"Mo-Fr 08:30-18:00"}</script>
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700,800,900&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=gambetta@401&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
 
-  <!-- B_77 Intro-Overlay (Variante A, overlay, showOnce) -->
-<!-- ===== INTRO OVERLAY (alles in #b77) ===== -->
-<div id="b77">
-  <canvas id="b77-canvas"></canvas>
+  <nav class="nav"><div class="wrap">
+    <a class="brand" href="/"><img src="/assets/img/logo.png" alt="B_77"></a>
+    <button class="burger" id="burger" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+  </div></nav>
 
-  <img id="b77-logo" src="data:image/png;base64,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" draggable="false" alt="B_77">
-
-  <div id="b77-topbar">
-    <div id="b77-loc">SIEGEN, DE →</div>
-    <div id="b77-headrule"></div>
-  </div>
-
-  <div id="b77-content">
-    <div id="b77-statement"><span data-ch><img src="data:image/png;base64,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" draggable="false" alt="B_77"></span> <span data-word>ist</span> <span data-word>eine</span> <span data-word>Boutique-Beratung</span> <span data-word>mit</span> <span data-word>einem</span> <span data-word>klaren</span> <span data-word>Fokus:</span> <span data-word class="em">Vertrieb.</span></div>
-    <div id="b77-rule"></div>
-    <div id="b77-question">Sie wollen Ihren Vertrieb aktivieren? Sie wollen Ihre Märkte aktiv bearbeiten? Sie wollen Ihre Umsätze steigern und planbare Ergebnisse aus dem Vertrieb?</div>
-    <div id="b77-btns">
-      <button id="b77-yes" class="b77-btn b77-btn--primary">JA</button>
-      <button id="b77-no" class="b77-btn">NEIN</button>
+  <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Navigation" aria-hidden="true"><div class="menu__wrap">
+    <div class="menu__meta">Navigation</div>
+    <nav class="menu__links">
+      <a href="/ueber"><span class="i">01</span>Über</a>
+      <a href="/leistungen"><span class="i">02</span>Leistungen</a>
+      <a href="/ki-im-vertrieb"><span class="i">03</span>KI im Vertrieb</a>
+      <a href="/kontakt"><span class="i">04</span>Kontakt</a>
+      <a href="https://sales-intelligence.b77.de"><span class="i">↗</span>Magazin</a>
+    </nav>
+    <div class="menu__foot">
+      <a href="tel:+4927189027837">+49 271 890 27 837</a>
+      <a href="mailto:kontakt@b77.de">kontakt@b77.de</a>
+      <a href="/impressum">Impressum &amp; Datenschutz</a>
     </div>
-  </div>
+  </div></div>
 
-  <div id="b77-counter"><b id="b77-counterN">00</b><span style="opacity:.5"> / 77</span><div class="sub">VERTRIEB IN BEWEGUNG</div></div>
-
-  <!-- NEIN-Platzhalter: ersetze diesen Block durch deine eigene Seite/Route -->
-  <div id="b77-nein">
-    <!-- Funnel: die Einwände + Abzweige -->
-    <div id="b77-nein-funnel">
-      <div class="k">— ANTWORT: NEIN</div>
-      <div class="t">Schade.</div>
-      <div class="s">
-        <p class="nein-lead">Dass wir uns gerade nicht kennenlernen. Wenn Sie Ihren Vertrieb zu einem anderen Zeitpunkt aktivieren möchten, freuen wir uns, von Ihnen zu hören.</p>
-        <p class="nein-guess">Wir mutmaßen, dass Sie aktuell mit <b>A</b> oder <b>B</b> antworten würden, oder?</p>
-        <div class="nein-einwand"><span class="ne-lbl">A</span><div class="ne-body"><span class="ne-q">„Mein Vertrieb läuft längst perfekt!"</span><span class="ne-a">Dann Glückwunsch — es ist tatsächlich alles getan. In dem Fall können wir nichts für Sie tun.</span></div></div>
-        <div class="nein-einwand"><span class="ne-lbl">B</span><div class="ne-body"><span class="ne-q">„Ich will gerade nichts verändern."</span><span class="ne-a">Verständlich. Aber ohne volles Commitment können wir Ihnen nicht helfen.</span></div></div>
-      </div>
-      <div class="b">
-        <a id="b77-nein-kontakt" class="b77-btn b77-btn--primary" href="/kontakt">DOCH — REDEN WIR →</a>
-        <button id="b77-nein-check" class="b77-btn">VERTRIEB SELBST EINSCHÄTZEN →</button>
-        <button id="b77-nein-home" class="b77-btn b77-btn--ghost">WEITER ZU B77.DE</button>
-      </div>
-      <p class="nein-mag">Lesen Sie gerne unser KI- &amp; Sales-Magazin – werktäglich neue Erkenntnisse, wie KI den Vertrieb verändert. <a href="https://sales-intelligence.b77.de" target="_blank" rel="noopener">Sales Intelligence →</a></p>
-    </div>
-
-    <!-- Inline-Check: läuft direkt hier, ohne Weiterleitung -->
-    <div id="b77-nein-check-view">
-      <div id="b77c-quiz">
-        <div class="b77c-top"><span id="b77c-dim">VERTRIEBS-CHECK</span><span id="b77c-num">01 / 06</span></div>
-        <div class="b77c-bar"><i id="b77c-fill"></i></div>
-        <div id="b77c-q" class="b77c-q"></div>
-        <div id="b77c-opts" class="b77c-opts"></div>
-        <div class="b77c-foot"><button id="b77c-back" class="b77-link">← ZURÜCK</button><button id="b77c-abort" class="b77-link">ABBRECHEN</button></div>
-      </div>
-      <div id="b77c-result">
-        <div class="k">— IHR SOFORT-BEFUND</div>
-        <div class="b77c-score"><b id="b77c-pct">0%</b><span id="b77c-tier"></span></div>
-        <div id="b77c-verdict" class="s"></div>
-        <div class="b">
-          <a id="b77c-full" class="b77-btn b77-btn--primary" href="/vertriebs-check">VOLLER CHECK · 25 FRAGEN →</a>
-          <a class="b77-btn" href="/kontakt">GESPRÄCH →</a>
-          <button id="b77c-doch" class="b77-btn b77-btn--ghost">DOCH STARTEN →</button>
+  <!-- 01 HERO -->
+  <header class="hero" id="top"><div class="wrap">
+    <div class="hero__card">
+      <img src="/assets/img/studio.jpg" alt="B_77 Studio in Siegen">
+      <div class="hero__in">
+        <div class="meta hero__kick">Wir machen Unternehmen</div>
+        <h1>Vertriebs&shy;aktiv.</h1>
+        <div class="hero__line">Vertriebsberatung für den Mittelstand aus Siegen – seit 2017.</div>
+        <p class="hero__sub">Vertriebsaktiv zu sein bedeutet: Märkte bewusst bearbeiten, Zielkunden systematisch gewinnen, Abschlüsse nicht dem Zufall überlassen.</p>
+        <div class="hero__cta">
+          <a class="pill" href="#kontakt"><span>Kostenloses Erstgespräch</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+          <a class="pill pill--ghost" href="/vertriebs-check"><span>Vertriebs-Check</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></a>
         </div>
       </div>
     </div>
-  </div>
+    <div class="strip"><span>Seit 2017 am Markt</span><span>KI Experten für Vertrieb</span><span>DACH-weit im Mandat</span><span>50+ Mandate im Mittelstand</span></div>
+  </div></header>
 
-  <div id="b77-fade"><span>→ B77.DE</span></div>
-  <button id="b77-replay">↺ REPLAY</button>
-  <div id="b77-progtrack"><div id="b77-progress"></div></div>
-</div>
+  <!-- 02 HALTUNG -->
+  <section class="hl"><div class="hl-gl" id="hl-gl" aria-hidden="true"></div><div class="wrap">
+    <div class="meta">Haltung – 02</div>
+    <p class="manifest" style="margin-top:18px">Der Markt bestimmt nicht Ihr Ergebnis. Ihr <span class="u-rose">Marktanteil</span> tut es – und der entsteht durch Initiative, nicht durch Abwarten. Ein aktiver Vertrieb macht Ihr Unternehmen steuerbar und Ihre Ergebnisse planbar.</p>
+  </div></section>
 
-<script>
-/* ================================================================
-   KONFIGURATION
-   ----------------------------------------------------------------
-   homeUrl : Zielseite bei "JA"
-   mode    : 'redirect' -> lädt homeUrl  |  'overlay' -> Overlay löst
-             sich auf und gibt die DARUNTERLIEGENDE Seite frei (kein Reload)
-   showOnce: true -> Intro nur einmal pro Besucher (localStorage)
-   speed   : Tempo (1 = normal)
-   ================================================================ */
-window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
-  homeUrl: 'https://b77.de',
-  mode: 'overlay',
-  showOnce: true,
-  speed: 1
-};
-
-(function () {
-  var CFG = window.B77_INTRO_CONFIG;
-  var root = document.getElementById('b77');
-  if (!root) return;
-  var SEEN = 'b77_intro_seen';
-  if (CFG.showOnce) { try { if (localStorage.getItem(SEEN)) { root.parentNode && root.parentNode.removeChild(root); return; } } catch (e) {} }
-
-  var $ = function (id) { return document.getElementById(id); };
-  var canvas = $('b77-canvas'), ctx = canvas.getContext('2d');
-  var el = {
-    logo: $('b77-logo'), topbar: $('b77-topbar'), loc: $('b77-loc'), headrule: $('b77-headrule'),
-    content: $('b77-content'), statement: $('b77-statement'), rule: $('b77-rule'), question: $('b77-question'),
-    btns: $('b77-btns'), counter: $('b77-counter'), counterN: $('b77-counterN'),
-    nein: $('b77-nein'), fade: $('b77-fade'), replay: $('b77-replay'),
-    progtrack: $('b77-progtrack'), progress: $('b77-progress')
-  };
-  var neinK = el.nein.querySelector('.k'), neinT = el.nein.querySelector('.t'), neinS = el.nein.querySelector('.s'), neinB = el.nein.querySelector('.b');
-
-  var clamp = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
-  var eOut = function (p) { return 1 - (1 - p) * (1 - p); };
-  var eIO = function (p) { return p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2; };
-  var lerp = function (a, b, t) { return a + (b - a) * t; };
-  var sp = function () { return CFG.speed || 1; };
-  var setOp = function (e, v) { if (e) e.style.opacity = (v < 0 ? 0 : v > 1 ? 1 : v).toFixed(3); };
-
-  var S = { phase: 'auto', gateReady: false, redir: false, t0: 0, ar: 0.416, chars: [], W: 1, H: 1 };
-
-  var logoImg = new Image();
-  logoImg.onload = boot; logoImg.onerror = boot;
-  logoImg.src = el.logo.getAttribute('src');
-
-  function boot() {
-    var started = false;
-    var go = function () {
-      if (started) return; started = true;
-      S.ar = (logoImg.naturalHeight / logoImg.naturalWidth) || 0.416;
-      splitStatement(); resize();
-      window.addEventListener('resize', function () { clearTimeout(S._rt); S._rt = setTimeout(resize, 200); });
-      wire(); startFlow();
-      requestAnimationFrame(loop);
-    };
-    // Sofort starten – die Animation braucht die Webfonts am Anfang nicht (Logo ist Canvas,
-    // Text erscheint erst ~5 s später). Fonts lösen nur noch eine Neuvermessung aus, keinen Neustart.
-    go();
-    if (document.fonts && document.fonts.ready) { document.fonts.ready.then(function () { try { resize(); } catch (e) {} }); }
-  }
-  var booted = false; var _go = boot; boot = function () { if (booted) return; booted = true; _go(); };
-
-  function splitStatement() {
-    var ws = el.statement.querySelectorAll('[data-word]');
-    for (var w = 0; w < ws.length; w++) {
-      var node = ws[w], txt = node.textContent; node.textContent = '';
-      node.style.display = 'inline-block'; node.style.whiteSpace = 'nowrap';
-      for (var i = 0; i < txt.length; i++) { var s = document.createElement('span'); s.setAttribute('data-ch', ''); s.textContent = txt[i]; s.style.display = 'inline-block'; s.style.opacity = '0'; node.appendChild(s); }
-    }
-    // logo token + all char spans, in document order
-    var first = el.statement.querySelector('[data-ch]'); first.style.display = 'inline-block'; first.style.opacity = '0';
-    S.chars = [].slice.call(el.statement.querySelectorAll('[data-ch]'));
-  }
-
-  function resize() {
-    var r = canvas.getBoundingClientRect();
-    S.W = Math.max(1, r.width); S.H = Math.max(1, r.height);
-    var dpr = Math.min(2, window.devicePixelRatio || 1);
-    canvas.width = Math.round(S.W * dpr); canvas.height = Math.round(S.H * dpr);
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    S.lw = Math.min(S.W * 0.44, 720); S.lh = S.lw * S.ar;
-    if (S.lh > S.H * 0.36) { S.lh = S.H * 0.36; S.lw = S.lh / S.ar; }
-    S.lx = (S.W - S.lw) / 2; S.ly = (S.H - S.lh) / 2 - S.H * 0.02;
-    S.gutter = Math.max(28, S.W * 0.05);
-    S.navH = Math.max(24, Math.min(34, S.H * 0.03)); S.navW = S.navH / S.ar;
-    S.navLeft = S.gutter; S.navTop = Math.max(26, S.H * 0.04);
-    el.content.style.left = S.gutter + 'px'; el.content.style.maxWidth = Math.min(1040, S.W - S.gutter * 2) + 'px';
-    el.counter.style.left = S.gutter + 'px';
-    el.nein.style.padding = '0 ' + S.gutter + 'px';
-    el.loc.style.right = S.gutter + 'px'; el.loc.style.top = (S.navTop + S.navH / 2 - 7) + 'px';
-    el.headrule.style.left = S.gutter + 'px'; el.headrule.style.width = (S.W - S.gutter * 2) + 'px'; el.headrule.style.top = (S.navTop + S.navH + 16) + 'px';
-    buildSamples(); initAmbient();
-  }
-
-  function buildSamples() {
-    var w = Math.max(2, Math.round(S.lw)), h = Math.max(2, Math.round(S.lh));
-    var off = document.createElement('canvas'); off.width = w; off.height = h;
-    var o = off.getContext('2d'); o.drawImage(logoImg, 0, 0, w, h);
-    var d = o.getImageData(0, 0, w, h).data;
-    var pts = [], step = Math.max(3, Math.round(S.lw / 100));
-    for (var y = 0; y < h; y += step) for (var x = 0; x < w; x += step) if (d[(y * w + x) * 4 + 3] > 120) pts.push([S.lx + x, S.ly + y]);
-    S.parts = pts.map(function (p) { var tx = p[0], ty = p[1], sx = -40 - Math.random() * S.W * 0.55; return { tx: tx, ty: ty, sx: sx, sy: ty + (Math.random() - 0.5) * S.H * 0.18, x: sx, y: ty, px: sx, py: ty, release: 900 + ((tx - S.lx) / S.lw) * 1000 + Math.random() * 140, dur: 680 + Math.random() * 420, r: 0.7 + Math.random() * 0.9 }; });
-  }
-  function initAmbient() { S.ambient = []; for (var i = 0; i < 64; i++) S.ambient.push({ x: Math.random() * S.W, y: Math.random() * S.H, vx: (Math.random() - 0.5) * 0.16, vy: (Math.random() - 0.5) * 0.16, r: Math.random() * 1.0 + 0.3, a: Math.random() * 0.16 + 0.03 }); }
-
-  function startFlow() {
-    S.phase = 'auto'; S.gateReady = false; S.redir = false; S.t0 = performance.now();
-    el.nein.style.display = 'none'; setOp(el.nein, 0);
-    setOp(el.fade, 0); setOp(el.replay, 0); el.replay.style.pointerEvents = 'none';
-    el.btns.style.pointerEvents = 'none'; el.progtrack.style.opacity = '1'; el.content.style.opacity = '1';
-    root.style.opacity = '1';
-  }
-  function answered() { if (CFG.showOnce) { try { localStorage.setItem(SEEN, '1'); } catch (e) {} } }
-  function onYes() { if (!S.gateReady) return; S.gateReady = false; answered(); S.phase = 'dissolve'; S.diStart = performance.now(); setOp(el.replay, 0); el.replay.style.pointerEvents = 'none'; spawnDissolve(); }
-  function onNo() { if (!S.gateReady) return; S.gateReady = false; answered(); S.phase = 'nein'; S.neinStart = performance.now(); el.nein.style.display = 'flex'; setOp(el.replay, 0); el.replay.style.pointerEvents = 'none'; }
-  function goHome() { try { window.location.href = CFG.homeUrl || 'https://b77.de'; } catch (e) {} }
-  function removeOverlay() { root.style.display = 'none'; if (root.parentNode) root.parentNode.removeChild(root); }
-  function finishYes() { if (CFG.mode === 'overlay') removeOverlay(); else goHome(); }
-  // „Doch"-Pfad von der NEIN-Seite: im Overlay-Modus sanft wegblenden und die Startseite freigeben.
-  function fadeDismiss() { answered(); if (CFG.mode === 'overlay') { root.style.transition = 'opacity .55s ease'; root.style.opacity = '0'; setTimeout(removeOverlay, 600); } else goHome(); }
-
-  /* ---------- Inline-Vertriebs-Check (läuft direkt auf der NEIN-Seite) ---------- */
-  var CHK = {
-    scale: ['Nein', 'Teilweise', 'Größtenteils', 'Ja, voll'],
-    q: [
-      { dim: 'POSITIONIERUNG', t: 'Unsere Zielkunden und unser Nutzenversprechen sind im Vertrieb glasklar.' },
-      { dim: 'PROZESS', t: 'Unser Vertriebsprozess ist von Erstkontakt bis Abschluss klar definiert.' },
-      { dim: 'MARKTBEARBEITUNG', t: 'Wir sprechen neue Entscheider systematisch an — statt auf Anfragen zu warten.' },
-      { dim: 'DATEN & STEUERUNG', t: 'Wir steuern den Vertrieb mit verlässlichen Zahlen, nicht aus dem Bauch.' },
-      { dim: 'KONSEQUENZ', t: 'Angebote werden bei uns konsequent und zeitnah nachverfolgt.' },
-      { dim: 'FÜHRUNG', t: 'Vertrieb ist bei uns Chefsache und wird aktiv nachgehalten.' }
-    ],
-    idx: 0, ans: []
-  };
-  function chkRenderQ() {
-    var q = CHK.q[CHK.idx], n = CHK.q.length;
-    $('b77c-dim').textContent = q.dim;
-    $('b77c-num').textContent = (CHK.idx + 1 < 10 ? '0' : '') + (CHK.idx + 1) + ' / 0' + n;
-    $('b77c-fill').style.width = Math.round((CHK.idx / n) * 100) + '%';
-    $('b77c-q').textContent = q.t;
-    var opts = $('b77c-opts'); opts.innerHTML = '';
-    CHK.scale.forEach(function (label, val) {
-      var b = document.createElement('button');
-      b.className = 'b77c-opt'; b.type = 'button';
-      b.innerHTML = '<span class="n">' + val + '</span><span>' + label + '</span>';
-      b.addEventListener('click', function () { chkAnswer(val); });
-      opts.appendChild(b);
-    });
-    $('b77c-back').style.visibility = CHK.idx > 0 ? 'visible' : 'hidden';
-  }
-  function chkAnswer(val) {
-    CHK.ans[CHK.idx] = val;
-    if (CHK.idx >= CHK.q.length - 1) chkResult();
-    else { CHK.idx++; chkRenderQ(); }
-  }
-  function chkResult() {
-    var sum = 0; for (var i = 0; i < CHK.q.length; i++) sum += (CHK.ans[i] || 0);
-    var pct = Math.round((sum / (CHK.q.length * 3)) * 100);
-    var tier, verdict;
-    if (pct < 40) { tier = 'REAKTIV'; verdict = 'Ihr Vertrieb verwaltet überwiegend Nachfrage. Der Hebel durch Struktur und aktive Marktbearbeitung ist riesig — sicher, dass „längst perfekt" stimmt?'; }
-    else if (pct < 70) { tier = 'IM AUFBAU'; verdict = 'Das Fundament steht in Teilen. Aber die Lücken bremsen genau das planbare Wachstum, das Sie wollen.'; }
-    else if (pct < 90) { tier = 'STRUKTURIERT'; verdict = 'Solide aufgestellt. Jetzt geht es um das letzte Drittel — Feinarbeit, die im Markt den Unterschied macht.'; }
-    else { tier = 'VERTRIEBSAKTIV'; verdict = 'Respekt — Sie gestalten Ihren Markt aktiv. Dann reden wir nicht über das Ob, sondern über Feinjustierung.'; }
-    $('b77c-pct').textContent = pct + '%';
-    $('b77c-tier').textContent = tier;
-    $('b77c-verdict').textContent = verdict;
-    $('b77c-quiz').style.display = 'none';
-    $('b77c-result').style.display = 'block';
-  }
-  function chkStart() {
-    CHK.idx = 0; CHK.ans = [];
-    $('b77-nein-funnel').style.display = 'none';
-    $('b77-nein-check-view').style.display = 'block';
-    $('b77c-result').style.display = 'none';
-    $('b77c-quiz').style.display = 'block';
-    chkRenderQ();
-  }
-  function chkBackToFunnel() {
-    $('b77-nein-check-view').style.display = 'none';
-    $('b77-nein-funnel').style.display = 'block';
-  }
-
-  function wire() {
-    $('b77-yes').addEventListener('click', onYes);
-    $('b77-no').addEventListener('click', onNo);
-    el.replay.addEventListener('click', startFlow);
-    // NEIN-Funnel
-    $('b77-nein-kontakt').addEventListener('click', function () { answered(); }); // Link navigiert selbst zu /kontakt; Intro nicht erneut zeigen
-    $('b77-nein-check').addEventListener('click', chkStart);
-    $('b77-nein-home').addEventListener('click', fadeDismiss);
-    // Inline-Check
-    $('b77c-back').addEventListener('click', function () { if (CHK.idx > 0) { CHK.idx--; chkRenderQ(); } });
-    $('b77c-abort').addEventListener('click', chkBackToFunnel);
-    $('b77c-doch').addEventListener('click', fadeDismiss);
-  }
-
-  /* ---------- Feuer? Nein — Momentum-Auflösung (weiße Streifen) ---------- */
-  function spawnDissolve() {
-    S.diss = [];
-    var cw = Math.min(960, S.W * 0.6), band = S.H * 0.46;
-    for (var i = 0; i < 1600; i++) {
-      var x, y;
-      if (Math.random() < 0.66) { x = S.gutter - 80 + Math.random() * cw; y = S.H * 0.5 + (Math.random() - 0.5) * band; }
-      else { x = Math.random() * S.W; y = Math.random() * S.H; }
-      S.diss.push({ x: x, y: y, v: 0, base: 0.55 + Math.random() * 0.9, rel: Math.max(0, x) / S.W * 620 + Math.random() * 240, r: 0.6 + Math.random() * 1.1 });
-    }
-  }
-  function drawDissolve(ft) {
-    ctx.lineCap = 'round'; ctx.globalCompositeOperation = 'lighter';
-    for (var i = 0; i < S.diss.length; i++) {
-      var p = S.diss[i]; var lo = ft - p.rel; if (lo <= 0) continue;
-      p.v += p.base; var px = p.x; p.x += p.v; if (p.x > S.W + 60) continue;
-      var a = Math.min(1, lo / 160);
-      ctx.strokeStyle = '#0f0f0f'; ctx.globalAlpha = Math.min(0.55, p.v / 30) * a; ctx.lineWidth = p.r * 1.2;
-      ctx.beginPath(); ctx.moveTo(px, p.y); ctx.lineTo(p.x, p.y); ctx.stroke();
-      ctx.fillStyle = '#0f0f0f'; ctx.globalAlpha = a; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283); ctx.fill();
-    }
-    ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
-  }
-
-  function drawAmbient() {
-    ctx.fillStyle = '#0f0f0f';
-    for (var i = 0; i < S.ambient.length; i++) { var a = S.ambient[i]; a.x += a.vx; a.y += a.vy; if (a.x < 0) a.x += S.W; if (a.x > S.W) a.x -= S.W; if (a.y < 0) a.y += S.H; if (a.y > S.H) a.y -= S.H; ctx.globalAlpha = a.a; ctx.beginPath(); ctx.arc(a.x, a.y, a.r, 0, 6.283); ctx.fill(); }
-    ctx.globalAlpha = 1;
-  }
-
-  function loop() { try { draw(); } catch (e) {} requestAnimationFrame(loop); }
-  function draw() {
-    if (!ctx) return;
-    ctx.clearRect(0, 0, S.W, S.H);
-    var now = performance.now();
-    if (S.phase === 'auto') computeAuto((now - S.t0) * sp());
-    else if (S.phase === 'dissolve') computeDissolve((now - S.diStart) * sp());
-    else if (S.phase === 'nein') computeNein((now - S.neinStart) * sp());
-  }
-
-  function computeAuto(t) {
-    var reveal = clamp((t - 3300) / 800);
-    if (t < 4300) {
-      drawAmbient();
-      var g = 1 - reveal;
-      if (g > 0.01) {
-        ctx.lineCap = 'round'; ctx.globalCompositeOperation = 'lighter';
-        for (var i = 0; i < S.parts.length; i++) {
-          var p = S.parts[i]; var lo = t - p.release; if (lo <= 0) continue;
-          var pr = Math.min(1, lo / p.dur), e = 1 - Math.pow(1 - pr, 3);
-          p.px = p.x; p.py = p.y; p.x = p.sx + (p.tx - p.sx) * e; p.y = p.sy + (p.ty - p.sy) * e;
-          var s = Math.sqrt((p.x - p.px) * (p.x - p.px) + (p.y - p.py) * (p.y - p.py));
-          if (s > 1.2) { ctx.strokeStyle = '#0f0f0f'; ctx.globalAlpha = Math.min(0.4, s / 70) * g; ctx.lineWidth = p.r * 1.2; ctx.beginPath(); ctx.moveTo(p.px, p.py); ctx.lineTo(p.x, p.y); ctx.stroke(); }
-          ctx.fillStyle = '#0f0f0f'; ctx.globalAlpha = Math.min(1, pr * 1.7) * g; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283); ctx.fill();
-        }
-        ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = 1;
-      }
-    }
-    var en = eIO(clamp((t - 4300) / 1000));
-    var w = lerp(S.lw, S.navW, en), x = lerp(S.lx, S.navLeft, en), y = lerp(S.ly, S.navTop, en);
-    el.logo.style.left = x + 'px'; el.logo.style.top = y + 'px'; el.logo.style.width = w + 'px'; el.logo.style.height = (w * S.ar) + 'px'; el.logo.style.transform = 'none';
-    setOp(el.logo, reveal);
-    setOp(el.topbar, clamp((t - 4600) / 600));
-    if (el.counterN) el.counterN.textContent = ('0' + Math.round(clamp(t / 2900) * 77)).slice(-2);
-    setOp(el.counter, clamp((t - 400) / 500) * (1 - clamp((t - 4300) / 500)));
-    el.progress.style.width = (clamp(t / 4200) * 100).toFixed(1) + '%';
-    setOp(el.progtrack, 1 - clamp((t - 4300) / 500));
-    /* Variante B: alles auf einmal einblenden (Fade + sanftes Aufsteigen + Weichzeichner) */
-    var TS = 5300, WD = 820, ch = S.chars, n = ch.length;
-    for (var k = 0; k < n; k++) { ch[k].style.opacity = '1'; ch[k].style.transform = 'none'; ch[k].style.filter = 'none'; }
-    var sp0 = clamp((t - TS) / WD), es0 = eOut(sp0);
-    var ty0 = ((1 - es0) * 24).toFixed(2), bl0 = ((1 - es0) * 7).toFixed(2), op0 = es0.toFixed(3);
-    el.statement.style.opacity = op0; el.statement.style.transform = 'translateY(' + ty0 + 'px)'; el.statement.style.filter = 'blur(' + bl0 + 'px)';
-    setOp(el.rule, es0); el.rule.style.transform = 'scaleX(1)';
-    el.question.style.opacity = op0; el.question.style.transform = 'translateY(' + ty0 + 'px)'; el.question.style.filter = 'blur(' + bl0 + 'px)';
-    el.btns.style.opacity = op0; el.btns.style.transform = 'translateY(' + ty0 + 'px)';
-    var gateTime = TS + WD;
-    if (t >= gateTime && !S.gateReady) { S.gateReady = true; el.btns.style.pointerEvents = 'auto'; setOp(el.replay, 1); el.replay.style.pointerEvents = 'auto'; }
-  }
-
-  function computeDissolve(ft) {
-    drawDissolve(ft);
-    var o = 1 - clamp(ft / 360);
-    setOp(el.content, o); setOp(el.logo, o); setOp(el.topbar, o); setOp(el.counter, 0); setOp(el.progtrack, 0);
-    if (CFG.mode === 'overlay') { root.style.opacity = (1 - clamp((ft - 1500) / 700)).toFixed(3); }
-    else { setOp(el.fade, clamp((ft - 1500) / 700)); }
-    if (ft > 2250 && !S.redir) { S.redir = true; finishYes(); }
-  }
-
-  function computeNein(nt) {
-    setOp(el.nein, clamp(nt / 450));
-    var kids = [neinK, neinT, neinS, neinB];
-    for (var i = 0; i < kids.length; i++) { var p = clamp((nt - 200 - i * 110) / 620); kids[i].style.opacity = p.toFixed(3); kids[i].style.transform = 'translateY(' + (18 * (1 - eOut(p))).toFixed(2) + 'px)'; }
-  }
-})();
-</script>
-
-
-  <!-- Nav: solide weiß (wie auf allen anderen Seiten) -->
-  <nav class="nav nav--floating">
-    <a class="nav__brand" href="/"><img src="/assets/B77_Logo_black.png" alt="B_77 Vertriebsberatung"></a>
-    <div class="nav__links">
-      <a href="/ueber">Über</a>
-      <a href="/leistungen">Leistungen</a>
-      <a href="/ki-im-vertrieb">KI im Vertrieb</a>
-      <a href="/kontakt">Kontakt</a>
-      <a class="nav__mag" href="https://sales-intelligence.b77.de" target="_blank" rel="noopener">Magazin ↗</a>
+  <!-- 03 LEISTUNGEN -->
+  <section id="leistungen" style="padding-top:0"><div class="wrap">
+    <div class="head-row"><div class="meta">Leistungen – 03</div></div>
+    <div class="grid">
+      <a href="/vertriebsstrategie" class="card card--light"><span class="card__ghost">01</span><div><span class="card__nr">01</span><h3>Vertriebsstrategie</h3><p>Marktanalyse, Positionierung, Zielkunden, Go-to-Market, Steuerung.</p></div><span class="card__go">Ansehen <span class="a">→</span></span></a>
+      <a href="/vertriebsaufbau" class="card card--rose"><span class="card__ghost">02</span><div><span class="card__nr">02</span><h3>Vertriebsaufbau</h3><p>Team, Prozesse, Werkzeuge – von Grund auf strukturiert, aufeinander abgestimmt.</p></div><span class="card__go">Ansehen <span class="a">→</span></span></a>
+      <a href="/vertriebsoptimierung" class="card card--cloud"><span class="card__ghost">03</span><div><span class="card__nr">03</span><h3>Vertriebsoptimierung</h3><p>Positionierung, Prozesse, CRM-Disziplin, Pipeline-Transparenz.</p></div><span class="card__go">Ansehen <span class="a">→</span></span></a>
+      <a href="/aktiver-vertrieb" class="card card--cloud"><span class="card__ghost">04</span><div><span class="card__nr">04</span><h3>Aktiver Vertrieb</h3><p>Zielkunden, Entscheider, Verhandlung – vom Erstkontakt bis zum Abschluss.</p></div><span class="card__go">Ansehen <span class="a">→</span></span></a>
+      <a href="/neukundengewinnung" class="card card--rose"><span class="card__ghost">05</span><div><span class="card__nr">05</span><h3>Neukundengewinnung</h3><p>Systematische Marktbearbeitung statt Zufall – planbar und wiederholbar.</p></div><span class="card__go">Ansehen <span class="a">→</span></span></a>
+      <a href="/ki-im-vertrieb" class="card card--light"><span class="card__ghost">06</span><div><span class="card__nr">06</span><h3>Digitalisierung</h3><p>KI im Vertrieb – ohne Hype, mit Ergebnis. Von Lead-Recherche bis Angebot.</p></div><span class="card__go">Ansehen <span class="a">→</span></span></a>
+      <a href="/internationalisierung" class="card card--light card--wide"><span class="card__ghost">07</span><div><span class="card__nr">07</span><h3>Internationalisierung</h3><p>Internationalen Fit prüfen, Markteintritt entwickeln, Aufbau begleiten.</p></div><span class="card__go">Ansehen <span class="a">→</span></span></a>
     </div>
-    <div class="nav__place">Siegen, DE →</div>
-    <button class="nav__burger" aria-label="Menü" aria-expanded="false"><span class="nav__burger-i" aria-hidden="true"></span></button>
-    <div class="nav__mobile">
-      <a href="/leistungen">Leistungen</a>
-      <a href="/ki-im-vertrieb">KI im Vertrieb</a>
-      <a href="/kontakt">Kontakt</a>
-      <a href="/ueber">Über B_77</a>
-      <a href="https://sales-intelligence.b77.de" target="_blank" rel="noopener">Magazin ↗</a>
-      <a class="nav__cta" href="/kontakt">Erstgespräch →</a>
-    </div>
-  </nav>
+  </div></section>
 
-  <!-- HERO (Monolith – Pixel-Feld, Sektion 00) -->
-  <section class="ph">
-    <div class="ph__gl" id="ph-gl" aria-hidden="true"></div>
-    <div class="ph__veil" aria-hidden="true"></div>
-    <div class="ph__content">
-      <p class="ph__kick">Wir machen Unternehmen</p>
-      <h1 class="ph__title">Vertriebs-<span class="em">aktiv.</span></h1>
-      <div class="ph__foot">
-        <div class="ph__foot-l">
-          <p class="ph__lead"><strong>Vertriebsberatung für den Mittelstand aus Siegen – seit 2017.</strong> Vertriebsaktiv zu sein bedeutet: Märkte bewusst bearbeiten, Zielkunden systematisch gewinnen, Abschlüsse nicht dem Zufall überlassen.</p>
-          <div class="ph__cta">
-            <a href="/kontakt">Kostenloses Erstgespräch →</a>
-            <a class="ghost" href="/vertriebs-check">Vertriebs-Check</a>
-          </div>
-        </div>
-        <div class="ph__stats"><span><b>seit 2017</b></span><span><b>50+</b> Mandate</span><span><b>25+</b> Jahre</span><span><b>DACH</b>-weit</span></div>
+  <!-- 3.5 TOP-THEMEN -->
+  <section style="padding-top:0"><div class="wrap">
+    <div class="meta">Top-Themen – 3.5</div>
+    <div class="grid">
+      <a href="/future-of-sales" class="card card--rose card--wide tt-fos"><div class="tt-fos__l"><span class="card__nr">Schwerpunkt · Zukunft</span><h3>Future of Sales</h3><p>Wenn Systeme mit Systemen verhandeln: Was die autonome Wirtschaft für Einkauf und Vertrieb im Mittelstand bedeutet – und der B_77 „Future of Sales“-Day.</p><span class="card__go" style="margin-top:22px">Zum Thema <span class="a">→</span></span></div><div class="tt-robot" id="tt-robot" aria-hidden="true"></div></a>
+      <a href="/vertrieb-motor-gegen-krise" class="card card--light"><div><span class="card__nr">Magazin · Vertrieb in der Krise</span><h3>Vertrieb ist der Motor gegen die Krise</h3><p>Ein Teil der Krise ist von außen gemacht, ein Teil hausgemacht. Warum der Vertrieb der einzige Hebel ist, der vollständig in Ihrer Hand liegt – und wie Sie ihn anwerfen.</p><blockquote>„Was hausgemacht ist, können wir ändern. Genau dort liegt unsere Kraft.“</blockquote></div><span class="card__go">Zum Artikel <span class="a">→</span></span></a>
+      <a href="/braucht-es-den-verkaeufer" class="card card--cloud"><div><span class="card__nr">Magazin · Zukunft des Verkäufers</span><h3>Braucht es den Verkäufer noch?</h3><p>Wenn Systeme mit Systemen verhandeln, verschwindet der Vertrieb nicht – er teilt sich. Warum der Verkäufer der Zukunft weniger Abschließer und mehr Übersetzer und Vertrauensanker ist.</p><blockquote>„Die größte Gefahr für Verkäufer ist nicht die KI. Es ist, in der austauschbaren Mitte zu bleiben.“</blockquote></div><span class="card__go">Zum Artikel <span class="a">→</span></span></a>
+    </div>
+  </div></section>
+
+  <!-- 04 STUDIO -->
+  <section id="studio" style="padding-top:0"><div class="wrap">
+    <div class="split">
+      <div><div class="meta">Das Studio · Siegen – 04</div>
+        <p class="lede" style="margin-top:16px;max-width:16ch;font-size:clamp(1.8rem,3.4vw,2.8rem)">Wo Ihr Vertrieb in Bewegung kommt.</p>
+        <p class="p" style="margin-top:18px"><strong>Im B_77 Studio:</strong> intensive Zeit zwischen Unternehmern, Führungskräften und allen, die Verantwortung für Vertrieb tragen.</p>
+        <a class="pill" href="/ueber" style="margin-top:26px"><span>Zum Studio</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+      </div>
+      <figure class="media"><img src="/assets/img/studio.jpg" alt="B_77 Studio in Siegen"></figure>
+    </div>
+  </div></section>
+
+  <!-- 05 CREDO -->
+  <section style="padding-top:0"><div class="wrap">
+    <div class="meta">Credo – 05</div>
+    <h2 class="credo" style="margin-top:18px">Aktiver Vertrieb schafft Nachfrage.</h2>
+    <p class="p" style="margin-top:20px">Reaktiver Vertrieb verwaltet sie nur. Wir bringen Unternehmen in Bewegung – bewusst, strukturiert, konsequent.</p>
+  </div></section>
+
+  <!-- 06 IN ZAHLEN -->
+  <section style="padding-top:0"><div class="wrap">
+    <div class="panel">
+      <div class="meta" style="color:rgba(243,233,236,.6);margin-bottom:28px">In Zahlen – 06</div>
+      <div class="stats">
+        <div class="stat"><div class="n">25<span class="u">Jahre</span></div><div class="l">Management- &amp; Beratungserfahrung im Mittelstand.</div></div>
+        <div class="stat"><div class="n">10<span class="u">Jahre</span></div><div class="l">Internationale Projekte und Märkte.</div></div>
+        <div class="stat"><div class="n">50<span class="u">Mandate</span></div><div class="l">In Industrie, Handel und Dienstleistung.</div></div>
       </div>
     </div>
-  </section>
+  </div></section>
 
-  <!-- Trust-Bar (echte Anker von der Über-Seite nach vorne gezogen) -->
-  <section class="section trustbar" data-reveal style="padding-top:clamp(28px,3.5vw,44px);padding-bottom:clamp(28px,3.5vw,44px);">
-    <div class="wrap" style="display:flex;flex-wrap:wrap;gap:18px 40px;align-items:center;justify-content:space-between;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding-top:clamp(20px,2.5vw,28px);padding-bottom:clamp(20px,2.5vw,28px);font-family:var(--mono);font-size:clamp(12px,1.15vw,14px);letter-spacing:0.02em;color:var(--text-2);">
-      <span><strong style="color:var(--ink);">Seit 2017</strong> am Markt</span>
-      <span>Netzwerk erfahrener <strong style="color:var(--ink);">Vertriebsprofis</strong></span>
-      <span>Ruhrgebiet · Sauerland · Rheinland</span>
-      <span><strong style="color:var(--ink);">50+ Mandate</strong> im Mittelstand</span>
-      <!-- TODO(Ben): echte Kundenlogos / Referenzleiste hier einsetzen, sobald freigegeben -->
+  <!-- 07 STANDPUNKT -->
+  <section style="padding-top:0"><div class="wrap">
+    <div class="split quote">
+      <div><div class="meta">Standpunkt – 07</div>
+        <blockquote style="margin-top:20px"><strong>Aktiver Vertrieb ist der Motor Ihres Unternehmens.</strong> Er sichert, was Sie aufgebaut haben, und macht Wachstum <span class="u-rose">steuerbar und planbar</span> – statt Ihr Unternehmen dem Zufall zu überlassen. Dafür steht B_77: Wir bringen Ihren Vertrieb in Bewegung, schärfen Strukturen und machen aus Aktivität messbare Ergebnisse.</blockquote>
+        <div class="quote__by"><b>Benjamin Loos</b><span class="meta">Experte für Vertrieb</span></div>
+      </div>
+      <figure class="media media--tall"><img src="/assets/img/benjamin-loos.jpg" alt="Benjamin Loos"></figure>
     </div>
-  </section>
+  </div></section>
 
-  <!-- Manifest -->
-  <section class="section manifest-sec" data-reveal>
-    <div class="corners wrap"><span>Haltung</span><span class="r">02</span></div>
-    <p class="manifest">Der Markt bestimmt nicht Ihr Ergebnis. Ihr Marktanteil tut es – und der entsteht durch Initiative, nicht durch Abwarten. Ein aktiver Vertrieb macht Ihr Unternehmen steuerbar und Ihre Ergebnisse planbar.</p>
-  </section>
+  <!-- 08 KI IM VERTRIEB -->
+  <section id="ki" style="padding-top:0"><div class="wrap">
+    <div class="meta">KI im Vertrieb – 08</div>
+    <h2 class="lede" style="margin-top:16px">Wir arbeiten mit KI. Und bringen sie zu Ihnen.</h2>
+    <div class="ki" style="margin-top:36px">
+      <div class="box"><h3>In Ihren Mandaten</h3><p>In unseren Mandaten setzen wir künstliche Intelligenz von der Marktrecherche bis zum Forecast ein. Wo es für Sie sinnvoll ist, implementieren wir sie direkt in Ihrem Unternehmen – passend zu Ihren Prozessen und Ihrem Team.</p></div>
+      <div class="box"><h3>Quoodix</h3><p>Unser Sales-Intelligence-Werkzeug findet und priorisiert Ihre lohnendsten Zielkunden – damit Ihr Vertrieb Zeit dort investiert, wo Abschlüsse entstehen. Tools, die mitarbeiten, nicht ersetzen. Ein Projekt der Bseventyseven GmbH.</p><a class="lnk" href="https://quoodix.io" target="_blank" rel="noopener">quoodix.io →</a></div>
+    </div>
+  </div></section>
 
-  <!-- Leistungen (Index-Liste, Decode-Hover) -->
-  <section class="section" id="leistungen" data-reveal>
-    <div class="corners wrap"><span>Leistungen</span><span class="r">03</span></div>
-    <div class="lmenu">
-      <a class="lc lc--feature lc--dark" href="/vertriebsstrategie" style="--g:radial-gradient(130% 120% at 100% 0%,#2a2a2a 0%,#161616 48%,#0f0f0f 100%);">
-        <span class="lc-ghost" aria-hidden="true">01</span>
-        <span class="lc-nr">01</span>
-        <div class="lc-body">
-          <h3 class="lc-title">Vertriebsstrategie</h3>
-          <p class="lc-tag">Marktanalyse, Positionierung, Zielkunden, Go-to-Market, Steuerung.</p>
-          <span class="lc-cta">Ansehen <i>→</i></span>
-        </div>
-      </a>
-      <div class="lmenu-rest">
-        <a class="lc lc--dark" href="/vertriebsaufbau" style="--g:linear-gradient(150deg,#262626 0%,#0f0f0f 100%);">
-          <span class="lc-ghost" aria-hidden="true">02</span>
-          <span class="lc-nr">02</span>
-          <div class="lc-body"><h3 class="lc-title">Vertriebsaufbau</h3><p class="lc-tag">Team, Prozesse, Werkzeuge – von Grund auf strukturiert, aufeinander abgestimmt.</p><span class="lc-cta">Ansehen <i>→</i></span></div>
-        </a>
-        <a class="lc lc--light" href="/vertriebsoptimierung" style="--g:linear-gradient(150deg,#f0f0f0 0%,#dcdcdc 100%);">
-          <span class="lc-ghost" aria-hidden="true">03</span>
-          <span class="lc-nr">03</span>
-          <div class="lc-body"><h3 class="lc-title">Vertriebsoptimierung</h3><p class="lc-tag">Positionierung, Prozesse, CRM-Disziplin, Pipeline-Transparenz.</p><span class="lc-cta">Ansehen <i>→</i></span></div>
-        </a>
-        <a class="lc lc--dark" href="/aktiver-vertrieb" style="--g:radial-gradient(130% 130% at 0% 100%,#303030 0%,#171717 48%,#0f0f0f 100%);">
-          <span class="lc-ghost" aria-hidden="true">04</span>
-          <span class="lc-nr">04</span>
-          <div class="lc-body"><h3 class="lc-title">Aktiver Vertrieb</h3><p class="lc-tag">Zielkunden, Entscheider, Verhandlung – vom Erstkontakt bis zum Abschluss.</p><span class="lc-cta">Ansehen <i>→</i></span></div>
-        </a>
-        <a class="lc lc--dark" href="/neukundengewinnung" style="--g:linear-gradient(200deg,#222222 0%,#0f0f0f 100%);">
-          <span class="lc-ghost" aria-hidden="true">05</span>
-          <span class="lc-nr">05</span>
-          <div class="lc-body"><h3 class="lc-title">Neukundengewinnung</h3><p class="lc-tag">Systematische Marktbearbeitung statt Zufall – planbar und wiederholbar.</p><span class="lc-cta">Ansehen <i>→</i></span></div>
-        </a>
-        <a class="lc lc--light" href="/ki-im-vertrieb" style="--g:linear-gradient(200deg,#eeeeee 0%,#d8d8d8 100%);">
-          <span class="lc-ghost" aria-hidden="true">06</span>
-          <span class="lc-nr">06</span>
-          <div class="lc-body"><h3 class="lc-title">Digitalisierung</h3><p class="lc-tag">KI im Vertrieb – ohne Hype, mit Ergebnis. Von Lead-Recherche bis Angebot.</p><span class="lc-cta">Ansehen <i>→</i></span></div>
-        </a>
-        <a class="lc lc--dark" href="/internationalisierung" style="--g:radial-gradient(120% 120% at 0% 0%,#2c2c2c 0%,#161616 55%,#0f0f0f 100%);">
-          <span class="lc-ghost" aria-hidden="true">07</span>
-          <span class="lc-nr">07</span>
-          <div class="lc-body"><h3 class="lc-title">Internationalisierung</h3><p class="lc-tag">Internationalen Fit prüfen, Markteintritt entwickeln, Aufbau begleiten.</p><span class="lc-cta">Ansehen <i>→</i></span></div>
-        </a>
+  <!-- 09 MAGAZIN -->
+  <section id="magazin" style="padding-top:0"><div class="wrap">
+    <div class="meta">Magazin · Werktäglich · Kostenfrei – 09</div>
+    <h2 class="lede" style="margin-top:16px">Sales Intelligence.</h2>
+    <div class="meta" style="margin-top:12px;text-transform:none;letter-spacing:.02em;font-weight:500">Das KI- &amp; Sales-Magazin von B_77 &amp; Quoodix</div>
+    <p class="p p--mut" style="margin-top:16px">KI im Vertrieb für den Mittelstand. Cases, Tools, Daten und Einordnungen – kein Hype, keine Pressemitteilungen. Nur das, was Vertriebsentscheider 2026 wirklich brauchen.</p>
+    <div class="meta" style="margin-top:32px">Aus dem Magazin</div>
+    <div class="mag">
+      <a href="https://sales-intelligence.b77.de"><span class="d">22. Juni 2026 · Schwerpunkt</span><span class="t">Vierundzwanzig Kontakte, ein Abschluss. Warum KI die Neukundenakquise im Mittelstand neu rechnet – aber nicht rettet.</span><span class="a">→</span></a>
+      <a href="https://sales-intelligence.b77.de"><span class="d">21. Juni 2026 · Schwerpunkt</span><span class="t">Vierzig Stunden Schulung, null Nutzung. Warum KI-Tools im Vertrieb an der Mannschaft scheitern – nicht an der Technik.</span><span class="a">→</span></a>
+      <a href="https://sales-intelligence.b77.de"><span class="d">20. Juni 2026 · Schwerpunkt</span><span class="t">Zwei von fünf Feldern. Warum schlechte Kontaktdaten jeden KI-Vertriebsansatz stoppen.</span><span class="a">→</span></a>
+    </div>
+    <a class="pill" href="https://sales-intelligence.b77.de" style="margin-top:30px"><span>Zum Magazin</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+  </div></section>
+
+  <!-- 10 VERTRIEBS-CHECK -->
+  <section id="check" style="padding-top:0"><div class="wrap">
+    <div class="band">
+      <div><div class="meta">Vertriebs-Check · Kostenlos · 15 Minuten – 10</div>
+        <p class="lede" style="margin-top:16px;font-size:clamp(1.8rem,3.4vw,2.8rem);max-width:18ch">Wo steht Ihr Vertrieb gerade?</p></div>
+      <div><p class="p">25 Fragen aus der Praxis. Ein strukturiertes Lagebild zu Markt, Organisation und operativer Umsetzung – mit konkreten Handlungsempfehlungen und PDF-Report zum Download. Ohne Anmeldung, ohne Haken.</p>
+        <a class="pill" href="/vertriebs-check" style="margin-top:24px"><span>Vertriebs-Check starten</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
       </div>
     </div>
-  </section>
+  </div></section>
 
-  <!-- Top-Themen -->
-  <section class="section" data-reveal>
-    <div class="corners wrap"><span>Top-Themen</span><span class="r">3.5</span></div>
-    <div class="tt-wrap">
-      <div class="tt-feature">
-        <div class="col-l">
-          <p class="meta">Schwerpunkt · Zukunft</p>
-          <h3>Future of Sales</h3>
-          <p class="ex">Wenn Systeme mit Systemen verhandeln: Was die autonome Wirtschaft für Einkauf und Vertrieb im Mittelstand bedeutet – und der B_77 „Future of Sales“-Day.</p>
-          <a class="cta" href="/future-of-sales">Zum Thema <i>→</i></a>
-        </div>
-        <div class="col-r tt-robot" id="tt-robot" data-spline="/assets/spline/robot.splinecode" aria-hidden="true"></div>
+  <!-- 10.5 REGION -->
+  <section style="padding-top:0"><div class="wrap">
+    <div class="meta">Vor Ort &amp; deutschlandweit – 10.5</div>
+    <p class="lede" style="margin-top:16px;font-size:clamp(1.8rem,3.4vw,2.8rem);max-width:24ch">Aus Siegen. Im Mandat DACH-weit.</p>
+    <p class="p" style="margin-top:18px">B_77 sitzt in <strong>Siegen</strong> – mit kurzen Wegen in Siegerland, Sauerland, Ruhrgebiet und Rheinland. Für Mandate arbeiten wir in der gesamten DACH-Region, wo immer Ihr Vertrieb es verlangt. Vor-Ort-Nähe, wo sie zählt – ohne uns geografisch zu begrenzen.</p>
+    <div class="chips"><span>Siegen</span><span>Kreuztal</span><span>Netphen</span><span>Hilchenbach</span><span>Olpe</span><span>Attendorn</span><span>Meschede</span><span>Arnsberg</span><span>Hagen</span><span>Dortmund</span><span>Köln</span><span>Wuppertal</span></div>
+    <div class="meta" style="margin-top:26px">DACH-Märkte</div>
+    <div class="chips" style="margin-top:12px"><span class="chip--dach">Deutschland</span><span class="chip--dach">Österreich (AT)</span><span class="chip--dach">Schweiz (CH)</span></div>
+  </div></section>
+
+  <!-- 11 KONTAKT -->
+  <section id="kontakt" style="padding-top:0"><div class="wrap">
+    <div class="panel cta">
+      <div class="meta" style="color:rgba(243,233,236,.6)">Kontakt – 11</div>
+      <h2 style="margin-top:14px">Reden wir.</h2>
+      <p class="steps">In drei Schritten zum Fahrplan: <strong>1.</strong> Anfrage senden · <strong>2.</strong> Kostenloses Erstgespräch, 30 Minuten, unverbindlich · <strong>3.</strong> Klares Lagebild und nächster Schritt. Wir melden uns innerhalb von <strong>24 Stunden</strong>.</p>
+      <div class="cta__links">
+        <a href="tel:+4927189027837">+49 271 890 27 837</a>
+        <a href="mailto:kontakt@b77.de">kontakt@b77.de</a>
+        <a href="https://b77.de">b77.de</a>
       </div>
-      <!-- TODO: Artikel-Teaser „Vertrieb ist der Motor gegen die Krise" wieder aktivieren, wenn live gewünscht
-      <div class="tt-feature tt-feature--essay">
-        <div class="col-l">
-          <p class="meta">Magazin · Vertrieb in der Krise</p>
-          <h3>Vertrieb ist der Motor gegen die Krise</h3>
-          <p class="ex">Ein Teil der Krise ist von außen gemacht, ein Teil hausgemacht. Warum der Vertrieb der einzige Hebel ist, der vollständig in Ihrer Hand liegt – und wie Sie ihn anwerfen.</p>
-          <a class="cta" href="/vertrieb-motor-gegen-krise">Zum Artikel <i>→</i></a>
-        </div>
-        <div class="col-r quote">Was hausgemacht ist, können wir ändern. Genau dort liegt unsere Kraft.</div>
-      </div>
-      -->
-      <!-- TODO: Artikel-Teaser wieder aktivieren, sobald /braucht-es-den-verkaeufer überarbeitet & live ist
-      <div class="tt-feature tt-feature--essay">
-        <div class="col-l">
-          <p class="meta">Magazin · Zukunft des Verkäufers</p>
-          <h3>Braucht es den Verkäufer noch?</h3>
-          <p class="ex">Wenn Systeme mit Systemen verhandeln, verschwindet der Vertrieb nicht – er teilt sich. Warum der Verkäufer der Zukunft weniger Abschließer und mehr Übersetzer und Vertrauensanker ist.</p>
-          <a class="cta" href="/braucht-es-den-verkaeufer">Zum Artikel <i>→</i></a>
-        </div>
-        <div class="col-r quote">Die größte Gefahr für Verkäufer ist nicht die KI. Es ist, in der austauschbaren Mitte zu bleiben.</div>
-      </div>
-      -->
+      <a class="pill" href="/kontakt"><span>Kostenloses Erstgespräch anfragen</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
     </div>
-  </section>
+  </div></section>
 
-  <!-- Studio (Teaser) -->
-  <section class="section studio" data-reveal>
-    <div class="corners wrap"><span>Das Studio · Siegen</span><span class="r">04</span></div>
-    <a class="studio__media" href="/ueber#studio" aria-label="Mehr über das B_77 Studio">
-      <img src="/assets/Studio.jpg?v=bw3" alt="B_77 Studio in Siegen – heller Raum mit freitragender Treppe und Lichtschacht von oben" loading="lazy" width="2000" height="1500">
-    </a>
-    <div class="studio__cap wrap">
-      <p class="studio__lead"><strong>Im B_77 Studio:</strong> intensive Zeit zwischen Unternehmern, Führungskräften und allen, die Verantwortung für Vertrieb tragen.</p>
-      <a class="btn-mono" href="/ueber#studio">Zum Studio →</a>
-    </div>
-  </section>
-
-  <!-- Plakat / Credo (schwarze Kontrast-Sektion) -->
-  <section class="plakat" data-reveal>
-    <div class="corners wrap"><span>Credo</span><span class="r">05</span></div>
-    <h2 class="display">Aktiver Vertrieb schafft Nachfrage.</h2>
-    <p class="plakat__sub">Reaktiver Vertrieb verwaltet sie nur. Wir bringen Unternehmen in Bewegung – bewusst, strukturiert, konsequent.</p>
-  </section>
-
-  <!-- Zahlen -->
-  <section class="section" data-reveal>
-    <div class="corners wrap"><span>In Zahlen</span><span class="r">06</span></div>
-    <div class="stats">
-      <div class="stat"><div class="stat__num">25</div><div class="stat__lbl">Jahre</div><div class="stat__txt">Management- &amp; Beratungserfahrung im Mittelstand.</div></div>
-      <div class="stat"><div class="stat__num">10</div><div class="stat__lbl">Jahre</div><div class="stat__txt">Internationale Projekte und Märkte.</div></div>
-      <div class="stat"><div class="stat__num">50</div><div class="stat__lbl">Mandate</div><div class="stat__txt">In Industrie, Handel und Dienstleistung.</div></div>
-    </div>
-  </section>
-
-  <!-- Experte / Person -->
-  <section class="section" data-reveal>
-    <div class="corners wrap"><span>Standpunkt</span><span class="r">07</span></div>
-    <div class="expert">
-      <figure class="expert__img">
-        <img src="/assets/benjamin-loos-bw.jpg" alt="Benjamin Loos, Experte für Vertrieb" loading="lazy" width="666" height="1000">
-        <figcaption class="figure__cap"><span>Benjamin Loos</span><span>Experte für Vertrieb</span></figcaption>
-      </figure>
-      <div class="expert__body">
-        <p class="expert__lead"><strong>Aktiver Vertrieb ist der Motor Ihres Unternehmens.</strong> Er sichert, was Sie aufgebaut haben, und macht Wachstum steuerbar und planbar – statt Ihr Unternehmen dem Zufall zu überlassen. Dafür steht B_77: Wir bringen Ihren Vertrieb in Bewegung, schärfen Strukturen und machen aus Aktivität messbare Ergebnisse.</p>
-        <a class="btn-mono expert__cta" href="#kontakt">Reden wir →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- KI -->
-  <section class="section" id="ki" data-reveal>
-    <div class="corners wrap"><span>KI im Vertrieb</span><span class="r">08</span></div>
-    <div class="ki-grid">
-      <h2 class="h2">Wir arbeiten mit KI. Und bringen sie zu Ihnen.</h2>
-      <div>
-        <p class="body">In unseren Mandaten setzen wir künstliche Intelligenz von der Marktrecherche bis zum Forecast ein. Wo es für Sie sinnvoll ist, implementieren wir sie direkt in Ihrem Unternehmen – passend zu Ihren Prozessen und Ihrem Team.</p>
-        <p class="body" style="margin-top:1.3em;"><strong>Quoodix.</strong> Unser Sales-Intelligence-Werkzeug findet und priorisiert Ihre lohnendsten Zielkunden – damit Ihr Vertrieb Zeit dort investiert, wo Abschlüsse entstehen. Tools, die mitarbeiten, nicht ersetzen. Ein Projekt der Bseventyseven GmbH.</p>
-        <p class="label" style="margin-top:1.4em;"><a href="https://quoodix.io" style="text-decoration:underline;text-underline-offset:3px;color:var(--ink);">quoodix.io →</a></p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Magazin: Sales Intelligence -->
-  <section class="section section--ink" id="magazin" data-reveal>
-    <div class="corners wrap"><span>Magazin · Werktäglich · Kostenfrei</span><span class="r">09</span></div>
-    <div class="ki-grid">
-      <div>
-        <h2 class="h2">Sales Intelligence.</h2>
-        <p class="mag-subline">Das KI- &amp; Sales-Magazin von B_77 &amp; Quoodix</p>
-      </div>
-      <p class="body">KI im Vertrieb für den Mittelstand. Cases, Tools, Daten und Einordnungen – kein Hype, keine Pressemitteilungen. Nur das, was Vertriebsentscheider 2026 wirklich brauchen.</p>
-    </div>
-    <p class="label wrap" style="margin:clamp(40px,6vw,64px) 0 0;">Aus dem Magazin</p>
-    <div class="mcards">
-      <a class="mc" href="https://sales-intelligence.b77.de/articles/2026-06-22-ki-neukundenakquise-conversion-mittelstand.html"><span class="mc-meta">22. Juni 2026 · Schwerpunkt</span><p class="mc-title">Vierundzwanzig Kontakte, ein Abschluss. Warum KI die Neukundenakquise im Mittelstand neu rechnet – aber nicht rettet.</p><span class="mc-arr">→</span></a>
-      <a class="mc" href="https://sales-intelligence.b77.de/articles/2026-06-21-ki-onboarding-vertrieb-akzeptanz.html"><span class="mc-meta">21. Juni 2026 · Schwerpunkt</span><p class="mc-title">Vierzig Stunden Schulung, null Nutzung. Warum KI-Tools im Vertrieb an der Mannschaft scheitern – nicht an der Technik.</p><span class="mc-arr">→</span></a>
-      <a class="mc" href="https://sales-intelligence.b77.de/articles/2026-06-20-ki-datenqualitaet-vertrieb-mittelstand.html"><span class="mc-meta">20. Juni 2026 · Schwerpunkt</span><p class="mc-title">Zwei von fünf Feldern. Warum schlechte Kontaktdaten jeden KI-Vertriebsansatz stoppen.</p><span class="mc-arr">→</span></a>
-    </div>
-    <div class="wrap" style="margin-top:clamp(36px,5vw,52px);"><a class="btn-mono" href="https://sales-intelligence.b77.de">Zum Magazin →</a></div>
-  </section>
-
-  <!-- Vertriebs-Check -->
-  <section class="section" id="check" data-reveal>
-    <div class="corners wrap"><span>Vertriebs-Check · Kostenlos · 15 Minuten</span><span class="r">10</span></div>
-    <div class="ki-grid">
-      <h2 class="h2">Wo steht Ihr Vertrieb gerade?</h2>
-      <div>
-        <p class="body">25 Fragen aus der Praxis. Ein strukturiertes Lagebild zu Markt, Organisation und operativer Umsetzung – mit konkreten Handlungsempfehlungen und PDF-Report zum Download. Ohne Anmeldung, ohne Haken.</p>
-        <div style="margin-top:clamp(28px,4vw,40px);"><a class="btn-mono" href="/vertriebs-check">Vertriebs-Check starten →</a></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Region / lokale Verlinkung -->
-  <section class="section" id="region" data-reveal>
-    <div class="corners wrap"><span>Region</span><span class="r">10.5</span></div>
-    <div class="ki-grid">
-      <h2 class="h2">Ihr Vertriebsberater in Siegen – und in der Region.</h2>
-      <div>
-        <p class="body">B_77 sitzt in <strong>Siegen</strong> und begleitet mittelständische Unternehmen im gesamten Siegerland, Sauerland, Ruhrgebiet und Rheinland. Vor-Ort-Nähe, wo sie zählt – deutschlandweit, wo es das Mandat verlangt.</p>
-        <p class="label" style="margin-top:1.4em;line-height:2;">
-          <a href="/vertriebsberatung-siegen" style="text-decoration:underline;text-underline-offset:3px;color:var(--ink);">Siegen</a> ·
-          <a href="/vertriebsberatung-kreuztal" style="text-decoration:underline;text-underline-offset:3px;color:var(--ink);">Kreuztal</a> ·
-          <a href="/vertriebsberatung-netphen" style="text-decoration:underline;text-underline-offset:3px;color:var(--ink);">Netphen</a> ·
-          <a href="/vertriebsberatung-hilchenbach" style="text-decoration:underline;text-underline-offset:3px;color:var(--ink);">Hilchenbach</a> ·
-          <a href="/vertriebsberatung-olpe" style="text-decoration:underline;text-underline-offset:3px;color:var(--ink);">Olpe</a> ·
-          <a href="/vertriebsberatung-attendorn" style="text-decoration:underline;text-underline-offset:3px;color:var(--ink);">Attendorn</a> ·
-          <a href="/vertriebsberatung-meschede" style="text-decoration:underline;text-underline-offset:3px;color:var(--ink);">Meschede</a> ·
-          <a href="/vertriebsberatung-arnsberg" style="text-decoration:underline;text-underline-offset:3px;color:var(--ink);">Arnsberg</a> ·
-          <a href="/vertriebsberatung-hagen" style="text-decoration:underline;text-underline-offset:3px;color:var(--ink);">Hagen</a> ·
-          <a href="/vertriebsberatung-dortmund" style="text-decoration:underline;text-underline-offset:3px;color:var(--ink);">Dortmund</a> ·
-          <a href="/vertriebsberatung-koeln" style="text-decoration:underline;text-underline-offset:3px;color:var(--ink);">Köln</a> ·
-          <a href="/vertriebsberatung-wuppertal" style="text-decoration:underline;text-underline-offset:3px;color:var(--ink);">Wuppertal</a>
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Kontakt -->
-  <section class="section kontakt" id="kontakt" data-reveal>
-    <div class="corners wrap"><span>Kontakt</span><span class="r">11</span></div>
-    <h2 class="display">Reden wir.</h2>
-    <p class="plakat__sub" style="max-width:60ch;">In drei Schritten zum Fahrplan: <strong>1.</strong> Anfrage senden · <strong>2.</strong> Kostenloses Erstgespräch, 30 Minuten, unverbindlich · <strong>3.</strong> Klares Lagebild und nächster Schritt. Wir melden uns innerhalb von <strong>24 Stunden</strong>.</p>
-    <div class="kontakt__links">
-      <div class="kontakt__item"><div class="label">Telefon</div><a href="tel:+4927189027837">+49 271 890 27 837</a></div>
-      <div class="kontakt__item"><div class="label">E-Mail</div><a href="mailto:kontakt@b77.de">kontakt@b77.de</a></div>
-      <div class="kontakt__item"><div class="label">Web</div><a href="https://b77.de">b77.de</a></div>
-    </div>
-    <div class="wrap" style="margin-top:clamp(28px,4vw,40px);"><a class="btn-mono" href="/kontakt">Kostenloses Erstgespräch anfragen →</a></div>
-  </section>
-
-  <footer class="footer">
+  <footer><div class="wrap">
     <span>© 2026 B_77 – Vertriebsberatung</span>
-    <span class="footer__r"><strong>Büro:</strong> Unter dem Klingelschacht 18, 57074 Siegen · <a href="/impressum">Impressum &amp; Datenschutz</a></span>
-  </footer>
+    <span>Büro: Unter dem Klingelschacht 18, 57074 Siegen · Impressum &amp; Datenschutz</span>
+  </div></footer>
 
-  <script src="monolith.js?v=mono30"></script>
-  <script>
-  /* HERO: ASCII-Zeichenfeld (Canvas2D). Mehrphasige Animation aus den Zeichen:
-     1) Wachstums-Pfeil baut sich von unten auf, 2) oben angekommen fallen die
-     Elemente herab, 3) daraus waechst von unten eine Umsatzkurve aus 12 Balken
-     (Monate) mit aufsteigenden, krummen Zahlen (8–24 Mio €). Balken/Pfeil/Kurve
-     aus Elementen; Zahlen + Monate als klare Labels. Monolith: hell auf dunkel. */
-  (function(){
-    var mount = document.getElementById('ph-gl');
+<script src="/assets/site.js"></script>
+<script type="module" src="/assets/spline/spline-viewer.js"></script>
+<script>
+(function(){var m=document.getElementById('tt-robot');if(!m)return;if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;var done=false;function mount(){if(done)return;done=true;function go(){var v=document.createElement('spline-viewer');v.setAttribute('url','/assets/spline/robot.splinecode');v.setAttribute('loading-anim-type','none');m.appendChild(v);function sf(){try{if(v.shadowRoot&&!v.__sf){var s=document.createElement('style');s.textContent='canvas{width:100%!important;height:100%!important;display:block}';v.shadowRoot.appendChild(s);v.__sf=1;}}catch(e){}}function nudge(){sf();try{window.dispatchEvent(new Event('resize'))}catch(e){}}function kill(){try{var r=v.shadowRoot;if(!r)return false;var l=r.querySelector('#logo')||r.querySelector('a[href*="spline.design"]');if(l){l.remove();return true}}catch(e){}return false}v.addEventListener('load',function(){kill();nudge();setTimeout(nudge,80);setTimeout(nudge,400)});var n=0,iv=setInterval(function(){sf();if(kill()||++n>80)clearInterval(iv)},120);[300,700,1500,2500].forEach(function(t){setTimeout(nudge,t)});}if(window.customElements){customElements.whenDefined('spline-viewer').then(go)}else{go()}}if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){mount();io.disconnect();}})},{rootMargin:'500px'});io.observe(m);}else{mount();}})();
+</script>
+<script>
+(function(){
+    var mount = document.getElementById('hl-gl');
     if (!mount) return;
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var canvas = document.createElement('canvas');
@@ -959,7 +316,6 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
     function loop(ts){requestAnimationFrame(loop);if(start===null)start=ts;if(ts-last<33)return;last=ts;var t=(ts-start)*0.001;draw(t%CYCLE,t);}
     requestAnimationFrame(loop);
   })();
-  </script>
-
+</script>
 </body>
 </html>
