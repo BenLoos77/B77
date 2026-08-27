@@ -44,11 +44,21 @@
     var menu = document.querySelector(".nav__mobile");
     if (!burger || !menu) return;
     var nav = burger.closest(".nav");
-    burger.addEventListener("click", function () {
-      var open = menu.classList.toggle("is-open");
+    function setOpen(open) {
+      menu.classList.toggle("is-open", open);
       if (nav) nav.classList.toggle("nav--menu-open", open);
-      burger.textContent = open ? "Schließen" : "Menü";
       burger.setAttribute("aria-expanded", open ? "true" : "false");
+      burger.setAttribute("aria-label", open ? "Menü schließen" : "Menü");
+      document.body.style.overflow = open ? "hidden" : "";
+    }
+    burger.addEventListener("click", function () {
+      setOpen(!menu.classList.contains("is-open"));
+    });
+    menu.addEventListener("click", function (e) {
+      if (e.target.closest && e.target.closest("a")) setOpen(false);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" || e.keyCode === 27) setOpen(false);
     });
   }
 
@@ -235,7 +245,36 @@
     });
   }
 
-  function init() { initDecode(); initReveal(); initNav(); initFloatingNav(); initGrid(); initSpline(); }
+  /* ---- Sanfter Seiten-Übergang: beim Navigieren auf Ink ausblenden ---- */
+  function initPageTransition() {
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
+    var fade = document.createElement("div");
+    fade.className = "b77-fade";
+    fade.setAttribute("aria-hidden", "true");
+    document.body.appendChild(fade);
+    // Zurück/Vor (bfcache): Overlay sicher zurücksetzen
+    window.addEventListener("pageshow", function () { fade.classList.remove("is-active"); });
+    var going = false;
+    document.addEventListener("click", function (e) {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      var a = e.target && e.target.closest ? e.target.closest("a") : null;
+      if (!a || a.target === "_blank" || a.hasAttribute("download")) return;
+      var raw = a.getAttribute("href") || "";
+      if (!raw || raw.charAt(0) === "#" || raw.indexOf("mailto:") === 0 || raw.indexOf("tel:") === 0) return;
+      var url;
+      try { url = new URL(a.href, location.href); } catch (_) { return; }
+      if (url.origin !== location.origin) return;
+      if (url.pathname === location.pathname && url.hash) return; // Anker auf gleicher Seite
+      if (going) return;
+      going = true;
+      e.preventDefault();
+      fade.classList.add("is-active");
+      setTimeout(function () { window.location.href = a.href; }, 360);
+    });
+  }
+
+  function init() { initDecode(); initReveal(); initNav(); initFloatingNav(); initGrid(); initSpline(); initPageTransition(); }
   if (document.readyState === "loading")
     document.addEventListener("DOMContentLoaded", init);
   else init();

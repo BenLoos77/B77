@@ -1,0 +1,283 @@
+<meta charset="utf-8">
+<title>B_77 · Rebranding — Richtungs-Gate</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Inter:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&family=Archivo:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:#0c0c0d;color:#f4f4f2;font-family:'Inter',system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 40px}
+  @media(max-width:640px){.wrap{padding:0 22px}}
+  section{padding:110px 0;position:relative}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.24em;text-transform:uppercase}
+  .mut{opacity:.62}
+  img.sig{display:block;width:100%;height:auto}
+
+  /* ============ COVER ============ */
+  .cover{padding:132px 0 96px;border-bottom:1px solid #1e1e20}
+  .cover .eyebrow{color:#9a9a97;margin-bottom:34px}
+  .cover h1{font-family:'Inter';font-weight:700;font-size:clamp(34px,6vw,68px);line-height:1.02;letter-spacing:-.03em;margin-bottom:26px}
+  .cover h1 u{text-decoration:none;color:#DCF500}
+  .cover .spine{font-size:clamp(19px,2.4vw,26px);max-width:60ch;color:#d9d9d6}
+  .cover .spine b{color:#fff}
+  .cover .meta{display:flex;flex-wrap:wrap;gap:12px;margin-top:40px}
+  .chip{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.04em;border:1px solid #2a2a2c;border-radius:999px;padding:8px 15px;color:#b7b7b3}
+  .chip b{color:#fff}
+  .howto{margin-top:52px;border-top:1px solid #1e1e20;padding-top:30px;display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  @media(max-width:760px){.howto{grid-template-columns:1fr;gap:16px}}
+  .howto .num{font-family:'JetBrains Mono';color:#DCF500;font-size:13px;margin-bottom:8px}
+  .howto p{font-size:15px;color:#c4c4c1}
+  .underscore-note{margin-top:30px;font-size:15px;color:#c4c4c1;max-width:70ch}
+  .underscore-note code{font-family:'JetBrains Mono';color:#DCF500;font-size:1.05em}
+
+  /* section frame label */
+  .frame{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:40px}
+  .frame .rk{font-family:'JetBrains Mono';font-size:12px;letter-spacing:.2em;text-transform:uppercase}
+  .frame .idx{font-family:'JetBrains Mono';font-size:12px;opacity:.5}
+
+  .grid2{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+  @media(max-width:860px){.grid2{grid-template-columns:1fr;gap:32px}}
+  .palette{display:flex;gap:0;margin:26px 0 0;border-radius:6px;overflow:hidden;border:1px solid rgba(0,0,0,.12)}
+  .sw{flex:1;height:64px;display:flex;align-items:flex-end;padding:6px 8px;font-family:'JetBrains Mono';font-size:10px;letter-spacing:.02em}
+  .specrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+  .spectag{font-family:'JetBrains Mono';font-size:11px;padding:6px 11px;border-radius:5px;letter-spacing:.02em}
+  .why{margin-top:26px;font-size:16px;line-height:1.6}
+  .kv{margin-top:22px;display:grid;grid-template-columns:auto 1fr;gap:6px 20px;font-size:14px}
+  .kv .k{font-family:'JetBrains Mono';font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.6;padding-top:2px}
+  .imgwrap{position:relative;border-radius:8px;overflow:hidden}
+  .imgcap{font-family:'JetBrains Mono';font-size:11px;letter-spacing:.04em;margin-top:10px;opacity:.55}
+
+  /* wordmark base */
+  .wm{font-weight:700;letter-spacing:-.02em;display:inline-flex;align-items:baseline;line-height:1}
+
+  /* ============ R1 — DER GRUNDSATZ ============ */
+  .d1{background:#E7E5DE;color:#1C1B18}
+  .d1 .rk{color:#B01F13}
+  .d1 .idx{color:#1C1B18}
+  .d1 .anriss{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(40px,7vw,96px);line-height:.98;letter-spacing:-.02em;position:relative;display:inline-block;padding-bottom:.14em}
+  .d1 .anriss:after{content:"";position:absolute;left:0;right:-.05em;bottom:0;height:4px;background:#CE2417}
+  .d1 .anriss:before{content:"";position:absolute;right:-.05em;bottom:0;width:4px;height:.42em;background:#CE2417;transform:translateY(-100%)}
+  .d1 .lede{font-size:19px;line-height:1.6;max-width:52ch;margin-top:34px;color:#2C2B27}
+  .d1 .wm{font-family:'Fraunces',serif;font-weight:600;font-size:58px;color:#1C1B18}
+  .d1 .wm .us{position:relative;color:#1C1B18}
+  .d1 .wm .us:after{content:"";position:absolute;left:.04em;right:-.14em;bottom:.06em;height:5px;background:#CE2417}
+  .d1 .spectag{background:#DEDCd3;color:#514F4A}
+  .d1 .kv .k{color:#514F4A}
+  .d1 .why b{color:#B01F13}
+  .d1 .imgwrap{border:1px solid #B8B4AA}
+
+  /* ============ R2 — DIE OFFENSIVE ============ */
+  .d2{background:#16171A;color:#F2F1ED}
+  .d2 .rk{color:#FF4A14}
+  .d2 .idx{color:#9A9CA1}
+  .d2 .anriss{font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(52px,11vw,150px);line-height:.9;letter-spacing:-.01em;position:relative;display:inline-block;padding-bottom:.12em}
+  .d2 .anriss:after{content:"";position:absolute;left:0;right:0;bottom:.02em;height:9px;background:linear-gradient(90deg,#3C3F45 0%,#3C3F45 30%,#C6300A 66%,#FF4A14 100%);box-shadow:0 0 18px rgba(255,74,20,.28)}
+  .d2 .lede{font-family:'Archivo';font-size:19px;line-height:1.55;max-width:52ch;margin-top:32px;color:#C7C8CB}
+  .d2 .wm{font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;font-size:60px;color:#F2F1ED;letter-spacing:0}
+  .d2 .wm .us{position:relative}
+  .d2 .wm .us:after{content:"";position:absolute;left:0;right:-.22em;bottom:.05em;height:6px;background:linear-gradient(90deg,#3C3F45,#FF4A14);box-shadow:0 0 14px rgba(255,74,20,.4)}
+  .d2 .spectag{background:#2A2C30;color:#C7C8CB}
+  .d2 .kv .k{color:#9A9CA1}
+  .d2 .why b{color:#FF4A14}
+  .d2 .sw{color:#fff}
+
+  /* ============ R3 — DIE VERTRIEBSINTELLIGENZ ============ */
+  .d3{background:#EDEDEA;color:#1A1B1D}
+  .d3 .rk{color:#1A1B1D}
+  .d3 .idx{color:#5E6063}
+  .d3 .anriss{font-family:'Inter';font-weight:700;font-size:clamp(38px,7vw,92px);line-height:1.0;letter-spacing:-.03em;position:relative;display:inline-block;padding-bottom:.22em}
+  .d3 .anriss .axis{position:absolute;left:0;right:0;bottom:.08em;height:2px;background:#1A1B1D}
+  .d3 .anriss .axis i{position:absolute;bottom:0;width:1px;height:7px;background:#5E6063}
+  .d3 .anriss .axis i.mj{height:13px;background:#1A1B1D}
+  .d3 .anriss .axis .zero{position:absolute;bottom:-3px;left:0;width:1.5px;height:16px;background:#E5261F}
+  .d3 .anriss .rise{position:absolute;bottom:.08em;height:34%;width:14px;background:#DCF500}
+  .d3 .lede{font-size:19px;line-height:1.55;max-width:52ch;margin-top:32px;color:#3E4043}
+  .d3 .wm{font-family:'Inter';font-weight:700;font-size:58px;color:#1A1B1D;letter-spacing:-.02em}
+  .d3 .wm .us{position:relative}
+  .d3 .wm .us:after{content:"";position:absolute;left:.02em;right:-.1em;bottom:.1em;height:2px;background:#1A1B1D}
+  .d3 .wm .us:before{content:"";position:absolute;left:50%;bottom:.1em;width:11px;height:26px;background:#DCF500}
+  .d3 .spectag{background:#F6F6F3;color:#5E6063;border:1px solid #C9C9C4}
+  .d3 .kv .k{color:#5E6063}
+  .d3 .why b{color:#1A1B1D;background:#DCF500;padding:0 4px}
+  .d3 .imgwrap{border:1px solid #C9C9C4}
+  .d3 .r3ph{background:#1A1B1D;aspect-ratio:16/11;position:relative;display:flex;align-items:center;justify-content:center}
+  .d3 .r3ph .ax{position:relative;width:72%;height:2px;background:repeating-linear-gradient(90deg,#3E4043 0 1px,transparent 1px 26px)}
+  .d3 .r3ph .ax:after{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:#2A2B2E}
+  .d3 .r3ph .zero{position:absolute;left:0;top:-6px;width:2px;height:15px;background:#E5261F}
+  .d3 .r3ph .bar{position:absolute;left:30%;top:-12px;width:118px;height:15px;border-radius:8px;background:#DCF500;box-shadow:0 0 30px rgba(220,245,0,.5)}
+  .d3 .r3ph .note{position:absolute;bottom:18px;left:0;right:0;text-align:center;font-family:'JetBrains Mono';font-size:10px;letter-spacing:.1em;color:#7d7f82;text-transform:uppercase}
+
+  /* ============ CLOSE ============ */
+  .close{background:#0c0c0d;border-top:1px solid #1e1e20}
+  .close h2{font-family:'Inter';font-weight:700;font-size:clamp(28px,4vw,46px);letter-spacing:-.02em;line-height:1.06;margin-bottom:20px}
+  .close p{font-size:18px;color:#c4c4c1;max-width:64ch;margin-bottom:14px}
+  .pick{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:40px 0 8px}
+  @media(max-width:760px){.pick{grid-template-columns:1fr}}
+  .pcard{border:1px solid #2a2a2c;border-radius:10px;padding:20px}
+  .pcard .t{font-family:'JetBrains Mono';font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}
+  .pcard .a{font-size:17px;font-weight:600}
+  .pcard.p1 .t{color:#CE2417}.pcard.p2 .t{color:#FF4A14}.pcard.p3 .t{color:#c9de00}
+  .foot{margin-top:56px;font-family:'JetBrains Mono';font-size:12px;letter-spacing:.06em;color:#77777a}
+  .foot b{color:#c9c9c6}
+</style>
+
+<!-- ================= COVER ================= -->
+<section class="cover">
+  <div class="wrap">
+    <p class="eyebrow">SEVEN SEVEN │ DESIGN — Rebranding B_77 · Richtungs-Gate · 06.08.2026</p>
+    <h1>Der Name bleibt. Alles andere<br>wird neu. Wähl die <u>Richtung</u>.</h1>
+    <p class="spine">Die Crew hat die Analyse in eine Strategie übersetzt. Eine Spine trägt alle drei Richtungen: <b>„Nachfrage wird gemacht."</b> — der Umschwung von „Vertrieb passiert uns" zu „Nachfrage machen wir". Das eine Wort, das WCG nie besetzt: <b>Vertrieb</b>.</p>
+    <div class="meta">
+      <span class="chip"><b>B_77</b> + Unterstrich bleiben Equity</span>
+      <span class="chip">Farbe · Typo · Wortmarke · Bild · Motion · Website — <b>neu</b></span>
+      <span class="chip">Latte: <b>Hauser Lacour</b></span>
+    </div>
+    <p class="underscore-note">Ein Leitmotiv über alle drei: der Unterstrich <code>_</code> aus <b>B_77</b> wird zur <b>„Aktiv-Linie"</b> — vom Zeichenrest zum System, auf dem Nachfrage entsteht. Jede Richtung interpretiert diese Linie anders: als Grundlinie, als Traktionsvektor, als Mess-Achse.</p>
+    <div class="howto">
+      <div><div class="num">01</div><p>Drei <b>interne</b> CI-Richtungen — kein Kunden-Buffet. Von reduziert bis kraftvoll.</p></div>
+      <div><div class="num">02</div><p>Jede steht in ihrer <b>echten</b> Optik: Farbe, Schrift, Wortmarke, Signature-Bild.</p></div>
+      <div><div class="num">03</div><p>Du wählst <b>eine</b>. Darauf konvergieren wir und bauen die Website.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= R1 — DER GRUNDSATZ ================= -->
+<section class="d1">
+  <div class="wrap">
+    <div class="frame"><span class="rk">Richtung 1 — Der Grundsatz</span><span class="idx">reduziert · editorial</span></div>
+    <span class="wm">B<span class="us">_</span>77</span>
+    <div style="height:48px"></div>
+    <div class="anriss">Nachfrage wird gemacht.</div>
+    <p class="lede">Vertrieb ist Haltung. Wer weiß, dass Nachfrage gemacht wird, muss nicht laut sein. Ein Grundsatz statt eines Angebots — stille Autorität, die WCGs Lautstärke nie hat.</p>
+    <div class="grid2" style="margin-top:64px">
+      <div>
+        <div class="palette">
+          <div class="sw" style="background:#E7E5DE;color:#1C1B18">#E7E5DE</div>
+          <div class="sw" style="background:#F5F4F0;color:#1C1B18">#F5F4F0</div>
+          <div class="sw" style="background:#1C1B18;color:#E7E5DE">#1C1B18</div>
+          <div class="sw" style="background:#CE2417;color:#fff">#CE2417</div>
+        </div>
+        <div class="specrow">
+          <span class="spectag">Display · Tiempos Headline</span>
+          <span class="spectag">Text · Söhne</span>
+        </div>
+        <div class="kv">
+          <div class="k">Linie</div><div>Der <b>_</b> wird zur roten Grundlinie, auf der jeder Satz steht; Emphase = Korrektur-Unterstreichung statt Fettung.</div>
+          <div class="k">Bild</div><div>Editorial-Portrait, gerichtetes Nordlicht, Gravitas — menschliche Wärme gegen die Reduktion.</div>
+          <div class="k">Risiko</div><div>Kippt ins Leise/Abstrakte, wenn der Beweis (Zahlen, Quoodix) fehlt — darf nicht nach Privatbank wirken.</div>
+        </div>
+        <p class="why"><b>Gewinnt, weil</b> sie den Kern behauptet statt ihn zu bebildern — die eine Haltung, die im Mittelstand als Souveränität liest.</p>
+      </div>
+      <div>
+        <div class="imgwrap"><img class="sig" src="__IMG1__" alt="Editorial-Portrait, stille Autorität"></div>
+        <p class="imgcap">Signature-Bild R1 · generiert · „stille Autorität"</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= R2 — DIE OFFENSIVE ================= -->
+<section class="d2">
+  <div class="wrap">
+    <div class="frame"><span class="rk">Richtung 2 — Die Offensive</span><span class="idx">operativ · kraftvoll</span></div>
+    <span class="wm">B<span class="us">_</span>77</span>
+    <div style="height:44px"></div>
+    <div class="anriss">Immer nach<br>vorne.</div>
+    <p class="lede">Vertrieb ist Offensive. Wir spielen nach vorne, der Kunde gewinnt Marktanteil — aus der Verwaltung in Bewegung. Der einzige Weg, der den blassen Text-Monolith mit Kraft und Bild bricht.</p>
+    <div class="grid2" style="margin-top:64px">
+      <div>
+        <div class="palette">
+          <div class="sw" style="background:#16171A">#16171A</div>
+          <div class="sw" style="background:#2A2C30">#2A2C30</div>
+          <div class="sw" style="background:#F2F1ED;color:#16171A">#F2F1ED</div>
+          <div class="sw" style="background:#FF4A14">#FF4A14</div>
+        </div>
+        <div class="specrow">
+          <span class="spectag">Display · GT America Compressed</span>
+          <span class="spectag">Kennwerte · GT America Mono</span>
+        </div>
+        <div class="kv">
+          <div class="k">Linie</div><div>Der <b>_</b> wird zur Traktions-/Vektorlinie: läuft beim Scrollen nach rechts auf, dünn → dicht → Glut, wie Drehmoment unter Last.</div>
+          <div class="k">Bild</div><div>Makro-Schnitt eines gefrästen Aggregats unter Last, ein glühend-heißes Element, hartes Spotlicht — regie-geführte Ingenieur-Fotografie.</div>
+          <div class="k">Risiko</div><div>Angriffs-/Bootcamp-Klischee, wenn nicht kompromisslos premium gebaut. Orange bleibt Skalpell, nie Deko.</div>
+        </div>
+        <p class="why"><b>Gewinnt, weil</b> sie als einzige Kraft und Bild verbindet — und die Kategorie diese Wucht noch nicht besetzt hat.</p>
+      </div>
+      <div>
+        <div class="imgwrap"><img class="sig" src="__IMG2__" alt="Makro-Aggregat unter Last, glühender Kern"></div>
+        <p class="imgcap">Signature-Bild R2 · generiert · „Kraft &amp; Drehmoment"</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= R3 — DIE VERTRIEBSINTELLIGENZ ================= -->
+<section class="d3">
+  <div class="wrap">
+    <div class="frame"><span class="rk">Richtung 3 — Die Vertriebsintelligenz</span><span class="idx">System · präzise</span></div>
+    <span class="wm">B<span class="us">_</span>77</span>
+    <div style="height:48px"></div>
+    <div class="anriss">Nachfrage ist kein Zufall.<span class="axis" id="ax3"><span class="zero"></span></span><span class="rise" id="rise3" style="left:0"></span></div>
+    <p class="lede">Nachfrage ist kein Zufall, sondern ein System: 25 Jahre Erfahrung + Quoodix = eine Maschine, die weiß, wer als Nächstes kauft. Macht die Software-Doppelrolle zum stärksten Argument statt zum Erklärungsproblem.</p>
+    <div class="grid2" style="margin-top:64px">
+      <div>
+        <div class="palette">
+          <div class="sw" style="background:#EDEDEA;color:#1A1B1D">#EDEDEA</div>
+          <div class="sw" style="background:#1A1B1D;color:#EDEDEA">#1A1B1D</div>
+          <div class="sw" style="background:#DCF500;color:#1A1B1D">#DCF500</div>
+          <div class="sw" style="background:#00A6D6;color:#fff">#00A6D6</div>
+          <div class="sw" style="background:#E5261F;color:#fff">#E5261F</div>
+        </div>
+        <div class="specrow">
+          <span class="spectag">Display · ABC Diatype</span>
+          <span class="spectag">Messwert · ABC Diatype Mono</span>
+        </div>
+        <div class="kv">
+          <div class="k">Linie</div><div>Der <b>_</b> wird zur Achsen-Grundlinie mit Tick-Marken und rotem Nullpunkt; ein Signal-Lime-Wert tickt hoch. Quoodix lebt als Live-Modul auf derselben Achse.</div>
+          <div class="k">Bild</div><div>Gefrästes Aluminium-Steuerpult, Lime-Readout auf gravierter Mess-Achse — Hardware, kein Screenshot. Braun/Rams-Register.</div>
+          <div class="k">Risiko</div><div>Kippt in „Sales-Tech" / KI-Buzzword-Look, wenn nicht diszipliniert. Lime nur als Signalfläche, nie als Fließtext.</div>
+        </div>
+        <p class="why"><b>Gewinnt, weil</b> sie als einzige die Software-Doppelrolle zum Beweis macht — der Leitstand als Argument.</p>
+      </div>
+      <div>
+        <div class="imgwrap"><img class="sig" src="__IMG3__" alt="Gefrästes Aluminium, leuchtender Lime-Stab — der lebende Wert"></div>
+        <p class="imgcap">Signature-Bild R3 · generiert · „der lebende Wert auf der Achse"</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CLOSE ================= -->
+<section class="close">
+  <div class="wrap">
+    <h2>Eine Richtung. Dann konvergieren wir.</h2>
+    <p>Das ist bewusst kein Kunden-Buffet, sondern das interne Richtungs-Gate. Sag mir, welche Welt B_77 die nächsten Jahre tragen soll — dann schärft die Crew genau diese eine bis zur fertigen Identity und baut die neue Website darauf. Nichts geht live vor deiner Wahl.</p>
+    <div class="pick">
+      <div class="pcard p1"><div class="t">Richtung 1</div><div class="a">Der Grundsatz — „Nachfrage wird gemacht."</div></div>
+      <div class="pcard p2"><div class="t">Richtung 2</div><div class="a">Die Offensive — „Immer nach vorne."</div></div>
+      <div class="pcard p3"><div class="t">Richtung 3</div><div class="a">Die Vertriebsintelligenz — „Nachfrage ist kein Zufall."</div></div>
+    </div>
+    <p class="mut" style="font-size:15px">Du kannst auch mischen („R2-Kraft, aber R3-Präzision im Detail") — sag es, und die Creative Direction konvergiert entsprechend.</p>
+    <p class="foot"><b>SEVEN SEVEN │ DESIGN</b> — die Designagentur von B_77 · Research → Strategie → Konzept → Identity → Imagery → Critic-Gate</p>
+  </div>
+</section>
+
+<script>
+  // R3: Achsen-Ticks generieren + Lime-Wert auf die Achse setzen (dezent, respektiert reduced-motion)
+  (function(){
+    var ax=document.getElementById('ax3');
+    if(ax){
+      var w=ax.offsetWidth||600, gap=26, n=Math.floor(w/gap), i;
+      for(i=1;i<n;i++){var t=document.createElement('i');if(i%5===0)t.className='mj';t.style.left=(i*gap)+'px';ax.appendChild(t);}
+    }
+    var rise=document.getElementById('rise3');
+    if(rise && ax){
+      var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var target=Math.round((ax.offsetWidth||600)*0.62);
+      if(reduced){rise.style.left=target+'px';}
+      else{var x=0;rise.style.left='0px';var id=setInterval(function(){x+=Math.max(2,(target-x)*0.08);if(x>=target-1){x=target;clearInterval(id);}rise.style.left=Math.round(x)+'px';},16);}
+    }
+  })();
+</script>

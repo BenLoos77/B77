@@ -13,6 +13,42 @@
 
   const CONSENT_KEY = 'b77-consent-v1';
 
+  // ============================================================
+  // GOOGLE ADS CONVERSION-TRACKING  (Consent Mode v2)
+  // TODO: Nach Anlage der Conversion-Aktion(en) in Google Ads eintragen.
+  //   AW_CONVERSION_ID = die Konto-Conversion-ID, z.B. 'AW-1234567890'
+  //   ADS_SEND_TO.*    = der komplette send_to-Wert der jeweiligen Aktion,
+  //                      z.B. 'AW-1234567890/AbC-D_efGh12ijkLmn'
+  //   Solange leer, passiert für Ads nichts (nur GA4 läuft weiter wie bisher).
+  // ============================================================
+  const AW_CONVERSION_ID = '';
+  const ADS_SEND_TO = {
+    contact_form:   '',   // Aktion "Kontaktanfrage" (Kontaktformular / Erstgespräch)
+    check_complete: ''    // Aktion "Sales-/KI-Check abgeschlossen"
+  };
+
+  // Consent Mode v2: Standard = alles verweigert. Rein clientseitig (dataLayer),
+  // KEIN Google-Skript, KEINE Cookies vor Zustimmung -> DSGVO-konform.
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = window.gtag || function() { window.dataLayer.push(arguments); };
+  window.gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'denied',
+    wait_for_update: 500
+  });
+
+  // Nach ausdrücklicher Zustimmung: Speicher freigeben
+  function grantConsent() {
+    window.gtag('consent', 'update', {
+      ad_storage: 'granted',
+      ad_user_data: 'granted',
+      ad_personalization: 'granted',
+      analytics_storage: 'granted'
+    });
+  }
+
   // Consent prüfen
   function getConsent() {
     try { return localStorage.getItem(CONSENT_KEY); } catch(e) { return null; }
@@ -42,7 +78,21 @@
       anonymize_ip: true,          // IP-Anonymisierung (DSGVO-Empfehlung)
       cookie_flags: 'SameSite=None;Secure'
     });
+    // Google Ads Tag (nur wenn Conversion-ID hinterlegt ist)
+    if (AW_CONVERSION_ID) window.gtag('config', AW_CONVERSION_ID);
   }
+
+  // Google-Ads-Conversion feuern (nur nach Zustimmung; je Typ nur einmal pro Seitenaufruf)
+  var _adsFired = {};
+  function trackAdsConversion(key, params) {
+    var sendTo = ADS_SEND_TO[key];
+    if (!sendTo || _adsFired[key]) return;
+    if (window.gaLoaded && typeof window.gtag === 'function') {
+      _adsFired[key] = true;
+      try { window.gtag('event', 'conversion', Object.assign({ send_to: sendTo }, params || {})); } catch (e) {}
+    }
+  }
+  window.b77AdsConversion = trackAdsConversion;
 
   // Banner-Styling — selbst-enthalten, im neuen B_77-Design (Weiß/Orange/Archivo)
   function injectConsentStyle() {
@@ -94,6 +144,7 @@
 
     document.getElementById('b77-consent-accept').addEventListener('click', () => {
       setConsent('accepted');
+      grantConsent();
       loadGA();
       hideBanner();
     });
@@ -137,9 +188,22 @@
       else if (href.indexOf('/kontakt') !== -1) track('click_cta', { cta_text: txt, link_url: href });
     }, true);
 
-    // Kontaktformular abgeschickt -> Lead (GA4-Empfehlungsevent)
+    // Kontaktformular -> Lead (GA4-Empfehlungsevent + Ads-Conversion), je Seitenaufruf nur einmal
+    var _leadFired = false;
+    function fireLead() {
+      if (_leadFired) return; _leadFired = true;
+      track('generate_lead', { method: 'contact_form' });
+      trackAdsConversion('contact_form');
+    }
     var form = document.getElementById('contact-form');
-    if (form) form.addEventListener('submit', function () { track('generate_lead', { method: 'contact_form' }); });
+    if (form) form.addEventListener('submit', fireLead);
+    // Robust: falls das Formular später eine Erfolgsmeldung einblendet, auch dann feuern
+    var fsucc = document.getElementById('form-success');
+    if (fsucc && window.MutationObserver) {
+      new MutationObserver(function () {
+        if (getComputedStyle(fsucc).display !== 'none') fireLead();
+      }).observe(fsucc, { attributes: true, attributeFilter: ['style', 'class'] });
+    }
 
     // Vertriebs-Check gestartet
     var cs = document.getElementById('check-start');
@@ -154,6 +218,7 @@
           fired = true;
           var sc = document.getElementById('r-score');
           track('check_complete', sc ? { score: (sc.textContent || '').trim() } : {});
+          trackAdsConversion('check_complete');
         }
       }).observe(res, { attributes: true, attributeFilter: ['class'] });
     }
@@ -168,6 +233,7 @@
   // Init
   const consent = getConsent();
   if (consent === 'accepted') {
+    grantConsent();
     loadGA();
   } else if (consent !== 'declined') {
     // Banner zeigen nach kurzem Delay (damit Seite erst lädt)

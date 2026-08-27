@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B_77 · Richtung 2 — Die Offensive · Specimen</title>
+
+<!-- Zielschriften: GT America Compressed / GT America / GT America Mono (Grilli).
+     Web-Substitute via Google Fonts, mit System-Fallback -> rendert auch offline. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Archivo:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ---- Tokens (Auszug aus tokens.css, für Standalone-Rendering eingebettet) ---- */
+  :root{
+    --base:#16171A; --base-800:#1D1E22; --steel:#2A2C30; --steel-600:#34363B;
+    --hairline:#3C3F45; --fg:#F2F1ED; --fg-muted:#9A9CA1; --fg-faint:#6B6E74;
+    --accent:#FF4A14; --accent-600:#C6300A; --accent-glow:rgba(255,74,20,.28); --focus:#FF7A4E;
+
+    --font-display:"GT America Compressed","Oswald","Arial Narrow",sans-serif;
+    --font-text:"GT America","Archivo",system-ui,-apple-system,sans-serif;
+    --font-mono:"GT America Mono","Space Mono","JetBrains Mono",ui-monospace,monospace;
+
+    --track-hero:-.02em; --track-display:-.015em; --track-label:.14em;
+    --vector-ramp:cubic-bezier(.16,.84,.44,1);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    background:var(--base); color:var(--fg);
+    font-family:var(--font-text); font-weight:400; line-height:1.55;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    font-feature-settings:"kern" 1;
+  }
+  ::selection{background:var(--accent); color:var(--base)}
+  a{color:inherit}
+  :focus-visible{outline:2px solid var(--focus); outline-offset:3px}
+
+  .wrap{max-width:1120px; margin:0 auto; padding:clamp(28px,5vw,64px) clamp(20px,5vw,56px)}
+
+  /* Mono technische Labels */
+  .kicker{
+    font-family:var(--font-mono); font-size:12px; font-weight:700;
+    letter-spacing:var(--track-label); text-transform:uppercase; color:var(--fg-muted);
+  }
+  .kicker .hot{color:var(--accent)}
+
+  /* ---------- Kopf ---------- */
+  header{display:flex; justify-content:space-between; align-items:flex-start; gap:24px; flex-wrap:wrap}
+  .mark{width:min(420px,60vw); height:auto; display:block}
+  .meta-block{text-align:right; font-family:var(--font-mono); font-size:12px; color:var(--fg-muted); line-height:1.7}
+  .meta-block b{color:var(--fg); font-weight:700}
+
+  /* Systemische Hairline mit Traktions-Zündung am rechten Ende */
+  .rule{
+    position:relative; height:3px; margin:clamp(28px,4vw,44px) 0;
+    background:linear-gradient(90deg,var(--hairline) 0%,var(--hairline) 34%,var(--accent-600) 74%,var(--accent) 100%);
+  }
+  .rule::after{content:""; position:absolute; right:0; top:50%; width:10px; height:10px;
+    transform:translate(4px,-50%) rotate(45deg); background:var(--accent);
+    box-shadow:0 0 18px var(--accent-glow)}
+
+  /* ---------- HERO: Anriss kondensiert ---------- */
+  .hero{padding:clamp(20px,4vw,40px) 0 0}
+  .hero h1{
+    font-family:var(--font-display); font-weight:700; text-transform:uppercase;
+    font-size:clamp(4.5rem,15.5vw,12.6rem); line-height:.9; letter-spacing:var(--track-hero);
+    color:var(--fg);
+  }
+  /* letzte Zeile sitzt AUF der Vektorlinie, die nach rechts aufläuft */
+  .hero .line-seat{position:relative; display:inline-block; padding-bottom:.12em}
+  .hero .line-seat::after{
+    content:""; position:absolute; left:0; bottom:0; height:10px; width:100%;
+    background:linear-gradient(90deg,var(--hairline) 0%,var(--accent-600) 55%,var(--accent) 100%);
+    transform-origin:left center; transform:scaleX(var(--run,1));
+    transition:transform var(--vector-ramp);
+    box-shadow:0 0 24px var(--accent-glow);
+  }
+  .hero .vorne{color:var(--accent)}
+  .hero-sub{margin-top:clamp(18px,3vw,30px); max-width:60ch; color:var(--fg-muted); font-size:clamp(1rem,1.6vw,1.333rem)}
+  .hero-sub .sec{font-family:var(--font-mono); color:var(--fg); font-weight:700}
+
+  /* ---------- Grid ---------- */
+  .cols{display:grid; grid-template-columns:1fr; gap:clamp(28px,4vw,44px)}
+  @media(min-width:820px){ .cols{grid-template-columns:1.15fr .85fr} }
+
+  .panel-title{font-family:var(--font-mono); font-size:12px; font-weight:700;
+    letter-spacing:var(--track-label); text-transform:uppercase; color:var(--fg-faint); margin-bottom:16px}
+
+  /* ---------- Farbpalette ---------- */
+  .swatches{display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--hairline)}
+  @media(max-width:520px){ .swatches{grid-template-columns:repeat(2,1fr)} }
+  .sw{background:var(--sw); padding:14px 14px 16px; min-height:104px; display:flex; flex-direction:column; justify-content:flex-end}
+  .sw .n{font-family:var(--font-text); font-weight:600; font-size:13px}
+  .sw .h{font-family:var(--font-mono); font-size:11px; letter-spacing:.06em; opacity:.75; margin-top:2px}
+  .sw.dark .n,.sw.dark .h{color:var(--fg)}
+  .sw.light .n,.sw.light .h{color:var(--base)}
+
+  /* ---------- Typo-Skala ---------- */
+  .scale-row{display:flex; align-items:baseline; gap:18px; padding:12px 0; border-bottom:1px solid var(--hairline)}
+  .scale-row:last-child{border-bottom:0}
+  .scale-tag{font-family:var(--font-mono); font-size:11px; color:var(--fg-faint); white-space:nowrap; min-width:96px}
+  .scale-spec{font-family:var(--font-display); text-transform:uppercase; line-height:1; letter-spacing:-.01em; color:var(--fg); overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+
+  /* ---------- Anwendungs-Schnipsel ---------- */
+  .apps{display:grid; grid-template-columns:1fr; gap:20px}
+  @media(min-width:640px){ .apps{grid-template-columns:1fr 1fr} }
+
+  .btn{
+    font-family:var(--font-display); text-transform:uppercase; font-weight:700; letter-spacing:.02em;
+    font-size:20px; color:var(--base); background:var(--accent);
+    border:0; padding:16px 26px; cursor:pointer; display:inline-flex; align-items:center; gap:12px;
+    position:relative; transition:background var(--vector-ramp) .25s, transform .25s var(--vector-ramp);
+  }
+  .btn .arw{transition:transform .3s var(--vector-ramp)}
+  .btn:hover{background:var(--accent-600)} .btn:hover .arw{transform:translateX(6px)}
+  .btn:active{transform:translateY(1px)}
+  .btn.ghost{background:transparent; color:var(--fg); box-shadow:inset 0 0 0 2px var(--hairline)}
+  .btn.ghost:hover{box-shadow:inset 0 0 0 2px var(--accent); color:var(--accent)}
+
+  /* Kennwert-Modul (Mono, tabellarische Ziffern) */
+  .kpi{background:var(--steel); padding:22px 22px 20px; position:relative; overflow:hidden;
+    box-shadow:inset 0 0 0 1px var(--hairline)}
+  .kpi::after{content:""; position:absolute; left:0; bottom:0; height:4px; width:100%;
+    background:linear-gradient(90deg,var(--hairline),var(--accent) 88%)}
+  .kpi .label{font-family:var(--font-mono); font-size:11px; letter-spacing:var(--track-label);
+    text-transform:uppercase; color:var(--fg-muted)}
+  .kpi .val{font-family:var(--font-display); font-weight:700; font-size:clamp(2.6rem,7vw,3.8rem);
+    line-height:1; margin-top:8px; letter-spacing:-.02em; font-variant-numeric:tabular-nums}
+  .kpi .val .u{color:var(--accent)}
+  .kpi .delta{font-family:var(--font-mono); font-size:12px; color:var(--accent); margin-top:6px; font-variant-numeric:tabular-nums}
+
+  /* CTA-Band */
+  .cta{margin-top:clamp(28px,4vw,44px); background:var(--base-800); box-shadow:inset 0 0 0 1px var(--hairline);
+    padding:clamp(24px,4vw,40px); display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
+    position:relative; overflow:hidden}
+  .cta::before{content:""; position:absolute; left:0; bottom:0; height:6px; width:100%;
+    background:linear-gradient(90deg,var(--hairline) 0%,var(--hairline) 40%,var(--accent-600) 72%,var(--accent) 100%)}
+  .cta h3{font-family:var(--font-display); text-transform:uppercase; font-weight:700; letter-spacing:-.01em;
+    font-size:clamp(1.8rem,4vw,2.6rem); line-height:1}
+  .cta .lead{color:var(--fg-muted); font-size:14px; margin-top:6px}
+
+  footer{margin-top:clamp(40px,6vw,72px); display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;
+    font-family:var(--font-mono); font-size:11px; color:var(--fg-faint); letter-spacing:.04em}
+  footer .hot{color:var(--accent)}
+
+  @media (prefers-reduced-motion:reduce){ *{transition:none !important} .hero .line-seat::after{transition:none} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ===================== KOPF ===================== -->
+  <header>
+    <!-- Wortmarke inline (identisch zu wortmarke.svg) -->
+    <svg class="mark" viewBox="0 0 1000 300" role="img" aria-label="B_77">
+      <g fill="#F2F1ED">
+        <path fill-rule="evenodd" d="M40,40 L128,40 C143,40 152,51 152,68 L152,92 C152,103 146,110 138,114 C146,118 158,126 158,140 L158,194 C158,209 145,220 128,220 L40,220 Z M78,66 L112,66 C122,66 128,72 128,80 L128,84 C128,92 122,98 112,98 L78,98 Z M78,140 L118,140 C130,140 136,148 136,162 L136,172 C136,186 130,194 118,194 L78,194 Z"/>
+        <path d="M560,40 L678,40 L630,220 L590,220 L632,78 L560,78 Z"/>
+        <path d="M690,40 L808,40 L760,220 L720,220 L762,78 L690,78 Z"/>
+      </g>
+      <g fill="#FF4A14">
+        <rect x="150" y="230" width="12" height="4" opacity="0.30"/>
+        <rect x="168" y="230" width="20" height="4" opacity="0.55"/>
+      </g>
+      <path fill="#FF4A14" d="M196,236 L810,222 L872,196 L946,150 L936,168 L878,214 L810,232 L196,242 Z"/>
+      <path fill="#FF4A14" d="M946,150 L916,166 L928,150 L912,146 Z"/>
+    </svg>
+
+    <div class="meta-block">
+      <div><b>REBRAND 2026</b></div>
+      <div>Richtung 2 · <span style="color:var(--accent)">Die Offensive</span></div>
+      <div>Territorium T2 · Mechanik MOTOR</div>
+      <div>SEVEN SEVEN │ DESIGN</div>
+    </div>
+  </header>
+
+  <div class="rule"></div>
+
+  <!-- ===================== HERO / ANRISS ===================== -->
+  <section class="hero">
+    <div class="kicker">// Anriss &nbsp;·&nbsp; <span class="hot">Verb-Energie, kein Ausrufezeichen-Verkauf</span></div>
+    <h1 style="margin-top:14px">Immer<br><span class="line-seat">nach <span class="vorne">vorne.</span></span></h1>
+    <p class="hero-sub">
+      Vertrieb als Maschine unter Last. Wir warten nicht auf den Markt —
+      <span class="sec">wir spielen auf Marktanteil.</span>
+      Der Unterstrich aus <b style="font-family:var(--font-mono);color:var(--fg)">B_77</b> wird zur Traktionslinie:
+      läuft aus dem Stand an und schießt nach vorne.
+    </p>
+  </section>
+
+  <div class="rule"></div>
+
+  <div class="cols">
+    <!-- ===================== TYPO-SKALA ===================== -->
+    <section>
+      <div class="panel-title">// Typografie — Oswald ⟶ GT America Compressed (Grilli)</div>
+      <div class="scale-row"><span class="scale-tag">HERO · 202/900</span><span class="scale-spec" style="font-size:44px">Immer nach vorne.</span></div>
+      <div class="scale-row"><span class="scale-tag">DISPLAY · 114</span><span class="scale-spec" style="font-size:34px">Auf Marktanteil</span></div>
+      <div class="scale-row"><span class="scale-tag">HEAD · 50</span><span class="scale-spec" style="font-size:26px">Drehmoment unter Last</span></div>
+      <div class="scale-row"><span class="scale-tag">SUB · 32</span><span class="scale-spec" style="font-size:20px; font-weight:600">Kraft · Tempo · Vektor</span></div>
+      <div class="scale-row">
+        <span class="scale-tag">MONO · KENNWERT</span>
+        <span style="font-family:var(--font-mono); font-size:14px; color:var(--fg-muted); letter-spacing:.02em; font-variant-numeric:tabular-nums">
+          DREHMOMENT&nbsp;·&nbsp;+47,0%&nbsp;·&nbsp;ANLAUF&nbsp;0—100
+        </span>
+      </div>
+    </section>
+
+    <!-- ===================== FARBPALETTE ===================== -->
+    <section>
+      <div class="panel-title">// Farbsystem — Graphit, Stahl, eine heiße Zündung</div>
+      <div class="swatches">
+        <div class="sw dark" style="--sw:#16171A"><span class="n">Graphit</span><span class="h">#16171A</span></div>
+        <div class="sw dark" style="--sw:#2A2C30"><span class="n">Maschinenstahl</span><span class="h">#2A2C30</span></div>
+        <div class="sw dark" style="--sw:#3C3F45"><span class="n">Stahl · Hairline</span><span class="h">#3C3F45</span></div>
+        <div class="sw light" style="--sw:#F2F1ED"><span class="n">Off-White</span><span class="h">#F2F1ED</span></div>
+        <div class="sw light" style="--sw:#FF4A14"><span class="n">Zündungs-Orange</span><span class="h">#FF4A14</span></div>
+        <div class="sw light" style="--sw:#C6300A"><span class="n">Glut-Tief</span><span class="h">#C6300A</span></div>
+      </div>
+      <p style="font-family:var(--font-mono); font-size:11px; color:var(--fg-faint); margin-top:12px; line-height:1.6">
+        Off-White auf Graphit = 16,0:1 · Orange auf Graphit = 5,5:1 (Text ok).<br>
+        Orange bleibt Skalpell — nie als UI-Gradient, nur die Aktivlinie & ein Wert.
+      </p>
+    </section>
+  </div>
+
+  <div class="rule"></div>
+
+  <!-- ===================== ANWENDUNGEN ===================== -->
+  <section>
+    <div class="panel-title">// Anwendung — Traktion sichtbar</div>
+    <div class="apps">
+
+      <!-- Buttons -->
+      <div class="kpi" style="background:var(--base-800); display:flex; flex-direction:column; gap:16px; align-items:flex-start; justify-content:center">
+        <button class="btn">Termin sichern <span class="arw">→</span></button>
+        <button class="btn ghost">Referenzen <span class="arw">→</span></button>
+        <span style="font-family:var(--font-mono); font-size:11px; color:var(--fg-faint)">Pfeil beschleunigt beim Hover — aus dem Stand nach vorne.</span>
+      </div>
+
+      <!-- Kennwert-Modul -->
+      <div class="kpi">
+        <div class="label">Umsatz-Traktion · YoY</div>
+        <div class="val">+47,0<span class="u">%</span></div>
+        <div class="delta">▲ 0—100 in 2 Quartalen · unter Last</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== CTA-BAND ===================== -->
+  <div class="cta">
+    <div>
+      <h3>Wir spielen auf Marktanteil.</h3>
+      <div class="lead">Die Traktionslinie unten läuft nach rechts auf — dort kulminiert die Aussage.</div>
+    </div>
+    <button class="btn">Offensive starten <span class="arw">→</span></button>
+  </div>
+
+  <footer>
+    <span>B_77 · REBRAND 2026 · RICHTUNG 2 „DIE OFFENSIVE"</span>
+    <span><span class="hot">■</span> #FF4A14 · Oswald / Archivo / Space Mono · Zielschrift: GT America (Grilli)</span>
+  </footer>
+
+</div>
+
+<script>
+  // Vektorlinie: läuft aus dem Stand an (0 -> voll), Drehmoment-Ease.
+  (function(){
+    var seat = document.querySelector('.hero .line-seat');
+    if(!seat) return;
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    seat.style.setProperty('--run', reduce ? '1' : '0');
+    if(reduce) return;
+    seat.style.setProperty('transition','transform 640ms cubic-bezier(.16,.84,.44,1)');
+    requestAnimationFrame(function(){ setTimeout(function(){ seat.style.setProperty('--run','1'); }, 260); });
+  })();
+</script>
+</body>
+</html>

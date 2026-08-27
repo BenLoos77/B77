@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300" width="1000" height="300" role="img" aria-label="B_77 — Immer nach vorne.">
+  <title>B_77 · Richtung 2 „Die Offensive"</title>
+  <desc>Wortmarke B_77. Der Unterstrich ist die Traktions-/Vektorlinie: läuft aus dem Stand an, wird unter Last steiler und dichter und schießt in Zündungs-Orange nach rechts über die Marke hinaus.</desc>
+
+  <!-- ================= GLYPHEN (als Pfade ausgelegt, keine Font-Abhängigkeit) =================
+       Off-White #F2F1ED · muskulös kondensiert (GT America Compressed Black, hier als Kontur). -->
+  <g fill="#F2F1ED">
+
+    <!-- B — kondensiert, schwer, zwei Punzen (evenodd) -->
+    <path fill-rule="evenodd" d="
+      M40,40
+      L128,40
+      C143,40 152,51 152,68
+      L152,92
+      C152,103 146,110 138,114
+      C146,118 158,126 158,140
+      L158,194
+      C158,209 145,220 128,220
+      L40,220
+      Z
+      M78,66 L112,66 C122,66 128,72 128,80 L128,84 C128,92 122,98 112,98 L78,98 Z
+      M78,140 L118,140 C130,140 136,148 136,162 L136,172 C136,186 130,194 118,194 L78,194 Z" />
+
+    <!-- 7 · erste Ziffer -->
+    <path d="M560,40 L678,40 L630,220 L590,220 L632,78 L560,78 Z" />
+
+    <!-- 7 · zweite Ziffer -->
+    <path d="M690,40 L808,40 L760,220 L720,220 L762,78 L690,78 Z" />
+  </g>
+
+  <!-- ================= DIE VEKTORLINIE (der Unterstrich als System) =================
+       Läuft links dünn an (aus dem Stand), bleibt unter der Marke unter Last flach,
+       wird dann steiler/dichter und schießt als Zünd-Tick über die 77 hinaus. -->
+
+  <!-- Motion-Trail: der Stillstand, aus dem sie kommt (gedämpfte Ticks) -->
+  <g fill="#FF4A14">
+    <rect x="150" y="230" width="12" height="4" opacity="0.30"/>
+    <rect x="168" y="230" width="20" height="4" opacity="0.55"/>
+  </g>
+
+  <!-- Traktionskörper: flach unter der Marke, ansteigend + dicker nach rechts, Spitze über 77 -->
+  <path fill="#FF4A14" d="
+    M196,236
+    L810,222
+    L872,196
+    L946,150
+    L936,168
+    L878,214
+    L810,232
+    L196,242
+    Z"/>
+
+  <!-- Zünd-Tick am Kulminationspunkt (heißester Punkt der Kurve) -->
+  <path fill="#FF4A14" d="M946,150 L916,166 L928,150 L912,146 Z"/>
+</svg>

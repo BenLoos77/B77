@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" width="720" height="300" role="img" aria-label="B_77">
+  <title>B_77 — Wortmarke, negativ (Tinte-Grund)</title>
+  <desc>Negativfassung: Papier-Glyphen auf Tinte. Die rote Aktiv-Linie bleibt rot — das Korrekturzeichen ist konstant.</desc>
+  <rect x="0" y="0" width="720" height="300" fill="#1C1B18"/>
+  <text x="46" y="212"
+        font-family="'Helvetica Neue', Arial, sans-serif"
+        font-size="212" font-weight="500"
+        letter-spacing="-3"
+        fill="#E7E5DE">B<tspan dx="52">77</tspan></text>
+  <rect x="44" y="212" width="418" height="22" fill="#CE2417"/>
+  <rect x="440" y="132" width="22" height="102" fill="#CE2417"/>
+</svg>
