@@ -23,7 +23,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"B_77 Vertriebsberatung","alternateName":"B_77","description":"Vertriebsberatung für mittelständische Unternehmen in Siegen, NRW und deutschlandweit.","url":"https://b77.de","logo":"https://b77.de/assets/B77_Logo_black.png","image":"https://b77.de/assets/og-b77.png","email":"kontakt@b77.de","telephone":"+49-271-89027837","founder":{"@type":"Person","name":"Benjamin Loos"},"foundingDate":"2017","address":{"@type":"PostalAddress","streetAddress":"Unter dem Klingelschacht 18","postalCode":"57074","addressLocality":"Siegen","addressRegion":"Nordrhein-Westfalen","addressCountry":"DE"},"areaServed":[{"@type":"City","name":"Siegen"},{"@type":"AdministrativeArea","name":"Nordrhein-Westfalen"},{"@type":"Country","name":"Deutschland"}],"serviceType":["Vertriebsberatung","Vertriebsoptimierung","Aktiver Vertrieb","Neukundengewinnung","Vertriebsaufbau"],"priceRange":"€€€","openingHours":"Mo-Fr 08:30-18:00"}</script>
 <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700,800,900&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f[]=gambetta@401&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/site.css?v=6">
+<link rel="stylesheet" href="/assets/site.css?v=7">
 <!-- B_77 Intro: Fonts + Style -->
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -113,20 +113,20 @@
   .studio__cap { display:flex; justify-content:space-between; align-items:flex-end; gap:24px 48px; flex-wrap:wrap; margin-top:clamp(20px,2.4vw,30px); }
   .studio__lead { max-width:54ch; margin:0; font-family:var(--sans); font-weight:400; font-size:clamp(17px,1.7vw,22px); line-height:1.5; color:var(--ink); }
   /* --- Neon-Anpassung Intro (an Hauptseite angeglichen) --- */
-  #b77-counter b{color:#FFFF00}
-  #b77-progtrack{background:rgba(255,255,0,.12)}
-  #b77-progress{background:#FFFF00}
-  #b77-loc{color:#FFFF00}
-  .b77-btn{border-radius:999px;border-color:rgba(255,255,0,.5);color:#F1ECE4}
-  .b77-btn:hover{border-color:#FFFF00;color:#FFFF00;transform:none}
-  .b77-btn--primary{background:#FFFF00;color:#141311;border-color:#FFFF00;border-radius:999px}
-  .b77-btn--primary:hover{background:#FFFF00;color:#141311;filter:brightness(1.06);transform:translateY(-1px)}
+  #b77-counter b{color:#E5FF00}
+  #b77-progtrack{background:rgba(229,255,0,.12)}
+  #b77-progress{background:#E5FF00}
+  #b77-loc{color:#E5FF00}
+  .b77-btn{border-radius:999px;border-color:rgba(229,255,0,.5);color:#F1ECE4}
+  .b77-btn:hover{border-color:#E5FF00;color:#E5FF00;transform:none}
+  .b77-btn--primary{background:#E5FF00;color:#141311;border-color:#E5FF00;border-radius:999px}
+  .b77-btn--primary:hover{background:#E5FF00;color:#141311;filter:brightness(1.06);transform:translateY(-1px)}
   #b77-nein .b77-btn--ghost{border-radius:999px}
-  #b77-nein .b77-btn--ghost:hover{color:#FFFF00}
-  #b77-replay{border-radius:999px;border-color:rgba(255,255,0,.5);color:#FFFF00}
-  #b77-replay:hover{border-color:#FFFF00;color:#FFFF00;background:rgba(255,255,0,.08)}
-  .b77c-opt:hover{border-color:rgba(255,255,0,.5)}
-  .b77c-score b{color:#FFFF00}
+  #b77-nein .b77-btn--ghost:hover{color:#E5FF00}
+  #b77-replay{border-radius:999px;border-color:rgba(229,255,0,.5);color:#E5FF00}
+  #b77-replay:hover{border-color:#E5FF00;color:#E5FF00;background:rgba(229,255,0,.08)}
+  .b77c-opt:hover{border-color:rgba(229,255,0,.5)}
+  .b77c-score b{color:#E5FF00}
 </style>
 </head>
 <body>
@@ -674,8 +674,8 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
     <span>Büro: Unter dem Klingelschacht 18, 57074 Siegen · <a href="/impressum">Impressum &amp; Datenschutz</a></span>
   </div></footer>
 
-<script src="/assets/site.js?v=6"></script>
-<script src="/assets/scroll.js?v=6" defer></script>
+<script src="/assets/site.js?v=7"></script>
+<script src="/assets/scroll.js?v=7" defer></script>
 <script type="module" src="/assets/spline/spline-viewer.js"></script>
 <script>
 (function(){var m=document.getElementById('tt-robot');if(!m)return;if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;var done=false;function mount(){if(done)return;done=true;function go(){var v=document.createElement('spline-viewer');v.setAttribute('url','/assets/spline/robot.splinecode');v.setAttribute('loading-anim-type','none');m.appendChild(v);function sf(){try{if(v.shadowRoot&&!v.__sf){var s=document.createElement('style');s.textContent='canvas{width:100%!important;height:100%!important;display:block}';v.shadowRoot.appendChild(s);v.__sf=1;}}catch(e){}}function nudge(){sf();try{window.dispatchEvent(new Event('resize'))}catch(e){}}function kill(){try{var r=v.shadowRoot;if(!r)return false;var l=r.querySelector('#logo')||r.querySelector('a[href*="spline.design"]');if(l){l.remove();return true}}catch(e){}return false}v.addEventListener('load',function(){kill();nudge();setTimeout(nudge,80);setTimeout(nudge,400)});var n=0,iv=setInterval(function(){sf();if(kill()||++n>80)clearInterval(iv)},120);[300,700,1500,2500].forEach(function(t){setTimeout(nudge,t)});}if(window.customElements){customElements.whenDefined('spline-viewer').then(go)}else{go()}}if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){mount();io.disconnect();}})},{rootMargin:'500px'});io.observe(m);}else{mount();}})();

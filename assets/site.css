@@ -1,7 +1,7 @@
 :root{
     --stone:#EDEBE6; --paper:#FBFAF7; --cloud:#F3F1EC; --ink:#1C1A17; --muted:#8A867E; --line:#DED9CF;
-    --rose-deep:#131311; --rose-deep2:#232320; --rose:#FFFF00; --rose-line:#5F5C57;
-    --on-deep:#F1ECE4; --ghost:rgba(255,255,0,.16); --r:28px;
+    --rose-deep:#131311; --rose-deep2:#232320; --rose:#E5FF00; --rose-line:#5F5C57;
+    --on-deep:#F1ECE4; --ghost:rgba(229,255,0,.16); --r:28px;
     --grade:saturate(.42) contrast(1.18) brightness(.93) sepia(.12);
   }
   *{margin:0;padding:0;box-sizing:border-box}
