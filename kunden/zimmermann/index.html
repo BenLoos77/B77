@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>sales engine by B_77 · Zimmermann Rhönradmischer</title>
+<!--
+  Präsentation für Zimmermann, im Look des B_77-Brandbooks (b77.de/brandbook):
+  Paper/Cloud/Stone, Carbon-Karten, ein Neon-Signal, Switzer + Gambetta.
+  Lokal über werkzeug/lokal.mjs unter http://localhost:4330/praesentation/.
+  Pfeiltasten oder Leertaste blättern, F für Vollbild, P druckt als PDF.
+-->
+<style>
+@font-face { font-family: 'Switzer'; font-weight: 400; font-display: swap; src: url(/kunden/zimmermann/schriften/switzer-400.woff2) format('woff2'); }
+@font-face { font-family: 'Switzer'; font-weight: 500; font-display: swap; src: url(/kunden/zimmermann/schriften/switzer-500.woff2) format('woff2'); }
+@font-face { font-family: 'Switzer'; font-weight: 600; font-display: swap; src: url(/kunden/zimmermann/schriften/switzer-600.woff2) format('woff2'); }
+@font-face { font-family: 'Switzer'; font-weight: 700; font-display: swap; src: url(/kunden/zimmermann/schriften/switzer-700.woff2) format('woff2'); }
+@font-face { font-family: 'Switzer'; font-weight: 800; font-display: swap; src: url(/kunden/zimmermann/schriften/switzer-800.woff2) format('woff2'); }
+@font-face { font-family: 'Switzer'; font-weight: 900; font-display: swap; src: url(/kunden/zimmermann/schriften/switzer-900.woff2) format('woff2'); }
+@font-face { font-family: 'Gambetta'; font-style: italic; font-weight: 400; font-display: swap; src: url(/kunden/zimmermann/schriften/gambetta-400-kursiv.woff2) format('woff2'); }
+
+:root {
+  --stone:#EDEBE6; --paper:#FBFAF7; --cloud:#F3F1EC; --ink:#1C1A17; --muted:#8A867E; --line:#DED9CF;
+  --carbon:#131311; --carbon-2:#232320; --neon:#E5FF00; --accent:#5F5C57; --on-deep:#F1ECE4; --text:#4A4740;
+  --r:28px; --rs:18px;
+  --sans:'Switzer',-apple-system,system-ui,sans-serif;
+  --serif:'Gambetta',Georgia,serif;
+  --mono:ui-monospace,'SF Mono',Menlo,monospace;
+  --mx:clamp(20px,5vw,84px);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-snap-type:y mandatory; scroll-behavior:smooth; }
+body { background:var(--paper); color:var(--ink); font-family:var(--sans); line-height:1.5; -webkit-font-smoothing:antialiased; }
+em { font-family:var(--serif); font-style:italic; font-weight:400; letter-spacing:-.01em; }
+a { color:inherit; }
+img { display:block; max-width:100%; }
+
+/* ---------- Folie ---------- */
+.folie { min-height:100vh; scroll-snap-align:start; position:relative; display:flex; flex-direction:column; justify-content:center;
+  padding:clamp(56px,7vh,96px) var(--mx) clamp(76px,9vh,110px); }
+.folie--hell { background:var(--paper); }
+.folie--wolke { background:var(--cloud); }
+.folie--stein { background:var(--stone); }
+.folie--dunkel { background:linear-gradient(155deg,var(--carbon-2),var(--carbon)); color:var(--on-deep); }
+.innen { width:100%; max-width:1320px; margin:0 auto; }
+
+.eyebrow { font-family:var(--mono); font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); display:flex; align-items:center; gap:16px; }
+.eyebrow::before { content:""; width:34px; height:2px; background:var(--ink); flex:none; }
+.folie--dunkel .eyebrow { color:rgba(241,236,228,.55); }
+.folie--dunkel .eyebrow::before { background:var(--neon); }
+.eyebrow b { color:var(--ink); font-weight:400; }
+.folie--dunkel .eyebrow b { color:var(--neon); }
+
+h1, h2 { font-weight:800; letter-spacing:-.035em; line-height:.98; text-wrap:balance; }
+h2 { font-size:clamp(2.2rem,4.6vw,4.4rem); margin-top:22px; max-width:20ch; }
+.lead { margin-top:20px; max-width:58ch; font-size:clamp(16px,1.45vw,20px); line-height:1.5; color:#33302B; }
+.folie--dunkel .lead { color:rgba(241,236,228,.78); }
+.mono { font-family:var(--mono); }
+
+/* ---------- Titel ---------- */
+.titel { justify-content:space-between; padding-top:clamp(28px,4vw,56px); }
+.titel .oben, .titel .unten { display:flex; justify-content:space-between; align-items:center; gap:20px; font-family:var(--mono); font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:rgba(241,236,228,.55); }
+.titel .oben img { height:34px; width:auto; }
+.titel h1 { font-weight:900; letter-spacing:-.055em; line-height:.84; font-size:clamp(4.2rem,13vw,12.5rem); color:var(--on-deep); }
+.titel h1 em { letter-spacing:-.02em; }
+.signal { width:clamp(120px,16vw,220px); height:12px; background:var(--neon); border-radius:999px; margin:clamp(22px,3.4vh,40px) 0; }
+.titel .fuer { font-size:clamp(20px,2.4vw,34px); font-weight:600; letter-spacing:-.02em; max-width:30ch; }
+.titel .fuer span { color:rgba(241,236,228,.55); font-weight:400; }
+.punkt { width:8px; height:8px; border-radius:50%; background:var(--neon); display:inline-block; margin-right:9px; vertical-align:1px; }
+
+/* ---------- Karten ---------- */
+.karten { display:grid; gap:16px; margin-top:clamp(28px,4.5vh,56px); }
+.k3 { grid-template-columns:repeat(3,1fr); }
+.k4 { grid-template-columns:repeat(4,1fr); }
+@media (max-width:980px) { .k3, .k4 { grid-template-columns:1fr 1fr; } }
+@media (max-width:600px) { .k3, .k4 { grid-template-columns:1fr; } }
+.karte { background:var(--cloud); border-radius:var(--r); padding:clamp(22px,2.2vw,32px); display:flex; flex-direction:column; justify-content:space-between; gap:18px; min-height:200px; }
+.folie--wolke .karte, .folie--stein .karte { background:var(--paper); border:1px solid var(--line); }
+.karte .n { font-family:var(--mono); font-size:12px; letter-spacing:.14em; color:var(--accent); }
+.karte h3 { font-weight:800; letter-spacing:-.02em; font-size:clamp(1.25rem,1.7vw,1.6rem); line-height:1.1; }
+.karte p { margin-top:10px; font-size:15px; line-height:1.5; color:var(--text); }
+.karte--dunkel { background:linear-gradient(150deg,var(--carbon-2),var(--carbon)) !important; color:var(--on-deep); border:0 !important; position:relative; overflow:hidden; }
+.karte--dunkel .n { color:var(--neon); }
+.karte--dunkel p { color:rgba(241,236,228,.74); }
+.folie--dunkel .karte { background:rgba(241,236,228,.06); border:1px solid rgba(241,236,228,.12); }
+.folie--dunkel .karte .n { color:var(--neon); }
+.folie--dunkel .karte p { color:rgba(241,236,228,.74); }
+
+/* ---------- Ablauf ---------- */
+.weg { margin-top:clamp(26px,4vh,48px); display:grid; gap:14px; }
+.weg__zeile { display:grid; grid-template-columns:170px 1fr; gap:16px; align-items:stretch; }
+@media (max-width:900px) { .weg__zeile { grid-template-columns:1fr; } }
+.weg__name { border-radius:var(--rs); background:var(--carbon); color:var(--on-deep); padding:18px; display:flex; flex-direction:column; justify-content:space-between; gap:10px; }
+.weg__name .mono { font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--neon); }
+.weg__name strong { font-size:19px; letter-spacing:-.02em; line-height:1.1; }
+.schritte { display:grid; grid-auto-flow:column; grid-auto-columns:1fr; gap:10px; }
+@media (max-width:900px) { .schritte { grid-auto-flow:row; } }
+.schritt { background:var(--paper); border:1px solid var(--line); border-radius:var(--rs); padding:16px 18px; position:relative; }
+.schritt .mono { font-size:11px; letter-spacing:.14em; color:var(--accent); }
+.schritt strong { display:block; margin-top:6px; font-size:17px; letter-spacing:-.015em; line-height:1.15; }
+.schritt span.t { display:block; margin-top:6px; font-size:13.5px; color:var(--text); line-height:1.4; }
+.schritt--ziel { background:var(--ink); border-color:var(--ink); color:var(--on-deep); }
+.schritt--ziel .mono { color:var(--neon); }
+.schritt--ziel span.t { color:rgba(241,236,228,.7); }
+.schritt:not(:last-child)::after { content:"→"; position:absolute; right:-10px; top:50%; transform:translate(50%,-50%); font-size:14px; color:var(--muted); z-index:1; }
+@media (max-width:900px) { .schritt:not(:last-child)::after { content:none; } }
+
+/* ---------- Zweispaltig mit Bild ---------- */
+.zwei { display:grid; grid-template-columns:.9fr 1.1fr; gap:clamp(28px,4vw,64px); align-items:center; }
+.zwei--bild-links { grid-template-columns:1.1fr .9fr; }
+@media (max-width:980px) { .zwei, .zwei--bild-links { grid-template-columns:1fr; } }
+.punkte { margin-top:26px; display:grid; gap:0; border-top:1px solid var(--line); max-width:56ch; }
+.folie--dunkel .punkte { border-color:rgba(241,236,228,.14); }
+.punkte li { list-style:none; display:grid; grid-template-columns:128px 1fr; gap:16px; padding:12px 0; border-bottom:1px solid var(--line); font-size:15.5px; line-height:1.45; }
+.folie--dunkel .punkte li { border-color:rgba(241,236,228,.14); }
+.punkte li b { font-family:var(--mono); font-weight:400; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); padding-top:4px; }
+.folie--dunkel .punkte li b { color:var(--neon); }
+@media (max-width:600px) { .punkte li { grid-template-columns:1fr; gap:2px; } }
+
+.fenster { border-radius:var(--rs); overflow:hidden; background:#fff; border:1px solid var(--line); box-shadow:0 30px 60px -30px rgba(28,26,23,.35); }
+.folie--dunkel .fenster { border-color:rgba(241,236,228,.14); box-shadow:0 30px 70px -30px rgba(0,0,0,.8); }
+.fenster__leiste { display:flex; align-items:center; gap:8px; padding:10px 14px; background:var(--cloud); border-bottom:1px solid var(--line); }
+.fenster__leiste i { width:9px; height:9px; border-radius:50%; background:var(--line); }
+.fenster__leiste span { margin-left:10px; font-family:var(--mono); font-size:11px; color:var(--muted); letter-spacing:.02em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.fenster img { width:100%; height:auto; }
+.fenster--hoch img { height:min(62vh,640px); object-fit:cover; object-position:top; }
+.fenster--mittel img { height:min(56vh,560px); object-fit:cover; object-position:top; }
+.stapel { position:relative; padding-bottom:9%; }
+.stapel .fenster + .fenster { position:absolute; width:46%; right:-3%; bottom:0; }
+.stapel .fenster + .fenster img { height:auto; max-height:min(34vh,320px); object-fit:cover; object-position:top; }
+@media (max-width:980px) { .stapel .fenster + .fenster { position:static; width:100%; margin-top:16px; } }
+
+/* ---------- Zahlen ---------- */
+.zahlen { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:24px; }
+.zahl { border-radius:var(--rs); background:linear-gradient(150deg,var(--carbon-2),var(--carbon)); color:var(--on-deep); padding:18px 20px; }
+.zahl strong { display:block; font-size:clamp(2rem,3.4vw,3.2rem); font-weight:900; letter-spacing:-.04em; line-height:1; color:var(--neon); }
+.zahl span { display:block; margin-top:8px; font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:rgba(241,236,228,.65); }
+.chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; }
+.chips span { font-size:13.5px; padding:6px 12px; border-radius:999px; border:1px solid var(--line); background:var(--paper); }
+
+/* ---------- Takt-Tabelle ---------- */
+.regeln { margin-top:clamp(24px,4vh,44px); display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+@media (max-width:980px) { .regeln { grid-template-columns:1fr 1fr; } }
+@media (max-width:600px) { .regeln { grid-template-columns:1fr; } }
+.regel { border-radius:var(--rs); padding:20px 22px; background:rgba(241,236,228,.06); border:1px solid rgba(241,236,228,.12); }
+.regel .wann { font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--neon); }
+.regel h3 { margin-top:8px; font-size:21px; font-weight:800; letter-spacing:-.02em; color:var(--on-deep); }
+.regel p { margin-top:8px; font-size:14.5px; color:rgba(241,236,228,.72); line-height:1.45; }
+
+/* ---------- Demo ---------- */
+.demo { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:clamp(24px,4vh,44px); }
+@media (max-width:980px) { .demo { grid-template-columns:1fr; } }
+.eingabe { border-radius:var(--r); background:var(--paper); color:var(--ink); padding:clamp(22px,2.4vw,34px); }
+.eingabe .mono { font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); }
+.eingabe dl { margin-top:14px; display:grid; grid-template-columns:150px 1fr; }
+.eingabe dt, .eingabe dd { padding:9px 0; border-bottom:1px solid var(--line); font-size:16px; }
+.eingabe dt { font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); padding-top:13px; }
+.eingabe dd { font-weight:600; }
+.ablauf { list-style:none; counter-reset:s; display:grid; gap:10px; }
+.ablauf li { counter-increment:s; display:grid; grid-template-columns:44px 1fr; gap:14px; align-items:start; padding:14px 16px; border-radius:var(--rs); background:rgba(241,236,228,.06); border:1px solid rgba(241,236,228,.12); font-size:15.5px; color:rgba(241,236,228,.82); }
+.ablauf li::before { content:counter(s,decimal-leading-zero); font-family:var(--mono); font-size:13px; color:var(--neon); padding-top:2px; }
+.ablauf li strong { color:var(--on-deep); font-weight:700; }
+
+/* ---------- Pills ---------- */
+.pill { display:inline-flex; align-items:center; gap:14px; background:var(--neon); color:var(--ink); border-radius:999px; padding:6px 6px 6px 20px; font-weight:700; font-size:14.5px; text-decoration:none; transition:.25s; white-space:nowrap; }
+.pill .ic { width:34px; height:34px; border-radius:50%; background:var(--ink); color:var(--neon); display:grid; place-items:center; transition:.25s; }
+.pill .ic svg { width:15px; height:15px; }
+.pill:hover { background:var(--on-deep); }
+.pill--rahmen { background:transparent; color:inherit; border:1px solid currentColor; }
+.pill--rahmen:hover { background:var(--ink); color:var(--neon); }
+.folie--dunkel .pill--rahmen:hover { background:var(--on-deep); color:var(--ink); }
+.pills { display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; }
+
+/* ---------- Links ---------- */
+.links { margin-top:clamp(24px,4vh,44px); display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+@media (max-width:980px) { .links { grid-template-columns:1fr; } }
+.linkblock { border-radius:var(--r); padding:clamp(22px,2.4vw,32px); background:var(--paper); border:1px solid var(--line); }
+.linkblock--dunkel { background:linear-gradient(150deg,var(--carbon-2),var(--carbon)); color:var(--on-deep); border:0; }
+.linkblock .k { font-family:var(--mono); font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); display:flex; justify-content:space-between; gap:12px; }
+.linkblock--dunkel .k { color:var(--neon); }
+.linkblock ul { list-style:none; margin-top:14px; }
+.linkblock li { display:grid; grid-template-columns:150px 1fr; gap:14px; padding:11px 0; border-bottom:1px solid var(--line); font-size:15px; align-items:baseline; }
+.linkblock--dunkel li { border-color:rgba(241,236,228,.14); }
+.linkblock li:last-child { border-bottom:0; }
+.linkblock li span { color:var(--muted); font-size:13.5px; }
+.linkblock--dunkel li span { color:rgba(241,236,228,.55); }
+.linkblock li a { font-family:var(--mono); font-size:13.5px; text-decoration:none; border-bottom:1px solid var(--line); overflow-wrap:anywhere; }
+.linkblock--dunkel li a { border-color:rgba(229,255,0,.45); }
+.linkblock li a:hover { border-color:currentColor; }
+.linkblock .hinweis { margin-top:12px; font-size:13px; color:var(--muted); }
+.linkblock--dunkel .hinweis { color:rgba(241,236,228,.55); }
+@media (max-width:600px) { .linkblock li { grid-template-columns:1fr; gap:2px; } }
+
+/* ---------- Checkliste ---------- */
+.liste { margin-top:clamp(24px,4vh,44px); display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+@media (max-width:980px) { .liste { grid-template-columns:1fr; } }
+.liste section { border-radius:var(--r); padding:clamp(20px,2.2vw,30px); background:var(--paper); border:1px solid var(--line); }
+.liste h3 { font-family:var(--mono); font-weight:400; font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); }
+.liste ul { list-style:none; margin-top:12px; }
+.liste li { position:relative; padding:9px 0 9px 26px; border-bottom:1px solid var(--line); font-size:15px; line-height:1.4; }
+.liste li:last-child { border-bottom:0; }
+.liste li::before { content:""; position:absolute; left:0; top:13px; width:13px; height:13px; border-radius:4px; border:1.5px solid var(--ink); }
+.liste li small { display:block; color:var(--muted); font-size:13px; }
+.reihe { margin-top:16px; display:flex; flex-wrap:wrap; gap:8px; align-items:center; font-size:14.5px; }
+.reihe span { padding:8px 14px; border-radius:999px; background:var(--ink); color:var(--on-deep); font-weight:600; }
+.reihe i { font-style:normal; color:var(--muted); }
+.reihe span.ziel { background:var(--neon); color:var(--ink); }
+
+/* ---------- Leiste unten ---------- */
+.leiste { position:fixed; left:0; right:0; bottom:0; z-index:20; display:flex; justify-content:space-between; align-items:center; gap:16px;
+  padding:12px var(--mx); font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; pointer-events:none; mix-blend-mode:difference; color:#e8e6e0; }
+.leiste .marke { font-family:var(--sans); font-weight:900; letter-spacing:-.04em; font-size:16px; text-transform:none; }
+.fortschritt { position:fixed; left:0; top:0; height:3px; background:var(--neon); z-index:21; width:0; transition:width .3s ease; }
+.tasten { display:flex; gap:6px; pointer-events:auto; mix-blend-mode:normal; }
+.tasten button { all:unset; cursor:pointer; width:30px; height:30px; border-radius:50%; display:grid; place-items:center; border:1px solid rgba(232,230,224,.5); font-size:13px; }
+@media (max-width:700px) { .leiste .hilfe { display:none; } }
+
+@media print {
+  @page { size: 1440px 900px; margin:0; }
+  html { scroll-snap-type:none; }
+  .folie { height:900px; min-height:0; page-break-after:always; break-after:page; overflow:hidden; }
+  .leiste, .fortschritt { display:none; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+<div class="fortschritt" data-fortschritt></div>
+
+<!-- 01 · Titel -->
+<section class="folie folie--dunkel titel" id="start" aria-label="Titel">
+  <div class="innen oben"><img src="/kunden/zimmermann/marke/b77-weiss.png" alt="B_77"><span>Erste Präsentation · September 2026</span></div>
+  <div class="innen">
+    <h1>sales <em>engine</em></h1>
+    <div class="signal"></div>
+    <p class="fuer">für den Zimmermann Rhönradmischer. <span>Firmen finden, ansprechen, Angebot in einer Minute.</span></p>
+  </div>
+  <div class="innen unten"><span><span class="punkt"></span>by B_77 · Vertriebsberatung · Siegen</span><span>Zimmermann Rhönradbau · Taunusstein</span></div>
+</section>
+
+<!-- 02 · Worum es geht -->
+<section class="folie folie--hell" id="ziel" aria-labelledby="t-ziel">
+  <div class="innen">
+    <p class="eyebrow"><b>01</b> — Worum es geht</p>
+    <h2 id="t-ziel">Neue Kunden für den Rhönradmischer. <em>Planbar.</em></h2>
+    <p class="lead">Die sales engine findet passende Betriebe, spricht sie mit ihrem eigenen Thema an und liefert Interessenten das Angebot sofort. Holger entscheidet, wer angeschrieben wird, und übernimmt, sobald jemand reagiert.</p>
+    <div class="karten k3">
+      <div class="karte"><span class="n">01 · FINDEN</span><div><h3>Recherche mit Beleg.</h3><p>Jeden Werktag bis zu 10 Betriebe aus den Zielbranchen. Jeder mit Anlass, Quelle und Ansprechpartner.</p></div></div>
+      <div class="karte"><span class="n">02 · ANSPRECHEN</span><div><h3>Persönlich, nicht massenhaft.</h3><p>Eine Mail von Holger mit dem Thema des Betriebs und einem eigenen Anwendungsblatt. Erinnerung und Nachfass laufen von selbst.</p></div></div>
+      <div class="karte karte--dunkel"><span class="n">03 · ABSCHLIESSEN</span><div><h3>Angebot in einer <em>Minute.</em></h3><p>Auf der Landingpage fordern Interessenten das Angebot an und haben es sofort im Postfach. Holger bekommt den Lead im selben Moment.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 · Ablauf -->
+<section class="folie folie--stein" id="ablauf" aria-labelledby="t-ablauf">
+  <div class="innen">
+    <p class="eyebrow"><b>02</b> — Der Ablauf</p>
+    <h2 id="t-ablauf">Zwei Wege. Ein Ziel: <em>Im Vertrieb.</em></h2>
+    <div class="weg">
+      <div class="weg__zeile">
+        <div class="weg__name"><span class="mono">Weg A</span><strong>Aktive Ansprache</strong></div>
+        <div class="schritte">
+          <div class="schritt"><span class="mono">01</span><strong>Recherche</strong><span class="t">Betriebe mit Beleg, werktags früh</span></div>
+          <div class="schritt"><span class="mono">02</span><strong>Freigabe</strong><span class="t">Holger oder Ben im Board</span></div>
+          <div class="schritt"><span class="mono">03</span><strong>Erstansprache</strong><span class="t">Mail von Holger</span></div>
+          <div class="schritt"><span class="mono">04</span><strong>Anwendungsblatt</strong><span class="t">eigene Seite je Firma</span></div>
+          <div class="schritt"><span class="mono">05</span><strong>Takt</strong><span class="t">Erinnerung, Nachfass, Meldung</span></div>
+        </div>
+      </div>
+      <div class="weg__zeile">
+        <div class="weg__name"><span class="mono">Weg B</span><strong>Angebot sofort</strong></div>
+        <div class="schritte">
+          <div class="schritt"><span class="mono">06</span><strong>Landingpage</strong><span class="t">rhoenradfassmischer.de</span></div>
+          <div class="schritt"><span class="mono">07</span><strong>Formular</strong><span class="t">Anwendungsfall, Firma, Kontakt</span></div>
+          <div class="schritt"><span class="mono">08</span><strong>Angebot per Mail</strong><span class="t">mit Preisen, Sekunden später</span></div>
+          <div class="schritt schritt--ziel"><span class="mono">09</span><strong>Im Vertrieb</strong><span class="t">Lead an Holger, „Angebot geöffnet“</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="lead" style="font-size:16px">Weg A führt in Weg B: Anwendungsblatt und Nachfass verweisen auf „Angebot sofort anfordern“. Wer anfragt, landet bei Holger, und die Mailfolge stoppt.</p>
+  </div>
+</section>
+
+<!-- 04 · Recherche -->
+<section class="folie folie--hell" id="recherche" aria-labelledby="t-recherche">
+  <div class="innen zwei">
+    <div>
+      <p class="eyebrow"><b>03</b> — Schritt 01 · Recherche</p>
+      <h2 id="t-recherche">Nur Betriebe, bei denen es <em>passt.</em></h2>
+      <ul class="punkte">
+        <li><b>Takt</b><span>Werktags um 07:00, bis zu 10 Firmen je Lauf. Warten 20 auf Freigabe, pausiert die Recherche.</span></li>
+        <li><b>Pflicht</b><span>Mischt trockene oder flüssige Güter und ist in einer Zielbranche aktiv. Beides mit Quelle.</span></li>
+        <li><b>Anlass</b><span>Ein konkreter Grund zum Schreiben, z. B. neue Linie, Zertifizierung, Stellenanzeige, Messe, vorhandene Mischtechnik.</span></li>
+        <li><b>Kontakt</b><span>Persönliche Adresse nur, wenn sie belegt ist. Sonst das Funktionspostfach „zu Händen“. Kein LinkedIn-Scraping.</span></li>
+        <li><b>Raus</b><span>Bestandskunden, laufende Angebote, Mischerbauer, reine Händler.</span></li>
+      </ul>
+    </div>
+    <div>
+      <div class="karte karte--dunkel" style="min-height:0">
+        <span class="n">ERSTER LAUF · 14.09.2026</span>
+        <div class="zahlen" style="margin-top:6px">
+          <div class="zahl" style="background:rgba(241,236,228,.06)"><strong>37</strong><span>geprüft</span></div>
+          <div class="zahl" style="background:rgba(241,236,228,.06)"><strong>9</strong><span>zur Freigabe</span></div>
+          <div class="zahl" style="background:rgba(241,236,228,.06)"><strong>10–250</strong><span>Mitarbeiter</span></div>
+        </div>
+      </div>
+      <div class="chips" aria-label="Zielbranchen">
+        <span>Lohnmischer und Lohnabfüller</span><span>Farben, Lacke, Beschichtungen</span><span>Masterbatch, Pigmente, Additive</span>
+        <span>Gewürze, Aromen, Tee</span><span>Kosmetik und Private Label</span><span>Nahrungsergänzung</span><span>Chemie, Kleb- und Dichtstoffe</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 · Freigabe -->
+<section class="folie folie--wolke" id="freigabe" aria-labelledby="t-freigabe">
+  <div class="innen zwei zwei--bild-links">
+    <div class="fenster">
+      <div class="fenster__leiste"><i></i><i></i><i></i><span>vertrieb.rhoenradfassmischer.de/zugang/freigabe</span></div>
+      <img src="/kunden/zimmermann/bilder/board-freigabe.webp" width="1300" height="720" alt="Board, Liste Zur Freigabe mit neun recherchierten Firmen, Kaufanlass, Empfänger und Knöpfen Freigeben und Ablehnen">
+    </div>
+    <div>
+      <p class="eyebrow"><b>04</b> — Schritt 02 · Freigabe</p>
+      <h2 id="t-freigabe">Kein Versand ohne <em>Ja.</em></h2>
+      <ul class="punkte">
+        <li><b>Board</b><span>Jede Firma mit Branche, Anlass, Quelle und Empfänger. Freigeben oder mit Grund ablehnen, auch mehrere zugleich.</span></li>
+        <li><b>Lernt</b><span>Ablehngründe schärfen das Zielprofil für die nächste Recherche.</span></li>
+        <li><b>Zugang</b><span>Anmeldung per Link, ohne Passwort. Kollegen im Vertrieb bekommen eigenen Zugang.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 06 · Erstansprache -->
+<section class="folie folie--hell" id="mail" aria-labelledby="t-mail">
+  <div class="innen zwei">
+    <div>
+      <p class="eyebrow"><b>05</b> — Schritt 03 · Erstansprache</p>
+      <h2 id="t-mail">Holger schreibt. Mit dem Thema <em>des Kunden.</em></h2>
+      <ul class="punkte">
+        <li><b>Absender</b><span>Holger Zimmermann, von einer eigenen Versand-Subdomain. Das Postfach für Gespräche bleibt geschützt.</span></li>
+        <li><b>Betreff</b><span>„Bio-Gewürzmischungen im Fass mischen.“ Ist das Material nicht belegt, gilt der Standardtext.</span></li>
+        <li><b>Kern</b><span>Fässer bis 250 Kilogramm, einfach und gründlich gemischt. Ein Mann genügt, auch beim Fasswechsel.</span></li>
+        <li><b>Regeln</b><span>Versand werktags 8 bis 17 Uhr. Abmeldelink in jeder Mail, wer widerspricht, wird gesperrt.</span></li>
+      </ul>
+    </div>
+    <div class="fenster fenster--hoch" style="max-width:620px;justify-self:center;width:100%">
+      <div class="fenster__leiste"><i></i><i></i><i></i><span>Posteingang · Holger Zimmermann</span></div>
+      <img src="/kunden/zimmermann/bilder/mail-erstansprache.webp" width="900" height="1200" alt="Erstansprache an einen recherchierten Gewürzhersteller mit Knopf zum Anwendungsblatt">
+    </div>
+  </div>
+</section>
+
+<!-- 07 · Anwendungsblatt -->
+<section class="folie folie--stein" id="blatt" aria-labelledby="t-blatt">
+  <div class="innen zwei zwei--bild-links">
+    <div class="fenster fenster--hoch" style="max-width:640px;justify-self:center;width:100%">
+      <div class="fenster__leiste"><i></i><i></i><i></i><span>vertrieb.rhoenradfassmischer.de/a/…</span></div>
+      <img src="/kunden/zimmermann/bilder/anwendungsblatt.webp" width="1040" height="1500" alt="Anwendungsblatt für einen Gewürzhersteller: Material, Branche, Fassgewicht, Bedienung durch einen Mann">
+    </div>
+    <div>
+      <p class="eyebrow"><b>06</b> — Schritt 04 · Anwendungsblatt</p>
+      <h2 id="t-blatt">Eine Seite je Firma. <em>Kein Prospekt.</em></h2>
+      <ul class="punkte">
+        <li><b>Inhalt</b><span>Was der Mischer bei genau diesem Material tut, was er ablöst, wie der Fasswechsel mit einem Mann läuft.</span></li>
+        <li><b>Gemessen</b><span>Gezählt wird der echte Aufruf der Seite, nicht das Öffnen der Mail. Darauf reagiert der Takt.</span></li>
+        <li><b>Weiter</b><span>„Angebot sofort anfordern“ führt direkt zum Formular auf der Landingpage. Als PDF speicherbar.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 08 · Takt -->
+<section class="folie folie--dunkel" id="takt" aria-labelledby="t-takt">
+  <div class="innen">
+    <p class="eyebrow"><b>07</b> — Schritt 05 · Takt</p>
+    <h2 id="t-takt">Die Folgemails laufen <em>von selbst.</em></h2>
+    <p class="lead">Der Takt richtet sich danach, was der Empfänger tut. Niemand wird öfter als nötig angeschrieben.</p>
+    <div class="regeln">
+      <div class="regel"><span class="wann">4 Werktage ohne Aufruf</span><h3>Erinnerung</h3><p>Kurz, einmal. Nur wenn die Mail nachweislich zugestellt wurde.</p></div>
+      <div class="regel"><span class="wann">3 Werktage nach dem Aufruf</span><h3>Nachfass</h3><p>Fasswechsel mit einem Mann, Halterung fürs Fass, Vorführgerät. Mit Knopf „Angebot sofort anfordern“.</p></div>
+      <div class="regel"><span class="wann">Sofort</span><h3>Reaktion gemeldet</h3><p>Bei einem Klick, zwei Aufrufen oder 45 Sekunden Lesezeit geht eine Meldung an den Vertrieb.</p></div>
+      <div class="regel"><span class="wann">Anfrage oder Antwort</span><h3>Übergabe</h3><p>Fordert die Firma ein Angebot an, rückt sie selbst zu Holger nach „Im Vertrieb“. Antwortet sie per Mail, übernimmt Holger sie im Board. Die Mailfolge stoppt.</p></div>
+      <div class="regel"><span class="wann">Nach 20 Werktagen</span><h3>Ende</h3><p>Keine Reaktion: die Firma ruht. Höchstens 4 Kontakte in 12 Monaten.</p></div>
+      <div class="regel"><span class="wann">Abmeldung · Rückläufer</span><h3>Sperre</h3><p>Widerspruch oder Spam-Meldung sperrt dauerhaft. Unzustellbare Adressen fallen raus.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 · Landingpage -->
+<section class="folie folie--hell" id="landingpage" aria-labelledby="t-landing">
+  <div class="innen zwei">
+    <div>
+      <p class="eyebrow"><b>08</b> — Schritt 06 · Landingpage</p>
+      <h2 id="t-landing">rhoenradfassmischer.de. <em>Weltmeisterlich gemischt.</em></h2>
+      <ul class="punkte">
+        <li><b>Inhalt</b><span>Prinzip, Bedienung durch einen Mann, Branchen, Aufstellung, technische Daten. Nur belegte Aussagen.</span></li>
+        <li><b>Herkunft</b><span>Vom weltweit führenden Hersteller von Rhönrädern, seit 1988, Europa- und Weltmeisterschaften seit 1991.</span></li>
+        <li><b>Ziel</b><span>Jeder Knopf führt zum Formular: Anwendungsfall nennen, Angebot in einer Minute.</span></li>
+        <li><b>Sauber</b><span>Kein Tracking, keine Cookies, Schriften selbst gehostet.</span></li>
+      </ul>
+    </div>
+    <div class="stapel">
+      <div class="fenster">
+        <div class="fenster__leiste"><i></i><i></i><i></i><span>www.rhoenradfassmischer.de</span></div>
+        <img src="/kunden/zimmermann/bilder/landing-hero.webp" width="1440" height="900" alt="Landingpage: Ein Fass. Eine Person. Homogen gemischt.">
+      </div>
+      <div class="fenster">
+        <div class="fenster__leiste"><i></i><i></i><i></i><span>#angebot</span></div>
+        <img src="/kunden/zimmermann/bilder/landing-angebot.webp" width="1440" height="1120" alt="Angebotsbereich: Anwendungsfall nennen, Angebot in einer Minute, Formular in drei Schritten">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 · Angebot in einer Minute -->
+<section class="folie folie--wolke" id="angebot" aria-labelledby="t-angebot">
+  <div class="innen zwei zwei--bild-links">
+    <div class="stapel">
+      <div class="fenster fenster--mittel">
+        <div class="fenster__leiste"><i></i><i></i><i></i><span>Posteingang des Interessenten</span></div>
+        <img src="/kunden/zimmermann/bilder/postfach.webp" width="1440" height="780" alt="Postfach mit Angebotsmail, Lead-Meldung und Meldung Angebot geöffnet">
+      </div>
+      <div class="fenster fenster--mittel">
+        <div class="fenster__leiste"><i></i><i></i><i></i><span>vertrieb.rhoenradfassmischer.de/a/…</span></div>
+        <img src="/kunden/zimmermann/bilder/angebot.webp" width="1040" height="1500" alt="Angebot WEB-2026-0003 für die B77 GmbH mit Leistungsumfang und Preisen">
+      </div>
+    </div>
+    <div>
+      <p class="eyebrow"><b>09</b> — Schritte 07–09 · Angebot sofort</p>
+      <h2 id="t-angebot">Anfrage rein. Angebot raus. <em>Sekunden.</em></h2>
+      <ul class="punkte">
+        <li><b>Kunde</b><span>Mail mit Link zum Angebot: Leistungsumfang, Optionen, Preise, als PDF. Freibleibend, 60 Tage gültig.</span></li>
+        <li><b>Vertrieb</b><span>Im selben Moment „Neue Angebotsanfrage“ an Holger und Ben, mit allen Angaben.</span></li>
+        <li><b>Signal</b><span>Öffnet der Kunde das Angebot, kommt einmal „Angebot geöffnet“. Im Board steht es grün, sonst rot.</span></li>
+        <li><b>Schutz</b><span>Das Angebot gibt es nur über den Link in der Mail. Mit fremder Adresse lässt sich nichts abgreifen.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 11 · Board -->
+<section class="folie folie--hell" id="board" aria-labelledby="t-board">
+  <div class="innen zwei">
+    <div>
+      <p class="eyebrow"><b>10</b> — Das Board</p>
+      <h2 id="t-board">Alles an einem Ort. <em>Für Holger.</em></h2>
+      <ul class="punkte">
+        <li><b>Listen</b><span>Zur Freigabe · Freigegeben · Kontaktiert · Reaktion · Im Vertrieb · Ausgeschlossen.</span></li>
+        <li><b>Im Vertrieb</b><span>Herkunft, „Angebot geöffnet“, Betreuer, Stand und Wiedervorlage je Firma.</span></li>
+        <li><b>Verlauf</b><span>Jede Mail, jeder Aufruf, jeder Klick mit Zeitpunkt. Filter, Sortierung, CSV-Export.</span></li>
+        <li><b>Team</b><span>Kollegen im Vertrieb anlegen und freischalten.</span></li>
+      </ul>
+    </div>
+    <div class="stapel">
+      <div class="fenster">
+        <div class="fenster__leiste"><i></i><i></i><i></i><span>vertrieb.rhoenradfassmischer.de/zugang</span></div>
+        <img src="/kunden/zimmermann/bilder/board-uebersicht.webp" width="1300" height="760" alt="Board-Übersicht mit Trichter und Aktivität der letzten 14 Tage">
+      </div>
+      <div class="fenster">
+        <div class="fenster__leiste"><i></i><i></i><i></i><span>/zugang/vertrieb</span></div>
+        <img src="/kunden/zimmermann/bilder/board-vertrieb.webp" width="1300" height="640" alt="Liste Im Vertrieb mit Spalte Angebot geöffnet, ja in Grün und noch nicht geöffnet in Rot">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 12 · Live-Demo -->
+<section class="folie folie--dunkel" id="demo" aria-labelledby="t-demo">
+  <div class="innen">
+    <p class="eyebrow"><b>11</b> — Live-Demo</p>
+    <h2 id="t-demo">Jetzt einmal <em>selbst.</em></h2>
+    <div class="demo">
+      <div>
+        <ol class="ablauf">
+          <li><span><strong>Landingpage öffnen</strong> und zum Formular springen.</span></li>
+          <li><span><strong>Daten eintragen</strong> wie rechts, dann „Angebot sofort erhalten“.</span></li>
+          <li><span><strong>Postfach öffnen:</strong> Angebot an den Kunden, Lead an Holger und Ben.</span></li>
+          <li><span><strong>Angebot ansehen</strong> über den Knopf in der Mail. Kurz darauf: „Angebot geöffnet“.</span></li>
+          <li><span><strong>Board „Im Vertrieb“:</strong> B77 GmbH bei Holger, Angebot geöffnet.</span></li>
+        </ol>
+        <div class="pills">
+          <a class="pill" href="http://localhost:4320/v2/#angebot" target="_blank" rel="noopener">Landingpage<span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+          <a class="pill pill--rahmen" href="http://localhost:4330/postfach" target="_blank" rel="noopener">Postfach<span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+          <a class="pill pill--rahmen" href="http://localhost:4330/direkt?weiter=/zugang/vertrieb" target="_blank" rel="noopener">Board<span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+        </div>
+      </div>
+      <div class="eingabe">
+        <span class="mono">Eingabe im Formular</span>
+        <dl>
+          <dt>Anwendungsfall</dt><dd>Kaffeerösterei</dd>
+          <dt>Firma</dt><dd>B77 GmbH</dd>
+          <dt>Straße</dt><dd>Unter dem Klingelschacht 18</dd>
+          <dt>PLZ · Ort</dt><dd>57074 Siegen</dd>
+          <dt>Anrede</dt><dd>Herr</dd>
+          <dt>Name</dt><dd>Benjamin Loos</dd>
+          <dt>Funktion</dt><dd>Produktionsleiter</dd>
+          <dt>E-Mail</dt><dd>ben@b77.de</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 13 · Links -->
+<section class="folie folie--hell" id="links" aria-labelledby="t-links">
+  <div class="innen">
+    <p class="eyebrow"><b>12</b> — Alle Links</p>
+    <h2 id="t-links">Heute als Demo. <em>Nach DNS live.</em></h2>
+    <div class="links">
+      <div class="linkblock">
+        <p class="k"><span>Demo · auf diesem Rechner</span><span>jetzt</span></p>
+        <ul>
+          <li><span>Landingpage</span><a href="http://localhost:4320/v2/" target="_blank" rel="noopener">localhost:4320/v2/</a></li>
+          <li><span>Formular</span><a href="http://localhost:4320/v2/#angebot" target="_blank" rel="noopener">localhost:4320/v2/#angebot</a></li>
+          <li><span>Demo-Postfach</span><a href="http://localhost:4330/postfach" target="_blank" rel="noopener">localhost:4330/postfach</a></li>
+          <li><span>Board Übersicht</span><a href="http://localhost:4330/direkt" target="_blank" rel="noopener">localhost:4330/direkt</a></li>
+          <li><span>Zur Freigabe</span><a href="http://localhost:4330/direkt?weiter=/zugang/freigabe" target="_blank" rel="noopener">localhost:4330/direkt?weiter=/zugang/freigabe</a></li>
+          <li><span>Im Vertrieb</span><a href="http://localhost:4330/direkt?weiter=/zugang/vertrieb" target="_blank" rel="noopener">localhost:4330/direkt?weiter=/zugang/vertrieb</a></li>
+          <li><span>Präsentation</span><a href="http://localhost:4330/praesentation/" target="_blank" rel="noopener">localhost:4330/praesentation/</a></li>
+        </ul>
+        <p class="hinweis">Simuliert zwei Wochen Betrieb mit erfundenen Firmen, dazu die 9 echten aus der Recherche. Es wird nichts versendet. Die Demo läuft nur auf dem Rechner der Vorführung, diese Links öffnen sonst nichts.</p>
+      </div>
+      <div class="linkblock linkblock--dunkel">
+        <p class="k"><span>Live · nach den DNS-Einträgen</span><span>bald</span></p>
+        <ul>
+          <li><span>Landingpage</span><a href="https://www.rhoenradfassmischer.de/" target="_blank" rel="noopener">www.rhoenradfassmischer.de</a></li>
+          <li><span>Angebot anfordern</span><a href="https://www.rhoenradfassmischer.de/#angebot" target="_blank" rel="noopener">www.rhoenradfassmischer.de/#angebot</a></li>
+          <li><span>Board</span><a href="https://vertrieb.rhoenradfassmischer.de/zugang" target="_blank" rel="noopener">vertrieb.rhoenradfassmischer.de/zugang</a></li>
+          <li><span>Angebote, Blätter</span><a href="https://vertrieb.rhoenradfassmischer.de/" target="_blank" rel="noopener">vertrieb.rhoenradfassmischer.de/a/…</a></li>
+          <li><span>Absender</span><span style="color:inherit;font-family:var(--mono);font-size:13.5px">holger.zimmermann@vertrieb.rhoenradfassmischer.de</span></li>
+          <li><span>Board bis dahin</span><a href="https://akquise-zimmermann.vercel.app/zugang" target="_blank" rel="noopener">akquise-zimmermann.vercel.app/zugang</a></li>
+        </ul>
+        <p class="hinweis">Das Board läuft schon online mit den 9 recherchierten Firmen. Angemeldet wird per Link ohne Passwort.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 14 · Bis zum Start -->
+<section class="folie folie--stein" id="start-live" aria-labelledby="t-start">
+  <div class="innen">
+    <p class="eyebrow"><b>13</b> — Bis zum Start</p>
+    <h2 id="t-start">Was noch fehlt. <em>Und wer es macht.</em></h2>
+    <div class="liste">
+      <section>
+        <h3>Zimmermann</h3>
+        <ul>
+          <li>Preise bestätigen<small>Das Angebot rechnet noch mit Platzhaltern</small></li>
+          <li>Mails und Anwendungsblatt freigeben<small>Holger zeichnet, Holger gibt frei</small></li>
+          <li>Postfach holger.zimmermann@rhoenradfassmischer.de<small>Empfängt Antworten und Leads</small></li>
+          <li>Bestandskundenliste<small>Damit kein Kunde angeschrieben wird</small></li>
+          <li>Impressum und Datenschutz ergänzen<small>HRB, Domain, Formular, Versanddienst</small></li>
+        </ul>
+      </section>
+      <section>
+        <h3>IT-Dienstleister</h3>
+        <ul>
+          <li>DNS-Einträge bei IONOS setzen<small>Liste mit allen Einträgen liegt vor</small></li>
+          <li>Beide Nameserver prüfen<small>DKIM braucht bis zur Freischaltung etwas Zeit</small></li>
+        </ul>
+      </section>
+      <section>
+        <h3>B_77</h3>
+        <ul>
+          <li>Landingpage und Board auf die Domains<small>Upload, sobald DNS steht</small></li>
+          <li>Versanddomain authentifizieren<small>Brevo, Zustellmeldungen, Schlüssel</small></li>
+          <li>Testmails an alle Postfächer<small>Zustellung, Darstellung, Links</small></li>
+          <li>Rechtlicher Check der Kaltmail<small>§ 7 UWG</small></li>
+          <li>Recherche täglich einschalten<small>Werktags 07:00</small></li>
+        </ul>
+      </section>
+    </div>
+    <div class="reihe" aria-label="Reihenfolge">
+      <span>DNS</span><i>→</i><span>Upload</span><i>→</i><span>Brevo</span><i>→</i><span>Testmails</span><i>→</i><span>Freigabe</span><i>→</i><span class="ziel">Erste Mails</span>
+    </div>
+  </div>
+</section>
+
+<!-- 15 · Schluss -->
+<section class="folie folie--dunkel titel" id="ende" aria-label="Schluss">
+  <div class="innen oben"><img src="/kunden/zimmermann/marke/b77-weiss.png" alt="B_77"><span>sales engine · Zimmermann Rhönradmischer</span></div>
+  <div class="innen">
+    <h1 style="font-size:clamp(3.4rem,9vw,8.5rem)">Fragen? <em>Dann los.</em></h1>
+    <div class="signal"></div>
+    <p class="fuer">Benjamin Loos · B_77 <span>· ben@b77.de · Unter dem Klingelschacht 18, 57074 Siegen</span></p>
+  </div>
+  <div class="innen unten"><span><span class="punkt"></span>Vertriebsberatung für den Mittelstand</span><span>b77.de</span></div>
+</section>
+
+<nav class="leiste" aria-label="Folien">
+  <span class="marke">B_77</span>
+  <span class="hilfe">← → blättern · F Vollbild</span>
+  <span data-zaehler>01 / 15</span>
+</nav>
+
+<script>
+(function () {
+  var folien = Array.prototype.slice.call(document.querySelectorAll('.folie'));
+  var zaehler = document.querySelector('[data-zaehler]');
+  var balken = document.querySelector('[data-fortschritt]');
+  var aktuell = 0;
+  function zwei(n) { return (n < 10 ? '0' : '') + n; }
+  function melden(i) {
+    aktuell = i;
+    zaehler.textContent = zwei(i + 1) + ' / ' + zwei(folien.length);
+    balken.style.width = ((i + 1) / folien.length * 100) + '%';
+  }
+  var beobachter = new IntersectionObserver(function (eintraege) {
+    eintraege.forEach(function (e) { if (e.isIntersecting) melden(folien.indexOf(e.target)); });
+  }, { threshold: 0.55 });
+  folien.forEach(function (f) { beobachter.observe(f); });
+  function gehe(i) {
+    i = Math.max(0, Math.min(folien.length - 1, i));
+    folien[i].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.target.closest && e.target.closest('input, textarea, select')) return;
+    if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].indexOf(e.key) > -1) { e.preventDefault(); gehe(aktuell + 1); }
+    else if (['ArrowLeft', 'ArrowUp', 'PageUp'].indexOf(e.key) > -1) { e.preventDefault(); gehe(aktuell - 1); }
+    else if (e.key === 'Home') { e.preventDefault(); gehe(0); }
+    else if (e.key === 'End') { e.preventDefault(); gehe(folien.length - 1); }
+    else if (e.key === 'f' || e.key === 'F') {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen && document.documentElement.requestFullscreen();
+      else document.exitFullscreen && document.exitFullscreen();
+    }
+    else if (e.key === 'p' || e.key === 'P') window.print();
+  });
+})();
+</script>
+</body>
+</html>
