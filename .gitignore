@@ -5,3 +5,8 @@ assets/studio 2.jpg
 assets/studio3.jpg
 assets/B_77 Studio.png
 .vercel
+
+# Secrets / lokale Umgebung (gehören in Vercel-Env, nie ins Repo)
+.env
+.env.*
+!.env.example

@@ -1,7 +1,7 @@
 /* ============================================================
-   B_77 — Vertriebs-Check (Monolith)
+   B_77, Vertriebs-Check (Monolith)
    In sich geschlossene Quiz-Logik: Fragen, Auswertung, Render.
-   Extrahiert aus script.js (initCheck + Helfer) — reines S/W,
+   Extrahiert aus script.js (initCheck + Helfer), reines S/W,
    keine Akzentfarbe: schwache Dimensionen werden über Mono-Label
    markiert, Balken bleiben schwarz auf hellgrau.
    ============================================================ */
@@ -21,7 +21,7 @@
     { d: 0, t: 'Unsere Positionierung ist für Entscheider sofort relevant und unterscheidbar.' },
     { d: 0, t: 'Wir wissen, in welchen Märkten unser Angebot den größten Hebel hat.' },
     { d: 0, t: 'Unser Nutzenversprechen ist klar formuliert und im Team einheitlich.' },
-    { d: 0, t: 'Wir bearbeiten unsere Zielmärkte bewusst — statt auf Anfragen zu warten.' },
+    { d: 0, t: 'Wir bearbeiten unsere Zielmärkte bewusst, statt auf Anfragen zu warten.' },
     { d: 1, t: 'Unser Vertriebsprozess ist von Erstkontakt bis Abschluss klar definiert.' },
     { d: 1, t: 'Verantwortlichkeiten und Übergaben im Vertrieb sind eindeutig geregelt.' },
     { d: 1, t: 'Leads werden bei uns nach klaren Kriterien qualifiziert.' },
@@ -36,9 +36,9 @@
     { d: 3, t: 'Wir kennen das Buying Center unserer Zielkunden inkl. stiller Einflussnehmer.' },
     { d: 3, t: 'Wir erzeugen aktiv Bedarf, statt nur bestehende Nachfrage zu verarbeiten.' },
     { d: 3, t: 'Verhandlungen führen wir strukturiert bis zum Abschluss.' },
-    { d: 3, t: 'Bestandskunden bauen wir gezielt aus — Cross-/Up-Selling, Empfehlungen.' },
+    { d: 3, t: 'Bestandskunden bauen wir gezielt aus, Cross-/Up-Selling, Empfehlungen.' },
     { d: 4, t: 'Vertrieb ist bei uns Chefsache und wird aktiv gesteuert.' },
-    { d: 4, t: 'Wir steuern mit KPIs, die wirklich steuern — nicht nur messen.' },
+    { d: 4, t: 'Wir steuern mit KPIs, die wirklich steuern, nicht nur messen.' },
     { d: 4, t: 'Vertriebsziele sind klar, verbindlich und werden nachgehalten.' },
     { d: 4, t: 'Unser Vertriebsteam entwickelt sich kontinuierlich weiter.' },
     { d: 4, t: 'Wir wissen jederzeit, wo wir stehen und wo wir nachsteuern müssen.' }
@@ -122,7 +122,7 @@
       document.getElementById('r-score').textContent = r.overall;
       var tn, td;
       if (r.overall <= 40) { tn = 'Reaktiver Vertrieb'; td = 'Ihr Vertrieb verwaltet überwiegend Nachfrage. Der Hebel durch Struktur und aktive Marktbearbeitung ist groß.'; }
-      else if (r.overall <= 60) { tn = 'Im Aufbau'; td = 'Das Fundament steht in Teilen — es gibt aber deutliche Lücken, die planbares Wachstum bremsen.'; }
+      else if (r.overall <= 60) { tn = 'Im Aufbau'; td = 'Das Fundament steht in Teilen, es gibt aber deutliche Lücken, die planbares Wachstum bremsen.'; }
       else if (r.overall <= 80) { tn = 'Strukturiert'; td = 'Ihr Vertrieb arbeitet solide. Mit gezielten Maßnahmen holen Sie das letzte Drittel heraus.'; }
       else { tn = 'Vertriebsaktiv'; td = 'Sie gestalten Ihren Markt aktiv. Jetzt geht es um Feinjustierung und Konsequenz.'; }
       document.getElementById('r-tier').textContent = tn;
@@ -131,7 +131,7 @@
       var dimsEl = document.getElementById('r-dims');
       dimsEl.innerHTML = '';
       DIMS.forEach(function (d, i) {
-        // Monolith: keine Akzentfarbe — schwache Dimension (<60) wird über
+        // Monolith: keine Akzentfarbe, schwache Dimension (<60) wird über
         // die CSS-Klasse "weak" markiert (Mono-Label + Strich), nicht über Farbe.
         var pct = r.dimPct[i], weak = pct < 60;
         var row = document.createElement('div');

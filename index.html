@@ -3,34 +3,232 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Vertriebsberatung Mittelstand Siegen – Mehr Anfragen mit B_77</title>
-<meta name="description" content="Vertriebsberatung für den Mittelstand: B_77 aktiviert Ihren Vertrieb mit Sales Intelligence und KI. Kostenloses Erstgespräch – seit 2017 in Siegen.">
+<title>B_77 · Vertriebsberatung für den Mittelstand, Siegen</title>
+<meta name="description" content="Vertriebsberatung für den Mittelstand: B_77 aktiviert Ihren Vertrieb mit Sales Intelligence und KI. Kostenloses Erstgespräch, seit 2017 in Siegen.">
 <link rel="canonical" href="https://b77.de/">
-<link rel="icon" type="image/png" href="/assets/img/favicon.png">
-<meta name="theme-color" content="#EDEBE6">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="B_77">
+<meta property="og:title" content="B_77 · Vertriebsberatung für den Mittelstand, Siegen">
+<meta property="og:description" content="Vertriebsberatung für den Mittelstand: B_77 aktiviert Ihren Vertrieb mit Sales Intelligence und KI. Kostenloses Erstgespräch, seit 2017 in Siegen.">
 <meta property="og:url" content="https://b77.de/">
-<meta property="og:title" content="Vertriebsberatung Mittelstand Siegen – Mehr Anfragen mit B_77">
-<meta property="og:description" content="Vertriebsberatung für den Mittelstand: B_77 aktiviert Ihren Vertrieb mit Sales Intelligence und KI. Kostenloses Erstgespräch – seit 2017 in Siegen.">
 <meta property="og:image" content="https://b77.de/assets/og-b77.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Vertriebsberatung Mittelstand Siegen – Mehr Anfragen mit B_77">
-<meta name="twitter:description" content="Vertriebsberatung für den Mittelstand: B_77 aktiviert Ihren Vertrieb mit Sales Intelligence und KI. Kostenloses Erstgespräch – seit 2017 in Siegen.">
 <meta name="twitter:image" content="https://b77.de/assets/og-b77.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"B_77 Vertriebsberatung","alternateName":"B_77","description":"Vertriebsberatung für mittelständische Unternehmen in Siegen, NRW und deutschlandweit.","url":"https://b77.de","logo":"https://b77.de/assets/B77_Logo_black.png","image":"https://b77.de/assets/og-b77.png","email":"kontakt@b77.de","telephone":"+49-271-89027837","founder":{"@type":"Person","name":"Benjamin Loos"},"foundingDate":"2017","address":{"@type":"PostalAddress","streetAddress":"Unter dem Klingelschacht 18","postalCode":"57074","addressLocality":"Siegen","addressRegion":"Nordrhein-Westfalen","addressCountry":"DE"},"areaServed":[{"@type":"City","name":"Siegen"},{"@type":"AdministrativeArea","name":"Nordrhein-Westfalen"},{"@type":"Country","name":"Deutschland"}],"serviceType":["Vertriebsberatung","Vertriebsoptimierung","Aktiver Vertrieb","Neukundengewinnung","Vertriebsaufbau"],"priceRange":"€€€","openingHours":"Mo-Fr 08:30-18:00"}</script>
-<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700,800,900&display=swap" rel="stylesheet">
-<link href="https://api.fontshare.com/v2/css?f[]=gambetta@401&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/site.css?v=8">
-<!-- B_77 Intro: Fonts + Style -->
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="/assets/img/favicon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
 <style>
-  /* ============================================================
-     B_77 INTRO — eigenständiges Overlay (Vanilla JS, kein Framework)
-     Konfiguration ganz unten im <script> unter  window.B77_INTRO_CONFIG
-     ============================================================ */
+  :root{
+    --paper:#F2F1EC; --ink:#161511; --soft:#5f5d55; --mute:#8c8a81;
+    --card:#E8E7E1; --card2:#DEDDD6; --dark:#141311;
+    --line:rgba(22,21,17,0.12); --line-d:rgba(242,241,236,0.14);
+    --accent:#E5FF00;
+    --f:'Satoshi',-apple-system,system-ui,sans-serif;
+    --mono:'Space Mono',ui-monospace,monospace;
+    --serif:'Newsreader',Georgia,serif;
+    --r:clamp(18px,2vw,30px);
+    --pad:clamp(16px,4vw,46px);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth;}
+  body{font-family:var(--f);background:var(--paper);color:var(--ink);line-height:1.5;overflow-x:hidden;}
+  ::selection{background:var(--accent);color:var(--ink);}
+  a{color:inherit;text-decoration:none;}
+  img{display:block;max-width:100%;}
+  .mono{font-family:var(--mono);font-size:11px;letter-spacing:0.15em;text-transform:uppercase;}
+  .wrap{max-width:1320px;margin:0 auto;padding:clamp(60px,7.5vw,104px) var(--pad);}
+
+  /* NAV + Burger */
+  header.nav{position:absolute;top:0;left:0;right:0;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:clamp(18px,2.4vw,30px) clamp(22px,5vw,58px);}
+  header.nav .b{font-weight:900;font-size:20px;letter-spacing:-0.03em;color:var(--ink);}
+  .burger{position:relative;z-index:60;width:44px;height:34px;border:0;background:transparent;cursor:pointer;display:flex;flex-direction:column;justify-content:center;align-items:flex-end;gap:8px;padding:0;}
+  .burger span{display:block;height:2px;width:34px;background:var(--ink);transition:transform .4s cubic-bezier(.2,.8,.2,1),width .4s,background .3s;}
+  .burger span:nth-child(2){width:22px;}
+  .burger:hover span{width:34px;}
+  .burger.open span{background:var(--paper);}
+  .burger.open span:nth-child(1){transform:translateY(5px) rotate(45deg);width:30px;}
+  .burger.open span:nth-child(2){transform:translateY(-5px) rotate(-45deg);width:30px;}
+  .menu{position:fixed;inset:0;z-index:55;background:var(--dark);color:var(--paper);display:flex;flex-direction:column;justify-content:center;padding:clamp(24px,6vw,80px);opacity:0;visibility:hidden;transition:opacity .45s,visibility .45s;}
+  .menu::before{content:"";position:absolute;inset:0;background:radial-gradient(90% 70% at 85% 12%,rgba(229,255,0,0.08),transparent 55%);pointer-events:none;}
+  .menu.open{opacity:1;visibility:visible;}
+  .menu__in{position:relative;display:flex;flex-direction:column;gap:clamp(4px,1vh,14px);}
+  .menu__in a{display:flex;align-items:baseline;gap:clamp(16px,2vw,28px);font-weight:900;font-size:clamp(34px,7.2vw,92px);letter-spacing:-0.035em;text-transform:uppercase;line-height:1.02;transform:translateY(26px);opacity:0;transition:transform .6s cubic-bezier(.19,1,.22,1),opacity .6s,color .2s;}
+  .menu.open .menu__in a{transform:none;opacity:1;}
+  .menu.open .menu__in a:nth-child(1){transition-delay:.06s}.menu.open .menu__in a:nth-child(2){transition-delay:.12s}.menu.open .menu__in a:nth-child(3){transition-delay:.18s}.menu.open .menu__in a:nth-child(4){transition-delay:.24s}.menu.open .menu__in a:nth-child(5){transition-delay:.30s}
+  .menu__in a:hover{color:var(--accent);}
+  .menu__in a .mn{font-family:var(--mono);font-size:clamp(11px,1vw,14px);font-weight:400;color:var(--accent);letter-spacing:0.12em;transform:translateY(-0.4em);}
+  .menu__mag .mag-arrow{color:var(--accent);font-size:0.62em;margin-left:0.14em;display:inline-block;transition:transform .3s;}
+  .menu__mag:hover .mag-arrow{transform:translateX(0.12em);}
+  .menu__foot{position:absolute;left:clamp(24px,6vw,80px);bottom:clamp(24px,6vw,60px);color:rgba(242,241,236,.5);}
+
+  /* HERO Media-Kachel */
+  .hero{position:relative;padding:clamp(76px,10vw,110px) var(--pad) 0;}
+  .hero__tile{position:relative;border-radius:var(--r);overflow:hidden;min-height:clamp(560px,84vh,900px);display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(26px,4.5vw,64px);background:#dcdbd4;}
+  .hero__tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;transform:scale(1.02);will-change:transform;}
+  .hero__tile::after{content:"";position:absolute;inset:0;z-index:1;background:radial-gradient(90% 90% at 6% 92%,rgba(236,235,230,.86),rgba(236,235,230,0) 58%),linear-gradient(180deg,rgba(236,235,230,.2),rgba(236,235,230,0) 30%,rgba(236,235,230,.35));}
+  .hero__in{position:relative;z-index:3;max-width:22ch;}
+  .hero__kick{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:var(--soft);margin-bottom:clamp(14px,1.6vw,22px);}
+  .hero__kick::before{content:"";width:28px;height:1px;background:var(--ink);}
+  .hero h1{font-weight:900;letter-spacing:-0.05em;line-height:0.86;font-size:clamp(58px,11vw,160px);text-transform:none;}
+  .hero h1 .dot{color:var(--accent);}
+  .hero__line{margin-top:clamp(18px,2vw,26px);font-weight:500;font-size:clamp(16px,1.3vw,19px);color:var(--ink);max-width:52ch;}
+  .hero__sub{margin-top:10px;font-size:clamp(15px,1.2vw,17px);color:var(--soft);max-width:54ch;line-height:1.5;}
+  .hero__cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:clamp(22px,3vw,34px);}
+  .pill{display:inline-flex;align-items:center;gap:12px;border-radius:999px;font-weight:700;font-size:14px;padding:16px 26px;transition:transform .25s,background .25s;}
+  .pill--neon{background:var(--accent);color:var(--ink);} .pill--neon:hover{transform:translateY(-2px);}
+  .pill--ghost{background:rgba(236,235,230,.5);color:var(--ink);border:1px solid var(--line);backdrop-filter:blur(4px);} .pill--ghost:hover{background:rgba(236,235,230,.8);}
+  .pill .ic{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:999px;background:var(--ink);color:var(--paper);font-size:13px;}
+  .pill--neon .ic{background:var(--ink);color:var(--accent);}
+  @media(max-width:640px){.hero h1{font-size:clamp(52px,16vw,90px);}.hero__in{max-width:100%;}}
+  /* Hero-Scroll: gelbe Fläche zieht sich in den Punkt zusammen */
+  .hero-stage{position:relative;height:230vh;}
+  .hero-pin{position:sticky;top:0;}
+  .hero-veil{position:absolute;inset:0;z-index:2;background:var(--accent);will-change:clip-path;pointer-events:none;}
+  @media(prefers-reduced-motion:reduce){.hero-stage{height:auto;}.hero-pin{position:static;}.hero-veil{display:none;}}
+
+  .claims{display:flex;flex-wrap:wrap;gap:8px 30px;justify-content:center;padding:clamp(22px,2.6vw,34px) var(--pad);}
+  .claims span{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--soft);position:relative;padding-left:16px;}
+  .claims span::before{content:"";position:absolute;left:0;top:0.4em;width:5px;height:5px;background:var(--accent);border-radius:50%;}
+
+  section{padding:clamp(54px,7vw,100px) 0;}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:var(--soft);display:flex;align-items:center;gap:12px;margin-bottom:clamp(22px,2.6vw,38px);}
+  .eyebrow::before{content:"";width:28px;height:1px;background:var(--accent);}
+  .eyebrow b{color:var(--ink);font-weight:700;}
+  .h-big{font-weight:900;font-size:clamp(30px,4.6vw,66px);letter-spacing:-0.035em;line-height:1.0;}
+  .h-mid{font-weight:700;font-size:clamp(25px,3.2vw,46px);letter-spacing:-0.03em;line-height:1.05;}
+  .lead{font-weight:600;font-size:clamp(23px,3.2vw,42px);letter-spacing:-0.025em;line-height:1.14;max-width:24ch;}
+  .lead .hl{background:linear-gradient(var(--accent),var(--accent)) 0 86%/100% 0.16em no-repeat;}
+  /* Credo: dramatische Motor-Kachel */
+  .credo-tile{position:relative;background:var(--dark);color:var(--paper);border-radius:var(--r);overflow:hidden;display:grid;grid-template-columns:1.08fr 0.92fr;gap:clamp(24px,3vw,56px);align-items:center;min-height:clamp(380px,42vw,560px);padding:clamp(32px,4vw,68px);}
+  .credo-txt{display:flex;flex-direction:column;gap:clamp(16px,2vw,26px);}
+  .credo-tile .eyebrow{margin-bottom:0;color:rgba(242,241,236,.6);} .credo-tile .eyebrow b{color:var(--paper);}
+  .credo-tile h2{font-weight:900;letter-spacing:-0.04em;line-height:0.95;font-size:clamp(40px,6vw,96px);max-width:12ch;}
+  .credo-tile h2 .nf{background:linear-gradient(var(--accent),var(--accent)) 0 86%/100% 0.12em no-repeat;}
+  .credo-tile .p{color:#bdbbb4;font-size:clamp(16px,1.4vw,20px);line-height:1.55;max-width:42ch;}
+  .credo-media{position:relative;margin:0 auto;align-self:center;border-radius:calc(var(--r)*0.58);overflow:hidden;aspect-ratio:1/1;width:100%;max-width:clamp(300px,52vw,520px);background:#000;}
+  .credo-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;will-change:transform;}
+  .credo-tile.no-media{grid-template-columns:1fr;} .credo-tile.no-media .credo-media{display:none;}
+  @media(max-width:860px){.credo-tile{grid-template-columns:1fr;}.credo-media{min-height:240px;order:2;}}
+  .p{font-size:clamp(16px,1.3vw,18px);color:var(--soft);max-width:60ch;line-height:1.6;}
+  .arrowlink{display:inline-flex;align-items:center;gap:10px;margin-top:24px;font-family:var(--mono);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:700;}
+  .arrowlink .ic{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:999px;background:var(--ink);color:var(--paper);transition:transform .3s;}
+  .arrowlink:hover .ic{transform:translateX(5px);}
+
+  /* HALTUNG: Chart-Kachel */
+  .haltung .grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:clamp(16px,2vw,28px);align-items:stretch;}
+  @media(max-width:860px){.haltung .grid{grid-template-columns:1fr;}}
+  .chart-tile{background:var(--card);border-radius:var(--r);padding:0;overflow:hidden;position:relative;min-height:clamp(300px,36vw,420px);}
+  .chart-tile .hl-gl{position:absolute;inset:0;}
+  .chart-tile .hl-gl canvas{display:block;width:100%;height:100%;}
+  .haltung .say{display:flex;flex-direction:column;justify-content:center;}
+
+  /* LEISTUNGEN Karten */
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,1.6vw,22px);}
+  @media(max-width:720px){.cards{grid-template-columns:1fr;}}
+  .card{position:relative;border-radius:var(--r);background:var(--card);padding:clamp(24px,2.6vw,40px);min-height:clamp(230px,24vw,300px);display:flex;flex-direction:column;overflow:hidden;transition:transform .4s cubic-bezier(.2,.8,.2,1);}
+  .card:hover{transform:translateY(-5px);}
+  .card .no{font-family:var(--mono);font-size:12px;color:var(--mute);letter-spacing:0.08em;}
+  .card h3{font-weight:700;font-size:clamp(21px,2vw,27px);letter-spacing:-0.02em;margin-top:14px;}
+  .card p{font-size:14px;color:var(--soft);line-height:1.5;margin-top:10px;max-width:34ch;}
+  .card .ghost{position:absolute;right:-0.08em;bottom:-0.24em;font-weight:900;font-size:clamp(120px,15vw,210px);line-height:0.8;letter-spacing:-0.04em;color:rgba(22,21,17,0.05);pointer-events:none;}
+  .card .go{margin-top:auto;padding-top:22px;display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:700;position:relative;z-index:2;}
+  .card .go .ic{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:999px;background:var(--ink);color:var(--paper);transition:transform .3s;}
+  .card:hover .go .ic{transform:translateX(4px);}
+  .card.hot{background:var(--dark);color:var(--paper);}
+  .card.hot p{color:#bdbbb4;} .card.hot .no{color:var(--accent);}
+  .card.hot .ghost{color:var(--accent);opacity:1;}
+  .card.hot .go .ic{background:var(--accent);color:var(--ink);}
+
+  .ink{background:var(--dark);color:var(--paper);border-radius:var(--r);}
+  .ink .eyebrow{color:rgba(242,241,236,.6);} .ink .eyebrow b{color:var(--paper);}
+  .ink .p{color:#bdbbb4;}
+
+  /* Top-Themen */
+  .themen{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.6vw,22px);}
+  @media(max-width:860px){.themen{grid-template-columns:1fr;}}
+  .tcard{background:var(--card);border-radius:var(--r);padding:clamp(24px,2.4vw,36px);display:flex;flex-direction:column;gap:14px;transition:transform .4s cubic-bezier(.2,.8,.2,1);}
+  .tcard:hover{transform:translateY(-5px);}
+  .tcard h3{font-weight:700;font-size:clamp(20px,1.9vw,26px);letter-spacing:-0.02em;line-height:1.08;}
+  .tcard p{font-size:14px;color:var(--soft);line-height:1.5;}
+  .tcard .q{font-family:var(--serif);font-style:italic;font-size:clamp(16px,1.4vw,20px);line-height:1.3;color:var(--ink);margin-top:auto;padding-left:14px;border-left:2px solid var(--accent);}
+  /* Future of Sales: volle Breite, dunkel, mit Roboter */
+  .fos{display:grid;grid-template-columns:1.02fr 0.98fr;gap:clamp(18px,2.4vw,44px);align-items:stretch;background:var(--dark);color:var(--paper);border-radius:var(--r);padding:clamp(28px,3.2vw,56px);overflow:hidden;min-height:clamp(330px,34vw,440px);margin-bottom:clamp(14px,1.6vw,22px);transition:transform .4s cubic-bezier(.2,.8,.2,1);}
+  .fos:hover{transform:translateY(-5px);}
+  .fos__l{display:flex;flex-direction:column;gap:16px;justify-content:center;max-width:48ch;}
+  .fos__l .mono{font-family:var(--mono);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;}
+  .fos__l h3{font-weight:900;font-size:clamp(30px,3.6vw,58px);letter-spacing:-0.03em;line-height:0.98;}
+  .fos__l p{color:#bdbbb4;font-size:clamp(15px,1.3vw,18px);line-height:1.55;}
+  .fos .arrowlink{margin-top:6px;color:var(--paper);}
+  .fos .arrowlink .ic{background:var(--accent);color:var(--ink);}
+  .fos__r{position:relative;min-height:260px;}
+  .fos__r spline-viewer{position:absolute;inset:0;width:100%!important;height:100%!important;display:block;}
+  @media(max-width:860px){.fos{grid-template-columns:1fr;}.fos__r{min-height:240px;order:2;}}
+  .themen2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,1.6vw,22px);}
+  @media(max-width:860px){.themen2{grid-template-columns:1fr;}}
+
+  /* Media-Kachel (Studio) */
+  .media-tile{position:relative;border-radius:var(--r);overflow:hidden;min-height:clamp(360px,44vw,560px);display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(26px,3.4vw,52px);}
+  .media-tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
+  .media-tile::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(20,19,17,.1),rgba(20,19,17,0) 30%,rgba(20,19,17,.72));}
+  .media-tile>*{position:relative;z-index:2;color:var(--paper);}
+  .media-tile .p{color:#e6e5df;}
+
+  /* Zahlen */
+  .zahlen .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.6vw,22px);}
+  @media(max-width:700px){.zahlen .grid{grid-template-columns:1fr;}}
+  .zcard{background:var(--dark);color:var(--paper);border-radius:var(--r);padding:clamp(26px,3vw,44px);min-height:clamp(200px,22vw,280px);display:flex;flex-direction:column;}
+  .zcard .n{font-weight:900;font-size:clamp(66px,9vw,140px);letter-spacing:-0.04em;line-height:0.82;}
+  .zcard .n small{font-weight:500;font-size:0.2em;letter-spacing:0.04em;margin-left:0.3em;vertical-align:1.3em;color:rgba(242,241,236,.55);text-transform:uppercase;font-family:var(--mono);}
+  .zcard .l{margin-top:auto;padding-top:22px;color:#bdbbb4;font-size:15px;line-height:1.5;max-width:28ch;}
+  .zcard .n b{color:var(--accent);}
+
+  .standpunkt .tile{background:var(--dark);color:var(--paper);border-radius:var(--r);padding:clamp(34px,5vw,80px);}
+  .standpunkt blockquote{font-weight:500;font-size:clamp(23px,3vw,44px);letter-spacing:-0.02em;line-height:1.22;max-width:26ch;}
+  .standpunkt blockquote b{font-weight:900;}
+  .standpunkt blockquote .em{font-family:var(--serif);font-style:italic;font-weight:400;}
+  .standpunkt .who{margin-top:clamp(24px,3vw,38px);display:flex;align-items:baseline;gap:14px;font-family:var(--mono);font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(242,241,236,.55);}
+  .standpunkt .who b{color:var(--paper);font-weight:700;font-family:var(--f);font-size:17px;letter-spacing:0;text-transform:none;}
+  .standpunkt .st-grid{display:grid;grid-template-columns:minmax(220px,0.6fr) 1fr;gap:clamp(28px,4vw,64px);align-items:center;}
+  .standpunkt .st-portrait{border-radius:calc(var(--r)*0.66);overflow:hidden;aspect-ratio:4/5;background:#20201c;margin:0;}
+  .standpunkt .st-portrait img{width:100%;height:100%;object-fit:cover;object-position:center top;filter:contrast(1.05) brightness(1.03);}
+  .standpunkt .st-grid.no-portrait{grid-template-columns:1fr;} .standpunkt .st-grid.no-portrait .st-portrait{display:none;}
+  @media(max-width:820px){.standpunkt .st-grid{grid-template-columns:1fr;gap:26px;}.standpunkt .st-portrait{max-width:300px;aspect-ratio:1/1;}}
+
+  .kibox{background:var(--card);border-radius:var(--r);padding:clamp(26px,3vw,44px);max-width:70ch;margin-top:clamp(26px,3vw,40px);border-left:3px solid var(--accent);}
+  .kibox h3{font-family:var(--mono);font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--soft);margin-bottom:14px;}
+
+  .mag{margin-top:clamp(22px,2.6vw,38px);display:grid;grid-template-columns:1fr;gap:10px;}
+  .mag a{display:grid;grid-template-columns:84px 1fr 40px;gap:clamp(12px,2vw,28px);align-items:center;background:var(--card);border-radius:calc(var(--r) * 0.6);padding:clamp(18px,1.9vw,26px) clamp(20px,2.2vw,30px);transition:transform .3s;}
+  .mag a:hover{transform:translateX(5px);}
+  .mag .dt{font-family:var(--mono);font-size:12px;color:var(--mute);}
+  .mag .t{font-weight:500;font-size:clamp(16px,1.5vw,20px);letter-spacing:-0.01em;line-height:1.3;}
+  .mag .ic{justify-self:end;font-size:22px;line-height:1;color:var(--mute);transition:color .25s,transform .3s;}
+  .mag a:hover .ic{color:var(--ink);transform:translateX(3px);}
+  @media(max-width:620px){.mag a{grid-template-columns:56px 1fr;}.mag .ic{display:none;}}
+
+  .check-tile{position:relative;border-radius:var(--r);overflow:hidden;background:var(--dark);color:var(--paper);padding:clamp(34px,5vw,78px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,64px);align-items:end;}
+  .check-tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.3;z-index:0;}
+  .check-tile::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(20,19,17,.9),rgba(20,19,17,.5));}
+  .check-tile>*{position:relative;z-index:2;}
+  @media(max-width:820px){.check-tile{grid-template-columns:1fr;gap:26px;}}
+
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;}
+  .chips span{font-family:var(--mono);font-size:12px;letter-spacing:0.05em;border:1px solid var(--line);border-radius:999px;padding:9px 16px;color:var(--soft);transition:border-color .25s,color .25s;}
+  .chips span:hover{border-color:var(--accent);color:var(--ink);}
+
+  .kontakt .tile{background:var(--dark);color:var(--paper);border-radius:var(--r);padding:clamp(34px,5vw,80px);}
+  .kontakt .big{font-weight:900;font-size:clamp(52px,11vw,170px);letter-spacing:-0.05em;line-height:0.86;}
+  .kontakt .big .dot{color:var(--accent);}
+  .kontakt .rows{margin-top:clamp(26px,3.4vw,48px);border-top:1px solid var(--line-d);max-width:760px;}
+  .kontakt .row{display:flex;justify-content:space-between;gap:20px;padding:16px 0;border-bottom:1px solid var(--line-d);font-size:clamp(15px,1.3vw,18px);flex-wrap:wrap;}
+  .kontakt .row .k{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(242,241,236,.55);align-self:center;}
+  .kontakt .row a:hover{color:var(--accent);}
+  .kontakt .steps{margin-top:22px;color:#bdbbb4;max-width:66ch;line-height:1.7;}
+  .kontakt .steps b{color:var(--paper);font-weight:700;}
+  footer{margin-top:clamp(30px,5vw,60px);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;letter-spacing:0.07em;color:rgba(242,241,236,.5);}
+
+  [data-r]{opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.19,1,.22,1),transform .9s cubic-bezier(.19,1,.22,1);}
+  [data-r].in{opacity:1;transform:none;}
+  [data-r][data-d="1"]{transition-delay:.08s;}[data-r][data-d="2"]{transition-delay:.16s;}
+  @media(prefers-reduced-motion:reduce){[data-r]{opacity:1;transform:none;transition:none;}.hero__tile img{transform:none;}}
   html, body { margin:0; padding:0; }
   #b77, #b77 * { box-sizing:border-box; }
   #b77 {
@@ -103,15 +301,7 @@
   #b77-replay:hover { border-color:rgba(245,244,242,0.6); color:#f5f4f2; }
   #b77-progtrack { position:absolute; left:0; bottom:0; height:2px; width:100%; background:rgba(255,255,255,0.05); z-index:5; }
   #b77-progress { height:100%; width:0%; background:#f5f4f2; }
-  /* Hero: dezentes Geister-Folio „77" */
-  .hb__folio { position:absolute; right:-1.5%; bottom:-5%; width:clamp(320px,54vw,760px); aspect-ratio:446/310;
-    background:url(/assets/B77_77_white.png?v=2) right bottom/contain no-repeat; opacity:.035; pointer-events:none; z-index:0; }
-  .hb > *:not(.hb__folio) { position:relative; z-index:1; }
-  /* Studio-Teaser (ganzes Bild, im Inhaltsraster) */
-  .studio__media { display:block; margin-top:clamp(28px,4vw,52px); padding:0 var(--gutter); }
-  .studio__media img { width:100%; height:auto; display:block; filter:grayscale(1); border:1px solid var(--line); }
-  .studio__cap { display:flex; justify-content:space-between; align-items:flex-end; gap:24px 48px; flex-wrap:wrap; margin-top:clamp(20px,2.4vw,30px); }
-  .studio__lead { max-width:54ch; margin:0; font-family:var(--sans); font-weight:400; font-size:clamp(17px,1.7vw,22px); line-height:1.5; color:var(--ink); }
+
   /* --- Neon-Anpassung Intro (an Hauptseite angeglichen) --- */
   #b77-counter b{color:#E5FF00}
   #b77-progtrack{background:rgba(229,255,0,.12)}
@@ -127,10 +317,19 @@
   #b77-replay:hover{border-color:#E5FF00;color:#E5FF00;background:rgba(229,255,0,.08)}
   .b77c-opt:hover{border-color:rgba(229,255,0,.5)}
   .b77c-score b{color:#E5FF00}
+
+  /* Neon nur auf Dunkel, auf Hell neutrales Grau (Ben-Regel, Konsistenz mit Unterseiten) */
+  .eyebrow::before{background:var(--soft);}
+  .credo-tile .eyebrow::before,.standpunkt .tile .eyebrow::before,.check-tile .eyebrow::before,.kontakt .tile .eyebrow::before{background:var(--accent);}
+  .kibox{border-left-color:var(--soft);}
+  .tcard .q{border-left-color:var(--soft);}
+  .claims span::before{background:var(--soft);}
 </style>
 </head>
 <body>
+
 <!-- ===== INTRO OVERLAY (alles in #b77) ===== -->
+<noscript><style>#b77{display:none!important}</style></noscript>
 <div id="b77">
   <canvas id="b77-canvas"></canvas>
 
@@ -153,24 +352,23 @@
 
   <div id="b77-counter"><b id="b77-counterN">00</b><span style="opacity:.5"> / 77</span><div class="sub">VERTRIEB IN BEWEGUNG</div></div>
 
-  <!-- NEIN-Platzhalter: ersetze diesen Block durch deine eigene Seite/Route -->
   <div id="b77-nein">
     <!-- Funnel: die Einwände + Abzweige -->
     <div id="b77-nein-funnel">
-      <div class="k">— ANTWORT: NEIN</div>
+      <div class="k">ANTWORT: NEIN</div>
       <div class="t">Schade.</div>
       <div class="s">
         <p class="nein-lead">Dass wir uns gerade nicht kennenlernen. Wenn Sie Ihren Vertrieb zu einem anderen Zeitpunkt aktivieren möchten, freuen wir uns, von Ihnen zu hören.</p>
         <p class="nein-guess">Wir mutmaßen, dass Sie aktuell mit <b>A</b> oder <b>B</b> antworten würden, oder?</p>
-        <div class="nein-einwand"><span class="ne-lbl">A</span><div class="ne-body"><span class="ne-q">„Mein Vertrieb läuft längst perfekt!"</span><span class="ne-a">Dann Glückwunsch — es ist tatsächlich alles getan. In dem Fall können wir nichts für Sie tun.</span></div></div>
+        <div class="nein-einwand"><span class="ne-lbl">A</span><div class="ne-body"><span class="ne-q">„Mein Vertrieb läuft längst perfekt!"</span><span class="ne-a">Dann Glückwunsch, es ist tatsächlich alles getan. In dem Fall können wir nichts für Sie tun.</span></div></div>
         <div class="nein-einwand"><span class="ne-lbl">B</span><div class="ne-body"><span class="ne-q">„Ich will gerade nichts verändern."</span><span class="ne-a">Verständlich. Aber ohne volles Commitment können wir Ihnen nicht helfen.</span></div></div>
       </div>
       <div class="b">
-        <a id="b77-nein-kontakt" class="b77-btn b77-btn--primary" href="/kontakt">DOCH — REDEN WIR →</a>
+        <a id="b77-nein-kontakt" class="b77-btn b77-btn--primary" href="/kontakt">DOCH, REDEN WIR →</a>
         <button id="b77-nein-check" class="b77-btn">VERTRIEB SELBST EINSCHÄTZEN →</button>
         <button id="b77-nein-home" class="b77-btn b77-btn--ghost">WEITER ZU B77.DE</button>
       </div>
-      <p class="nein-mag">Lesen Sie gerne unser KI- &amp; Sales-Magazin – werktäglich neue Erkenntnisse, wie KI den Vertrieb verändert. <a href="https://sales-intelligence.b77.de" target="_blank" rel="noopener">Sales Intelligence →</a></p>
+      <p class="nein-mag">Lesen Sie gerne unser KI- &amp; Sales-Magazin, werktäglich neue Erkenntnisse, wie KI den Vertrieb verändert. <a href="https://sales-intelligence.b77.de" target="_blank" rel="noopener">Sales Intelligence →</a></p>
     </div>
 
     <!-- Inline-Check: läuft direkt hier, ohne Weiterleitung -->
@@ -183,7 +381,7 @@
         <div class="b77c-foot"><button id="b77c-back" class="b77-link">← ZURÜCK</button><button id="b77c-abort" class="b77-link">ABBRECHEN</button></div>
       </div>
       <div id="b77c-result">
-        <div class="k">— IHR SOFORT-BEFUND</div>
+        <div class="k">IHR SOFORT-BEFUND</div>
         <div class="b77c-score"><b id="b77c-pct">0%</b><span id="b77c-tier"></span></div>
         <div id="b77c-verdict" class="s"></div>
         <div class="b">
@@ -200,6 +398,232 @@
   <div id="b77-progtrack"><div id="b77-progress"></div></div>
 </div>
 
+
+  <header class="nav">
+    <a class="b" href="#top">B_77</a>
+    <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false"><span></span><span></span></button>
+  </header>
+  <nav class="menu" id="menu" aria-hidden="true">
+    <div class="menu__in">
+      <a href="#leistungen"><span class="mn">1</span>Leistungen</a>
+      <a href="#ki"><span class="mn">2</span>KI im Vertrieb</a>
+      <a href="#check"><span class="mn">3</span>Vertriebs-Check</a>
+      <a href="#kontakt"><span class="mn">4</span>Kontakt</a>
+      <a href="#magazin" class="menu__mag"><span class="mn">5</span>Magazin <span class="mag-arrow">→</span></a>
+    </div>
+    <div class="menu__foot mono">B_77 · Vertriebsberatung · Siegen · seit 2017</div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero-stage">
+   <div class="hero-pin">
+    <div class="hero" id="top" data-n="00">
+      <div class="hero__tile">
+        <img src="assets/bildwelt-hell.jpg" alt="" onerror="this.style.display='none'">
+        <div class="hero__in">
+          <div class="hero__kick">Wir machen Unternehmen</div>
+          <h1>Vertriebs&shy;aktiv<span class="dot">.</span></h1>
+          <p class="hero__line">Vertriebsberatung für den Mittelstand aus Siegen, seit 2017.</p>
+          <p class="hero__sub">Vertriebsaktiv zu sein bedeutet: Märkte bewusst bearbeiten, Zielkunden systematisch gewinnen, Abschlüsse nicht dem Zufall überlassen.</p>
+          <div class="hero__cta">
+            <a class="pill pill--neon" href="#kontakt">Kostenloses Erstgespräch <span class="ic">→</span></a>
+            <a class="pill pill--ghost" href="/vertriebs-check">Vertriebs-Check <span class="ic">↓</span></a>
+          </div>
+        </div>
+        <div class="hero-veil" aria-hidden="true"></div>
+      </div>
+    </div>
+   </div>
+  </div>
+
+  <div class="claims">
+    <span>Seit 2017 am Markt</span><span>KI Experten für Vertrieb</span><span>DACH-weit im Mandat</span><span>50+ Mandate im Mittelstand</span>
+  </div>
+
+  <!-- HALTUNG -->
+  <section class="haltung wrap" id="haltung" data-n="02">
+    <div class="eyebrow" data-r><b>Haltung</b> · 02</div>
+    <div class="grid">
+      <div class="chart-tile" data-r>
+        <div class="hl-gl" id="hl-gl" aria-hidden="true"></div>
+      </div>
+      <div class="say" data-r data-d="1">
+        <p class="lead">Der Markt bestimmt nicht Ihr Ergebnis. Ihr <span class="hl">Marktanteil</span> tut es, und der entsteht durch Initiative, nicht durch Abwarten. Ein aktiver Vertrieb macht Ihr Unternehmen steuerbar und Ihre Ergebnisse planbar.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEISTUNGEN -->
+  <section class="wrap" id="leistungen" data-n="03">
+    <div class="eyebrow" data-r><b>Leistungen</b> · 03</div>
+    <div class="cards">
+      <a class="card" href="/vertriebsstrategie" data-r><span class="no">01</span><h3>Vertriebsstrategie</h3><p>Marktanalyse, Positionierung, Zielkunden, Go-to-Market, Steuerung.</p><span class="ghost">01</span><span class="go">Ansehen <span class="ic">→</span></span></a>
+      <a class="card" href="/vertriebsaufbau" data-r data-d="1"><span class="no">02</span><h3>Vertriebsaufbau</h3><p>Team, Prozesse, Werkzeuge, von Grund auf strukturiert, aufeinander abgestimmt.</p><span class="ghost">02</span><span class="go">Ansehen <span class="ic">→</span></span></a>
+      <a class="card" href="/vertriebsoptimierung" data-r><span class="no">03</span><h3>Vertriebsoptimierung</h3><p>Positionierung, Prozesse, CRM-Disziplin, Pipeline-Transparenz.</p><span class="ghost">03</span><span class="go">Ansehen <span class="ic">→</span></span></a>
+      <a class="card" href="/aktiver-vertrieb" data-r data-d="1"><span class="no">04</span><h3>Aktiver Vertrieb</h3><p>Zielkunden, Entscheider, Verhandlung, vom Erstkontakt bis zum Abschluss.</p><span class="ghost">04</span><span class="go">Ansehen <span class="ic">→</span></span></a>
+      <a class="card hot" href="/neukundengewinnung" data-r><span class="no">05</span><h3>Neukundengewinnung</h3><p>Systematische Marktbearbeitung statt Zufall, planbar und wiederholbar.</p><span class="ghost">05</span><span class="go">Ansehen <span class="ic">→</span></span></a>
+      <a class="card" href="/ki-im-vertrieb" data-r data-d="1"><span class="no">06</span><h3>Digitalisierung</h3><p>KI im Vertrieb, ohne Hype, mit Ergebnis. Von Lead-Recherche bis Angebot.</p><span class="ghost">06</span><span class="go">Ansehen <span class="ic">→</span></span></a>
+      <a class="card" href="/internationalisierung" data-r><span class="no">07</span><h3>Internationalisierung</h3><p>Internationalen Fit prüfen, Markteintritt entwickeln, Aufbau begleiten.</p><span class="ghost">07</span><span class="go">Ansehen <span class="ic">→</span></span></a>
+    </div>
+  </section>
+
+  <!-- TOP-THEMEN -->
+  <section class="wrap" data-n="3.5">
+    <div class="eyebrow" data-r><b>Top-Themen</b></div>
+    <a class="fos" href="/future-of-sales" data-r>
+      <div class="fos__l">
+        <span class="mono" style="color:var(--accent)">Schwerpunkt · Zukunft</span>
+        <h3>Future of Sales</h3>
+        <p>Wenn Systeme mit Systemen verhandeln: Was die autonome Wirtschaft für Einkauf und Vertrieb im Mittelstand bedeutet, und der B_77 Future-of-Sales-Day.</p>
+        <span class="arrowlink">Zum Thema <span class="ic">→</span></span>
+      </div>
+      <div class="fos__r" id="tt-robot" aria-hidden="true"></div>
+    </a>
+    <div class="themen2">
+      <a class="tcard" href="/vertrieb-motor-gegen-krise" data-r data-d="1">
+        <span class="mono" style="color:var(--mute)">Vertrieb in der Krise</span>
+        <h3>Vertrieb ist der Motor gegen die Krise</h3>
+        <p>Ein Teil der Krise ist von außen gemacht, ein Teil hausgemacht. Warum der Vertrieb der einzige Hebel ist, der vollständig in Ihrer Hand liegt.</p>
+        <span class="q">Was hausgemacht ist, können wir ändern.</span>
+      </a>
+      <a class="tcard" href="/braucht-es-den-verkaeufer" data-r data-d="2">
+        <span class="mono" style="color:var(--mute)">Zukunft des Verkäufers</span>
+        <h3>Braucht es den Verkäufer noch?</h3>
+        <p>Wenn Systeme mit Systemen verhandeln, verschwindet der Vertrieb nicht, er teilt sich. Weniger Abschließer, mehr Übersetzer und Vertrauensanker.</p>
+        <span class="q">Die Gefahr ist nicht die KI. Es ist die austauschbare Mitte.</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- STUDIO -->
+  <section class="wrap" id="studio" data-n="04">
+    <div class="eyebrow" data-r><b>Das Studio</b> · Siegen · 04</div>
+    <div class="media-tile" data-r>
+      <img src="assets/img/studio.jpg" alt="B_77 Studio in Siegen" onerror="this.style.display='none'">
+      <p class="h-mid">Wo Ihr Vertrieb in Bewegung kommt.</p>
+      <p class="p" style="margin-top:16px;max-width:52ch;"><strong>Im B_77 Studio:</strong> intensive Zeit zwischen Unternehmern, Führungskräften und allen, die Verantwortung für Vertrieb tragen.</p>
+      <a class="arrowlink" href="/ueber" style="margin-top:22px;">Zum Studio <span class="ic">→</span></a>
+    </div>
+  </section>
+
+  <!-- CREDO -->
+  <section class="wrap" data-n="05">
+    <div class="credo-tile" data-r>
+      <div class="credo-txt">
+        <div class="eyebrow"><b>Credo</b> · 05</div>
+        <h2>Aktiver Vertrieb schafft <span class="nf">Nachfrage</span>.</h2>
+        <p class="p">Reaktiver Vertrieb verwaltet sie nur. Wir bringen Unternehmen in Bewegung, bewusst, strukturiert, konsequent.</p>
+      </div>
+      <figure class="credo-media"><img src="assets/turbine-front.jpg" alt="Industrielle Turbine, frontal" onerror="this.closest('.credo-tile').classList.add('no-media')"></figure>
+    </div>
+  </section>
+
+  <!-- ZAHLEN -->
+  <section class="zahlen wrap" data-n="06">
+    <div class="eyebrow" data-r><b>In Zahlen</b> · 06</div>
+    <div class="grid">
+      <div class="zcard" data-r><div class="n"><b>25</b><small>Jahre</small></div><div class="l">Management- und Beratungserfahrung im Mittelstand.</div></div>
+      <div class="zcard" data-r data-d="1"><div class="n"><b>10</b><small>Jahre</small></div><div class="l">Internationale Projekte und Märkte.</div></div>
+      <div class="zcard" data-r data-d="2"><div class="n"><b>50</b><small>Mandate</small></div><div class="l">In Industrie, Handel und Dienstleistung.</div></div>
+    </div>
+  </section>
+
+  <!-- STANDPUNKT -->
+  <section class="standpunkt wrap" data-n="07">
+    <div class="tile" data-r>
+      <div class="st-grid">
+        <figure class="st-portrait"><img src="assets/benjamin-loos-bw.jpg" alt="Benjamin Loos" onerror="this.closest('.st-grid').classList.add('no-portrait')"></figure>
+        <div class="st-body">
+          <div class="eyebrow" style="color:rgba(242,241,236,.6)"><b style="color:var(--paper)">Standpunkt</b> · 07</div>
+          <blockquote><b>Aktiver Vertrieb ist der Motor Ihres Unternehmens.</b> Er sichert, was Sie aufgebaut haben, und macht Wachstum <span class="em">steuerbar und planbar</span>, statt Ihr Unternehmen dem Zufall zu überlassen. Dafür steht B_77.</blockquote>
+          <div class="who"><b>Benjamin Loos</b> Experte für Vertrieb</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KI -->
+  <section class="wrap" id="ki" data-n="08">
+    <div class="eyebrow" data-r><b>KI im Vertrieb</b> · 08</div>
+    <h2 class="h-mid" data-r>Wir arbeiten mit KI. Und bringen sie zu Ihnen.</h2>
+    <div class="kibox" data-r>
+      <h3>In Ihren Mandaten</h3>
+      <p class="p">In unseren Mandaten setzen wir künstliche Intelligenz von der Marktrecherche bis zum Forecast ein. Wo es für Sie sinnvoll ist, implementieren wir sie direkt in Ihrem Unternehmen, passend zu Ihren Prozessen und Ihrem Team.</p>
+      <a class="arrowlink" href="/ki-im-vertrieb">KI im Vertrieb <span class="ic">→</span></a>
+    </div>
+  </section>
+
+  <!-- MAGAZIN -->
+  <section class="wrap" id="magazin" data-n="09">
+    <div class="eyebrow" data-r><b>Magazin</b> · werktäglich · kostenfrei · 09</div>
+    <h2 class="h-mid" data-r>Sales Intelligence.</h2>
+    <p class="p" data-r style="margin-top:14px;">Das KI- und Sales-Magazin von B_77. KI im Vertrieb für den Mittelstand: Cases, Tools, Daten und Einordnungen, kein Hype, keine Pressemitteilungen. Nur das, was Vertriebsentscheider 2026 wirklich brauchen.</p>
+    <div class="mag" data-r>
+      <a href="https://sales-intelligence.b77.de" target="_blank" rel="noopener"><span class="dt">22.06.</span><span class="t">Vierundzwanzig Kontakte, ein Abschluss. Warum KI die Neukundenakquise im Mittelstand neu rechnet, aber nicht rettet.</span><span class="ic">→</span></a>
+      <a href="https://sales-intelligence.b77.de" target="_blank" rel="noopener"><span class="dt">21.06.</span><span class="t">Vierzig Stunden Schulung, null Nutzung. Warum KI-Tools im Vertrieb an der Mannschaft scheitern, nicht an der Technik.</span><span class="ic">→</span></a>
+      <a href="https://sales-intelligence.b77.de" target="_blank" rel="noopener"><span class="dt">20.06.</span><span class="t">Zwei von fünf Feldern. Warum schlechte Kontaktdaten jeden KI-Vertriebsansatz stoppen.</span><span class="ic">→</span></a>
+    </div>
+    <a class="arrowlink" href="https://sales-intelligence.b77.de" target="_blank" rel="noopener" data-r>Zum Magazin <span class="ic">→</span></a>
+  </section>
+
+  <!-- VERTRIEBS-CHECK -->
+  <section class="wrap" id="check" data-n="10">
+    <div class="check-tile" data-r>
+      <img src="assets/bildwelt-hell.jpg" alt="" onerror="this.style.display='none'">
+      <div>
+        <div class="eyebrow" style="color:rgba(242,241,236,.6)"><b style="color:var(--paper)">Vertriebs-Check</b> · kostenlos · 15 Min</div>
+        <p class="h-big" style="color:var(--paper);max-width:14ch;">Wo steht Ihr Vertrieb gerade?</p>
+      </div>
+      <div>
+        <p class="p" style="color:#d6d4cd;">25 Fragen aus der Praxis. Ein strukturiertes Lagebild zu Markt, Organisation und operativer Umsetzung, mit konkreten Handlungsempfehlungen und PDF-Report zum Download. Ohne Anmeldung, ohne Haken.</p>
+        <a class="pill pill--neon" href="/vertriebs-check" style="margin-top:26px;">Vertriebs-Check starten <span class="ic">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGION -->
+  <section class="wrap" data-n="10.5">
+    <div class="eyebrow" data-r><b>Vor Ort und deutschlandweit</b></div>
+    <h2 class="h-mid" data-r>Aus Siegen. Im Mandat DACH-weit.</h2>
+    <p class="p" data-r style="margin-top:18px;">B_77 sitzt in Siegen, mit kurzen Wegen in Siegerland, Sauerland, Ruhrgebiet und Rheinland. Für Mandate arbeiten wir in der gesamten DACH-Region, wo immer Ihr Vertrieb es verlangt. Vor-Ort-Nähe, wo sie zählt, ohne uns geografisch zu begrenzen.</p>
+    <div class="chips" data-r><span>Siegen</span><span>Kreuztal</span><span>Netphen</span><span>Hilchenbach</span><span>Olpe</span><span>Attendorn</span><span>Meschede</span><span>Arnsberg</span><span>Hagen</span><span>Dortmund</span><span>Köln</span><span>Wuppertal</span><span>Deutschland</span><span>Österreich</span><span>Schweiz</span></div>
+  </section>
+
+  <!-- KONTAKT -->
+  <section class="kontakt wrap" id="kontakt" data-n="11">
+    <div class="tile" data-r>
+      <div class="eyebrow" style="color:rgba(242,241,236,.6)"><b style="color:var(--paper)">Kontakt</b> · 11</div>
+      <div class="big">Reden wir<span class="dot">.</span></div>
+      <p class="steps">In drei Schritten zum Fahrplan: <b>1.</b> Anfrage senden, <b>2.</b> kostenloses Erstgespräch, 30 Minuten, unverbindlich, <b>3.</b> klares Lagebild und nächster Schritt. Wir melden uns innerhalb von <b>24 Stunden</b>.</p>
+      <div class="rows">
+        <div class="row"><span class="k">Telefon</span><a href="tel:+4927189027837">+49 271 890 27 837</a></div>
+        <div class="row"><span class="k">E-Mail</span><a href="mailto:kontakt@b77.de">kontakt@b77.de</a></div>
+        <div class="row"><span class="k">Web</span><a href="https://b77.de">b77.de</a></div>
+      </div>
+      <a class="pill pill--neon" href="/kontakt" style="margin-top:28px;">Erstgespräch anfragen <span class="ic">→</span></a>
+      <footer>
+        <span>© 2026 B_77 Vertriebsberatung</span>
+        <span>Unter dem Klingelschacht 18 · 57074 Siegen · <a href="/impressum" style="border-bottom:1px solid rgba(242,241,236,.4);">Impressum und Datenschutz</a></span>
+      </footer>
+    </div>
+  </section>
+
+  <script>
+    (function(){
+      var reduce=matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.12});
+      document.querySelectorAll('[data-r]').forEach(function(el){io.observe(el);});
+
+      var burger=document.getElementById('burger'), menu=document.getElementById('menu');
+      function toggleMenu(open){ var o=(open===undefined)?!menu.classList.contains('open'):open; menu.classList.toggle('open',o); burger.classList.toggle('open',o); burger.setAttribute('aria-expanded',o); menu.setAttribute('aria-hidden',!o); document.body.style.overflow=o?'hidden':''; }
+      if(burger){ burger.addEventListener('click',function(){toggleMenu();}); menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){toggleMenu(false);});}); document.addEventListener('keydown',function(e){ if(e.key==='Escape') toggleMenu(false); }); }
+
+      /* Hero-Bild sanfter Scroll-Push */
+      var himg=document.querySelector('.hero__tile img'), raf=0;
+      function onScroll(){ raf=0; if(reduce||!himg) return; var sc=window.scrollY, p=Math.min(1,sc/(window.innerHeight||1)); himg.style.transform='scale('+(1.02+p*0.1).toFixed(3)+') transl3d(0,'+(p*18).toFixed(1)+'px,0)'; himg.style.transform='scale('+(1.02+p*0.1).toFixed(3)+')'; }
+      addEventListener('scroll',function(){ if(!raf) raf=requestAnimationFrame(onScroll); },{passive:true});
+    })();
+  </script>
 <script>
 /* ================================================================
    KONFIGURATION
@@ -221,6 +645,9 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
   var CFG = window.B77_INTRO_CONFIG;
   var root = document.getElementById('b77');
   if (!root) return;
+  // Failsafe: ohne Config oder bei reduzierter Bewegung kein schwarzer Vollbild-Blocker, Seite sofort frei
+  var reduceIntro = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceIntro || !CFG) { try { root.parentNode && root.parentNode.removeChild(root); } catch (e) {} return; }
   var SEEN = 'b77_intro_seen';
   if (CFG.showOnce) { try { if (localStorage.getItem(SEEN)) { root.parentNode && root.parentNode.removeChild(root); return; } } catch (e) {} }
 
@@ -252,13 +679,15 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
     var started = false;
     var go = function () {
       if (started) return; started = true;
-      S.ar = (logoImg.naturalHeight / logoImg.naturalWidth) || 0.416;
-      splitStatement(); resize();
-      window.addEventListener('resize', function () { clearTimeout(S._rt); S._rt = setTimeout(resize, 200); });
-      wire(); startFlow();
-      requestAnimationFrame(loop);
+      try {
+        S.ar = (logoImg.naturalHeight / logoImg.naturalWidth) || 0.416;
+        splitStatement(); resize();
+        window.addEventListener('resize', function () { clearTimeout(S._rt); S._rt = setTimeout(resize, 200); });
+        wire(); startFlow();
+        requestAnimationFrame(loop);
+      } catch (e) { try { root.parentNode && root.parentNode.removeChild(root); } catch (e2) {} }
     };
-    // Sofort starten – die Animation braucht die Webfonts am Anfang nicht (Logo ist Canvas,
+    // Sofort starten, die Animation braucht die Webfonts am Anfang nicht (Logo ist Canvas,
     // Text erscheint erst ~5 s später). Fonts lösen nur noch eine Neuvermessung aus, keinen Neustart.
     go();
     if (document.fonts && document.fonts.ready) { document.fonts.ready.then(function () { try { resize(); } catch (e) {} }); }
@@ -330,7 +759,7 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
     q: [
       { dim: 'POSITIONIERUNG', t: 'Unsere Zielkunden und unser Nutzenversprechen sind im Vertrieb glasklar.' },
       { dim: 'PROZESS', t: 'Unser Vertriebsprozess ist von Erstkontakt bis Abschluss klar definiert.' },
-      { dim: 'MARKTBEARBEITUNG', t: 'Wir sprechen neue Entscheider systematisch an — statt auf Anfragen zu warten.' },
+      { dim: 'MARKTBEARBEITUNG', t: 'Wir sprechen neue Entscheider systematisch an, statt auf Anfragen zu warten.' },
       { dim: 'DATEN & STEUERUNG', t: 'Wir steuern den Vertrieb mit verlässlichen Zahlen, nicht aus dem Bauch.' },
       { dim: 'KONSEQUENZ', t: 'Angebote werden bei uns konsequent und zeitnah nachverfolgt.' },
       { dim: 'FÜHRUNG', t: 'Vertrieb ist bei uns Chefsache und wird aktiv nachgehalten.' }
@@ -362,10 +791,10 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
     var sum = 0; for (var i = 0; i < CHK.q.length; i++) sum += (CHK.ans[i] || 0);
     var pct = Math.round((sum / (CHK.q.length * 3)) * 100);
     var tier, verdict;
-    if (pct < 40) { tier = 'REAKTIV'; verdict = 'Ihr Vertrieb verwaltet überwiegend Nachfrage. Der Hebel durch Struktur und aktive Marktbearbeitung ist riesig — sicher, dass „längst perfekt" stimmt?'; }
+    if (pct < 40) { tier = 'REAKTIV'; verdict = 'Ihr Vertrieb verwaltet überwiegend Nachfrage. Der Hebel durch Struktur und aktive Marktbearbeitung ist riesig. Sicher, dass „längst perfekt" stimmt?'; }
     else if (pct < 70) { tier = 'IM AUFBAU'; verdict = 'Das Fundament steht in Teilen. Aber die Lücken bremsen genau das planbare Wachstum, das Sie wollen.'; }
-    else if (pct < 90) { tier = 'STRUKTURIERT'; verdict = 'Solide aufgestellt. Jetzt geht es um das letzte Drittel — Feinarbeit, die im Markt den Unterschied macht.'; }
-    else { tier = 'VERTRIEBSAKTIV'; verdict = 'Respekt — Sie gestalten Ihren Markt aktiv. Dann reden wir nicht über das Ob, sondern über Feinjustierung.'; }
+    else if (pct < 90) { tier = 'STRUKTURIERT'; verdict = 'Solide aufgestellt. Jetzt geht es um das letzte Drittel: Feinarbeit, die im Markt den Unterschied macht.'; }
+    else { tier = 'VERTRIEBSAKTIV'; verdict = 'Respekt, Sie gestalten Ihren Markt aktiv. Dann reden wir nicht über das Ob, sondern über Feinjustierung.'; }
     $('b77c-pct').textContent = pct + '%';
     $('b77c-tier').textContent = tier;
     $('b77c-verdict').textContent = verdict;
@@ -399,7 +828,7 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
     $('b77c-doch').addEventListener('click', fadeDismiss);
   }
 
-  /* ---------- Feuer? Nein — Momentum-Auflösung (weiße Streifen) ---------- */
+  /* ---------- Feuer? Nein, Momentum-Auflösung (weiße Streifen) ---------- */
   function spawnDissolve() {
     S.diss = [];
     var cw = Math.min(960, S.W * 0.6), band = S.H * 0.46;
@@ -496,190 +925,7 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
 })();
 </script>
 
-
-  <nav class="nav"><div class="wrap">
-    <a class="brand" href="/"><img src="/assets/img/logo.png" alt="B_77"></a>
-    <button class="burger" id="burger" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
-  </div></nav>
-
-  <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Navigation" aria-hidden="true"><div class="menu__wrap">
-    <div class="menu__meta">Navigation</div>
-    <nav class="menu__links">
-      <a href="/ueber"><span class="i">01</span>Über</a>
-      <a href="/leistungen"><span class="i">02</span>Leistungen</a>
-      <a href="/ki-im-vertrieb"><span class="i">03</span>KI im Vertrieb</a>
-      <a href="/kontakt"><span class="i">04</span>Kontakt</a>
-      <a href="https://sales-intelligence.b77.de"><span class="i">↗&#xFE0E;</span>Magazin</a>
-    </nav>
-    <div class="menu__foot">
-      <a href="tel:+4927189027837">+49 271 890 27 837</a>
-      <a href="mailto:kontakt@b77.de">kontakt@b77.de</a>
-      <a href="/impressum">Impressum &amp; Datenschutz</a>
-    </div>
-  </div></div>
-
-  <!-- 01 HERO -->
-  <header class="hero" id="top"><div class="wrap">
-    <div class="hero__card">
-      <img src="/assets/img/studio.jpg" alt="B_77 Studio in Siegen">
-      <div class="hero__in">
-        <div class="meta hero__kick">Wir machen Unternehmen</div>
-        <h1>Vertriebs&shy;aktiv.</h1>
-        <div class="hero__line">Vertriebsberatung für den Mittelstand aus Siegen – seit 2017.</div>
-        <p class="hero__sub">Vertriebsaktiv zu sein bedeutet: Märkte bewusst bearbeiten, Zielkunden systematisch gewinnen, Abschlüsse nicht dem Zufall überlassen.</p>
-        <div class="hero__cta">
-          <a class="pill" href="#kontakt"><span>Kostenloses Erstgespräch</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-          <a class="pill pill--ghost" href="/vertriebs-check"><span>Vertriebs-Check</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></a>
-        </div>
-      </div>
-    </div>
-    <div class="strip"><span>Seit 2017 am Markt</span><span>KI Experten für Vertrieb</span><span>DACH-weit im Mandat</span><span>50+ Mandate im Mittelstand</span></div>
-  </div></header>
-
-  <!-- 02 HALTUNG -->
-  <section class="hl"><div class="hl-gl" id="hl-gl" aria-hidden="true"></div><div class="wrap">
-    <div class="meta">Haltung – 02</div>
-    <p class="manifest" style="margin-top:18px">Der Markt bestimmt nicht Ihr Ergebnis. Ihr <span class="u-rose">Marktanteil</span> tut es – und der entsteht durch Initiative, nicht durch Abwarten. Ein aktiver Vertrieb macht Ihr Unternehmen steuerbar und Ihre Ergebnisse planbar.</p>
-  </div></section>
-
-  <!-- 03 LEISTUNGEN -->
-  <section id="leistungen" style="padding-top:0"><div class="wrap">
-    <div class="head-row"><div class="meta">Leistungen – 03</div></div>
-    <div class="grid">
-      <a href="/vertriebsstrategie" class="card card--light"><span class="card__ghost">01</span><div><span class="card__nr">01</span><h3>Vertriebsstrategie</h3><p>Marktanalyse, Positionierung, Zielkunden, Go-to-Market, Steuerung.</p></div><span class="card__go">Ansehen <span class="a">→</span></span></a>
-      <a href="/vertriebsaufbau" class="card card--rose"><span class="card__ghost">02</span><div><span class="card__nr">02</span><h3>Vertriebsaufbau</h3><p>Team, Prozesse, Werkzeuge – von Grund auf strukturiert, aufeinander abgestimmt.</p></div><span class="card__go">Ansehen <span class="a">→</span></span></a>
-      <a href="/vertriebsoptimierung" class="card card--cloud"><span class="card__ghost">03</span><div><span class="card__nr">03</span><h3>Vertriebsoptimierung</h3><p>Positionierung, Prozesse, CRM-Disziplin, Pipeline-Transparenz.</p></div><span class="card__go">Ansehen <span class="a">→</span></span></a>
-      <a href="/aktiver-vertrieb" class="card card--cloud"><span class="card__ghost">04</span><div><span class="card__nr">04</span><h3>Aktiver Vertrieb</h3><p>Zielkunden, Entscheider, Verhandlung – vom Erstkontakt bis zum Abschluss.</p></div><span class="card__go">Ansehen <span class="a">→</span></span></a>
-      <a href="/neukundengewinnung" class="card card--rose"><span class="card__ghost">05</span><div><span class="card__nr">05</span><h3>Neukundengewinnung</h3><p>Systematische Marktbearbeitung statt Zufall – planbar und wiederholbar.</p></div><span class="card__go">Ansehen <span class="a">→</span></span></a>
-      <a href="/ki-im-vertrieb" class="card card--light"><span class="card__ghost">06</span><div><span class="card__nr">06</span><h3>Digitalisierung</h3><p>KI im Vertrieb – ohne Hype, mit Ergebnis. Von Lead-Recherche bis Angebot.</p></div><span class="card__go">Ansehen <span class="a">→</span></span></a>
-      <a href="/internationalisierung" class="card card--light card--wide"><span class="card__ghost">07</span><div><span class="card__nr">07</span><h3>Internationalisierung</h3><p>Internationalen Fit prüfen, Markteintritt entwickeln, Aufbau begleiten.</p></div><span class="card__go">Ansehen <span class="a">→</span></span></a>
-    </div>
-  </div></section>
-
-  <!-- 3.5 TOP-THEMEN -->
-  <section style="padding-top:0"><div class="wrap">
-    <div class="meta">Top-Themen – 3.5</div>
-    <div class="grid">
-      <a href="/future-of-sales" class="card card--rose card--wide tt-fos"><div class="tt-fos__l"><span class="card__nr">Schwerpunkt · Zukunft</span><h3>Future of Sales</h3><p>Wenn Systeme mit Systemen verhandeln: Was die autonome Wirtschaft für Einkauf und Vertrieb im Mittelstand bedeutet – und der B_77 „Future of Sales“-Day.</p><span class="card__go" style="margin-top:22px">Zum Thema <span class="a">→</span></span></div><div class="tt-robot" id="tt-robot" aria-hidden="true"></div></a>
-      <a href="/vertrieb-motor-gegen-krise" class="card card--light"><div><span class="card__nr">Magazin · Vertrieb in der Krise</span><h3>Vertrieb ist der Motor gegen die Krise</h3><p>Ein Teil der Krise ist von außen gemacht, ein Teil hausgemacht. Warum der Vertrieb der einzige Hebel ist, der vollständig in Ihrer Hand liegt – und wie Sie ihn anwerfen.</p><blockquote>„Was hausgemacht ist, können wir ändern. Genau dort liegt unsere Kraft.“</blockquote></div><span class="card__go">Zum Artikel <span class="a">→</span></span></a>
-      <a href="/braucht-es-den-verkaeufer" class="card card--cloud"><div><span class="card__nr">Magazin · Zukunft des Verkäufers</span><h3>Braucht es den Verkäufer noch?</h3><p>Wenn Systeme mit Systemen verhandeln, verschwindet der Vertrieb nicht – er teilt sich. Warum der Verkäufer der Zukunft weniger Abschließer und mehr Übersetzer und Vertrauensanker ist.</p><blockquote>„Die größte Gefahr für Verkäufer ist nicht die KI. Es ist, in der austauschbaren Mitte zu bleiben.“</blockquote></div><span class="card__go">Zum Artikel <span class="a">→</span></span></a>
-    </div>
-  </div></section>
-
-  <!-- 04 STUDIO -->
-  <section id="studio" style="padding-top:0"><div class="wrap">
-    <div class="split">
-      <div><div class="meta">Das Studio · Siegen – 04</div>
-        <p class="lede" style="margin-top:16px;max-width:16ch;font-size:clamp(1.8rem,3.4vw,2.8rem)">Wo Ihr Vertrieb in Bewegung kommt.</p>
-        <p class="p" style="margin-top:18px"><strong>Im B_77 Studio:</strong> intensive Zeit zwischen Unternehmern, Führungskräften und allen, die Verantwortung für Vertrieb tragen.</p>
-        <a class="pill" href="/ueber" style="margin-top:26px"><span>Zum Studio</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-      </div>
-      <figure class="media"><img src="/assets/img/studio.jpg" alt="B_77 Studio in Siegen"></figure>
-    </div>
-  </div></section>
-
-  <!-- 05 CREDO -->
-  <section style="padding-top:0"><div class="wrap">
-    <div class="meta">Credo – 05</div>
-    <h2 class="credo" style="margin-top:18px">Aktiver Vertrieb schafft Nachfrage.</h2>
-    <p class="p" style="margin-top:20px">Reaktiver Vertrieb verwaltet sie nur. Wir bringen Unternehmen in Bewegung – bewusst, strukturiert, konsequent.</p>
-  </div></section>
-
-  <!-- 06 IN ZAHLEN -->
-  <section style="padding-top:0"><div class="wrap">
-    <div class="panel">
-      <div class="meta" style="color:rgba(243,233,236,.6);margin-bottom:28px">In Zahlen – 06</div>
-      <div class="stats">
-        <div class="stat"><div class="n">25<span class="u">Jahre</span></div><div class="l">Management- &amp; Beratungserfahrung im Mittelstand.</div></div>
-        <div class="stat"><div class="n">10<span class="u">Jahre</span></div><div class="l">Internationale Projekte und Märkte.</div></div>
-        <div class="stat"><div class="n">50<span class="u">Mandate</span></div><div class="l">In Industrie, Handel und Dienstleistung.</div></div>
-      </div>
-    </div>
-  </div></section>
-
-  <!-- 07 STANDPUNKT -->
-  <section style="padding-top:0"><div class="wrap">
-    <div class="split quote">
-      <div><div class="meta">Standpunkt – 07</div>
-        <blockquote style="margin-top:20px"><strong>Aktiver Vertrieb ist der Motor Ihres Unternehmens.</strong> Er sichert, was Sie aufgebaut haben, und macht Wachstum <span class="u-rose">steuerbar und planbar</span> – statt Ihr Unternehmen dem Zufall zu überlassen. Dafür steht B_77: Wir bringen Ihren Vertrieb in Bewegung, schärfen Strukturen und machen aus Aktivität messbare Ergebnisse.</blockquote>
-        <div class="quote__by"><b>Benjamin Loos</b><span class="meta">Experte für Vertrieb</span></div>
-      </div>
-      <figure class="media media--tall"><img src="/assets/img/benjamin-loos.jpg" alt="Benjamin Loos"></figure>
-    </div>
-  </div></section>
-
-  <!-- 08 KI IM VERTRIEB -->
-  <section id="ki" style="padding-top:0"><div class="wrap">
-    <div class="meta">KI im Vertrieb – 08</div>
-    <h2 class="lede" style="margin-top:16px">Wir arbeiten mit KI. Und bringen sie zu Ihnen.</h2>
-    <div class="ki" style="margin-top:36px">
-      <div class="box"><h3>In Ihren Mandaten</h3><p>In unseren Mandaten setzen wir künstliche Intelligenz von der Marktrecherche bis zum Forecast ein. Wo es für Sie sinnvoll ist, implementieren wir sie direkt in Ihrem Unternehmen – passend zu Ihren Prozessen und Ihrem Team.</p></div>
-      <div class="box"><h3>Quoodix</h3><p>Unser Sales-Intelligence-Werkzeug findet und priorisiert Ihre lohnendsten Zielkunden – damit Ihr Vertrieb Zeit dort investiert, wo Abschlüsse entstehen. Tools, die mitarbeiten, nicht ersetzen. Ein Projekt der Bseventyseven GmbH.</p><a class="lnk" href="https://quoodix.io" target="_blank" rel="noopener">quoodix.io →</a></div>
-    </div>
-  </div></section>
-
-  <!-- 09 MAGAZIN -->
-  <section id="magazin" style="padding-top:0"><div class="wrap">
-    <div class="meta">Magazin · Werktäglich · Kostenfrei – 09</div>
-    <h2 class="lede" style="margin-top:16px">Sales Intelligence.</h2>
-    <div class="meta" style="margin-top:12px;text-transform:none;letter-spacing:.02em;font-weight:500">Das KI- &amp; Sales-Magazin von B_77 &amp; Quoodix</div>
-    <p class="p p--mut" style="margin-top:16px">KI im Vertrieb für den Mittelstand. Cases, Tools, Daten und Einordnungen – kein Hype, keine Pressemitteilungen. Nur das, was Vertriebsentscheider 2026 wirklich brauchen.</p>
-    <div class="meta" style="margin-top:32px">Aus dem Magazin</div>
-    <div class="mag">
-      <a href="https://sales-intelligence.b77.de"><span class="d">22. Juni 2026 · Schwerpunkt</span><span class="t">Vierundzwanzig Kontakte, ein Abschluss. Warum KI die Neukundenakquise im Mittelstand neu rechnet – aber nicht rettet.</span><span class="a">→</span></a>
-      <a href="https://sales-intelligence.b77.de"><span class="d">21. Juni 2026 · Schwerpunkt</span><span class="t">Vierzig Stunden Schulung, null Nutzung. Warum KI-Tools im Vertrieb an der Mannschaft scheitern – nicht an der Technik.</span><span class="a">→</span></a>
-      <a href="https://sales-intelligence.b77.de"><span class="d">20. Juni 2026 · Schwerpunkt</span><span class="t">Zwei von fünf Feldern. Warum schlechte Kontaktdaten jeden KI-Vertriebsansatz stoppen.</span><span class="a">→</span></a>
-    </div>
-    <a class="pill" href="https://sales-intelligence.b77.de" style="margin-top:30px"><span>Zum Magazin</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-  </div></section>
-
-  <!-- 10 VERTRIEBS-CHECK -->
-  <section id="check" style="padding-top:0"><div class="wrap">
-    <div class="band">
-      <div><div class="meta">Vertriebs-Check · Kostenlos · 15 Minuten – 10</div>
-        <p class="lede" style="margin-top:16px;font-size:clamp(1.8rem,3.4vw,2.8rem);max-width:18ch">Wo steht Ihr Vertrieb gerade?</p></div>
-      <div><p class="p">25 Fragen aus der Praxis. Ein strukturiertes Lagebild zu Markt, Organisation und operativer Umsetzung – mit konkreten Handlungsempfehlungen und PDF-Report zum Download. Ohne Anmeldung, ohne Haken.</p>
-        <a class="pill" href="/vertriebs-check" style="margin-top:24px"><span>Vertriebs-Check starten</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-      </div>
-    </div>
-  </div></section>
-
-  <!-- 10.5 REGION -->
-  <section style="padding-top:0"><div class="wrap">
-    <div class="meta">Vor Ort &amp; deutschlandweit – 10.5</div>
-    <p class="lede" style="margin-top:16px;font-size:clamp(1.8rem,3.4vw,2.8rem);max-width:24ch">Aus Siegen. Im Mandat DACH-weit.</p>
-    <p class="p" style="margin-top:18px">B_77 sitzt in <strong>Siegen</strong> – mit kurzen Wegen in Siegerland, Sauerland, Ruhrgebiet und Rheinland. Für Mandate arbeiten wir in der gesamten DACH-Region, wo immer Ihr Vertrieb es verlangt. Vor-Ort-Nähe, wo sie zählt – ohne uns geografisch zu begrenzen.</p>
-    <div class="chips"><span>Siegen</span><span>Kreuztal</span><span>Netphen</span><span>Hilchenbach</span><span>Olpe</span><span>Attendorn</span><span>Meschede</span><span>Arnsberg</span><span>Hagen</span><span>Dortmund</span><span>Köln</span><span>Wuppertal</span></div>
-    <div class="meta" style="margin-top:26px">DACH-Märkte</div>
-    <div class="chips" style="margin-top:12px"><span class="chip--dach">Deutschland</span><span class="chip--dach">Österreich (AT)</span><span class="chip--dach">Schweiz (CH)</span></div>
-  </div></section>
-
-  <!-- 11 KONTAKT -->
-  <section id="kontakt" style="padding-top:0"><div class="wrap">
-    <div class="panel cta">
-      <div class="meta" style="color:rgba(243,233,236,.6)">Kontakt – 11</div>
-      <h2 style="margin-top:14px">Reden wir.</h2>
-      <p class="steps">In drei Schritten zum Fahrplan: <strong>1.</strong> Anfrage senden · <strong>2.</strong> Kostenloses Erstgespräch, 30 Minuten, unverbindlich · <strong>3.</strong> Klares Lagebild und nächster Schritt. Wir melden uns innerhalb von <strong>24 Stunden</strong>.</p>
-      <div class="cta__links">
-        <a href="tel:+4927189027837">+49 271 890 27 837</a>
-        <a href="mailto:kontakt@b77.de">kontakt@b77.de</a>
-        <a href="https://b77.de">b77.de</a>
-      </div>
-      <a class="pill" href="/kontakt"><span>Kostenloses Erstgespräch anfragen</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-    </div>
-  </div></section>
-
-  <footer><div class="wrap">
-    <span>© 2026 B_77 – Vertriebsberatung</span>
-    <span>Büro: Unter dem Klingelschacht 18, 57074 Siegen · <a href="/impressum">Impressum &amp; Datenschutz</a></span>
-  </div></footer>
-
-<script src="/assets/site.js?v=8"></script>
-<script src="/assets/scroll.js?v=8" defer></script>
-<script type="module" src="/assets/spline/spline-viewer.js"></script>
-<script>
-(function(){var m=document.getElementById('tt-robot');if(!m)return;if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;var done=false;function mount(){if(done)return;done=true;function go(){var v=document.createElement('spline-viewer');v.setAttribute('url','/assets/spline/robot.splinecode');v.setAttribute('loading-anim-type','none');m.appendChild(v);function sf(){try{if(v.shadowRoot&&!v.__sf){var s=document.createElement('style');s.textContent='canvas{width:100%!important;height:100%!important;display:block}';v.shadowRoot.appendChild(s);v.__sf=1;}}catch(e){}}function nudge(){sf();try{window.dispatchEvent(new Event('resize'))}catch(e){}}function kill(){try{var r=v.shadowRoot;if(!r)return false;var l=r.querySelector('#logo')||r.querySelector('a[href*="spline.design"]');if(l){l.remove();return true}}catch(e){}return false}v.addEventListener('load',function(){kill();nudge();setTimeout(nudge,80);setTimeout(nudge,400)});var n=0,iv=setInterval(function(){sf();if(kill()||++n>80)clearInterval(iv)},120);[300,700,1500,2500].forEach(function(t){setTimeout(nudge,t)});}if(window.customElements){customElements.whenDefined('spline-viewer').then(go)}else{go()}}if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){mount();io.disconnect();}})},{rootMargin:'500px'});io.observe(m);}else{mount();}})();
-</script>
+<!-- HALTUNG · ASCII-Umsatzchart (1:1 aus der Live-Seite) -->
 <script>
 (function(){
     var mount = document.getElementById('hl-gl');
@@ -693,7 +939,6 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
     var RAMP = " .·:-+=*oxX%#@", LAST = RAMP.length - 1, CONTRAST = 1.5, ANIM_I = 0.6;
     var AB1=3.8, AH=4.3, AF1=6.6, CB0=5.0, CB1=9.8, CH1=12.8, CF1=15.2, CYCLE=15.2;
     var MONTHS=["JAN","FEB","MÄR","APR","MAI","JUN","JUL","AUG","SEP","OKT","NOV","DEZ"];
-    /* Monatswerte in Mio €, unregelmaessig schwankend zwischen 1,2 und 2,6 (krumm) */
     var VALS=[1.7,2.3,1.9,2.6,2.1,1.3,2.2,2.6,1.8,2.4,1.6,2.3];
     var W,H,dpr,cell,cols,rows,amask=null,shaft=[],head=null,charFont='';
     var baseY,barMaxH,x0,x1,slot,barW;
@@ -731,19 +976,18 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
       canvas.style.width=W+'px'; canvas.style.height=H+'px'; ctx.setTransform(dpr,0,0,dpr,0,0);
       cols=Math.ceil(W/cell); rows=Math.ceil(H/cell);
       ctx.textAlign='center'; ctx.textBaseline='middle';
-      charFont=cell+"px 'Geist Mono','JetBrains Mono',ui-monospace,monospace";
+      charFont=cell+"px 'Space Mono','Geist Mono','JetBrains Mono',ui-monospace,monospace";
       buildArrow(); buildChart();
     }
     setup(); window.addEventListener('resize',setup,{passive:true});
 
     function field(nx,ny,t){var w=Math.sin(nx*7+t*0.7)+Math.sin(ny*5-t*0.5+Math.sin(nx*4+t*0.3)*1.2)+Math.sin((nx*3+ny*6)+t*0.6);return (w/3)*0.5+0.5;}
     function shim(gx,gy,t){var lum=field(gx/cols,gy/rows,t);lum+=Math.sin(t*2.4+gx*0.55+gy*0.8)*0.22*ANIM_I;lum=(lum-0.5)*CONTRAST+0.5;return lum*0.55+0.45;}
-    function putChar(gx,gy,px,py,t,a){var lum=shim(gx,gy,t)*a;if(lum<0.16)return;if(lum>1)lum=1;var ch=RAMP.charAt((lum*LAST)|0);if(ch===' ')return;ctx.fillStyle='rgba(15,15,15,'+(0.18+lum*0.63).toFixed(3)+')';ctx.fillText(ch,px,py);}
+    function putChar(gx,gy,px,py,t,a){var lum=shim(gx,gy,t)*a;if(lum<0.16)return;if(lum>1)lum=1;var ch=RAMP.charAt((lum*LAST)|0);if(ch===' ')return;ctx.fillStyle='rgba(22,21,17,'+(0.18+lum*0.63).toFixed(3)+')';ctx.fillText(ch,px,py);}
 
     function draw(tc,t){
       ctx.clearRect(0,0,W,H);
       ctx.font=charFont;
-      /* ---- Pfeil ---- */
       if(tc<AF1){
         var build=smooth(tc/AB1), frontY=H*(1.06-1.14*build), falling=tc>AH, fp=falling?clamp01((tc-AH)/(AF1-AH)):0;
         for(var gy=0;gy<rows;gy++)for(var gx=0;gx<cols;gx++){
@@ -754,7 +998,6 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
           if(a<=0.02)continue; putChar(gx,gy,px,py+dy,t,a);
         }
       }
-      /* ---- Chart ---- */
       if(tc>=CB0){
         var riseDur=1.15, stag=(CB1-CB0-riseDur)/11, chartFall=tc>CH1, cf=chartFall?clamp01((tc-CH1)/(CF1-CH1)):0, tops=[];
         for(var i=0;i<12;i++){var rp=smooth(clamp01((tc-(CB0+i*stag))/riseDur));var h=barMaxH*(0.22+0.78*(VALS[i]-1.2)/1.4)*rp;tops.push({cx:x0+slot*(i+0.5),topY:baseY-h,rp:rp});}
@@ -773,12 +1016,12 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
           for(var s=0;s<10;s++){var u=s/10,px=A.cx+(B.cx-A.cx)*u,py=(A.topY+(B.topY-A.topY)*u)-cell*0.7,gx=Math.round(px/cell),gy=Math.round(py/cell),a=Math.min(A.rp,B.rp);if(chartFall)a*=(1-cf);if(a<=0.05)continue;putChar(gx,gy,px,py,t,a*0.9);}}
         var numPx=Math.max(12,W*0.0112),monPx=Math.max(11,W*0.0104),baseFade=chartFall?(1-cf):1;
         for(var i=0;i<12;i++){var b=tops[i],an=clamp01((b.rp-0.55)/0.4)*baseFade;
-          if(an>0.03){ctx.font='600 '+numPx+"px 'Geist Mono','JetBrains Mono',ui-monospace,monospace";ctx.fillStyle='rgba(15,15,15,'+(0.95*an).toFixed(3)+')';ctx.fillText(VALS[i].toFixed(1).replace('.',','),b.cx,b.topY-numPx*1.5);}
+          if(an>0.03){ctx.font='600 '+numPx+"px 'Space Mono','Geist Mono','JetBrains Mono',ui-monospace,monospace";ctx.fillStyle='rgba(22,21,17,'+(0.95*an).toFixed(3)+')';ctx.fillText(VALS[i].toFixed(1).replace('.',','),b.cx,b.topY-numPx*1.5);}
           var am=b.rp*baseFade;
-          if(am>0.03){ctx.font=monPx+"px 'Geist Mono','JetBrains Mono',ui-monospace,monospace";ctx.fillStyle='rgba(15,15,15,'+(0.58*am).toFixed(3)+')';ctx.fillText(MONTHS[i],b.cx,baseY+monPx*1.5);}
+          if(am>0.03){ctx.font=monPx+"px 'Space Mono','Geist Mono','JetBrains Mono',ui-monospace,monospace";ctx.fillStyle='rgba(22,21,17,'+(0.58*am).toFixed(3)+')';ctx.fillText(MONTHS[i],b.cx,baseY+monPx*1.5);}
         }
         var uFade=clamp01((tc-CB0-0.5)/1)*baseFade;
-        if(uFade>0.03){ctx.font=Math.max(10,W*0.0092)+"px 'Geist Mono','JetBrains Mono',ui-monospace,monospace";ctx.textAlign='left';ctx.fillStyle='rgba(15,15,15,'+(0.46*uFade).toFixed(3)+')';ctx.fillText('NETTOUMSATZ · MIO €',x0,baseY-barMaxH-numPx*1.2);ctx.textAlign='center';}
+        if(uFade>0.03){ctx.font=Math.max(10,W*0.0092)+"px 'Space Mono','Geist Mono','JetBrains Mono',ui-monospace,monospace";ctx.textAlign='left';ctx.fillStyle='rgba(22,21,17,'+(0.46*uFade).toFixed(3)+')';ctx.fillText('NETTOUMSATZ · MIO €',x0,baseY-barMaxH-numPx*1.2);ctx.textAlign='center';}
       }
     }
 
@@ -788,5 +1031,128 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
     requestAnimationFrame(loop);
   })();
 </script>
+
+<!-- FUTURE OF SALES · Spline-Roboter (wie Live-Seite) -->
+<script type="module" src="assets/spline/spline-viewer.js?v=2"></script>
+<script>
+(function(){var m=document.getElementById('tt-robot');if(!m)return;if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;var done=false;function mount(){if(done)return;done=true;function go(){var v=document.createElement('spline-viewer');v.setAttribute('url','assets/spline/robot.splinecode');v.setAttribute('loading-anim-type','none');m.appendChild(v);function sf(){try{if(v.shadowRoot&&!v.__sf){var s=document.createElement('style');s.textContent='canvas{width:100%!important;height:100%!important;display:block}';v.shadowRoot.appendChild(s);v.__sf=1;}}catch(e){}}function nudge(){sf();try{window.dispatchEvent(new Event('resize'))}catch(e){}}function kill(){try{var r=v.shadowRoot;if(!r)return false;var l=r.querySelector('#logo')||r.querySelector('a[href*="spline.design"]');if(l){l.remove();return true}}catch(e){}return false}v.addEventListener('load',function(){kill();nudge();setTimeout(nudge,80);setTimeout(nudge,400)});var n=0,iv=setInterval(function(){sf();if(kill()||++n>80)clearInterval(iv)},120);[300,700,1500,2500].forEach(function(t){setTimeout(nudge,t)});}if(window.customElements){customElements.whenDefined('spline-viewer').then(go)}else{go()}}if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){mount();io.disconnect();}})},{rootMargin:'500px'});io.observe(m);}else{mount();}})();
+</script>
+
+<!-- SCROLL-EFFEKTE (Prototyp) -->
+<script src="/assets/lenis.min.js"></script>
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function clamp(x){return x<0?0:x>1?1:x;}
+
+  /* Smooth-Scroll */
+  if(!reduce && window.Lenis){
+    try{ var lenis=new Lenis({lerp:0.09}); function raf(t){lenis.raf(t);requestAnimationFrame(raf);} requestAnimationFrame(raf); }catch(e){}
+  }
+
+  /* Hero: Gelb zieht sich in den Punkt zusammen, Text bleibt an Ort und Stelle */
+  (function(){
+    var stage=document.querySelector('.hero-stage'), veil=document.querySelector('.hero-veil'),
+        heroIn=document.querySelector('.hero__in'), tile=document.querySelector('.hero__tile'),
+        dot=document.querySelector('.hero h1 .dot'), img=document.querySelector('.hero__tile img'),
+        h1=document.querySelector('.hero h1');
+    if(!stage||!veil||!tile||!dot||!heroIn||!h1) return;
+    if(reduce){ veil.style.display='none'; return; }
+    var rest=[].slice.call(heroIn.children).filter(function(el){return el!==h1;});
+    rest.forEach(function(el){el.style.opacity='0';el.style.willChange='opacity';});
+    h1.style.willChange='opacity';
+    var dx=0,dy=0,rMax=0,rMin=6;
+    function measure(){
+      var tr=tile.getBoundingClientRect();
+      var rg; try{ rg=document.createRange(); rg.selectNodeContents(dot); }catch(e){}
+      var dr=rg?rg.getBoundingClientRect():dot.getBoundingClientRect();
+      if(!dr.width){ dr=dot.getBoundingClientRect(); }
+      dx=(dr.left-tr.left)+dr.width/2;
+      var cs=getComputedStyle(h1), fs=parseFloat(cs.fontSize)||120;
+      var ctx=measure._c||(measure._c=document.createElement('canvas').getContext('2d'));
+      ctx.font=cs.fontWeight+' '+fs+'px '+cs.fontFamily;
+      var fm=ctx.measureText('Hg'); var asc=fm.fontBoundingBoxAscent||fs*0.75, desc=fm.fontBoundingBoxDescent||fs*0.25;
+      var baseline=(dr.top-tr.top)+(dr.height-(asc+desc))/2+asc;
+      dy=baseline - fs*0.045;
+      var cns=[[0,0],[tr.width,0],[0,tr.height],[tr.width,tr.height]]; rMax=0;
+      cns.forEach(function(c){var d=Math.hypot(c[0]-dx,c[1]-dy); if(d>rMax)rMax=d;});
+      rMax*=1.06; rMin=Math.max(3, fs*0.05);
+    }
+    function upd(){
+      var r=stage.getBoundingClientRect(), total=Math.max(1,stage.offsetHeight-window.innerHeight);
+      var p=clamp(-r.top/total), c=clamp(p/0.62);
+      var R=rMax*(1-c)+rMin*c, v='circle('+R.toFixed(1)+'px at '+dx.toFixed(1)+'px '+dy.toFixed(1)+'px)';
+      veil.style.clipPath=v; veil.style.webkitClipPath=v;
+      h1.style.opacity=(0.4+0.6*c).toFixed(3);
+      var rf=clamp((c-0.5)/0.42).toFixed(3);
+      rest.forEach(function(el){el.style.opacity=rf;});
+      if(img) img.style.transform='scale('+(1.1-c*0.08).toFixed(4)+')';
+    }
+    measure(); upd();
+    window.addEventListener('scroll', upd, {passive:true});
+    window.addEventListener('resize', function(){measure();upd();}, {passive:true});
+    window.addEventListener('load', function(){measure();upd();});
+    if(document.fonts&&document.fonts.ready){document.fonts.ready.then(function(){measure();upd();});}
+  })();
+
+  /* Credo: frontale Turbine dreht sich (ganzes Bild, radialsymmetrisch) */
+  (function(){
+    if(reduce) return;
+    var media=document.querySelector('.credo-media'), img=media&&media.querySelector('img');
+    if(!img) return;
+    img.style.willChange='transform';
+    function upd(){
+      var r=media.getBoundingClientRect(), vh=window.innerHeight;
+      var prog=clamp((vh - r.top)/(vh + r.height));
+      img.style.transform='rotate('+((prog-0.5)*170).toFixed(2)+'deg)';
+    }
+    upd();
+    window.addEventListener('scroll', upd, {passive:true});
+    window.addEventListener('resize', upd, {passive:true});
+  })();
+
+  /* Zahlen: Count-up */
+  (function(){
+    if(reduce) return;
+    var nums=[].slice.call(document.querySelectorAll('.zcard .n b'));
+    if(!nums.length || !('IntersectionObserver' in window)) return;
+    function run(el){
+      var to=parseInt(el.getAttribute('data-to'),10); if(isNaN(to)) return;
+      var dur=1200,start=null;
+      function step(ts){if(start===null)start=ts;var p=clamp((ts-start)/dur),e=1-Math.pow(1-p,3);el.textContent=Math.round(to*e);if(p<1)requestAnimationFrame(step);else el.textContent=to;}
+      requestAnimationFrame(step);
+    }
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){run(e.target);io.unobserve(e.target);}});},{threshold:0.6});
+    nums.forEach(function(el){el.setAttribute('data-to',(el.textContent||'').trim());el.textContent='0';io.observe(el);});
+  })();
+
+  /* Haltung: Text-Reveal beim Scrollen */
+  (function(){
+    if(reduce) return;
+    var lead=document.querySelector('.haltung .lead'); if(!lead) return;
+    var words=[];
+    try{
+      [].slice.call(lead.childNodes).forEach(function(node){
+        if(node.nodeType===3){
+          var parts=node.textContent.split(/(\s+)/), frag=document.createDocumentFragment();
+          parts.forEach(function(p){ if(!p)return; if(/^\s+$/.test(p)){frag.appendChild(document.createTextNode(p));} else {var s=document.createElement('span');s.className='rw';s.textContent=p;frag.appendChild(s);words.push(s);} });
+          lead.replaceChild(frag,node);
+        } else if(node.nodeType===1){ node.classList.add('rw'); words.push(node); }
+      });
+    }catch(e){ return; }
+    words.forEach(function(w){ w.style.color='rgba(22,21,17,0.18)'; w.style.transition='color .3s ease'; });
+    var sec=lead.closest('section');
+    function upd(){
+      var r=sec.getBoundingClientRect(), vh=window.innerHeight;
+      var p=clamp((vh*0.82 - r.top)/(vh*0.55)), lit=p*(words.length+3);
+      words.forEach(function(w,i){ var o=clamp(lit-i); w.style.color='rgba(22,21,17,'+(0.18+0.82*o).toFixed(3)+')'; });
+    }
+    upd();
+    window.addEventListener('scroll',upd,{passive:true});
+    window.addEventListener('resize',upd,{passive:true});
+  })();
+})();
+</script>
+
 </body>
 </html>
