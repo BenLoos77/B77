@@ -11,3 +11,6 @@ _entwurf-silber-altrosa.html
 # Rebrand-2026-Arbeitsordner (Konzept, Entwürfe) – nie deployen
 rebrand-2026/
 
+# Akquise-/Studio-Submodul (vertrauliche Mandats- und Lead-Mockups): nie auf b77.de, schuetzt auch lokales "vercel --prod" vor dem Upload des Submodul-Arbeitsbaums
+assets/design-studio-77/
+
