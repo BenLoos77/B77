@@ -1,6 +1,9 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/check", "destination": "/vertriebs-check", "permanent": true }
+  ],
   "crons": [
     {
       "path": "/api/trigger-magazin",
