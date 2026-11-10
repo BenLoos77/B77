@@ -2,9 +2,10 @@
 (function(){
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* Smooth-Scroll (Lenis) */
-  if(!reduce && window.Lenis){
-    try{ var lenis=new Lenis({lerp:0.09}); (function raf(t){lenis.raf(t);requestAnimationFrame(raf);})(); }catch(e){}
+  /* Smooth-Scroll (Lenis). In Opera deaktiviert: dort kollidiert Lenis mit dem eingebauten Smooth-Scroll und macht die Seite kaum scrollbar. */
+  var isOpera = /OPR\//.test(navigator.userAgent) || !!window.opr || (navigator.userAgentData && navigator.userAgentData.brands && navigator.userAgentData.brands.some(function(b){return b.brand==='Opera';}));
+  if(!reduce && window.Lenis && !isOpera){
+    try{ var lenis=window.lenis=new Lenis({lerp:0.09}); (function raf(t){lenis.raf(t);requestAnimationFrame(raf);})(); }catch(e){}
   }
 
   /* Scroll-Reveals */
