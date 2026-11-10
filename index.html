@@ -49,6 +49,12 @@
   .menu{position:fixed;inset:0;z-index:55;background:var(--dark);color:var(--paper);display:flex;flex-direction:column;justify-content:center;padding:clamp(24px,6vw,80px);opacity:0;visibility:hidden;transition:opacity .45s,visibility .45s;}
   .menu::before{content:"";position:absolute;inset:0;background:radial-gradient(90% 70% at 85% 12%,rgba(229,255,0,0.08),transparent 55%);pointer-events:none;}
   .menu.open{opacity:1;visibility:visible;}
+  .menu__close{position:absolute;top:clamp(18px,2.4vw,30px);right:clamp(22px,5vw,58px);z-index:6;width:42px;height:42px;border:0;background:transparent;cursor:pointer;opacity:0;transition:opacity .4s .1s;}
+  .menu.open .menu__close{opacity:1;}
+  .menu__close span{position:absolute;top:50%;left:50%;width:26px;height:2px;background:var(--paper);transition:background .3s;}
+  .menu__close span:nth-child(1){transform:translate(-50%,-50%) rotate(45deg);}
+  .menu__close span:nth-child(2){transform:translate(-50%,-50%) rotate(-45deg);}
+  .menu__close:hover span{background:var(--accent);}
   .menu__in{position:relative;display:flex;flex-direction:column;gap:clamp(4px,1vh,14px);}
   .menu__in a{display:flex;align-items:baseline;gap:clamp(16px,2vw,28px);font-weight:900;font-size:clamp(34px,7.2vw,92px);letter-spacing:-0.035em;text-transform:uppercase;line-height:1.02;transform:translateY(26px);opacity:0;transition:transform .6s cubic-bezier(.19,1,.22,1),opacity .6s,color .2s;}
   .menu.open .menu__in a{transform:none;opacity:1;}
@@ -69,6 +75,10 @@
   .hero__kick::before{content:"";width:28px;height:1px;background:var(--ink);}
   .hero h1{font-weight:900;letter-spacing:-0.05em;line-height:0.86;font-size:clamp(58px,11vw,160px);text-transform:none;}
   .hero h1 .dot{color:var(--accent);}
+  .hero__scroll{position:absolute;left:50%;bottom:clamp(18px,2.6vw,30px);transform:translateX(-50%);z-index:4;display:flex;flex-direction:column;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;letter-spacing:0.26em;text-transform:uppercase;color:var(--ink);opacity:.72;pointer-events:none;}
+  .hero__scroll-arrow{font-size:15px;line-height:1;animation:heroScrollBob 1.8s ease-in-out infinite;}
+  @keyframes heroScrollBob{0%,100%{transform:translateY(-2px);opacity:.55;}50%{transform:translateY(4px);opacity:1;}}
+  @media(prefers-reduced-motion:reduce){.hero__scroll-arrow{animation:none;}}
   .hero__line{margin-top:clamp(18px,2vw,26px);font-weight:500;font-size:clamp(16px,1.3vw,19px);color:var(--ink);max-width:52ch;}
   .hero__sub{margin-top:10px;font-size:clamp(15px,1.2vw,17px);color:var(--soft);max-width:54ch;line-height:1.5;}
   .hero__cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:clamp(22px,3vw,34px);}
@@ -406,7 +416,7 @@
     <a class="b" href="#top">B_77</a>
     <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false"><span></span><span></span></button>
   </header>
-  <nav class="menu" id="menu" aria-hidden="true">
+  <nav class="menu" id="menu" aria-hidden="true"><button class="menu__close" id="menu-close" type="button" aria-label="Menü schließen"><span></span><span></span></button>
     <div class="menu__in">
       <a href="#leistungen"><span class="mn">1</span>Leistungen</a>
       <a href="#ki"><span class="mn">2</span>KI im Vertrieb</a>
@@ -434,6 +444,7 @@
           </div>
         </div>
         <div class="hero-veil" aria-hidden="true"></div>
+        <div class="hero__scroll" aria-hidden="true">Scroll<span class="hero__scroll-arrow">↓</span></div>
       </div>
     </div>
    </div>
@@ -621,7 +632,7 @@
 
       var burger=document.getElementById('burger'), menu=document.getElementById('menu');
       function toggleMenu(open){ var o=(open===undefined)?!menu.classList.contains('open'):open; menu.classList.toggle('open',o); burger.classList.toggle('open',o); burger.setAttribute('aria-expanded',o); menu.setAttribute('aria-hidden',!o); document.body.style.overflow=o?'hidden':''; }
-      if(burger){ burger.addEventListener('click',function(){toggleMenu();}); menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){toggleMenu(false);});}); document.addEventListener('keydown',function(e){ if(e.key==='Escape') toggleMenu(false); }); }
+      if(burger){ burger.addEventListener('click',function(){toggleMenu();}); var mClose=document.getElementById('menu-close'); if(mClose) mClose.addEventListener('click',function(){toggleMenu(false);}); menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){toggleMenu(false);});}); document.addEventListener('keydown',function(e){ if(e.key==='Escape') toggleMenu(false); }); }
 
       /* Hero-Bild sanfter Scroll-Push */
       var himg=document.querySelector('.hero__tile img'), raf=0;
@@ -1060,7 +1071,7 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
     var stage=document.querySelector('.hero-stage'), veil=document.querySelector('.hero-veil'),
         heroIn=document.querySelector('.hero__in'), tile=document.querySelector('.hero__tile'),
         dot=document.querySelector('.hero h1 .dot'), img=document.querySelector('.hero__tile img'),
-        h1=document.querySelector('.hero h1');
+        h1=document.querySelector('.hero h1'), scrollHint=document.querySelector('.hero__scroll');
     if(!stage||!veil||!tile||!dot||!heroIn||!h1) return;
     if(reduce){ veil.style.display='none'; return; }
     var rest=[].slice.call(heroIn.children).filter(function(el){return el!==h1;});
@@ -1092,6 +1103,7 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
       var rf=clamp((c-0.5)/0.42).toFixed(3);
       rest.forEach(function(el){el.style.opacity=rf;});
       if(img) img.style.transform='scale('+(1.1-c*0.08).toFixed(4)+')';
+      if(scrollHint) scrollHint.style.opacity=((1-clamp(c*2.4))*0.72).toFixed(3);
     }
     measure(); upd();
     window.addEventListener('scroll', upd, {passive:true});
