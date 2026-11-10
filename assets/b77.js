@@ -29,4 +29,21 @@
     menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){toggleMenu(false);});});
     document.addEventListener('keydown',function(e){ if(e.key==='Escape') toggleMenu(false); });
   }
+
+  /* Kontakt-Formular: mailto-Absenden (kein Server, keine Drittweitergabe) */
+  var cform=document.getElementById('contact-form');
+  if(cform){
+    var okBox=document.getElementById('form-success');
+    cform.addEventListener('submit',function(e){
+      e.preventDefault();
+      if(cform.checkValidity && !cform.checkValidity()){ if(cform.reportValidity) cform.reportValidity(); return; }
+      var g=function(id){var el=document.getElementById(id);return el?el.value.trim():'';};
+      var name=g('cf-name'), firma=g('cf-firma'), mail=g('cf-mail'), tel=g('cf-tel'), msg=g('cf-msg');
+      var subj='Erstgespräch-Anfrage'+(name?' · '+name:'')+(firma?' ('+firma+')':'');
+      var body='Name: '+name+'\nUnternehmen: '+firma+'\nE-Mail: '+mail+'\nTelefon: '+tel+'\n\nWorum geht es:\n'+msg+'\n';
+      window.location.href='mailto:kontakt@b77.de?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body);
+      cform.style.display='none';
+      if(okBox) okBox.classList.add('is-visible');
+    });
+  }
 })();

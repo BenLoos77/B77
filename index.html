@@ -71,9 +71,10 @@
   .hero__kick::before{content:"";width:28px;height:1px;background:var(--ink);}
   .hero h1{font-weight:900;letter-spacing:-0.05em;line-height:0.86;font-size:clamp(58px,11vw,160px);text-transform:none;}
   .hero h1 .dot{color:var(--accent);}
-  .hero__scroll{display:inline-flex;align-items:center;gap:9px;margin-top:clamp(16px,1.9vw,24px);font-family:var(--mono);font-size:12px;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink);}
-  .hero__scroll-arrow{font-size:14px;line-height:1;animation:heroScrollBob 1.6s ease-in-out infinite;}
-  @keyframes heroScrollBob{0%,100%{transform:translateY(-1px);}50%{transform:translateY(3px);}}
+  .hero__scroll{position:fixed;left:50%;bottom:clamp(20px,3.4vh,42px);transform:translateX(-50%);z-index:20;display:inline-flex;flex-direction:column;align-items:center;gap:5px;border:0;background:transparent;cursor:pointer;font-family:var(--mono);font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:var(--ink);transition:color .25s;}
+  .hero__scroll:hover{color:var(--accent);}
+  .hero__scroll-arrow{font-size:16px;line-height:1;animation:heroScrollBob 1.5s ease-in-out infinite;}
+  @keyframes heroScrollBob{0%,100%{transform:translateY(-2px);}50%{transform:translateY(5px);}}
   @media(prefers-reduced-motion:reduce){.hero__scroll-arrow{animation:none;}}
   .hero__line{margin-top:clamp(18px,2vw,26px);font-weight:500;font-size:clamp(16px,1.3vw,19px);color:var(--ink);max-width:52ch;}
   .hero__sub{margin-top:10px;font-size:clamp(15px,1.2vw,17px);color:var(--soft);max-width:54ch;line-height:1.5;}
@@ -426,13 +427,13 @@
   <!-- HERO -->
   <div class="hero-stage">
    <div class="hero-pin">
+    <button class="hero__scroll" type="button" aria-label="Nach unten scrollen"><span>Scroll</span><span class="hero__scroll-arrow">↓</span></button>
     <div class="hero" id="top" data-n="00">
       <div class="hero__tile">
         <img src="assets/bildwelt-hell.jpg" alt="" onerror="this.style.display='none'">
         <div class="hero__in">
           <div class="hero__kick">Wir machen Unternehmen</div>
           <h1>Vertriebs&shy;aktiv<span class="dot">.</span></h1>
-          <div class="hero__scroll" aria-hidden="true">Scroll<span class="hero__scroll-arrow">↓</span></div>
           <p class="hero__line">Vertriebsberatung für den Mittelstand aus Siegen, seit 2017.</p>
           <p class="hero__sub">Vertriebsaktiv zu sein bedeutet: Märkte bewusst bearbeiten, Zielkunden systematisch gewinnen, Abschlüsse nicht dem Zufall überlassen.</p>
           <div class="hero__cta">
@@ -1059,7 +1060,8 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
 
   /* Smooth-Scroll */
   if(!reduce && window.Lenis){
-    try{ var lenis=new Lenis({lerp:0.09}); function raf(t){lenis.raf(t);requestAnimationFrame(raf);} requestAnimationFrame(raf); }catch(e){}
+    try{ var lenis=window.lenis=new Lenis({lerp:0.09}); function raf(t){lenis.raf(t);requestAnimationFrame(raf);} requestAnimationFrame(raf); }catch(e){}
+  (function(){var sb=document.querySelector('.hero__scroll');if(!sb)return;sb.addEventListener('click',function(){var st=document.querySelector('.hero-stage');var ty=st?(st.getBoundingClientRect().top+window.pageYOffset+st.offsetHeight-window.innerHeight):window.innerHeight;if(window.lenis&&window.lenis.scrollTo)window.lenis.scrollTo(ty,{duration:1.4});else window.scrollTo({top:ty,behavior:'smooth'});});function fade(){var o=Math.max(0,1-window.pageYOffset/280);sb.style.opacity=o.toFixed(3);sb.style.pointerEvents=o<0.12?'none':'auto';}window.addEventListener('scroll',fade,{passive:true});fade();})();
   }
 
   /* Hero: Gelb zieht sich in den Punkt zusammen, Text bleibt an Ort und Stelle */
@@ -1099,7 +1101,6 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
       var rf=clamp((c-0.5)/0.42).toFixed(3);
       rest.forEach(function(el){el.style.opacity=rf;});
       if(img) img.style.transform='scale('+(1.1-c*0.08).toFixed(4)+')';
-      if(scrollHint) scrollHint.style.opacity=(1-clamp(c*2.4)).toFixed(3);
     }
     measure(); upd();
     window.addEventListener('scroll', upd, {passive:true});

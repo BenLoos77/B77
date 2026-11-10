@@ -52,14 +52,14 @@
  <form id="contact-form" class="cform">
  <div class="meta">Erstgespräch anfragen</div>
  <div class="form-row">
- <div class="field"><label>Name *</label><input required type="text" placeholder="Ihr Name"></div>
- <div class="field"><label>Unternehmen</label><input type="text" placeholder="Firma"></div>
+ <div class="field"><label for="cf-name">Name *</label><input id="cf-name" name="name" required type="text" autocomplete="name" placeholder="Ihr Name"></div>
+ <div class="field"><label for="cf-firma">Unternehmen</label><input id="cf-firma" name="firma" type="text" autocomplete="organization" placeholder="Firma"></div>
  </div>
  <div class="form-row">
- <div class="field"><label>E-Mail *</label><input required type="email" placeholder="name@firma.de"></div>
- <div class="field"><label>Telefon</label><input type="tel" placeholder="+49 …"></div>
+ <div class="field"><label for="cf-mail">E-Mail *</label><input id="cf-mail" name="email" required type="email" autocomplete="email" placeholder="name@firma.de"></div>
+ <div class="field"><label for="cf-tel">Telefon</label><input id="cf-tel" name="tel" type="tel" autocomplete="tel" placeholder="+49 …"></div>
  </div>
- <div class="field"><label>Worum geht es? *</label><textarea required rows="4" placeholder="Wo steht Ihr Vertrieb gerade?"></textarea></div>
+ <div class="field"><label for="cf-msg">Worum geht es? *</label><textarea id="cf-msg" name="nachricht" required rows="4" placeholder="Wo steht Ihr Vertrieb gerade?"></textarea></div>
  <button class="pill" type="submit"><span>Anfrage senden</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
  <p class="form-note">Mit dem Absenden stimmen Sie der Verarbeitung gemäß Datenschutzerklärung zu.</p>
  </form>
