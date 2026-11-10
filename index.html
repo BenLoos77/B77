@@ -75,9 +75,9 @@
   .hero__kick::before{content:"";width:28px;height:1px;background:var(--ink);}
   .hero h1{font-weight:900;letter-spacing:-0.05em;line-height:0.86;font-size:clamp(58px,11vw,160px);text-transform:none;}
   .hero h1 .dot{color:var(--accent);}
-  .hero__scroll{position:absolute;left:50%;bottom:clamp(18px,2.6vw,30px);transform:translateX(-50%);z-index:4;display:flex;flex-direction:column;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;letter-spacing:0.26em;text-transform:uppercase;color:var(--ink);opacity:.72;pointer-events:none;}
-  .hero__scroll-arrow{font-size:15px;line-height:1;animation:heroScrollBob 1.8s ease-in-out infinite;}
-  @keyframes heroScrollBob{0%,100%{transform:translateY(-2px);opacity:.55;}50%{transform:translateY(4px);opacity:1;}}
+  .hero__scroll{display:inline-flex;align-items:center;gap:9px;margin-top:clamp(16px,1.9vw,24px);font-family:var(--mono);font-size:12px;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink);}
+  .hero__scroll-arrow{font-size:14px;line-height:1;animation:heroScrollBob 1.6s ease-in-out infinite;}
+  @keyframes heroScrollBob{0%,100%{transform:translateY(-1px);}50%{transform:translateY(3px);}}
   @media(prefers-reduced-motion:reduce){.hero__scroll-arrow{animation:none;}}
   .hero__line{margin-top:clamp(18px,2vw,26px);font-weight:500;font-size:clamp(16px,1.3vw,19px);color:var(--ink);max-width:52ch;}
   .hero__sub{margin-top:10px;font-size:clamp(15px,1.2vw,17px);color:var(--soft);max-width:54ch;line-height:1.5;}
@@ -436,6 +436,7 @@
         <div class="hero__in">
           <div class="hero__kick">Wir machen Unternehmen</div>
           <h1>Vertriebs&shy;aktiv<span class="dot">.</span></h1>
+          <div class="hero__scroll" aria-hidden="true">Scroll<span class="hero__scroll-arrow">↓</span></div>
           <p class="hero__line">Vertriebsberatung für den Mittelstand aus Siegen, seit 2017.</p>
           <p class="hero__sub">Vertriebsaktiv zu sein bedeutet: Märkte bewusst bearbeiten, Zielkunden systematisch gewinnen, Abschlüsse nicht dem Zufall überlassen.</p>
           <div class="hero__cta">
@@ -444,7 +445,6 @@
           </div>
         </div>
         <div class="hero-veil" aria-hidden="true"></div>
-        <div class="hero__scroll" aria-hidden="true">Scroll<span class="hero__scroll-arrow">↓</span></div>
       </div>
     </div>
    </div>
@@ -1074,7 +1074,7 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
         h1=document.querySelector('.hero h1'), scrollHint=document.querySelector('.hero__scroll');
     if(!stage||!veil||!tile||!dot||!heroIn||!h1) return;
     if(reduce){ veil.style.display='none'; return; }
-    var rest=[].slice.call(heroIn.children).filter(function(el){return el!==h1;});
+    var rest=[].slice.call(heroIn.children).filter(function(el){return el!==h1 && !el.classList.contains('hero__scroll');});
     rest.forEach(function(el){el.style.opacity='0';el.style.willChange='opacity';});
     h1.style.willChange='opacity';
     var dx=0,dy=0,rMax=0,rMin=6;
@@ -1099,11 +1099,11 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
       var p=clamp(-r.top/total), c=clamp(p/0.62);
       var R=rMax*(1-c)+rMin*c, v='circle('+R.toFixed(1)+'px at '+dx.toFixed(1)+'px '+dy.toFixed(1)+'px)';
       veil.style.clipPath=v; veil.style.webkitClipPath=v;
-      h1.style.opacity=(0.4+0.6*c).toFixed(3);
+      h1.style.opacity='1';
       var rf=clamp((c-0.5)/0.42).toFixed(3);
       rest.forEach(function(el){el.style.opacity=rf;});
       if(img) img.style.transform='scale('+(1.1-c*0.08).toFixed(4)+')';
-      if(scrollHint) scrollHint.style.opacity=((1-clamp(c*2.4))*0.72).toFixed(3);
+      if(scrollHint) scrollHint.style.opacity=(1-clamp(c*2.4)).toFixed(3);
     }
     measure(); upd();
     window.addEventListener('scroll', upd, {passive:true});
