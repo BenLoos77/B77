@@ -37,9 +37,11 @@
   .wrap{max-width:1320px;margin:0 auto;padding:clamp(60px,7.5vw,104px) var(--pad);}
 
   /* NAV + Burger */
-  header.nav{position:absolute;top:0;left:0;right:0;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:clamp(18px,2.4vw,30px) clamp(22px,5vw,58px);}
+  header.nav{position:fixed;top:0;left:0;right:0;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:clamp(18px,2.4vw,30px) clamp(22px,5vw,58px);border-bottom:1px solid transparent;transition:padding .3s ease,background .3s ease,border-color .3s ease,box-shadow .3s ease;}
+  header.nav.nav--scrolled{padding-top:clamp(11px,1.5vw,16px);padding-bottom:clamp(11px,1.5vw,16px);background:rgba(242,241,236,0.82);backdrop-filter:blur(12px) saturate(1.1);-webkit-backdrop-filter:blur(12px) saturate(1.1);border-bottom-color:var(--line);box-shadow:0 1px 24px rgba(22,21,17,0.05);}
   header.nav .b{font-weight:900;font-size:20px;letter-spacing:-0.03em;color:var(--ink);}
-  .burger{position:relative;z-index:60;width:44px;height:34px;border:0;background:transparent;cursor:pointer;display:flex;flex-direction:column;justify-content:center;align-items:flex-end;gap:8px;padding:0;}
+  .burger{position:relative;z-index:60;width:44px;height:34px;border:0;background:transparent;cursor:pointer;display:flex;flex-direction:column;justify-content:center;align-items:flex-end;gap:8px;padding:0;transition:opacity .3s ease;}
+  .burger.open{opacity:0;pointer-events:none;}
   .burger span{display:block;height:2px;width:34px;background:var(--ink);transition:transform .4s cubic-bezier(.2,.8,.2,1),width .4s,background .3s;}
   .burger span:nth-child(2){width:22px;}
   .burger:hover span{width:34px;}
@@ -630,6 +632,10 @@
       var burger=document.getElementById('burger'), menu=document.getElementById('menu');
       function toggleMenu(open){ var o=(open===undefined)?!menu.classList.contains('open'):open; menu.classList.toggle('open',o); burger.classList.toggle('open',o); burger.setAttribute('aria-expanded',o); menu.setAttribute('aria-hidden',!o); document.body.style.overflow=o?'hidden':''; }
       if(burger){ burger.addEventListener('click',function(){toggleMenu();}); var mClose=document.getElementById('menu-close'); if(mClose) mClose.addEventListener('click',function(){toggleMenu(false);}); menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){toggleMenu(false);});}); document.addEventListener('keydown',function(e){ if(e.key==='Escape') toggleMenu(false); }); }
+
+      /* Sticky-Header: dezenter Balken blendet beim Scrollen ein (Logo + Burger bleiben lesbar) */
+      var navEl=document.querySelector('header.nav');
+      if(navEl){ var onNavScroll=function(){ navEl.classList.toggle('nav--scrolled', window.pageYOffset>40); }; window.addEventListener('scroll',onNavScroll,{passive:true}); onNavScroll(); }
 
       /* Hero-Bild sanfter Scroll-Push */
       var himg=document.querySelector('.hero__tile img'), raf=0;

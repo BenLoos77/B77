@@ -26,8 +26,18 @@
   }
   if(burger){
     burger.addEventListener('click',function(){toggleMenu();});
+    var menuClose=document.getElementById('menu-close');
+    if(menuClose) menuClose.addEventListener('click',function(){toggleMenu(false);});
     menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){toggleMenu(false);});});
     document.addEventListener('keydown',function(e){ if(e.key==='Escape') toggleMenu(false); });
+  }
+
+  /* Sticky-Header: dezenter Balken blendet beim Scrollen ein (Logo + Burger bleiben lesbar) */
+  var navEl=document.querySelector('header.nav');
+  if(navEl){
+    var onNavScroll=function(){ navEl.classList.toggle('nav--scrolled', window.pageYOffset>40); };
+    window.addEventListener('scroll',onNavScroll,{passive:true});
+    onNavScroll();
   }
 
   /* Kontakt-Formular: mailto-Absenden (kein Server, keine Drittweitergabe) */
