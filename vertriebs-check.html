@@ -14,7 +14,17 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://b77.de/assets/og-b77.png">
 <link rel="icon" type="image/png" href="/assets/img/favicon.png">
-<link rel="stylesheet" href="/assets/b77.css?v=20261111">
+<link rel="stylesheet" href="/assets/b77.css?v=20261112">
+<style>
+  /* Vertriebs-Check: Leerraum oben reduzieren, damit die Fragen ohne staendiges Scrollen sichtbar sind */
+  .checkpage:has(#phase-quiz.active){padding-top:clamp(62px,6vw,80px);}
+  .checkpage:has(#phase-quiz.active) > .wrap{display:none;}
+  .checkpage #vc{padding-top:18px;padding-bottom:44px;}
+  #phase-quiz .section{padding-top:10px;padding-bottom:28px;min-height:auto;}
+  #phase-quiz .q-top{margin-bottom:12px;}
+  #phase-quiz .q-bar{margin-bottom:24px;}
+  #phase-quiz .q-text{margin-bottom:26px;}
+</style>
 </head>
 <body>
   <header class="nav">
@@ -60,7 +70,7 @@
 
   <!-- Phase 2: Quiz -->
   <div id="phase-quiz" class="check-phase">
-    <section class="section section--first" style="min-height:70vh;">
+    <section class="section section--first">
       <div class="wrap" style="max-width:980px;">
         <div class="q-top"><span class="dim"></span><span class="qnum"></span></div>
         <div class="q-bar"><i style="width:0%"></i></div>
@@ -105,6 +115,6 @@
   </div>
   <script src="/assets/lenis.min.js"></script>
   <script src="/assets/check.js"></script>
-  <script src="/assets/b77.js?v=20261111"></script>
+  <script src="/assets/b77.js?v=20261112"></script>
 </body>
 </html>

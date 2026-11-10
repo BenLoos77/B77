@@ -37,8 +37,8 @@
   .wrap{max-width:1320px;margin:0 auto;padding:clamp(60px,7.5vw,104px) var(--pad);}
 
   /* NAV + Burger */
-  header.nav{position:fixed;top:0;left:0;right:0;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:clamp(18px,2.4vw,30px) clamp(22px,5vw,58px);border-bottom:1px solid transparent;transition:padding .3s ease,background .3s ease,border-color .3s ease,box-shadow .3s ease;}
-  header.nav.nav--scrolled{padding-top:clamp(11px,1.5vw,16px);padding-bottom:clamp(11px,1.5vw,16px);background:rgba(242,241,236,0.82);backdrop-filter:blur(12px) saturate(1.1);-webkit-backdrop-filter:blur(12px) saturate(1.1);border-bottom-color:var(--line);box-shadow:0 1px 24px rgba(22,21,17,0.05);}
+  header.nav{position:fixed;top:0;left:0;right:0;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:clamp(18px,2.4vw,30px) clamp(22px,5vw,58px);transition:padding .3s ease,background .3s ease;}
+  header.nav.nav--scrolled{padding-top:clamp(11px,1.5vw,16px);padding-bottom:clamp(11px,1.5vw,16px);background:linear-gradient(180deg,rgba(242,241,236,0.94),rgba(242,241,236,0.72) 54%,rgba(242,241,236,0));}
   header.nav .b{font-weight:900;font-size:20px;letter-spacing:-0.03em;color:var(--ink);}
   .burger{position:relative;z-index:60;width:44px;height:34px;border:0;background:transparent;cursor:pointer;display:flex;flex-direction:column;justify-content:center;align-items:flex-end;gap:8px;padding:0;transition:opacity .3s ease;}
   .burger.open{opacity:0;pointer-events:none;}
@@ -74,7 +74,7 @@
   .hero h1{font-weight:900;letter-spacing:-0.05em;line-height:0.86;font-size:clamp(58px,11vw,160px);text-transform:none;}
   .hero h1 .dot{color:var(--accent);}
   .hero__scroll{position:fixed;left:50%;bottom:clamp(20px,3.4vh,42px);transform:translateX(-50%);z-index:20;display:inline-flex;flex-direction:column;align-items:center;gap:5px;border:0;background:transparent;cursor:pointer;font-family:var(--mono);font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:var(--ink);transition:color .25s;}
-  .hero__scroll:hover{color:var(--accent);}
+  .hero__scroll:hover{font-weight:700;letter-spacing:0.26em;}
   .hero__scroll-arrow{font-size:16px;line-height:1;animation:heroScrollBob 1.5s ease-in-out infinite;}
   @keyframes heroScrollBob{0%,100%{transform:translateY(-2px);}50%{transform:translateY(5px);}}
   @media(prefers-reduced-motion:reduce){.hero__scroll-arrow{animation:none;}}
@@ -252,7 +252,7 @@
   #b77-logo { position:absolute; left:0; top:0; width:200px; height:auto; opacity:0; pointer-events:none; user-select:none; z-index:6; }
   #b77-topbar { position:absolute; inset:0; opacity:0; pointer-events:none; z-index:5; }
   #b77-loc { position:absolute; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:0.18em; color:#6c6a66; }
-  #b77-headrule { position:absolute; height:1px; background:rgba(245,244,242,0.10); }
+  #b77-headrule { display:none; }
   #b77-content { position:absolute; top:50%; left:60px; transform:translateY(-50%); max-width:1000px; display:flex; flex-direction:column; align-items:flex-start; pointer-events:none; z-index:5; opacity:0; }
   #b77-statement { font-weight:700; font-size:clamp(30px,4.3vw,60px); line-height:1.13; letter-spacing:-0.015em; color:#f5f4f2; }
   #b77-statement .em { font-family:'Newsreader',serif; font-style:italic; font-weight:500; letter-spacing:0; }
@@ -838,7 +838,17 @@ window.B77_INTRO_CONFIG = window.B77_INTRO_CONFIG || {
     $('b77-no').addEventListener('click', onNo);
     el.replay.addEventListener('click', startFlow);
     // NEIN-Funnel
-    $('b77-nein-kontakt').addEventListener('click', function () { answered(); }); // Link navigiert selbst zu /kontakt; Intro nicht erneut zeigen
+    $('b77-nein-kontakt').addEventListener('click', function (e) {
+      answered();
+      if (CFG.mode !== 'overlay') return; // redirect-Modus: Link navigiert selbst zu /kontakt
+      e.preventDefault(); // Overlay auflösen und zur Kontakt-Sektion der Startseite scrollen
+      root.style.transition = 'opacity .55s ease'; root.style.opacity = '0';
+      setTimeout(function () {
+        removeOverlay();
+        var k = document.getElementById('kontakt');
+        if (k) { if (window.lenis && window.lenis.scrollTo) window.lenis.scrollTo(k, { offset: 0 }); else k.scrollIntoView({ behavior: 'smooth' }); }
+      }, 600);
+    });
     $('b77-nein-check').addEventListener('click', chkStart);
     $('b77-nein-home').addEventListener('click', fadeDismiss);
     // Inline-Check
