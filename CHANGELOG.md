@@ -1,5 +1,14 @@
 # Changelog B_77 Website
 
+## 2026-11-13 · Startseite: Copy-Feinschliff
+
+Drei sichtbare Textstellen der Startseite angepasst, keine Struktur-, Technik-
+oder SEO-Änderung.
+
+- Intro-Ladeanzeige: "VERTRIEB IN BEWEGUNG" wird zu "VERTRIEB IN AKTION".
+- Hero-Zeile ohne Standort-/Jahreszusatz: "Vertriebsberatung für den Mittelstand." (Siegen und "seit 2017" bleiben in Meta-Tags, Menü-Fußzeile und Claims-Band erhalten).
+- Haltungs-Absatz neu formuliert, Highlight von "Marktanteil" auf "Anteil am Markt".
+
 ## 2026-11-09 · Relaunch der Marketing-Seiten
 
 Neues Erscheinungsbild für Startseite und alle 42 Unterseiten. Inhalt, Farbwelt
