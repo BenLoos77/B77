@@ -1,5 +1,19 @@
 # Changelog B_77 Website
 
+## 2026-11-13 · GA4 mit Consent-Banner, SEO-Auszeichnung, 2 Artikel
+
+Der bislang nur lokal (uncommitted) gepflegte Consent-/GA4- und SEO-Umbau ist
+jetzt im Repo, damit git-basierte Deploys ihn nicht mehr entfernen. Entspricht
+dem bereits live getesteten Stand auf www.b77.de.
+
+- Webanalyse: Google Analytics 4 (G-N6KF1KY957), ausschließlich nach aktiver Einwilligung. Eigenes Dark-Consent-Banner (`assets/b77-consent.js`), gleichwertiges "Ablehnen", gtag.js lädt erst nach "Akzeptieren", Wahl in localStorage, Widerruf jederzeit über die Cookie-Einstellungen. Ersetzt das alte, ungated `css/analytics.js` (entfernt).
+- Datenschutz: Impressum um den GA4-Abschnitt ergänzt (Google Ireland, EU-US DPF, Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TTDSG) samt Widerruf-Link, Stand November 2026.
+- SEO: schema.org JSON-LD (ProfessionalService/Service/WebSite) auf allen Seiten, 2 neue Fachartikel (Vertrieb auslagern oder aufbauen, Interim-Vertriebsleitung) mit Verlinkung und sitemap.xml.
+- Future-of-Sales-Roboter: Safari-Poster-Fix (`robot-still.v2.jpg`, Karte auf #000).
+
+Die Zeile "keine Tracker" aus dem Eintrag vom 2026-11-09 gilt damit nicht mehr;
+GA lädt aber weiterhin nur nach aktiver Zustimmung.
+
 ## 2026-11-13 · Startseite: Copy-Feinschliff
 
 Drei sichtbare Textstellen der Startseite angepasst, keine Struktur-, Technik-
