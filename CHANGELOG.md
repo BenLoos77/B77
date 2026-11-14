@@ -1,5 +1,17 @@
 # Changelog B_77 Website
 
+## 2026-11-14 · Lokale SEO Phase 3: Umland-Stadtseiten vertieft
+
+Elf Stadtseiten im Siegener Einzugsgebiet von nahezu wortgleichen Vorlagen
+(Doorway-Risiko, rund 60 Prozent Textüberschneidung) auf eigenständige, lokal
+belegte Inhalte umgebaut. Keine Design-, Schema- oder Strukturänderung, nur der
+sichtbare Inhalt je Stadt.
+
+- Überarbeitet: Kreuztal, Hilchenbach, Attendorn, Netphen, Bad Berleburg, Lennestadt, Olpe, Dillenburg, Gummersbach, Meschede, Arnsberg.
+- Je Seite echte regionale Substanz (reale Branchencluster und prägende Industrie als Regionskontext, nicht als Kundenbehauptung), stadtspezifische Abschnittsüberschriften und FAQ, aufgebrochenes statt templatehaftes Textgerüst.
+- Sachliche Altfehler behoben: verstümmelte Geografie und Entfernungen, "Schwarzwald-Tempo" (Hilchenbach), falsche Branche "Optik/Feinmechanik" für Dillenburg (gehört nach Wetzlar), falsch verortete Firma (Gummersbach).
+- Zweifach durch das Critic-Gate (ss-critic) geführt (Pilot und Ausroll), Fakten je Stadt geprüft. Sie-Form, kein Em-Dash, Design-System und strukturierte Daten unverändert.
+
 ## 2026-11-14 · Impressum und Datenschutz vervollständigt
 
 - Impressum: Handelsregister ergänzt (Amtsgericht Siegen, HRB 13092), Pflichtangabe für die GmbH nach § 5 TMG.
