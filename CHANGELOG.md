@@ -1,5 +1,10 @@
 # Changelog B_77 Website
 
+## 2026-11-14 · Impressum und Datenschutz vervollständigt
+
+- Impressum: Handelsregister ergänzt (Amtsgericht Siegen, HRB 13092), Pflichtangabe für die GmbH nach § 5 TMG.
+- Datenschutz: Hosting-Anbieter benannt (Vercel Inc., USA) samt USA-Übermittlung und EU-Standardvertragsklauseln; Rechtsgrundlagen für Server-Logfiles (Art. 6 Abs. 1 lit. f) und Kontaktanfragen (lit. b bzw. f) ergänzt; zuständige Aufsichtsbehörde (LDI NRW) genannt.
+
 ## 2026-11-13 · GA4 mit Consent-Banner, SEO-Auszeichnung, 2 Artikel
 
 Der bislang nur lokal (uncommitted) gepflegte Consent-/GA4- und SEO-Umbau ist
