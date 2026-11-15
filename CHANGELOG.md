@@ -1,5 +1,9 @@
 # Changelog B_77 Website
 
+## 2026-11-15 · Trailer: KI-Hinweis, neue Zeile 2, nur der Film
+
+Der Trailer zeigt den Hinweis „KI-generierte Bilder und Stimme“ dezent oben links und in der Endkarte. Zeile 2 spricht „Weltmarktführer“, mit neuer Tonaufnahme. Die Lesefassung mit internen Notizen entfällt auf der Live-Seite.
+
 ## 2026-11-15 · Trailer: sichtbarer Ton-Hinweis
 
 Blockiert der Browser den Ton ohne vorherigen Klick, zeigt der Trailer oben einen pulsierenden Hinweis „Ton an: einmal tippen“. Ein Tipp irgendwo schaltet den Sprecher sofort mit der aktuellen Zeile ein und blendet den Hinweis aus. Erlaubt der Browser Ton, erscheint kein Hinweis.

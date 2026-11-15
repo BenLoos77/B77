@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>B_77 · Ärmel hoch</title>
-<meta name="description" content="Ärmel hoch: Aus Trümmern wurden Werkhallen, aus Werkhallen Weltmarken. Jetzt holen wir uns die Märkte zurück. B_77, Vertriebsberatung für den Mittelstand.">
+<meta name="description" content="Ärmel hoch: Aus Trümmern wurden Werkhallen, aus Werkhallen Weltmarktführer. Jetzt holen wir uns die Märkte zurück. B_77, Vertriebsberatung für den Mittelstand.">
 <style>
 @font-face{font-family:'Satoshi';src:url(/trailer/assets/fonts/b77-2.woff2) format('woff2');font-weight:500;font-display:swap}
 @font-face{font-family:'Satoshi';src:url(/trailer/assets/fonts/b77-3.woff2) format('woff2');font-weight:700;font-display:swap}
@@ -119,6 +119,8 @@ body{background:#000;color:var(--paper);font-family:var(--sans);-webkit-font-smo
 .endcard .logo{position:relative;display:block;justify-self:center;margin-inline:auto;width:min(46vw,380px);opacity:0;transform:translateY(8px);transition:1.6s .5s}
 .endcard .claim{position:relative;margin-top:26px;padding:0 16px 0 calc(16px + .2em);font-family:var(--mono);font-weight:700;font-size:clamp(13px,1.5vw,16px);letter-spacing:.2em;color:var(--paper);opacity:0;text-shadow:0 1px 14px rgba(0,0,0,.6);transition:1.4s 1.1s}
 .endcard.reveal .logo{opacity:1;transform:none} .endcard.reveal .claim{opacity:1}
+.endcard .ai-end{position:relative;margin-top:16px;font-family:var(--mono);font-size:clamp(10px,1vw,12px);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);opacity:0;transition:1.4s 1.6s}
+.endcard.reveal .ai-end{opacity:.8}
 
 /* Chrome */
 .topbar{position:absolute;z-index:15;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;
@@ -127,6 +129,7 @@ body{background:#000;color:var(--paper);font-family:var(--sans);-webkit-font-smo
 .topbar .b i{width:7px;height:7px;border-radius:50%;background:var(--neon);box-shadow:0 0 12px var(--ghost)}
 .topbar .st:hover,.topbar .st:focus-visible{color:var(--paper)}
 .topbar .st{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.ai-note{position:absolute;z-index:15;top:56px;left:clamp(22px,6vw,96px);font-size:10px;letter-spacing:.16em;color:var(--muted);opacity:.8;text-shadow:0 1px 6px rgba(0,0,0,.7);pointer-events:none;white-space:nowrap}
 .hud{position:absolute;z-index:15;left:0;right:0;bottom:0;padding:0 clamp(22px,6vw,96px) clamp(16px,2.6vw,26px)}
 .prog{height:2px;background:rgba(244,241,234,.2);position:relative;margin-bottom:15px}
 .prog i{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--neon);transition:width .6s linear}
@@ -161,28 +164,6 @@ body{background:#000;color:var(--paper);font-family:var(--sans);-webkit-font-smo
   .fx::before,.fx::after,.fx{animation:none!important}
 }
 
-/* ===== Lesefassung ===== */
-.doc{background:var(--ink);padding:clamp(60px,9vw,120px) clamp(22px,6vw,96px) 90px}
-.doc .in{max-width:1060px;margin:0 auto}
-.doc .k{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--neon);display:flex;gap:12px;align-items:center}
-.doc .k::before{content:"";width:30px;height:1px;background:var(--neon)}
-.doc h2{font-weight:900;letter-spacing:-.04em;font-size:clamp(30px,4.6vw,58px);line-height:1;margin:22px 0 10px}
-.doc h2 em{font-family:var(--serif);font-style:italic;font-weight:400}
-.doc .sub{color:var(--muted);max-width:66ch;font-size:16px;margin-bottom:40px}
-.beats{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden}
-.brow{display:grid;grid-template-columns:54px 1fr 150px;background:var(--ink)}
-@media(max-width:720px){.brow{grid-template-columns:40px 1fr}.brow .c3{grid-column:2}}
-.brow>div{padding:16px 18px}
-.brow .c1{font-family:var(--mono);color:var(--neon);font-size:13px}
-.brow .c2{font-weight:600}.brow .c2 small{display:block;color:var(--muted);font-weight:400;font-size:13px;margin-top:4px}
-.brow .c3{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center}
-.brow.h{background:#141210;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
-.steps{margin-top:44px;display:grid;gap:14px;max-width:72ch}
-.step{display:grid;grid-template-columns:auto 1fr;gap:16px;border-top:1px solid var(--line);padding-top:14px}
-.step .no{font-family:var(--mono);font-size:12px;color:var(--neon)}
-.step .tx{color:#D5D1C8;font-size:15.5px}.step .tx b{color:var(--paper);font-weight:600}
-.flag{margin-top:34px;display:inline-flex;gap:10px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:12px 16px}.flag b{color:var(--neon);font-weight:400}
-.foot{color:var(--faint);font-family:var(--mono);font-size:10px;letter-spacing:.08em;margin-top:40px}
 </style>
 </head>
 <body>
@@ -252,11 +233,14 @@ body{background:#000;color:var(--paper);font-family:var(--sans);-webkit-font-smo
     </div>
   </div>
 
+  <div class="ai-note mono">KI-generierte Bilder und Stimme</div>
+
   <div class="cap" id="cap"><div class="num mono" id="num"></div><div class="line" id="line"></div></div>
 
   <div class="endcard" id="endcard">
     <img class="logo" src="/trailer/assets/B77_Logo_white.png" alt="B_77">
     <div class="claim mono">Vertriebsberatung für den Mittelstand</div>
+    <div class="ai-end mono">KI-generierte Bilder und Stimme</div>
   </div>
 
   <div class="hud">
@@ -273,33 +257,6 @@ body{background:#000;color:var(--paper);font-family:var(--sans);-webkit-font-smo
   <div class="playov" id="playov"><button id="playbtn" class="playbtn">Film abspielen ▶</button></div>
 </section>
 
-<section class="doc">
-  <div class="in">
-    <div class="k">B_77 · Website-Intro · Manifest</div>
-    <h2>Sechs Sätze, <em>ein</em> Kino-Moment.</h2>
-    <p class="sub">Weniger Motive, dafür hochwertige Kino-Bilder und graphische Übergänge: Letterbox-Format, Farb-Grading, Neon-Wipe, ein gestempeltes Qualitätssiegel, ein harter Schnitt am Wendepunkt und das sich öffnende Tor zum Schluss. Der Text trägt, der Ton ist optional (Schalter oben rechts, standardmäßig aus). Die Bilder sind fotoreal generiert und für die Produktion gegen echten Dreh austauschbar.</p>
-
-    <div class="beats">
-      <div class="brow h"><div>Beat</div><div>Satz / Bild</div><div>Übergang</div></div>
-      <div class="brow"><div class="c1">01</div><div class="c2">Aus Trümmern wurden Werkhallen.<small>Nachkriegs-Fabrik, zerstört</small></div><div class="c3">Auftakt, Letterbox</div></div>
-      <div class="brow"><div class="c1">02</div><div class="c2">In Werkhallen entstanden Weltmarken.<small>Werkhalle, epische Lichtschächte</small></div><div class="c3">Neon-Wipe</div></div>
-      <div class="brow"><div class="c1">03</div><div class="c2">Aus „Made in Germany“ wurde ein Qualitätssiegel.<small>Gebürsteter Stahl, Siegel eingebrannt</small></div><div class="c3">Iris, Stempel</div></div>
-      <div class="brow"><div class="c1">04</div><div class="c2">Wir haben uns lange genug auf unserem Erbe ausgeruht.<small>stille, kühle Halle</small></div><div class="c3">Langsamer Push, Stillstand</div></div>
-      <div class="brow"><div class="c1">05</div><div class="c2">Jetzt müssen wir die Zukunft gestalten.<small>Hochwertiger Industrieroboter, Präzision</small></div><div class="c3">Weißer Blitz</div></div>
-      <div class="brow"><div class="c1">06</div><div class="c2">Die Märkte gehören uns. Es wird Zeit, dass wir sie uns zurückholen!<small>Frachtflugzeug wird am Heck beladen</small></div><div class="c3">Tor-Öffnung → B_77-Punkt</div></div>
-    </div>
-
-    <div class="steps">
-      <div class="step"><div class="no mono">01</div><div class="tx"><b>Feinschliff.</b> Timing je Beat, Grading pro Szene und die Übergänge lassen sich weiter schärfen. Einzelne Bilder generiere ich bei Bedarf gezielt neu.</div></div>
-      <div class="step"><div class="no mono">02</div><div class="tx"><b>Produktion.</b> Für den Launch sind die generierten Bilder gegen echten Dreh oder lizenziertes Archivmaterial austauschbar, Look und Schnitt bleiben.</div></div>
-      <div class="step"><div class="no mono">03</div><div class="tx"><b>Gate.</b> Reduced-Motion, Tastatur, Pause und Überspringen sind dabei. Vor „kundenfähig" läuft es durchs Critic-Gate. Deploy entscheidest du.</div></div>
-    </div>
-
-    <div class="flag mono"><b>Status</b> Zwischenstand. Kino-Treatment, generierte Bilder. Nichts live, kein Deploy.</div>
-    <div class="foot">~/Projects/b77/website/intro/aermel-hoch.html · 2026-11-15</div>
-  </div>
-</section>
-
 <script>
 (function(){
   "use strict";
@@ -308,7 +265,7 @@ body{background:#000;color:var(--paper);font-family:var(--sans);-webkit-font-smo
   // hold = Pause nach dem Einblenden in ms, damit die Sprecherzeile vor dem nächsten Schnitt fertig ist (Zeilenlänge plus rund 0,5 s)
   var scenes=[
     {n:'01 / AUS TRÜMMERN', t:'Aus Trümmern wurden\n<b>Werkhallen.</b>',           img:'nachkrieg-v6.jpg', grade:'past',   tr:'fade',  dur:3000},
-    {n:'02 / WELTMARKEN',    t:'In Werkhallen entstanden\n<b>Weltmarken.</b>',     img:'man-hall-v4.jpg',        grade:'proud',  tr:'wipe',  dur:3100},
+    {n:'02 / WELTMARKTFÜHRER',    t:'In Werkhallen entstanden\n<b>Weltmarktführer.</b>',     img:'man-hall-v4.jpg',        grade:'proud',  tr:'wipe',  dur:3100},
     {n:'03 / QUALITÄT',      t:'Aus „Made in Germany“ wurde\nein <b>Qualitätssiegel.</b>', img:'stahl-v5.jpg', grade:'steel', tr:'iris', hold:2800,  dur:3600, seal:true},
     {n:'04 / DER STILLSTAND',t:'Wir haben uns lange genug\nauf unserem Erbe ausgeruht.', img:'man-idle.jpg', grade:'cold', tr:'push', hold:2700, dur:3600, still:true},
     {n:'05 / DIE ZUKUNFT',   t:'Jetzt müssen wir\ndie <b>Zukunft</b> gestalten.',          img:'robot-v8.jpg',     grade:'steel', tr:'cut', hold:2800,   dur:3000},
@@ -409,7 +366,7 @@ body{background:#000;color:var(--paper);font-family:var(--sans);-webkit-font-smo
 
   pp.addEventListener('click', function(){ if(playing) pause(); else play(); });
   rp.addEventListener('click', function(){ pause(); ended=false; endcard.className='endcard'; idx=0; play(); });
-  skip.addEventListener('click', function(){ pause(); document.querySelector('.doc').scrollIntoView({behavior:'smooth'}); });
+  skip.addEventListener('click', function(){ pause(); if(!ended) toEnd(); });
   playbtn.addEventListener('click', function(){ if(sound) voUnlock(); playov.classList.remove('on'); idx=0; play(); });
   snd.addEventListener('click', function(){
     sound=!sound;
@@ -422,7 +379,7 @@ body{background:#000;color:var(--paper);font-family:var(--sans);-webkit-font-smo
   document.addEventListener('keydown', function(e){
     var onBtn=!!(e.target && e.target.closest && e.target.closest('button'));
     if(e.code==='Space'){ if(onBtn) return; e.preventDefault(); if(playing) pause(); else play(); }
-    else if(e.code==='Escape'||(e.code==='Enter'&&!onBtn)){ pause(); document.querySelector('.doc').scrollIntoView({behavior:'smooth'}); }
+    else if(e.code==='Escape'||(e.code==='Enter'&&!onBtn)){ pause(); if(!ended) toEnd(); }
   });
 
   function begin(){
