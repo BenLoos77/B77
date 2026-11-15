@@ -315,7 +315,7 @@ body{background:#000;color:var(--paper);font-family:var(--sans);-webkit-font-smo
   var TRMS={fade:2600, wipe:2600, iris:3000, push:2800, cut:1000, doors:3000}; var HOLD=2600;
   var layers=[fa,fb], active=0, idx=0, timer=null, playing=false, started=false, ended=false;
   // Ton: eine Sprecherzeile je Szene (Stimme Helmut), standardmäßig an, per Schalter abschaltbar.
-  // Blockiert der Browser Ton ohne Klick, startet der Film erst über den Abspiel-Knopf (dann mit Ton).
+  // Blockiert der Browser Ton ohne Klick, läuft der Film trotzdem los; der Ton setzt bei der ersten Geste auf der Seite ein.
   var VO=scenes.map(function(_, k){ var a=new Audio(); a.preload='none'; a.src=A+'vo-helmut/zeile'+(k+1)+'.mp3'; return a; });
   var snd=document.getElementById('snd');
   var sound=true, voTimer=null, voReady=false, curIdx=-1, capShown=false;
@@ -336,7 +336,9 @@ body{background:#000;color:var(--paper);font-family:var(--sans);-webkit-font-smo
     else if(type==='iris') fx.classList.add('iris');
   }
   function voUnlock(){ // in einer Klick-Geste aufrufen: Audio freischalten (iOS), sofort wieder anhalten
-    if(voReady) return; voReady=true;
+    if(voReady) return;
+    if(navigator.userActivation && !navigator.userActivation.isActive) return; // nur in echter Geste, sonst zählt der Versuch nicht
+    voReady=true;
     VO.forEach(function(a){ a.preload='auto'; try{ var p=a.play(); a.pause(); a.currentTime=0; if(p && p.catch) p.catch(function(){}); }catch(e){} });
   }
   function voStop(){ clearTimeout(voTimer); VO.forEach(function(a){ a.pause(); }); }
@@ -420,8 +422,10 @@ body{background:#000;color:var(--paper);font-family:var(--sans);-webkit-font-smo
     // Prüfen, ob der Browser Ton ohne Klick erlaubt (leise Probe mit Lautstärke 0)
     var t=VO[0], vol=t.volume; t.preload='auto'; t.volume=0;
     var go=function(){ t.pause(); t.currentTime=0; t.volume=vol; voReady=true; VO.forEach(function(a){ a.preload='auto'; }); setTimeout(play, 700); };
-    var ask=function(){ t.volume=vol; buildFrame(layers[active], scenes[0]); layers[active].className='frame live go'; grade.className='grade g-'+scenes[0].grade;
-      playbtn.textContent='Film mit Ton abspielen ▶'; playov.classList.add('on'); playbtn.focus({preventScroll:true}); };
+    var ask=function(){ t.volume=vol; setTimeout(play, 700);
+      var wake=function(){ ['click','touchend','keydown'].forEach(function(ev){ document.removeEventListener(ev, wake); });
+        if(!sound) return; voUnlock(); if(playing && capShown && curIdx>=0) voPlay(curIdx, 0); };
+      ['click','touchend','keydown'].forEach(function(ev){ document.addEventListener(ev, wake); }); };
     try{ var p=t.play(); if(p && p.then) p.then(go, ask); else go(); }catch(e){ ask(); }
   }
   if('IntersectionObserver' in window){
