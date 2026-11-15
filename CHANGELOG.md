@@ -1,5 +1,9 @@
 # Changelog B_77 Website
 
+## 2026-11-15 · Trailer: Ton standardmäßig an
+
+Der Sprecherton im Trailer ist jetzt von Anfang an eingeschaltet und lässt sich über den Schalter oben rechts ausschalten. Erlaubt der Browser keinen Ton ohne Klick (Safari, iPhone), startet der Film nicht stumm, sondern zeigt „Film mit Ton abspielen ▶“ und läuft nach dem Klick mit Ton.
+
 ## 2026-11-15 · Trailer „Ärmel hoch“ unter /trailer
 
 Das Manifest-Intro als eigenständige Seite b77.de/trailer: sechs Bildszenen,
