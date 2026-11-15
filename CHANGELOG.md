@@ -1,5 +1,16 @@
 # Changelog B_77 Website
 
+## 2026-11-15 · Lokale SEO: 9 große und fernere Stadtseiten (Hybrid)
+
+Die neun verbleibenden Stadtseiten außerhalb des Siegener Umlands von der alten
+Doorway-Vorlage auf eine ehrliche Hybrid-Lösung umgebaut. Nur sichtbarer Inhalt
+je Stadt, keine Design-, Schema- oder Strukturänderung.
+
+- Echte Lokalseiten mit verifiziertem Industrieanker: Dortmund (Wilo), Wuppertal (Knipex, Bayer), Wetzlar (Optik/Leica), Hagen (C.D. Wälzholz), Iserlohn (Märkischer Metallcluster), Marburg (Pharma/Life-Sciences).
+- Ehrlich überregional statt vorgetäuschtem Standort: Köln, Düsseldorf, Bonn (realer Marktkontext, Positionierung "aus Siegen, überregional", kein fingiertes lokales Büro).
+- Altfehler behoben: falsche Entfernungen und Branchen (Hagen "Batterietechnik", Düsseldorf "130 km"), unehrliche Nähe-Behauptung und Meta-"ganz nah dran", unbelegte "über 25 Jahre Erfahrung", Hagen "gehört zu Südwestfalen" (ist kreisfrei).
+- Durch das Critic-Gate (ss-critic) geführt: PASS nach Nacharbeit (Fakten, Ehrlichkeit, Doorway-Fingerabdruck). Sie-Form, kein Em-Dash, Design und strukturierte Daten unverändert.
+
 ## 2026-11-14 · Lokale SEO Phase 3: Umland-Stadtseiten vertieft
 
 Elf Stadtseiten im Siegener Einzugsgebiet von nahezu wortgleichen Vorlagen
