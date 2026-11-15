@@ -1,5 +1,15 @@
 # Changelog B_77 Website
 
+## 2026-11-15 · SEO Phase 4, Welle 1: Ratgeber-Hub und 5 Fachartikel
+
+Start der nationalen Content-Offensive. Die Pillar-Seite /vertriebsberatung wird
+zum Hub, der auf einen wachsenden Ratgeber verlinkt, plus fünf neue Fachartikel
+mit echter Vertriebspraxis statt Füllstoff.
+
+- Neue On-Site-Artikel (BlogPosting-Schema, Breadcrumb auf die passende Leistungsseite, interne Verlinkung): "Was kostet eine Vertriebsberatung?", "Woran erkennt man eine gute Vertriebsberatung?", "Vertriebsberatung, Training oder Interim: was wann passt", "Vertrieb im Mittelstand aufbauen: Schritte und Fehler", "Aktiver Vertrieb statt Warten auf Anfragen".
+- Pillar /vertriebsberatung um einen Ratgeber-Hub ergänzt, der Autorität an die Artikel verteilt; die 5 URLs in sitemap.xml aufgenommen.
+- Durch das Critic-Gate (ss-critic) geführt: PASS auf Substanz, Nacharbeit am Handwerk (einheitliche Anführungszeichen, Kachel-Rhythmus) erledigt. Sie-Form, kein Em-Dash.
+
 ## 2026-11-15 · Lokale SEO: 9 große und fernere Stadtseiten (Hybrid)
 
 Die neun verbleibenden Stadtseiten außerhalb des Siegener Umlands von der alten
