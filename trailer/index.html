@@ -139,6 +139,15 @@ body{background:#000;color:var(--paper);font-family:var(--sans);-webkit-font-smo
 .playov.on{display:grid}
 .playbtn{appearance:none;border:1px solid var(--neon);background:rgba(0,0,0,.4);color:var(--paper);font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:16px 26px;border-radius:999px;cursor:pointer}
 .playbtn:hover{background:var(--neon);color:#111}
+.tonhint{position:absolute;z-index:18;top:clamp(64px,11vh,104px);left:50%;transform:translate(-50%,-8px);display:flex;align-items:center;gap:10px;
+  appearance:none;border:1px solid var(--neon);background:rgba(0,0,0,.55);color:var(--paper);font-family:var(--mono);font-size:12px;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;padding:12px 20px;border-radius:999px;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .5s,transform .5s}
+.tonhint svg{width:16px;height:16px;color:var(--neon);flex:none}
+.tonhint.on{opacity:1;transform:translate(-50%,0);pointer-events:auto;animation:tonpulse 1.6s ease-in-out infinite}
+.tonhint:hover{background:var(--neon);color:#111}.tonhint:hover svg{color:#111}
+@keyframes tonpulse{0%,100%{box-shadow:0 0 0 0 rgba(229,255,0,.45)}50%{box-shadow:0 0 0 10px rgba(229,255,0,0)}}
+@media(prefers-reduced-motion:reduce){.tonhint.on{animation:none}}
+@media(max-width:380px){.tonhint{font-size:11px;letter-spacing:.12em;padding:11px 16px}}
 .topbar .tbr{display:flex;align-items:center;gap:14px;pointer-events:auto}
 .topbar .btn{pointer-events:auto}
 #snd svg{width:16px;height:16px;display:block}
@@ -260,6 +269,7 @@ body{background:#000;color:var(--paper);font-family:var(--sans);-webkit-font-smo
     </div>
   </div>
 
+  <button class="tonhint" id="tonhint" type="button" aria-label="Ton einschalten"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5h3.3L11.5 6v12l-4.7-3.5H3.5z"/><path d="M15 9.2a3.6 3.6 0 0 1 0 5.6"/><path d="M17.6 6.6a7.4 7.4 0 0 1 0 10.8"/></svg><span>Ton an: einmal tippen</span></button>
   <div class="playov" id="playov"><button id="playbtn" class="playbtn">Film abspielen ▶</button></div>
 </section>
 
@@ -405,7 +415,7 @@ body{background:#000;color:var(--paper);font-family:var(--sans);-webkit-font-smo
     sound=!sound;
     snd.setAttribute('aria-pressed', String(sound));
     snd.title = sound ? 'Ton aus' : 'Ton an';
-    if(!sound){ voStop(); return; }
+    if(!sound){ voStop(); var h=document.getElementById('tonhint'); if(h) h.classList.remove('on'); return; }
     voUnlock();
     if(playing && capShown && curIdx>=0) voPlay(curIdx, 0);
   });
@@ -422,8 +432,10 @@ body{background:#000;color:var(--paper);font-family:var(--sans);-webkit-font-smo
     // Prüfen, ob der Browser Ton ohne Klick erlaubt (leise Probe mit Lautstärke 0)
     var t=VO[0], vol=t.volume; t.preload='auto'; t.volume=0;
     var go=function(){ t.pause(); t.currentTime=0; t.volume=vol; voReady=true; VO.forEach(function(a){ a.preload='auto'; }); setTimeout(play, 700); };
-    var ask=function(){ t.volume=vol; setTimeout(play, 700);
-      var wake=function(){ ['click','touchend','keydown'].forEach(function(ev){ document.removeEventListener(ev, wake); });
+    var hint=document.getElementById('tonhint');
+    var ask=function(){ t.volume=vol; setTimeout(play, 700); if(sound) setTimeout(function(){ if(!voReady && sound) hint.classList.add('on'); }, 900);
+      var wake=function(){ if(navigator.userActivation && !navigator.userActivation.isActive) return;
+        ['click','touchend','keydown'].forEach(function(ev){ document.removeEventListener(ev, wake); }); hint.classList.remove('on');
         if(!sound) return; voUnlock(); if(playing && capShown && curIdx>=0) voPlay(curIdx, 0); };
       ['click','touchend','keydown'].forEach(function(ev){ document.addEventListener(ev, wake); }); };
     try{ var p=t.play(); if(p && p.then) p.then(go, ask); else go(); }catch(e){ ask(); }

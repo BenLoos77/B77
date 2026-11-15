@@ -1,5 +1,9 @@
 # Changelog B_77 Website
 
+## 2026-11-15 · Trailer: sichtbarer Ton-Hinweis
+
+Blockiert der Browser den Ton ohne vorherigen Klick, zeigt der Trailer oben einen pulsierenden Hinweis „Ton an: einmal tippen“. Ein Tipp irgendwo schaltet den Sprecher sofort mit der aktuellen Zeile ein und blendet den Hinweis aus. Erlaubt der Browser Ton, erscheint kein Hinweis.
+
 ## 2026-11-15 · Trailer startet immer sofort
 
 Kein Abspiel-Knopf mehr: Der Trailer startet immer von selbst. Blockiert der Browser Ton ohne Klick, läuft der Film trotzdem, und der Sprecher setzt beim ersten Klick, Tippen oder Tastendruck mit der aktuellen Zeile ein.
