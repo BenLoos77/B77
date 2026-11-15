@@ -1,5 +1,13 @@
 # Changelog B_77 Website
 
+## 2026-11-15 · Trailer „Ärmel hoch“ unter /trailer
+
+Das Manifest-Intro als eigenständige Seite b77.de/trailer: sechs Bildszenen,
+optional mit Sprecherton (standardmäßig aus), Endkarte mit Logo und Claim.
+
+- Neuer Ordner `trailer/` mit nur den benötigten Dateien (6 Bilder, Logo, 6 lokale Schriften, 6 Tonspuren), keine externen Einbindungen, nicht in der sitemap.
+- Endkarte mobil korrigiert: Logo steht mittig über dem Claim. Kopfleiste mit Link zur Startseite und zum Impressum.
+
 ## 2026-11-15 · SEO Phase 4, Welle 1: Ratgeber-Hub und 5 Fachartikel
 
 Start der nationalen Content-Offensive. Die Pillar-Seite /vertriebsberatung wird
