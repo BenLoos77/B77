@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B_77 · Manifest</title>
+<meta name="description" content="B_77 Website-Intro: Kino-Bildfolge, sechs Beats, graphische Übergänge, optional mit Sprecher. Aus Trümmern wurden Werkhallen, bis die Märkte zurückgeholt werden.">
+<style>
+@font-face{font-family:'Satoshi';src:url(assets/fonts/b77-2.woff2) format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Satoshi';src:url(assets/fonts/b77-3.woff2) format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Satoshi';src:url(assets/fonts/b77-4.woff2) format('woff2');font-weight:900;font-display:swap}
+@font-face{font-family:'Space Mono';src:url(assets/fonts/b77-13.woff2) format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Space Mono';src:url(assets/fonts/b77-16.woff2) format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Newsreader';font-style:italic;src:url(assets/fonts/b77-10.woff2) format('woff2');font-weight:400;font-display:swap}
+
+:root{
+  --ink:#0A0907; --paper:#F4F1EA; --muted:#A6A298; --faint:#6E6A60;
+  --neon:#E5FF00; --ghost:rgba(229,255,0,.18); --line:rgba(244,241,234,.14);
+  --sans:'Satoshi',system-ui,sans-serif; --mono:'Space Mono',monospace; --serif:'Newsreader',Georgia,serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#000;color:var(--paper);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.mono{font-family:var(--mono);letter-spacing:.16em;text-transform:uppercase}
+
+/* ===== Kino-Bühne ===== */
+.cinema{position:relative;height:100svh;min-height:560px;background:#000;overflow:hidden;isolation:isolate}
+.band{position:absolute;left:0;right:0;top:0;bottom:0;overflow:hidden}
+.bar{position:absolute;left:0;right:0;height:0;background:#000;z-index:14;transition:height 1.1s cubic-bezier(.7,0,.2,1)}
+.bar.top{top:0}.bar.bot{bottom:0}
+.cinema.rolled .bar{height:clamp(26px,9vh,88px)}
+
+.frame{position:absolute;inset:0;opacity:0;z-index:1;
+  transition:opacity .7s ease, transform 1.15s cubic-bezier(.22,.9,.26,1), clip-path 1.15s cubic-bezier(.22,.9,.26,1);
+  will-change:opacity,transform,clip-path;background:#000}
+.frame.live{opacity:1;z-index:2}
+.frame .fimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.12);transition:transform 6.5s linear}
+.frame.live .fimg{transform:scale(1.02)}
+.frame.still .fimg{transition:transform 7s linear;transform:scale(1.04)}
+
+/* Enter-Zustände der Übergänge */
+.tr-wipe{clip-path:inset(0 100% 0 0)} .tr-wipe.go{clip-path:inset(0 0 0 0)}
+.tr-iris{clip-path:circle(0% at 50% 52%)} .tr-iris.go{clip-path:circle(150% at 50% 52%)}
+.tr-doors{clip-path:inset(0 50% 0 50%)} .tr-doors.go{clip-path:inset(0 0 0 0)}
+.tr-push{transform:translateX(9%) scale(1.08)} .tr-push.go{transform:translateX(0) scale(1.02)}
+.tr-cut{transition:opacity .12s linear}
+.frame.exit{opacity:0;transform:scale(1.06);transition:opacity .9s ease, transform 1.2s ease}
+.frame.exit-push{opacity:0;transform:translateX(-14%) scale(1.06)}
+
+/* Grade / Kinostimmung */
+.grade{position:absolute;inset:0;z-index:5;pointer-events:none;mix-blend-mode:soft-light;transition:background 1s ease, opacity 1s ease}
+.g-past{background:radial-gradient(120% 120% at 50% 40%,rgba(150,96,36,.34),rgba(22,14,8,.6))}
+.g-proud{background:linear-gradient(180deg,rgba(60,120,140,.16),rgba(150,110,40,.26))}
+.g-steel{background:radial-gradient(90% 90% at 60% 40%,rgba(120,150,170,.18),rgba(6,8,12,.62))}
+.g-cold{background:linear-gradient(180deg,rgba(120,160,200,.2),rgba(8,16,28,.6));mix-blend-mode:normal;opacity:.9}
+.g-future{background:radial-gradient(80% 80% at 58% 42%,rgba(229,255,0,.16),rgba(14,12,4,.5))}
+.g-rise{background:radial-gradient(90% 90% at 60% 36%,rgba(255,200,90,.2),rgba(20,14,6,.5))}
+.grain{position:absolute;inset:0;z-index:9;pointer-events:none;opacity:.07;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.bloom{position:absolute;left:-10%;right:-10%;top:40%;height:20%;z-index:6;pointer-events:none;opacity:.5;
+  background:radial-gradient(60% 100% at 50% 50%,rgba(255,240,200,.14),transparent 70%);filter:blur(16px)}
+.vig{position:absolute;inset:0;z-index:8;pointer-events:none;
+  background:radial-gradient(130% 95% at 50% 46%,transparent 44%,rgba(0,0,0,.5)),linear-gradient(0deg,rgba(0,0,0,.55),transparent 34%,rgba(0,0,0,.4))}
+
+/* FX-Layer (Neon-Wipe / Türen / Flash) */
+.fx{position:absolute;inset:0;z-index:13;pointer-events:none}
+.fx.wipe::before{content:"";position:absolute;top:0;bottom:0;width:3px;left:0;background:var(--neon);box-shadow:0 0 30px 3px var(--ghost);animation:sweepX var(--d,2.6s) cubic-bezier(.22,.9,.26,1) forwards}
+@keyframes sweepX{from{left:-1%}to{left:101%}}
+.fx.doors::before,.fx.doors::after{content:"";position:absolute;top:0;bottom:0;width:2px;background:var(--neon);box-shadow:0 0 26px 2px var(--ghost)}
+.fx.doors::before{left:50%;animation:doorL var(--d,3s) cubic-bezier(.22,.9,.26,1) forwards}
+.fx.doors::after{right:50%;animation:doorR var(--d,3s) cubic-bezier(.22,.9,.26,1) forwards}
+@keyframes doorL{to{left:-1%}} @keyframes doorR{to{right:-1%}}
+.fx.cut{animation:flash var(--d,1s) ease forwards}
+@keyframes flash{0%{background:rgba(255,255,255,0)}18%{background:rgba(255,255,255,.7)}40%{background:rgba(229,255,0,.25)}100%{background:rgba(255,255,255,0)}}
+.fx.iris::before{content:"";position:absolute;left:50%;top:52%;width:0;height:0;border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 2px rgba(229,255,0,.9),0 0 90px 16px rgba(229,255,0,.32);animation:irisRing var(--d,3s) cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes irisRing{0%{width:0;height:0;opacity:1}85%{opacity:.85}100%{width:280vmax;height:280vmax;opacity:0}}
+
+/* Qualitätssiegel */
+.seal{position:absolute;z-index:11;left:66%;top:42%;width:min(38vh,320px);aspect-ratio:1;transform:translate(-50%,-50%);opacity:0;
+  transition:opacity .6s ease}
+.seal.on{opacity:1}
+.seal svg{overflow:visible}
+.seal .heat{color:#ff7a1a;opacity:0}
+.seal .burn{color:#1c1812;opacity:0}
+.seal .h-ring,.seal .b-ring{fill:none;stroke:currentColor;stroke-width:4.4}
+.seal .h-ring.thin,.seal .b-ring.thin{stroke-width:2.6}
+.seal .h-txt,.seal .b-txt{fill:currentColor;font-family:var(--mono);font-size:14px;font-weight:700;letter-spacing:4px}
+.seal .h-dot,.seal .b-dot{fill:currentColor}
+.seal .h-mk,.seal .b-mk{fill:currentColor;font-family:var(--sans);font-weight:900;font-size:66px}
+.seal.on .heat{animation:heatUp 2.8s ease-out .05s forwards}
+.seal.on .burn{animation:burnIn 1.5s .35s cubic-bezier(.2,.7,.2,1) forwards}
+.seal .scorch{color:#3a2412;opacity:0}
+.seal.on .scorch{animation:scorchIn 1.8s .6s ease-out forwards}
+@keyframes scorchIn{from{opacity:0}to{opacity:.7}}
+@keyframes heatUp{0%{opacity:0}14%{opacity:1}100%{opacity:0}}
+@keyframes burnIn{from{opacity:0;filter:blur(7px)}to{opacity:1;filter:blur(0)}}
+@media(prefers-reduced-motion:reduce){.seal.on .heat{animation:none;opacity:0}.seal.on .burn{animation:none;opacity:1;filter:none}}
+.seal svg{width:100%;height:100%}
+.seal .ring{fill:none;stroke:var(--neon);stroke-width:1.5;opacity:.9}
+.seal .tx{fill:var(--paper);font-family:var(--mono);font-size:7.2px;letter-spacing:3px;text-transform:uppercase}
+.seal .mk{fill:var(--neon);font-family:var(--sans);font-weight:900;font-size:34px}
+
+/* Caption */
+.cap{position:absolute;z-index:12;left:clamp(22px,6vw,96px);bottom:clamp(96px,16vh,170px);max-width:min(88vw,760px)}
+.num{font-family:var(--mono);font-size:11px;letter-spacing:.24em;color:var(--neon);margin-bottom:18px;opacity:0;transform:translateY(8px);transition:.6s;text-shadow:0 1px 12px rgba(0,0,0,.8)}
+.line{font-weight:900;letter-spacing:-.04em;line-height:1.04;font-size:clamp(22px,3.5vw,46px);white-space:pre-line;
+  clip-path:inset(0 0 104% 0);transition:clip-path .95s cubic-bezier(.2,.85,.2,1) .12s}
+.line{text-shadow:0 2px 22px rgba(0,0,0,.75),0 0 3px rgba(0,0,0,.6)}
+.line b{color:var(--neon);font-weight:900}
+.line s{color:var(--faint);text-decoration:line-through;text-decoration-thickness:4px}
+.line em{font-family:var(--serif);font-style:italic;font-weight:400}
+.cap.show .num{opacity:1;transform:none}
+.cap.show .line{clip-path:inset(-14% 0 -14% 0)}
+.cap::before{content:"";position:absolute;inset:-40px -70px -46px -46px;background:radial-gradient(closest-side,rgba(0,0,0,.5),rgba(0,0,0,0));z-index:-1;pointer-events:none}
+
+/* Logo-Finale */
+.endcard{position:absolute;inset:0;z-index:16;display:grid;place-content:center;text-align:center;background:var(--ink);opacity:0;pointer-events:none;transition:opacity 2.4s ease}
+.endcard.on{opacity:1}
+/* Endkarte ohne Akzentpunkt */
+.endcard .logo{position:relative;display:block;justify-self:center;margin-inline:auto;width:min(46vw,380px);opacity:0;transform:translateY(8px);transition:1.6s .5s}
+.endcard .claim{position:relative;margin-top:26px;padding:0 16px 0 calc(16px + .2em);font-family:var(--mono);font-weight:700;font-size:clamp(13px,1.5vw,16px);letter-spacing:.2em;color:var(--paper);opacity:0;text-shadow:0 1px 14px rgba(0,0,0,.6);transition:1.4s 1.1s}
+.endcard.reveal .logo{opacity:1;transform:none} .endcard.reveal .claim{opacity:1}
+.endcard .ai-end{position:relative;margin-top:16px;font-family:var(--mono);font-size:clamp(10px,1vw,12px);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);opacity:0;transition:1.4s 1.6s}
+.endcard.reveal .ai-end{opacity:.8}
+
+/* Chrome */
+.topbar{position:absolute;z-index:15;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;
+  padding:clamp(16px,2.4vw,24px) clamp(22px,6vw,96px);pointer-events:none}
+.topbar .b{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:-.02em;font-size:17px}
+.topbar .b i{width:7px;height:7px;border-radius:50%;background:var(--neon);box-shadow:0 0 12px var(--ghost)}
+.topbar .st{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.ai-note{position:absolute;z-index:15;top:56px;left:clamp(22px,6vw,96px);font-size:10px;letter-spacing:.16em;color:var(--muted);opacity:.8;text-shadow:0 1px 6px rgba(0,0,0,.7);pointer-events:none;white-space:nowrap}
+.hud{position:absolute;z-index:15;left:0;right:0;bottom:0;padding:0 clamp(22px,6vw,96px) clamp(16px,2.6vw,26px)}
+.prog{height:2px;background:rgba(244,241,234,.2);position:relative;margin-bottom:15px}
+.prog i{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--neon);transition:width .6s linear}
+.ctrl{display:flex;align-items:center;gap:13px}
+.btn{appearance:none;border:1px solid var(--line);background:rgba(0,0,0,.3);color:var(--paper);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:11px;display:grid;place-items:center;transition:.2s}
+.btn:hover{border-color:var(--neon);color:var(--neon)}
+.btn.skip{width:auto;border-radius:999px;padding:0 16px;font-size:10px;letter-spacing:.14em;margin-left:auto}
+.count{font-size:11px;color:var(--muted);font-family:var(--mono)}
+.playov{position:absolute;inset:0;z-index:17;display:none;place-items:center;background:rgba(6,5,4,.5)}
+.playov.on{display:grid}
+.playbtn{appearance:none;border:1px solid var(--neon);background:rgba(0,0,0,.4);color:var(--paper);font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:16px 26px;border-radius:999px;cursor:pointer}
+.playbtn:hover{background:var(--neon);color:#111}
+.tonhint{position:absolute;z-index:18;top:clamp(64px,11vh,104px);left:50%;transform:translate(-50%,-8px);display:flex;align-items:center;gap:10px;
+  appearance:none;border:1px solid var(--neon);background:rgba(0,0,0,.55);color:var(--paper);font-family:var(--mono);font-size:12px;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;padding:12px 20px;border-radius:999px;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .5s,transform .5s}
+.tonhint svg{width:16px;height:16px;color:var(--neon);flex:none}
+.tonhint.on{opacity:1;transform:translate(-50%,0);pointer-events:auto;animation:tonpulse 1.6s ease-in-out infinite}
+.tonhint:hover{background:var(--neon);color:#111}.tonhint:hover svg{color:#111}
+@keyframes tonpulse{0%,100%{box-shadow:0 0 0 0 rgba(229,255,0,.45)}50%{box-shadow:0 0 0 10px rgba(229,255,0,0)}}
+@media(prefers-reduced-motion:reduce){.tonhint.on{animation:none}}
+@media(max-width:380px){.tonhint{font-size:11px;letter-spacing:.12em;padding:11px 16px}}
+.topbar .tbr{display:flex;align-items:center;gap:14px;pointer-events:auto}
+.topbar .btn{pointer-events:auto}
+#snd svg{width:16px;height:16px;display:block}
+#snd .sw-on{display:none}
+#snd[aria-pressed="true"]{border-color:var(--neon);color:var(--neon)}
+#snd[aria-pressed="true"] .sw-on{display:inline}
+#snd[aria-pressed="true"] .sw-off{display:none}
+
+@media(prefers-reduced-motion:reduce){
+  .frame,.frame .fimg,.line,.num,.seal,.bar,.endcard *{transition:none!important}
+  .fx::before,.fx::after,.fx{animation:none!important}
+}
+
+/* ===== Lesefassung ===== */
+.doc{background:var(--ink);padding:clamp(60px,9vw,120px) clamp(22px,6vw,96px) 90px}
+.doc .in{max-width:1060px;margin:0 auto}
+.doc .k{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--neon);display:flex;gap:12px;align-items:center}
+.doc .k::before{content:"";width:30px;height:1px;background:var(--neon)}
+.doc h2{font-weight:900;letter-spacing:-.04em;font-size:clamp(30px,4.6vw,58px);line-height:1;margin:22px 0 10px}
+.doc h2 em{font-family:var(--serif);font-style:italic;font-weight:400}
+.doc .sub{color:var(--muted);max-width:66ch;font-size:16px;margin-bottom:40px}
+.beats{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.brow{display:grid;grid-template-columns:54px 1fr 150px;background:var(--ink)}
+@media(max-width:720px){.brow{grid-template-columns:40px 1fr}.brow .c3{grid-column:2}}
+.brow>div{padding:16px 18px}
+.brow .c1{font-family:var(--mono);color:var(--neon);font-size:13px}
+.brow .c2{font-weight:600}.brow .c2 small{display:block;color:var(--muted);font-weight:400;font-size:13px;margin-top:4px}
+.brow .c3{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center}
+.brow.h{background:#141210;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.steps{margin-top:44px;display:grid;gap:14px;max-width:72ch}
+.step{display:grid;grid-template-columns:auto 1fr;gap:16px;border-top:1px solid var(--line);padding-top:14px}
+.step .no{font-family:var(--mono);font-size:12px;color:var(--neon)}
+.step .tx{color:#D5D1C8;font-size:15.5px}.step .tx b{color:var(--paper);font-weight:600}
+.flag{margin-top:34px;display:inline-flex;gap:10px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:12px 16px}.flag b{color:var(--neon);font-weight:400}
+.foot{color:var(--faint);font-family:var(--mono);font-size:10px;letter-spacing:.08em;margin-top:40px}
+</style>
+</head>
+<body>
+
+<section class="cinema" id="cinema">
+  <div class="band">
+    <div class="frame" id="fa"></div>
+    <div class="frame" id="fb"></div>
+    <div class="grade" id="grade"></div>
+    <div class="bloom"></div>
+    <div class="vig"></div>
+    <div class="grain"></div>
+    <div class="fx" id="fx"></div>
+
+    <div class="seal" id="seal">
+      <svg viewBox="0 0 200 200" aria-hidden="true">
+        <defs>
+          <path id="sealTop" d="M27,100 A73,73 0 0,1 173,100"/>
+          <path id="sealBot" d="M17,100 A83,83 0 0,0 183,100"/>
+          <filter id="burnEdge" x="-5%" y="-5%" width="110%" height="110%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="n"/>
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/>
+          </filter>
+          <filter id="heatGlow" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="4"/>
+          </filter>
+        </defs>
+        <g class="heat" filter="url(#heatGlow)">
+          <circle class="h-ring" cx="100" cy="100" r="96"/>
+          <circle class="h-ring thin" cx="100" cy="100" r="60"/>
+          <text class="h-txt"><textPath href="#sealTop" startOffset="50%" text-anchor="middle">QUALITÄTSSIEGEL</textPath></text>
+          <text class="h-txt"><textPath href="#sealBot" startOffset="50%" text-anchor="middle">„MADE IN GERMANY“</textPath></text>
+          <circle class="h-dot" cx="24" cy="100" r="3.4"/>
+          <circle class="h-dot" cx="176" cy="100" r="3.4"/>
+          <text class="h-mk" x="100" y="122" text-anchor="middle">D</text>
+        </g>
+        <g class="scorch" filter="url(#heatGlow)">
+          <circle class="b-ring" cx="100" cy="100" r="96"/>
+          <circle class="b-ring thin" cx="100" cy="100" r="60"/>
+          <text class="b-txt"><textPath href="#sealTop" startOffset="50%" text-anchor="middle">QUALITÄTSSIEGEL</textPath></text>
+            <text class="b-txt"><textPath href="#sealBot" startOffset="50%" text-anchor="middle">„MADE IN GERMANY“</textPath></text>
+            <circle class="b-dot" cx="24" cy="100" r="3.4"/>
+            <circle class="b-dot" cx="176" cy="100" r="3.4"/>
+          <text class="b-mk" x="100" y="122" text-anchor="middle">D</text>
+        </g>
+        <g class="burn">
+          <g filter="url(#burnEdge)">
+            <circle class="b-ring" cx="100" cy="100" r="96"/>
+            <circle class="b-ring thin" cx="100" cy="100" r="60"/>
+            <text class="b-txt"><textPath href="#sealTop" startOffset="50%" text-anchor="middle">QUALITÄTSSIEGEL</textPath></text>
+            <text class="b-txt"><textPath href="#sealBot" startOffset="50%" text-anchor="middle">„MADE IN GERMANY“</textPath></text>
+            <circle class="b-dot" cx="24" cy="100" r="3.4"/>
+            <circle class="b-dot" cx="176" cy="100" r="3.4"/>
+            <text class="b-mk" x="100" y="122" text-anchor="middle">D</text>
+          </g>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <div class="bar top"></div>
+  <div class="bar bot"></div>
+
+  <div class="topbar"><div class="b"><i></i>B_77</div>
+    <div class="tbr"><div class="st">Kino-Bildfolge</div>
+      <button id="snd" class="btn" aria-pressed="true" aria-label="Ton" title="Ton aus"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5h3.3L11.5 6v12l-4.7-3.5H3.5z"/><g class="sw-on"><path d="M15 9.2a3.6 3.6 0 0 1 0 5.6"/><path d="M17.6 6.6a7.4 7.4 0 0 1 0 10.8"/></g><g class="sw-off"><path d="M15.5 9.5l5 5M20.5 9.5l-5 5"/></g></svg></button>
+    </div>
+  </div>
+
+  <div class="ai-note mono">KI-generierte Bilder und Stimme</div>
+
+  <div class="cap" id="cap"><div class="num mono" id="num"></div><div class="line" id="line"></div></div>
+
+  <div class="endcard" id="endcard">
+    <img class="logo" src="assets/B77_Logo_white.png" alt="B_77">
+    <div class="claim mono">Vertriebsberatung für den Mittelstand</div>
+    <div class="ai-end mono">KI-generierte Bilder und Stimme</div>
+  </div>
+
+  <div class="hud">
+    <div class="prog"><i id="prog"></i></div>
+    <div class="ctrl">
+      <button id="pp" class="btn" aria-label="Pause/Play">❚❚</button>
+      <button id="rp" class="btn" aria-label="Von vorn">⟲</button>
+      <span class="count" id="count">01 / 06</span>
+      <button id="skip" class="btn skip mono">Überspringen →</button>
+    </div>
+  </div>
+
+  <button class="tonhint" id="tonhint" type="button" aria-label="Ton einschalten"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5h3.3L11.5 6v12l-4.7-3.5H3.5z"/><path d="M15 9.2a3.6 3.6 0 0 1 0 5.6"/><path d="M17.6 6.6a7.4 7.4 0 0 1 0 10.8"/></svg><span>Ton an: einmal tippen</span></button>
+  <div class="playov" id="playov"><button id="playbtn" class="playbtn">Film abspielen ▶</button></div>
+</section>
+
+<section class="doc">
+  <div class="in">
+    <div class="k">B_77 · Website-Intro · Manifest</div>
+    <h2>Sechs Sätze, <em>ein</em> Kino-Moment.</h2>
+    <p class="sub">Weniger Motive, dafür hochwertige Kino-Bilder und graphische Übergänge: Letterbox-Format, Farb-Grading, Neon-Wipe, ein gestempeltes Qualitätssiegel, ein harter Schnitt am Wendepunkt und das sich öffnende Tor zum Schluss. Der Text trägt, der Ton ist optional (Schalter oben rechts, standardmäßig aus). Die Bilder sind fotoreal generiert und für die Produktion gegen echten Dreh austauschbar.</p>
+
+    <div class="beats">
+      <div class="brow h"><div>Beat</div><div>Satz / Bild</div><div>Übergang</div></div>
+      <div class="brow"><div class="c1">01</div><div class="c2">Aus Trümmern wurden Werkhallen.<small>Nachkriegs-Fabrik, zerstört</small></div><div class="c3">Auftakt, Letterbox</div></div>
+      <div class="brow"><div class="c1">02</div><div class="c2">In Werkhallen entstanden Weltmarktführer.<small>Werkhalle, epische Lichtschächte</small></div><div class="c3">Neon-Wipe</div></div>
+      <div class="brow"><div class="c1">03</div><div class="c2">Aus „Made in Germany“ wurde ein Qualitätssiegel.<small>Gebürsteter Stahl, Siegel eingebrannt</small></div><div class="c3">Iris, Stempel</div></div>
+      <div class="brow"><div class="c1">04</div><div class="c2">Wir haben uns lange genug auf unserem Erbe ausgeruht.<small>stille, kühle Halle</small></div><div class="c3">Langsamer Push, Stillstand</div></div>
+      <div class="brow"><div class="c1">05</div><div class="c2">Jetzt müssen wir die Zukunft gestalten.<small>Hochwertiger Industrieroboter, Präzision</small></div><div class="c3">Weißer Blitz</div></div>
+      <div class="brow"><div class="c1">06</div><div class="c2">Die Märkte gehören uns. Es wird Zeit, dass wir sie uns zurückholen!<small>Frachtflugzeug wird am Heck beladen</small></div><div class="c3">Tor-Öffnung → B_77-Punkt</div></div>
+    </div>
+
+    <div class="steps">
+      <div class="step"><div class="no mono">01</div><div class="tx"><b>Feinschliff.</b> Timing je Beat, Grading pro Szene und die Übergänge lassen sich weiter schärfen. Einzelne Bilder generiere ich bei Bedarf gezielt neu.</div></div>
+      <div class="step"><div class="no mono">02</div><div class="tx"><b>Produktion.</b> Für den Launch sind die generierten Bilder gegen echten Dreh oder lizenziertes Archivmaterial austauschbar, Look und Schnitt bleiben.</div></div>
+      <div class="step"><div class="no mono">03</div><div class="tx"><b>Gate.</b> Reduced-Motion, Tastatur, Pause und Überspringen sind dabei. Vor „kundenfähig" läuft es durchs Critic-Gate. Deploy entscheidest du.</div></div>
+    </div>
+
+    <div class="flag mono"><b>Status</b> Zwischenstand. Kino-Treatment, generierte Bilder. Nichts live, kein Deploy.</div>
+    <div class="foot">~/Projects/b77/website/intro/aermel-hoch.html · 2026-11-15</div>
+  </div>
+</section>
+
+<script>
+(function(){
+  "use strict";
+  var RM = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var A='assets/';
+  // hold = Pause nach dem Einblenden in ms, damit die Sprecherzeile vor dem nächsten Schnitt fertig ist (Zeilenlänge plus rund 0,5 s)
+  var scenes=[
+    {n:'01 / AUS TRÜMMERN', t:'Aus Trümmern wurden\n<b>Werkhallen.</b>',           img:'nachkrieg-v6.jpg', grade:'past',   tr:'fade',  dur:3000},
+    {n:'02 / WELTMARKTFÜHRER',    t:'In Werkhallen entstanden\n<b>Weltmarktführer.</b>',     img:'man-hall-v4.jpg',        grade:'proud',  tr:'wipe',  dur:3100},
+    {n:'03 / QUALITÄT',      t:'Aus „Made in Germany“ wurde\nein <b>Qualitätssiegel.</b>', img:'stahl-v5.jpg', grade:'steel', tr:'iris', hold:2800,  dur:3600, seal:true},
+    {n:'04 / DER STILLSTAND',t:'Wir haben uns lange genug\nauf unserem Erbe ausgeruht.', img:'man-idle.jpg', grade:'cold', tr:'push', hold:2700, dur:3600, still:true},
+    {n:'05 / DIE ZUKUNFT',   t:'Jetzt müssen wir\ndie <b>Zukunft</b> gestalten.',          img:'robot-v8.jpg',     grade:'steel', tr:'cut', hold:2800,   dur:3000},
+    {n:'06 / DIE MÄRKTE',    t:'Die Märkte gehören uns.\nEs wird Zeit, dass wir sie\nuns <b>zurückholen!</b>', img:'flug-v8.jpg', grade:'rise', tr:'doors', hold:3900, dur:4000}
+  ];
+
+  var fa=document.getElementById('fa'), fb=document.getElementById('fb'), grade=document.getElementById('grade'),
+      fx=document.getElementById('fx'), seal=document.getElementById('seal'),
+      cap=document.getElementById('cap'), num=document.getElementById('num'), line=document.getElementById('line'),
+      prog=document.getElementById('prog'), count=document.getElementById('count'), cinema=document.getElementById('cinema'),
+      endcard=document.getElementById('endcard'),
+      pp=document.getElementById('pp'), rp=document.getElementById('rp'), skip=document.getElementById('skip'),
+      playov=document.getElementById('playov'), playbtn=document.getElementById('playbtn');
+  var TRMS={fade:2600, wipe:2600, iris:3000, push:2800, cut:1000, doors:3000}; var HOLD=2600;
+  var layers=[fa,fb], active=0, idx=0, timer=null, playing=false, started=false, ended=false;
+  // Ton: eine Sprecherzeile je Szene (Stimme Helmut), standardmäßig an, per Schalter abschaltbar.
+  // Blockiert der Browser Ton ohne Klick, läuft der Film trotzdem los; der Ton setzt bei der ersten Geste auf der Seite ein.
+  var VO=scenes.map(function(_, k){ var a=new Audio(); a.preload='none'; a.src=A+'vo-helmut/zeile'+(k+1)+'.mp3'; return a; });
+  var snd=document.getElementById('snd');
+  var sound=true, voTimer=null, voReady=false, curIdx=-1, capShown=false;
+
+  function buildFrame(el, sc){
+    el.innerHTML=''; el.classList.toggle('still', !!sc.still);
+    if(sc.img){ var im=document.createElement('img'); im.className='fimg'; im.src=A+sc.img; im.alt=''; el.appendChild(im); }
+  }
+  function setCap(sc){
+    cap.classList.remove('show'); num.textContent=sc.n||''; line.innerHTML=sc.t||'';
+    void cap.offsetWidth; setTimeout(function(){ cap.classList.add('show'); }, 60);
+  }
+  function runFx(type, d){
+    fx.className='fx'; fx.style.setProperty('--d', (d||1000)+'ms'); void fx.offsetWidth;
+    if(type==='wipe') fx.classList.add('wipe');
+    else if(type==='doors') fx.classList.add('doors');
+    else if(type==='cut') fx.classList.add('cut');
+    else if(type==='iris') fx.classList.add('iris');
+  }
+  function voUnlock(){ // in einer Klick-Geste aufrufen: Audio freischalten (iOS), sofort wieder anhalten
+    if(voReady) return;
+    if(navigator.userActivation && !navigator.userActivation.isActive) return; // nur in echter Geste, sonst zählt der Versuch nicht
+    voReady=true;
+    VO.forEach(function(a){ a.preload='auto'; try{ var p=a.play(); a.pause(); a.currentTime=0; if(p && p.catch) p.catch(function(){}); }catch(e){} });
+  }
+  function voStop(){ clearTimeout(voTimer); VO.forEach(function(a){ a.pause(); }); }
+  function voPlay(i, delay){
+    clearTimeout(voTimer);
+    voTimer=setTimeout(function(){
+      VO.forEach(function(a, k){ if(k!==i) a.pause(); });
+      if(!sound || !playing) return;
+      try{ var a=VO[i]; a.currentTime=0; var p=a.play(); if(p && p.catch) p.catch(function(){}); }catch(e){}
+    }, delay);
+  }
+  function show(i, first){
+    var sc=scenes[i];
+    var cur=layers[active], nxt=layers[1-active];
+    buildFrame(nxt, sc);
+    grade.className='grade g-'+sc.grade;
+    if(sc.seal){ setTimeout(function(){ seal.classList.add('on'); }, Math.round((TRMS[sc.tr]||1000)*0.8)); } else { seal.classList.remove('on'); }
+    var tr = first ? 'fade' : sc.tr;
+    var d = TRMS[tr]||1200;
+    cap.classList.remove('show');
+    capShown=false; curIdx=i; var my=i;
+    setTimeout(function(){ setCap(sc); if(curIdx===my) capShown=true; }, Math.round(d*0.5));
+    voPlay(i, Math.round(d*0.5));
+    nxt.className='frame tr-'+tr;
+    nxt.style.transition='opacity '+d+'ms ease, transform '+d+'ms cubic-bezier(.22,.9,.26,1), clip-path '+d+'ms cubic-bezier(.22,.9,.26,1)';
+    if(!RM) runFx(tr, d);
+    void nxt.offsetWidth;
+    nxt.classList.add('live');
+    requestAnimationFrame(function(){ nxt.classList.add('go'); });
+    if(cur!==nxt){ cur.style.transition='opacity '+d+'ms ease, transform '+d+'ms ease';
+      if(!RM && tr==='push') cur.classList.add('exit-push'); else cur.classList.add('exit');
+      setTimeout(function(){ cur.className='frame'; cur.style.transition=''; }, d+300); }
+    active=1-active;
+    count.textContent=(i+1<10?'0':'')+(i+1)+' / 0'+scenes.length;
+    prog.style.width=((i+1)/scenes.length*100)+'%';
+  }
+  function toEnd(){
+    ended=true; voStop(); endcard.classList.add('on');
+    layers.forEach(function(l){ l.style.transition='opacity 2.2s ease, transform 2.6s ease'; l.classList.add('exit'); });
+    cap.classList.remove('show'); seal.classList.remove('on');
+    setTimeout(function(){ endcard.classList.add('reveal'); }, 1500);
+    prog.style.width='100%'; count.textContent='B_77';
+    playing=false; pp.textContent='⟲';
+  }
+  function schedule(){ clearTimeout(timer); timer=setTimeout(advance, (TRMS[scenes[idx].tr]||1000)+(scenes[idx].hold||HOLD)); }
+  function advance(){
+    if(idx<scenes.length-1){ idx++; show(idx); if(playing) schedule(); }
+    else { toEnd(); }
+  }
+  function play(){
+    if(sound) voUnlock(); playov.classList.remove('on');
+    if(ended){ ended=false; endcard.className='endcard'; idx=0; }
+    playing=true; pp.textContent='❚❚';
+    if(!started){ started=true; cinema.classList.add('rolled'); }
+    show(idx, idx===0); schedule();
+  }
+  function pause(){ playing=false; pp.textContent='▶'; clearTimeout(timer); voStop(); }
+
+  pp.addEventListener('click', function(){ if(playing) pause(); else play(); });
+  rp.addEventListener('click', function(){ pause(); ended=false; endcard.className='endcard'; idx=0; play(); });
+  skip.addEventListener('click', function(){ pause(); document.querySelector('.doc').scrollIntoView({behavior:'smooth'}); });
+  playbtn.addEventListener('click', function(){ if(sound) voUnlock(); playov.classList.remove('on'); idx=0; play(); });
+  snd.addEventListener('click', function(){
+    sound=!sound;
+    snd.setAttribute('aria-pressed', String(sound));
+    snd.title = sound ? 'Ton aus' : 'Ton an';
+    if(!sound){ voStop(); var h=document.getElementById('tonhint'); if(h) h.classList.remove('on'); return; }
+    voUnlock();
+    if(playing && capShown && curIdx>=0) voPlay(curIdx, 0);
+  });
+  document.addEventListener('keydown', function(e){
+    var onBtn=!!(e.target && e.target.closest && e.target.closest('button'));
+    if(e.code==='Space'){ if(onBtn) return; e.preventDefault(); if(playing) pause(); else play(); }
+    else if(e.code==='Escape'||(e.code==='Enter'&&!onBtn)){ pause(); document.querySelector('.doc').scrollIntoView({behavior:'smooth'}); }
+  });
+
+  function begin(){
+    if(started) return;
+    cinema.classList.add('rolled');
+    if(RM){ started=true; show(scenes.length-1, true); playov.classList.add('on'); return; }
+    // Prüfen, ob der Browser Ton ohne Klick erlaubt (leise Probe mit Lautstärke 0)
+    var t=VO[0], vol=t.volume; t.preload='auto'; t.volume=0;
+    var go=function(){ t.pause(); t.currentTime=0; t.volume=vol; voReady=true; VO.forEach(function(a){ a.preload='auto'; }); setTimeout(play, 700); };
+    var hint=document.getElementById('tonhint');
+    var ask=function(){ t.volume=vol; setTimeout(play, 700); if(sound) setTimeout(function(){ if(!voReady && sound) hint.classList.add('on'); }, 900);
+      var wake=function(){ if(navigator.userActivation && !navigator.userActivation.isActive) return;
+        ['click','touchend','keydown'].forEach(function(ev){ document.removeEventListener(ev, wake); }); hint.classList.remove('on');
+        if(!sound) return; voUnlock(); if(playing && capShown && curIdx>=0) voPlay(curIdx, 0); };
+      ['click','touchend','keydown'].forEach(function(ev){ document.addEventListener(ev, wake); }); };
+    try{ var p=t.play(); if(p && p.then) p.then(go, ask); else go(); }catch(e){ ask(); }
+  }
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ begin(); io.disconnect(); } }); },{threshold:.5});
+    io.observe(cinema);
+  } else { begin(); }
+})();
+</script>
+</body>
+</html>

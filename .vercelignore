@@ -10,3 +10,6 @@ rebrand-2026/
 # Akquise-/Studio-Submodul (vertrauliche Mandats- und Lead-Mockups): nie auf b77.de, schuetzt auch lokales "vercel --prod" vor dem Upload des Submodul-Arbeitsbaums
 assets/design-studio-77/
 
+
+# Quelle des Trailers, wird per build-trailer.py nach trailer/ gebaut. Nicht ausliefern.
+trailer-quelle/

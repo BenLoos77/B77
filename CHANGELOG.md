@@ -1,5 +1,9 @@
 # Changelog B_77 Website
 
+## 2026-11-15 · Sicherheit: Content-Security-Policy, Google Fonts entfernt, Trailer-Quelle im Repo
+
+Alle Seiten bekommen eine Content-Security-Policy (Stufe 1), die fremde Skripte, Verbindungen und Einbettungen sperrt. Die Mahlo-Seiten laden Schriften lokal statt von Google. Die Quelle des Trailers liegt in `trailer-quelle/` und wird nicht ausgeliefert.
+
 ## 2026-11-15 · Trailer: KI-Hinweis, neue Zeile 2, nur der Film
 
 Der Trailer zeigt den Hinweis „KI-generierte Bilder und Stimme“ dezent oben links und in der Endkarte. Zeile 2 spricht „Weltmarktführer“, mit neuer Tonaufnahme. Die Lesefassung mit internen Notizen entfällt auf der Live-Seite.
