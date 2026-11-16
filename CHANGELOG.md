@@ -1,5 +1,9 @@
 # Changelog B_77 Website
 
+## 2026-11-16 · Trailer: Satz in Szene 4 neu formuliert
+
+Szene 4 sagt jetzt „Wir haben lange von diesem Erbe profitieren können.“ Die Zeile ist neu eingesungen. Quelle, Lesefassung und Trailer sind angeglichen.
+
 ## 2026-11-15 · Sicherheit: Content-Security-Policy, Google Fonts entfernt, Trailer-Quelle im Repo
 
 Alle Seiten bekommen eine Content-Security-Policy (Stufe 1), die fremde Skripte, Verbindungen und Einbettungen sperrt. Die Mahlo-Seiten laden Schriften lokal statt von Google. Die Quelle des Trailers liegt in `trailer-quelle/` und wird nicht ausgeliefert.
