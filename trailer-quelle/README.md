@@ -20,4 +20,4 @@ Das schreibt `trailer/` neu: die Seite mit absoluten Pfaden und nur die benötig
 
 - `aermel-hoch.html`: Film, Quelle der Seite
 - `build-trailer.py`: baut `trailer/`
-- `assets/`: Schriften, Logo, Bilder und die sechs Sprechzeilen (`vo-helmut/`)
+- `assets/`: Schriften, Logo, Bilder und die Sprecherspur (`vo-helmut/aermel-hoch-vo.mp3`). Die Einzelzeilen `zeile1` bis `zeile6` sind nur noch Archiv und gehen nicht mehr in den Build.

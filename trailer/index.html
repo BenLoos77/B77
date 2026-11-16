@@ -33,25 +33,25 @@ body{background:#000;color:var(--paper);font-family:var(--sans);-webkit-font-smo
   transition:opacity .7s ease, transform 1.15s cubic-bezier(.22,.9,.26,1), clip-path 1.15s cubic-bezier(.22,.9,.26,1);
   will-change:opacity,transform,clip-path;background:#000}
 .frame.live{opacity:1;z-index:2}
-.frame .fimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.12);transition:transform 6.5s linear}
-.frame.live .fimg{transform:scale(1.02)}
-.frame.still .fimg{transition:transform 7s linear;transform:scale(1.04)}
+/* Bewegung des Bildes (langsames Vordringen) setzt das Skript je Szene */
+.frame .fimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1);will-change:transform}
 
-/* Enter-Zustände der Übergänge */
+/* Enter-Zustände der Übergänge (Zeiten und Kurven setzt das Skript) */
 .tr-wipe{clip-path:inset(0 100% 0 0)} .tr-wipe.go{clip-path:inset(0 0 0 0)}
 .tr-iris{clip-path:circle(0% at 50% 52%)} .tr-iris.go{clip-path:circle(150% at 50% 52%)}
 .tr-doors{clip-path:inset(0 50% 0 50%)} .tr-doors.go{clip-path:inset(0 0 0 0)}
 .tr-push{transform:translateX(9%) scale(1.08)} .tr-push.go{transform:translateX(0) scale(1.02)}
-.tr-cut{transition:opacity .12s linear}
+.tr-cut{transition:opacity .08s linear}
 .frame.exit{opacity:0;transform:scale(1.06);transition:opacity .9s ease, transform 1.2s ease}
 .frame.exit-push{opacity:0;transform:translateX(-14%) scale(1.06)}
 
-/* Grade / Kinostimmung */
-.grade{position:absolute;inset:0;z-index:5;pointer-events:none;mix-blend-mode:soft-light;transition:background 1s ease, opacity 1s ease}
+/* Grading: zwei Ebenen, die sich überblenden (Verläufe selbst springen in CSS) */
+.grade{position:absolute;inset:0;z-index:5;pointer-events:none;mix-blend-mode:soft-light;opacity:0;transition:opacity 1.2s ease}
+.grade.on{opacity:1}
 .g-past{background:radial-gradient(120% 120% at 50% 40%,rgba(150,96,36,.34),rgba(22,14,8,.6))}
 .g-proud{background:linear-gradient(180deg,rgba(60,120,140,.16),rgba(150,110,40,.26))}
 .g-steel{background:radial-gradient(90% 90% at 60% 40%,rgba(120,150,170,.18),rgba(6,8,12,.62))}
-.g-cold{background:linear-gradient(180deg,rgba(120,160,200,.2),rgba(8,16,28,.6));mix-blend-mode:normal;opacity:.9}
+.g-cold{background:linear-gradient(180deg,rgba(120,160,200,.2),rgba(8,16,28,.6));mix-blend-mode:normal}
 .g-future{background:radial-gradient(80% 80% at 58% 42%,rgba(229,255,0,.16),rgba(14,12,4,.5))}
 .g-rise{background:radial-gradient(90% 90% at 60% 36%,rgba(255,200,90,.2),rgba(20,14,6,.5))}
 .grain{position:absolute;inset:0;z-index:9;pointer-events:none;opacity:.07;mix-blend-mode:overlay;
@@ -61,59 +61,60 @@ body{background:#000;color:var(--paper);font-family:var(--sans);-webkit-font-smo
 .vig{position:absolute;inset:0;z-index:8;pointer-events:none;
   background:radial-gradient(130% 95% at 50% 46%,transparent 44%,rgba(0,0,0,.5)),linear-gradient(0deg,rgba(0,0,0,.55),transparent 34%,rgba(0,0,0,.4))}
 
-/* FX-Layer (Neon-Wipe / Türen / Flash) */
+/* FX-Layer (Neon-Wipe / Türen / Flash / Iris), dieselbe Kurve wie das Bild */
 .fx{position:absolute;inset:0;z-index:13;pointer-events:none}
-.fx.wipe::before{content:"";position:absolute;top:0;bottom:0;width:3px;left:0;background:var(--neon);box-shadow:0 0 30px 3px var(--ghost);animation:sweepX var(--d,2.6s) cubic-bezier(.22,.9,.26,1) forwards}
+.fx.wipe::before{content:"";position:absolute;top:0;bottom:0;width:3px;left:0;background:var(--neon);box-shadow:0 0 30px 3px var(--ghost);animation:sweepX var(--d,2.6s) cubic-bezier(.65,0,.35,1) forwards}
 @keyframes sweepX{from{left:-1%}to{left:101%}}
 .fx.doors::before,.fx.doors::after{content:"";position:absolute;top:0;bottom:0;width:2px;background:var(--neon);box-shadow:0 0 26px 2px var(--ghost)}
-.fx.doors::before{left:50%;animation:doorL var(--d,3s) cubic-bezier(.22,.9,.26,1) forwards}
-.fx.doors::after{right:50%;animation:doorR var(--d,3s) cubic-bezier(.22,.9,.26,1) forwards}
+.fx.doors::before{left:50%;animation:doorL var(--d,3s) cubic-bezier(.65,0,.35,1) forwards}
+.fx.doors::after{right:50%;animation:doorR var(--d,3s) cubic-bezier(.65,0,.35,1) forwards}
 @keyframes doorL{to{left:-1%}} @keyframes doorR{to{right:-1%}}
 .fx.cut{animation:flash var(--d,1s) ease forwards}
 @keyframes flash{0%{background:rgba(255,255,255,0)}18%{background:rgba(255,255,255,.7)}40%{background:rgba(229,255,0,.25)}100%{background:rgba(255,255,255,0)}}
-.fx.iris::before{content:"";position:absolute;left:50%;top:52%;width:0;height:0;border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 2px rgba(229,255,0,.9),0 0 90px 16px rgba(229,255,0,.32);animation:irisRing var(--d,3s) cubic-bezier(.2,.7,.2,1) forwards}
-@keyframes irisRing{0%{width:0;height:0;opacity:1}85%{opacity:.85}100%{width:280vmax;height:280vmax;opacity:0}}
+/* Iris: fest große Fläche, nur skaliert (keine Größenänderung mit Weichzeichner pro Bild) */
+.fx.iris::before{content:"";position:absolute;left:50%;top:52%;width:280vmax;height:280vmax;margin:-140vmax 0 0 -140vmax;border-radius:50%;transform:scale(.0001);box-shadow:0 0 0 2px rgba(229,255,0,.9),0 0 90px 16px rgba(229,255,0,.32);animation:irisRing var(--d,3s) cubic-bezier(.65,0,.35,1) forwards}
+@keyframes irisRing{0%{transform:scale(.0001);opacity:1}85%{opacity:.85}100%{transform:scale(1);opacity:0}}
 
-/* Qualitätssiegel */
-.seal{position:absolute;z-index:11;left:66%;top:42%;width:min(38vh,320px);aspect-ratio:1;transform:translate(-50%,-50%);opacity:0;
+/* Qualitätssiegel: drei Ebenen (Hitze, Brand, Brandkante). Animiert werden nur Deckkraft und Skalierung. */
+.seal{position:absolute;z-index:11;left:66%;top:42%;width:min(38vh,320px,64vw);aspect-ratio:1;transform:translate(-50%,-50%);opacity:0;
   transition:opacity .6s ease}
 .seal.on{opacity:1}
+.seal.out{opacity:0}
+@media(max-width:600px){.seal{left:50%;top:40%}}
 .seal svg{overflow:visible}
-.seal .heat{color:#ff7a1a;opacity:0}
-.seal .burn{color:#1c1812;opacity:0}
+.seal .sl{position:absolute;left:0;top:0;width:100%;height:100%;opacity:0;will-change:opacity,transform}
+.seal .heat-l{color:#ff7a1a}
+.seal .scorch-l{color:#3a2412}
+.seal .burn-l{color:#1c1812}
+.seal.on .heat-l{animation:heatUp 2.8s ease-out .05s forwards}
+.seal.on .scorch-l{animation:scorchIn 1.8s .6s ease-out forwards}
+.seal.on .burn-l{animation:burnIn 1.5s .35s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes scorchIn{from{opacity:0}to{opacity:.7}}
+@keyframes heatUp{0%{opacity:0}14%{opacity:1}100%{opacity:0}}
+@keyframes burnIn{from{opacity:0;transform:scale(1.02)}to{opacity:1;transform:scale(1)}}
+@media(prefers-reduced-motion:reduce){.seal.on .heat-l{animation:none;opacity:0}.seal.on .scorch-l{animation:none;opacity:.7}.seal.on .burn-l{animation:none;opacity:1}}
+.seal svg{width:100%;height:100%}
 .seal .h-ring,.seal .b-ring{fill:none;stroke:currentColor;stroke-width:4.4}
 .seal .h-ring.thin,.seal .b-ring.thin{stroke-width:2.6}
 .seal .h-txt,.seal .b-txt{fill:currentColor;font-family:var(--mono);font-size:14px;font-weight:700;letter-spacing:4px}
 .seal .h-dot,.seal .b-dot{fill:currentColor}
 .seal .h-mk,.seal .b-mk{fill:currentColor;font-family:var(--sans);font-weight:900;font-size:66px}
-.seal.on .heat{animation:heatUp 2.8s ease-out .05s forwards}
-.seal.on .burn{animation:burnIn 1.5s .35s cubic-bezier(.2,.7,.2,1) forwards}
-.seal .scorch{color:#3a2412;opacity:0}
-.seal.on .scorch{animation:scorchIn 1.8s .6s ease-out forwards}
-@keyframes scorchIn{from{opacity:0}to{opacity:.7}}
-@keyframes heatUp{0%{opacity:0}14%{opacity:1}100%{opacity:0}}
-@keyframes burnIn{from{opacity:0;filter:blur(7px)}to{opacity:1;filter:blur(0)}}
-@media(prefers-reduced-motion:reduce){.seal.on .heat{animation:none;opacity:0}.seal.on .burn{animation:none;opacity:1;filter:none}}
-.seal svg{width:100%;height:100%}
-.seal .ring{fill:none;stroke:var(--neon);stroke-width:1.5;opacity:.9}
-.seal .tx{fill:var(--paper);font-family:var(--mono);font-size:7.2px;letter-spacing:3px;text-transform:uppercase}
-.seal .mk{fill:var(--neon);font-family:var(--sans);font-weight:900;font-size:34px}
 
-/* Caption */
+/* Caption: beim Satzwechsel fährt der alte Satz kurz weg, der neue kommt mit dem Sprechen */
 .cap{position:absolute;z-index:12;left:clamp(22px,6vw,96px);bottom:clamp(96px,16vh,170px);max-width:min(88vw,760px)}
-.num{font-family:var(--mono);font-size:11px;letter-spacing:.24em;color:var(--neon);margin-bottom:18px;opacity:0;transform:translateY(8px);transition:.6s;text-shadow:0 1px 12px rgba(0,0,0,.8)}
+.num{font-family:var(--mono);font-size:11px;letter-spacing:.24em;color:var(--neon);margin-bottom:18px;opacity:0;transform:translateY(8px);transition:opacity .2s ease,transform .2s ease;text-shadow:0 1px 12px rgba(0,0,0,.8)}
 .line{font-weight:900;letter-spacing:-.04em;line-height:1.04;font-size:clamp(22px,3.5vw,46px);white-space:pre-line;
-  clip-path:inset(0 0 104% 0);transition:clip-path .95s cubic-bezier(.2,.85,.2,1) .12s}
+  clip-path:inset(0 0 104% 0);transition:clip-path .2s ease-in}
 .line{text-shadow:0 2px 22px rgba(0,0,0,.75),0 0 3px rgba(0,0,0,.6)}
 .line b{color:var(--neon);font-weight:900}
 .line s{color:var(--faint);text-decoration:line-through;text-decoration-thickness:4px}
 .line em{font-family:var(--serif);font-style:italic;font-weight:400}
-.cap.show .num{opacity:1;transform:none}
-.cap.show .line{clip-path:inset(-14% 0 -14% 0)}
+.cap.show .num{opacity:1;transform:none;transition:opacity .7s ease .12s,transform .7s ease .12s}
+.cap.show .line{clip-path:inset(-14% 0 -14% 0);transition:clip-path .9s cubic-bezier(.2,.85,.2,1) .05s}
 .cap::before{content:"";position:absolute;inset:-40px -70px -46px -46px;background:radial-gradient(closest-side,rgba(0,0,0,.5),rgba(0,0,0,0));z-index:-1;pointer-events:none}
 
-/* Logo-Finale */
-.endcard{position:absolute;inset:0;z-index:16;display:grid;place-content:center;text-align:center;background:var(--ink);opacity:0;pointer-events:none;transition:opacity 2.4s ease}
+/* Logo-Finale: z 14, damit Kopf- und Fußleiste mit Impressum-Link und Bedienung darüber sichtbar bleiben */
+.endcard{position:absolute;inset:0;z-index:14;display:grid;place-content:center;text-align:center;background:var(--ink);opacity:0;pointer-events:none;transition:opacity 2.4s ease}
 .endcard.on{opacity:1}
 /* Endkarte ohne Akzentpunkt */
 .endcard .logo{position:relative;display:block;justify-self:center;margin-inline:auto;width:min(46vw,380px);opacity:0;transform:translateY(8px);transition:1.6s .5s}
@@ -136,13 +137,14 @@ body{background:#000;color:var(--paper);font-family:var(--sans);-webkit-font-smo
 .ctrl{display:flex;align-items:center;gap:13px}
 .btn{appearance:none;border:1px solid var(--line);background:rgba(0,0,0,.3);color:var(--paper);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:11px;display:grid;place-items:center;transition:.2s}
 .btn:hover{border-color:var(--neon);color:var(--neon)}
+.btn:focus-visible,.playbtn:focus-visible,.tonhint:focus-visible,.topbar .st:focus-visible{outline:2px solid var(--neon);outline-offset:3px}
 .btn.skip{width:auto;border-radius:999px;padding:0 16px;font-size:10px;letter-spacing:.14em;margin-left:auto}
 .count{font-size:11px;color:var(--muted);font-family:var(--mono)}
 .playov{position:absolute;inset:0;z-index:17;display:none;place-items:center;background:rgba(6,5,4,.5)}
 .playov.on{display:grid}
 .playbtn{appearance:none;border:1px solid var(--neon);background:rgba(0,0,0,.4);color:var(--paper);font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:16px 26px;border-radius:999px;cursor:pointer}
 .playbtn:hover{background:var(--neon);color:#111}
-.tonhint{position:absolute;z-index:18;top:clamp(64px,11vh,104px);left:50%;transform:translate(-50%,-8px);display:flex;align-items:center;gap:10px;
+.tonhint{position:absolute;z-index:18;top:clamp(84px,11vh,104px);left:50%;transform:translate(-50%,-8px);display:flex;align-items:center;gap:10px;
   appearance:none;border:1px solid var(--neon);background:rgba(0,0,0,.55);color:var(--paper);font-family:var(--mono);font-size:12px;font-weight:700;
   letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;padding:12px 20px;border-radius:999px;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .5s,transform .5s}
 .tonhint svg{width:16px;height:16px;color:var(--neon);flex:none}
@@ -173,13 +175,14 @@ body{background:#000;color:var(--paper);font-family:var(--sans);-webkit-font-smo
     <div class="frame" id="fa"></div>
     <div class="frame" id="fb"></div>
     <div class="grade" id="grade"></div>
+    <div class="grade" id="grade2"></div>
     <div class="bloom"></div>
     <div class="vig"></div>
     <div class="grain"></div>
     <div class="fx" id="fx"></div>
 
     <div class="seal" id="seal">
-      <svg viewBox="0 0 200 200" aria-hidden="true">
+      <svg class="sl heat-l" viewBox="0 0 200 200" aria-hidden="true">
         <defs>
           <path id="sealTop" d="M27,100 A73,73 0 0,1 173,100"/>
           <path id="sealBot" d="M17,100 A83,83 0 0,0 183,100"/>
@@ -191,7 +194,7 @@ body{background:#000;color:var(--paper);font-family:var(--sans);-webkit-font-smo
             <feGaussianBlur stdDeviation="4"/>
           </filter>
         </defs>
-        <g class="heat" filter="url(#heatGlow)">
+        <g filter="url(#heatGlow)">
           <circle class="h-ring" cx="100" cy="100" r="96"/>
           <circle class="h-ring thin" cx="100" cy="100" r="60"/>
           <text class="h-txt"><textPath href="#sealTop" startOffset="50%" text-anchor="middle">QUALITÄTSSIEGEL</textPath></text>
@@ -200,25 +203,27 @@ body{background:#000;color:var(--paper);font-family:var(--sans);-webkit-font-smo
           <circle class="h-dot" cx="176" cy="100" r="3.4"/>
           <text class="h-mk" x="100" y="122" text-anchor="middle">D</text>
         </g>
-        <g class="scorch" filter="url(#heatGlow)">
+      </svg>
+      <svg class="sl scorch-l" viewBox="0 0 200 200" aria-hidden="true">
+        <g filter="url(#heatGlow)">
           <circle class="b-ring" cx="100" cy="100" r="96"/>
           <circle class="b-ring thin" cx="100" cy="100" r="60"/>
           <text class="b-txt"><textPath href="#sealTop" startOffset="50%" text-anchor="middle">QUALITÄTSSIEGEL</textPath></text>
-            <text class="b-txt"><textPath href="#sealBot" startOffset="50%" text-anchor="middle">„MADE IN GERMANY“</textPath></text>
-            <circle class="b-dot" cx="24" cy="100" r="3.4"/>
-            <circle class="b-dot" cx="176" cy="100" r="3.4"/>
+          <text class="b-txt"><textPath href="#sealBot" startOffset="50%" text-anchor="middle">„MADE IN GERMANY“</textPath></text>
+          <circle class="b-dot" cx="24" cy="100" r="3.4"/>
+          <circle class="b-dot" cx="176" cy="100" r="3.4"/>
           <text class="b-mk" x="100" y="122" text-anchor="middle">D</text>
         </g>
-        <g class="burn">
-          <g filter="url(#burnEdge)">
-            <circle class="b-ring" cx="100" cy="100" r="96"/>
-            <circle class="b-ring thin" cx="100" cy="100" r="60"/>
-            <text class="b-txt"><textPath href="#sealTop" startOffset="50%" text-anchor="middle">QUALITÄTSSIEGEL</textPath></text>
-            <text class="b-txt"><textPath href="#sealBot" startOffset="50%" text-anchor="middle">„MADE IN GERMANY“</textPath></text>
-            <circle class="b-dot" cx="24" cy="100" r="3.4"/>
-            <circle class="b-dot" cx="176" cy="100" r="3.4"/>
-            <text class="b-mk" x="100" y="122" text-anchor="middle">D</text>
-          </g>
+      </svg>
+      <svg class="sl burn-l" viewBox="0 0 200 200" aria-hidden="true">
+        <g filter="url(#burnEdge)">
+          <circle class="b-ring" cx="100" cy="100" r="96"/>
+          <circle class="b-ring thin" cx="100" cy="100" r="60"/>
+          <text class="b-txt"><textPath href="#sealTop" startOffset="50%" text-anchor="middle">QUALITÄTSSIEGEL</textPath></text>
+          <text class="b-txt"><textPath href="#sealBot" startOffset="50%" text-anchor="middle">„MADE IN GERMANY“</textPath></text>
+          <circle class="b-dot" cx="24" cy="100" r="3.4"/>
+          <circle class="b-dot" cx="176" cy="100" r="3.4"/>
+          <text class="b-mk" x="100" y="122" text-anchor="middle">D</text>
         </g>
       </svg>
     </div>
@@ -246,135 +251,194 @@ body{background:#000;color:var(--paper);font-family:var(--sans);-webkit-font-smo
   <div class="hud">
     <div class="prog"><i id="prog"></i></div>
     <div class="ctrl">
-      <button id="pp" class="btn" aria-label="Pause/Play">❚❚</button>
+      <button id="pp" class="btn" aria-label="Abspielen oder Pause">❚❚</button>
       <button id="rp" class="btn" aria-label="Von vorn">⟲</button>
       <span class="count" id="count">01 / 06</span>
       <button id="skip" class="btn skip mono">Überspringen →</button>
     </div>
   </div>
 
-  <button class="tonhint" id="tonhint" type="button" aria-label="Ton einschalten"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5h3.3L11.5 6v12l-4.7-3.5H3.5z"/><path d="M15 9.2a3.6 3.6 0 0 1 0 5.6"/><path d="M17.6 6.6a7.4 7.4 0 0 1 0 10.8"/></svg><span>Ton an: einmal tippen</span></button>
-  <div class="playov" id="playov"><button id="playbtn" class="playbtn">Film abspielen ▶</button></div>
+  <button class="tonhint" id="tonhint" type="button" aria-label="Ton einschalten"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5h3.3L11.5 6v12l-4.7-3.5H3.5z"/><path d="M15 9.2a3.6 3.6 0 0 1 0 5.6"/><path d="M17.6 6.6a7.4 7.4 0 0 1 0 10.8"/></svg><span>Ton an: hier klicken</span></button>
+  <div class="playov" id="playov"><button id="playbtn" class="playbtn">Film abspielen &#x25B6;&#xFE0E;</button></div>
 </section>
 
 <script>
 (function(){
   "use strict";
   var RM = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-  var A='/trailer/assets/';
-  // hold = Pause nach dem Einblenden in ms, damit die Sprecherzeile vor dem nächsten Schnitt fertig ist (Zeilenlänge plus rund 0,5 s)
+  var A = '/trailer/assets/';
+  var EASE = 'cubic-bezier(.65,0,.35,1)';
+  var END = 24600; // Endkarte: rund 1,2 s nach dem letzten Wort
+  // Eine durchgehende Sprecherspur (vo-helmut/aermel-hoch-vo.mp3). Vor jedem Übergang steht eine Pause, damit das Bild ruhig einblendet.
+  // at = Beginn des Übergangs (ms), sp = Beginn des Satzes (ms), dur = Dauer des Übergangs (ms).
   var scenes=[
-    {n:'01 / AUS TRÜMMERN', t:'Aus Trümmern wurden\n<b>Werkhallen.</b>',           img:'nachkrieg-v6.jpg', grade:'past',   tr:'fade',  dur:3000},
-    {n:'02 / WELTMARKTFÜHRER',    t:'In Werkhallen entstanden\n<b>Weltmarktführer.</b>',     img:'man-hall-v4.jpg',        grade:'proud',  tr:'wipe',  dur:3100},
-    {n:'03 / QUALITÄT',      t:'Aus „Made in Germany“ wurde\nein <b>Qualitätssiegel.</b>', img:'stahl-v5.jpg', grade:'steel', tr:'iris', hold:2800,  dur:3600, seal:true},
-    {n:'04 / DER STILLSTAND',t:'Wir haben lange von diesem\nErbe profitieren können.', img:'man-idle.jpg', grade:'cold', tr:'push', hold:2700, dur:3600, still:true},
-    {n:'05 / DIE ZUKUNFT',   t:'Jetzt müssen wir\ndie <b>Zukunft</b> gestalten.',          img:'robot-v8.jpg',     grade:'steel', tr:'cut', hold:2800,   dur:3000},
-    {n:'06 / DIE MÄRKTE',    t:'Die Märkte gehören uns.\nEs wird Zeit, dass wir sie\nuns <b>zurückholen!</b>', img:'flug-v8.jpg', grade:'rise', tr:'doors', hold:3900, dur:4000}
+    {n:'01 / AUS TRÜMMERN',    t:'Aus Trümmern wurden\n<b>Werkhallen.</b>',                          img:'nachkrieg-v6.jpg', grade:'past',  tr:'fade',  at:0,     sp:600,   dur:1100},
+    {n:'02 / WELTMARKTFÜHRER', t:'In Werkhallen entstanden\n<b>Weltmarktführer.</b>',                img:'man-hall-v4.jpg',  grade:'proud', tr:'wipe',  at:3290,  sp:3490,  dur:1200},
+    {n:'03 / QUALITÄT',        t:'Aus „Made in Germany“ wurde\nein <b>Qualitätssiegel.</b>',         img:'stahl-v5.jpg',     grade:'steel', tr:'iris',  at:6850,  sp:7050,  dur:1600, seal:9350},
+    {n:'04 / DER STILLSTAND',  t:'Wir haben lange von diesem\nErbe profitieren können.',              img:'man-idle.jpg',     grade:'cold',  tr:'push',  at:11060, sp:11260, dur:1300, still:true},
+    {n:'05 / DIE ZUKUNFT',     t:'Jetzt müssen wir\ndie <b>Zukunft</b> gestalten.',                  img:'robot-v8.jpg',     grade:'steel', tr:'cut',   at:15260, sp:15480, dur:380},
+    {n:'06 / DIE MÄRKTE',      t:'Die Märkte gehören uns.\nEs wird Zeit, dass wir sie\nuns <b>zurückholen!</b>', img:'flug-v8.jpg', grade:'rise', tr:'doors', at:18660, sp:18860, dur:1800}
   ];
 
-  var fa=document.getElementById('fa'), fb=document.getElementById('fb'), grade=document.getElementById('grade'),
+  var fa=document.getElementById('fa'), fb=document.getElementById('fb'),
+      gradeEls=[document.getElementById('grade'), document.getElementById('grade2')],
       fx=document.getElementById('fx'), seal=document.getElementById('seal'),
       cap=document.getElementById('cap'), num=document.getElementById('num'), line=document.getElementById('line'),
       prog=document.getElementById('prog'), count=document.getElementById('count'), cinema=document.getElementById('cinema'),
-      endcard=document.getElementById('endcard'),
+      endcard=document.getElementById('endcard'), hint=document.getElementById('tonhint'), snd=document.getElementById('snd'),
       pp=document.getElementById('pp'), rp=document.getElementById('rp'), skip=document.getElementById('skip'),
       playov=document.getElementById('playov'), playbtn=document.getElementById('playbtn');
-  var TRMS={fade:2600, wipe:2600, iris:3000, push:2800, cut:1000, doors:3000}; var HOLD=2600;
-  var layers=[fa,fb], active=0, idx=0, timer=null, playing=false, started=false, ended=false;
-  // Ton: eine Sprecherzeile je Szene (Stimme Helmut), standardmäßig an, per Schalter abschaltbar.
-  // Blockiert der Browser Ton ohne Klick, läuft der Film trotzdem los; der Ton setzt bei der ersten Geste auf der Seite ein.
-  var VO=scenes.map(function(_, k){ var a=new Audio(); a.preload='none'; a.src=A+'vo-helmut/zeile'+(k+1)+'.mp3'; return a; });
-  var snd=document.getElementById('snd');
-  var sound=true, voTimer=null, voReady=false, curIdx=-1, capShown=false;
+  var layers=[fa,fb], active=0, gAct=0;
 
-  function buildFrame(el, sc){
-    el.innerHTML=''; el.classList.toggle('still', !!sc.still);
-    if(sc.img){ var im=document.createElement('img'); im.className='fimg'; im.src=A+sc.img; im.alt=''; el.appendChild(im); }
+  // Bilder vorab laden und dekodieren, damit der Schnitt nicht auf das Dekodieren wartet
+  var imgs=scenes.map(function(sc){ var im=new Image(); im.className='fimg'; im.alt=''; im.src=A+sc.img; return im; });
+  imgs.forEach(function(im){ if(im.decode){ im.decode().catch(function(){}); } });
+  var logo=endcard.querySelector('.logo'); if(logo && logo.decode){ logo.decode().catch(function(){}); }
+
+  // Sprecherspur: eine Datei für den ganzen Film. Die Filmzeit läuft mit der Systemuhr und richtet sich
+  // beim Tonbeginn einmal am Ton aus.
+  var vo=new Audio(A+'vo-helmut/aermel-hoch-vo.mp3'); vo.preload='auto';
+  var sound=true, voReady=false, awaitAudio=false;
+  var t0=0, anchor=0, raf=null, playing=false, started=false, ended=false;
+  var shown=-1, capIdx=-1, sealOn=false, sealT=null, capTimer=null, cleanT=[];
+
+  function now(){ return performance.now(); }
+  function filmTime(){ return t0 + (now() - anchor); }
+  function setAnchor(ms){ t0=ms; anchor=now(); }
+
+  function buildFrame(el, i){
+    el.innerHTML='';
+    var im=imgs[i]; im.style.transition=''; im.style.transform='scale(1)';
+    el.appendChild(im);
   }
-  function setCap(sc){
-    cap.classList.remove('show'); num.textContent=sc.n||''; line.innerHTML=sc.t||'';
-    void cap.offsetWidth; setTimeout(function(){ cap.classList.add('show'); }, 60);
+  function setGrade(name){
+    var nx=gradeEls[1-gAct], cu=gradeEls[gAct];
+    nx.className='grade g-'+name+' on';
+    if(cu!==nx) cu.classList.remove('on');
+    gAct=1-gAct;
   }
   function runFx(type, d){
-    fx.className='fx'; fx.style.setProperty('--d', (d||1000)+'ms'); void fx.offsetWidth;
-    if(type==='wipe') fx.classList.add('wipe');
-    else if(type==='doors') fx.classList.add('doors');
-    else if(type==='cut') fx.classList.add('cut');
-    else if(type==='iris') fx.classList.add('iris');
+    fx.className='fx'; fx.style.setProperty('--d', d+'ms'); void fx.offsetWidth;
+    if(type==='wipe'||type==='doors'||type==='cut'||type==='iris') fx.classList.add(type);
   }
-  function voUnlock(){ // in einer Klick-Geste aufrufen: Audio freischalten (iOS), sofort wieder anhalten
-    if(voReady) return;
-    if(navigator.userActivation && !navigator.userActivation.isActive) return; // nur in echter Geste, sonst zählt der Versuch nicht
-    voReady=true;
-    VO.forEach(function(a){ a.preload='auto'; try{ var p=a.play(); a.pause(); a.currentTime=0; if(p && p.catch) p.catch(function(){}); }catch(e){} });
+  function setCap(i){
+    var sc=scenes[i];
+    num.textContent=sc.n; line.innerHTML=sc.t;
+    void cap.offsetWidth;
+    cap.classList.add('show');
   }
-  function voStop(){ clearTimeout(voTimer); VO.forEach(function(a){ a.pause(); }); }
-  function voPlay(i, delay){
-    clearTimeout(voTimer);
-    voTimer=setTimeout(function(){
-      VO.forEach(function(a, k){ if(k!==i) a.pause(); });
-      if(!sound || !playing) return;
-      try{ var a=VO[i]; a.currentTime=0; var p=a.play(); if(p && p.catch) p.catch(function(){}); }catch(e){}
-    }, delay);
-  }
-  function show(i, first){
+  function show(i){
     var sc=scenes[i];
     var cur=layers[active], nxt=layers[1-active];
-    buildFrame(nxt, sc);
-    grade.className='grade g-'+sc.grade;
-    if(sc.seal){ setTimeout(function(){ seal.classList.add('on'); }, Math.round((TRMS[sc.tr]||1000)*0.8)); } else { seal.classList.remove('on'); }
-    var tr = first ? 'fade' : sc.tr;
-    var d = TRMS[tr]||1200;
-    cap.classList.remove('show');
-    capShown=false; curIdx=i; var my=i;
-    setTimeout(function(){ setCap(sc); if(curIdx===my) capShown=true; }, Math.round(d*0.5));
-    voPlay(i, Math.round(d*0.5));
+    shown=i;
+    buildFrame(nxt, i);
+    setGrade(sc.grade);
+    if(!sc.seal && sealOn){ seal.classList.add('out'); clearTimeout(sealT); sealT=setTimeout(function(){ seal.classList.remove('on','out'); }, 700); sealOn=false; } // Siegel blendet aus, seine Animation läuft dabei zu Ende
+    cap.classList.remove('show');   // alter Satz geht weg, der neue kommt mit dem Sprechen
+    var tr=sc.tr, d=sc.dur, pd=(tr==='cut')?80:d;
     nxt.className='frame tr-'+tr;
-    nxt.style.transition='opacity '+d+'ms ease, transform '+d+'ms cubic-bezier(.22,.9,.26,1), clip-path '+d+'ms cubic-bezier(.22,.9,.26,1)';
+    nxt.style.transition='opacity '+pd+'ms '+EASE+', transform '+pd+'ms '+EASE+', clip-path '+pd+'ms '+EASE;
     if(!RM) runFx(tr, d);
     void nxt.offsetWidth;
     nxt.classList.add('live');
     requestAnimationFrame(function(){ nxt.classList.add('go'); });
-    if(cur!==nxt){ cur.style.transition='opacity '+d+'ms ease, transform '+d+'ms ease';
-      if(!RM && tr==='push') cur.classList.add('exit-push'); else cur.classList.add('exit');
-      setTimeout(function(){ cur.className='frame'; cur.style.transition=''; }, d+300); }
+    // Bild: langsames Vordringen, das ohne Rücksprung in den nächsten Übergang läuft
+    var nextAt=(i+1<scenes.length)?scenes[i+1].at:END;
+    var kb=nxt.querySelector('.fimg');
+    if(kb){ void kb.offsetWidth; kb.style.transition='transform '+(nextAt-sc.at+800)+'ms linear'; kb.style.transform='scale('+(sc.still?1.02:1.06)+')'; }
+    nxt.style.zIndex='2';   // der neue Satz liegt immer über dem alten, sonst bliebe er bei Wipe und Tür darunter
+    if(cur!==nxt){
+      cur.style.zIndex='1';
+      if(tr==='fade'||tr==='push'){
+        cur.style.transition='opacity '+d+'ms ease, transform '+d+'ms ease';
+        cur.classList.add(tr==='push'?'exit-push':'exit');
+      }
+      var old=cur;
+      cleanT.push(setTimeout(function(){ old.className='frame'; old.style.transition=''; old.style.zIndex=''; }, pd+400));
+    }
     active=1-active;
     count.textContent=(i+1<10?'0':'')+(i+1)+' / 0'+scenes.length;
     prog.style.width=((i+1)/scenes.length*100)+'%';
   }
   function toEnd(){
-    ended=true; voStop(); endcard.classList.add('on');
+    ended=true; playing=false; pp.textContent='⟲'; pp.setAttribute('aria-label','Von vorn'); var tonh=document.getElementById('tonhint'); if(tonh) tonh.classList.remove('on');
+    if(vo) vo.pause();
+    endcard.classList.add('on');
     layers.forEach(function(l){ l.style.transition='opacity 2.2s ease, transform 2.6s ease'; l.classList.add('exit'); });
-    cap.classList.remove('show'); seal.classList.remove('on');
-    setTimeout(function(){ endcard.classList.add('reveal'); }, 1500);
+    cap.classList.remove('show'); seal.classList.remove('on','out'); clearTimeout(sealT); sealOn=false;
+    cleanT.push(setTimeout(function(){ endcard.classList.add('reveal'); }, 1500));
     prog.style.width='100%'; count.textContent='B_77';
-    playing=false; pp.textContent='⟲';
   }
-  function schedule(){ clearTimeout(timer); timer=setTimeout(advance, (TRMS[scenes[idx].tr]||1000)+(scenes[idx].hold||HOLD)); }
-  function advance(){
-    if(idx<scenes.length-1){ idx++; show(idx); if(playing) schedule(); }
-    else { toEnd(); }
+  function resetFilm(){
+    cleanT.forEach(function(h){ clearTimeout(h); }); cleanT=[];
+    clearTimeout(capTimer);
+    ended=false; endcard.className='endcard';
+    layers.forEach(function(l){ l.className='frame'; l.style.transition=''; l.style.zIndex=''; l.innerHTML=''; });
+    gradeEls.forEach(function(g){ g.className='grade'; }); gAct=0;
+    cap.classList.remove('show'); capIdx=-1;
+    seal.classList.remove('on','out'); clearTimeout(sealT); sealOn=false;
+    fx.className='fx';
+    shown=-1; t0=0; setAnchor(0);
+    prog.style.width='0%'; count.textContent='01 / 0'+scenes.length;
   }
+  function tick(){
+    raf=null;
+    if(!playing) return;
+    var t=filmTime();
+    while(shown+1<scenes.length && t>=scenes[shown+1].at){ show(shown+1); }
+    if(shown>=0){
+      var sc=scenes[shown];
+      if(capIdx!==shown && t>=sc.sp){ capIdx=shown; setCap(shown); }
+      if(sc.seal && !sealOn && t>=sc.seal){ seal.classList.add('on'); sealOn=true; }
+    }
+    if(shown===scenes.length-1 && t>=END){ toEnd(); return; }
+    raf=requestAnimationFrame(tick);
+  }
+  function voUnlock(){ // in einer Klick-Geste aufrufen: Ton freischalten (iOS), sofort wieder anhalten, Position bleibt
+    if(voReady || playing) return;
+    if(navigator.userActivation && !navigator.userActivation.isActive) return;
+    voReady=true;
+    try{ var p=vo.play(); vo.pause(); if(p && p.catch) p.catch(function(){}); }catch(e){}
+  }
+  vo.addEventListener('playing', function(){ // Tonbeginn: Filmzeit auf den Ton ausrichten; veraltete Null-Position nach dem Weiterlaufen ignorieren
+    if(awaitAudio && playing){ awaitAudio=false; var a=vo.currentTime*1000; if(!(a<50 && filmTime()>1500)) setAnchor(a); }
+  });
   function play(){
-    if(sound) voUnlock(); playov.classList.remove('on');
-    if(ended){ ended=false; endcard.className='endcard'; idx=0; }
-    playing=true; pp.textContent='❚❚';
+    if(ended) resetFilm();
+    if(sound) voUnlock();
+    playov.classList.remove('on');
+    if(playing) return;
+    playing=true; pp.textContent='❚❚'; pp.setAttribute('aria-label','Pause');
     if(!started){ started=true; cinema.classList.add('rolled'); }
-    show(idx, idx===0); schedule();
+    setAnchor(t0);
+    if(shown<0) show(0);
+    awaitAudio=false;
+    if(sound){
+      awaitAudio=true;
+      vo.currentTime=t0/1000;
+      var p=vo.play(); if(p && p.catch) p.catch(function(){ awaitAudio=false; });
+    }
+    raf=requestAnimationFrame(tick);
   }
-  function pause(){ playing=false; pp.textContent='▶'; clearTimeout(timer); voStop(); }
+  function pause(){
+    if(!playing) return;
+    t0=filmTime(); playing=false; pp.textContent='▶︎'; pp.setAttribute('aria-label','Abspielen');
+    if(raf){ cancelAnimationFrame(raf); raf=null; }
+    awaitAudio=false;
+    if(vo) vo.pause();
+  }
 
   pp.addEventListener('click', function(){ if(playing) pause(); else play(); });
-  rp.addEventListener('click', function(){ pause(); ended=false; endcard.className='endcard'; idx=0; play(); });
+  rp.addEventListener('click', function(){ pause(); resetFilm(); play(); });
   skip.addEventListener('click', function(){ pause(); if(!ended) toEnd(); });
-  playbtn.addEventListener('click', function(){ if(sound) voUnlock(); playov.classList.remove('on'); idx=0; play(); });
+  playbtn.addEventListener('click', function(){ if(sound) voUnlock(); playov.classList.remove('on'); resetFilm(); play(); });
   snd.addEventListener('click', function(){
     sound=!sound;
     snd.setAttribute('aria-pressed', String(sound));
     snd.title = sound ? 'Ton aus' : 'Ton an';
-    if(!sound){ voStop(); var h=document.getElementById('tonhint'); if(h) h.classList.remove('on'); return; }
+    if(!sound){ awaitAudio=false; vo.pause(); hint.classList.remove('on'); return; }
     voUnlock();
-    if(playing && capShown && curIdx>=0) voPlay(curIdx, 0);
+    if(playing){ awaitAudio=true; vo.currentTime=filmTime()/1000; var p=vo.play(); if(p && p.catch) p.catch(function(){ awaitAudio=false; }); }
   });
   document.addEventListener('keydown', function(e){
     var onBtn=!!(e.target && e.target.closest && e.target.closest('button'));
@@ -385,17 +449,23 @@ body{background:#000;color:var(--paper);font-family:var(--sans);-webkit-font-smo
   function begin(){
     if(started) return;
     cinema.classList.add('rolled');
-    if(RM){ started=true; show(scenes.length-1, true); playov.classList.add('on'); return; }
+    if(RM){ started=true; resetFilm(); show(scenes.length-1); setCap(scenes.length-1); capIdx=scenes.length-1; playov.classList.add('on'); return; }
     // Prüfen, ob der Browser Ton ohne Klick erlaubt (leise Probe mit Lautstärke 0)
-    var t=VO[0], vol=t.volume; t.preload='auto'; t.volume=0;
-    var go=function(){ t.pause(); t.currentTime=0; t.volume=vol; voReady=true; VO.forEach(function(a){ a.preload='auto'; }); setTimeout(play, 700); };
-    var hint=document.getElementById('tonhint');
-    var ask=function(){ t.volume=vol; setTimeout(play, 700); if(sound) setTimeout(function(){ if(!voReady && sound) hint.classList.add('on'); }, 900);
-      var wake=function(){ if(navigator.userActivation && !navigator.userActivation.isActive) return;
-        ['click','touchend','keydown'].forEach(function(ev){ document.removeEventListener(ev, wake); }); hint.classList.remove('on');
-        if(!sound) return; voUnlock(); if(playing && capShown && curIdx>=0) voPlay(curIdx, 0); };
-      ['click','touchend','keydown'].forEach(function(ev){ document.addEventListener(ev, wake); }); };
-    try{ var p=t.play(); if(p && p.then) p.then(go, ask); else go(); }catch(e){ ask(); }
+    var vol=vo.volume; vo.volume=0;
+    var go=function(){ vo.pause(); vo.currentTime=0; vo.volume=vol; voReady=true; setTimeout(play, 700); };
+    var ask=function(){ vo.volume=vol; setTimeout(play, 700);
+      if(sound) setTimeout(function(){ if(!voReady && sound) hint.classList.add('on'); }, 900);
+      var wake=function(){
+        if(navigator.userActivation && !navigator.userActivation.isActive) return;
+        ['click','touchend','keydown'].forEach(function(ev){ document.removeEventListener(ev, wake); });
+        hint.classList.remove('on');
+        if(!sound) return;
+        voUnlock();
+        if(playing){ awaitAudio=true; vo.currentTime=filmTime()/1000; var p=vo.play(); if(p && p.catch) p.catch(function(){ awaitAudio=false; }); }
+      };
+      ['click','touchend','keydown'].forEach(function(ev){ document.addEventListener(ev, wake); });
+    };
+    try{ var p=vo.play(); if(p && p.then) p.then(go, ask); else go(); }catch(e){ ask(); }
   }
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ begin(); io.disconnect(); } }); },{threshold:.5});

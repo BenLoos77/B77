@@ -11,6 +11,7 @@ s = open(os.path.join(SRC, 'aermel-hoch.html')).read()
 n = s.count('assets/')
 s = (s.replace('url(assets/', 'url(/trailer/assets/')
       .replace('src="assets/', 'src="/trailer/assets/')
+      .replace("var A = 'assets/';", "var A = '/trailer/assets/';")
       .replace("var A='assets/';", "var A='/trailer/assets/';"))
 assert s.count('/trailer/assets/') == n, 'unbekannte assets/-Referenz in der Quelle'
 def rep(a, b):
@@ -38,7 +39,7 @@ assert "querySelector('.doc')" not in s and 'class="doc"' not in s and "Lesefass
 # benötigte Dateien
 files = set(re.findall(r'/trailer/assets/([\w./-]+\.(?:png|jpg|woff2))', s))
 files |= {m for m in re.findall(r"img:'([\w.-]+\.jpg)'", s)}
-files |= {f'vo-helmut/zeile{i}.mp3' for i in range(1, 7)}
+files |= {'vo-helmut/aermel-hoch-vo.mp3'}
 if os.path.exists(dst): shutil.rmtree(dst)
 for f in sorted(files):
     os.makedirs(os.path.dirname(os.path.join(dst, 'assets', f)), exist_ok=True)
