@@ -2,7 +2,7 @@
 
 ## 2026-11-16 · Trailer: Fassung mit Pausen, 30,5 s
 
-Vor jedem der fünf Übergänge steht 0,5 s mehr Pause. Die Sprecherspur liegt als eine Datei vor, Untertitel und Bild folgen ihr. Das Siegel blendet sauber aus, die Endkarte lässt Impressum und Bedienung sichtbar.
+Vor jedem der fünf Übergänge steht 0,5 s mehr Pause. Die Sprecherspur liegt als eine Datei vor, Untertitel und Bild folgen ihr. Das Siegel blendet sauber aus, die Endkarte lässt Impressum und Bedienung sichtbar. Flugzeug und Roboterarm sind neu generiert, ohne Schrift und mit normalem Leitwerk.
 
 ## 2026-11-16 · Trailer: Satz in Szene 4 neu formuliert
 
