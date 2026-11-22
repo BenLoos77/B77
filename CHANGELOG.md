@@ -1,5 +1,10 @@
 # Changelog B_77 Website
 
+## 2026-11-22 · Mahlo-Mappe: Übersicht um die Unterlagen vom November ergänzt
+
+- /mahlo verlinkt jetzt Projektstand 11/2026, Präsentation Sales/Marketing Engine und Funktionsbeschreibung v4 (Liste und Menü). Eine Anmeldung gilt für die ganze Mappe.
+- Google-Fonts-Einbindung aus der Übersicht entfernt (verstieß gegen die Regel „Schriften lokal“, wurde live von der CSP ohnehin blockiert) und einen Em-Dash ersetzt.
+
 ## 2026-11-22 · Sales/Marketing Engine: Funktionsbeschreibung v4
 
 - Neue Seite /mahlo/salesengine/funktionsbeschreibung: Lesefassung der Funktionsbeschreibung v4 (Quelle `~/Projects/sales-marketing-engine/funktionsbeschreibung/`), in der passwortgeschützten Mahlo-Mappe, `noindex`, keine externen Ressourcen. Enthält interne Angaben (Pilot, Pricing offen), auf Bens Wunsch hinter dem Mahlo-Passwort.
