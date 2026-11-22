@@ -1,5 +1,9 @@
 # Changelog B_77 Website
 
+## 2026-11-22 · Mahlo-Mappe: Rücklinks
+
+- Projektstand, Engine-Präsentation und Funktionsbeschreibung verlinken oben („← Mappe“) und im Fuß zurück auf die Übersicht /mahlo.
+
 ## 2026-11-22 · Mahlo-Mappe: Übersicht um die Unterlagen vom November ergänzt
 
 - /mahlo verlinkt jetzt Projektstand 11/2026, Präsentation Sales/Marketing Engine und Funktionsbeschreibung v4 (Liste und Menü). Eine Anmeldung gilt für die ganze Mappe.

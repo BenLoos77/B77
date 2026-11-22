@@ -107,10 +107,17 @@ footer{font:13px var(--head);color:var(--mute);padding:0 0 48px}
 .steps li::before{content:counter(a);font:700 15px/1.6 var(--head);color:var(--acc)}
 .dep{margin-top:18px}
 @media print{nav{display:none}.wrap,header.hero{grid-template-columns:1fr}section{break-inside:avoid-page;border:0;padding:20px 0}.orbit{animation:none}}
+
+.back{display:block;max-width:1180px;margin:0 auto;padding:22px 24px 0;font:600 12px/1.4 var(--head);letter-spacing:.08em;text-transform:uppercase;color:var(--acc);text-decoration:none;}
+.back:hover,.back:focus-visible{text-decoration:underline;}
+footer a{color:inherit;}
+@media (max-width:600px){.back{padding-left:16px;padding-right:16px;}}
+@media print{.back{display:none;}}
 </style>
 </head>
 <body>
 
+<a class="back" href="/mahlo">← Mappe mit allen Unterlagen</a>
 <header class="hero">
   <div class="meta"><b>B77 · Produktentwicklung</b>Funktionsbeschreibung v4<br>Stand 18.11.2026<br>Entscheidungen Runde 1 bis 3 eingearbeitet</div>
   <div>
@@ -438,7 +445,7 @@ footer{font:13px var(--head);color:var(--mute);padding:0 0 48px}
   <div class="note dep"><strong>Abhängigkeit:</strong> Broschüren im Pilot setzen die Entscheidung zur Mahlo-CI voraus (E15). Verzögert sie sich, startet die Pilotphase nur mit den Mailabläufen, und die Broschüren kommen nach, sobald die Vorlagen stehen.</div>
 </section>
 
-<footer>B77 · Sales/Marketing Engine · Funktionsbeschreibung v4 · Lesefassung der Markdown-Quelle · interner Entwurf</footer>
+<footer>B77 · Sales/Marketing Engine · Funktionsbeschreibung v4 · Lesefassung der Markdown-Quelle · interner Entwurf · <a href="/mahlo">Zur Mappe mit allen Unterlagen</a></footer>
 </main>
 </div>
 </body>
