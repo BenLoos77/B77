@@ -1,5 +1,9 @@
 # Changelog B_77 Website
 
+## 2026-11-22 · Mahlo: Projektstand November 2026
+
+- Neue Seite /mahlo/projektstand/11_26: Projektstand und erster Eindruck für die Geschäftsführung Mahlo, in der passwortgeschützten Mahlo-Mappe, `noindex`, keine externen Ressourcen.
+
 ## 2026-11-22 · Mahlo: Präsentation Sales/Marketing Engine
 
 - Neue Seite /mahlo/salesengine: self-contained Präsentation der Sales/Marketing Engine für Mahlo (Quelle `~/Projects/mahlo/marketing-engine/`), durch das Critic-Gate geführt.
