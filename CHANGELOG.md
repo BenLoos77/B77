@@ -1,5 +1,9 @@
 # Changelog B_77 Website
 
+## 2026-11-22 · Mahlo-Mappe: Kontakt aus dem Menü
+
+- Menüpunkt „Kontakt“ auf /mahlo entfernt, Mahlo braucht kein Erstgespräch.
+
 ## 2026-11-22 · Mahlo-Mappe: Übersicht im b77-Design
 
 - /mahlo nutzt jetzt Gerüst und Stylesheet der Website (Kopf, Menü, Seitenkopf, Ratgeber-Karten, Fuß). Ohne Cookie-Banner und ohne Google Analytics, weil vertrauliche Kundenseite.
