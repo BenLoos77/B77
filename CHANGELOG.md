@@ -1,5 +1,9 @@
 # Changelog B_77 Website
 
+## 2026-11-22 · Mahlo-Mappe: Übersicht im b77-Design
+
+- /mahlo nutzt jetzt Gerüst und Stylesheet der Website (Kopf, Menü, Seitenkopf, Ratgeber-Karten, Fuß). Ohne Cookie-Banner und ohne Google Analytics, weil vertrauliche Kundenseite.
+
 ## 2026-11-22 · Mahlo-Mappe: Übersicht nur noch Einleitung
 
 - /mahlo ist jetzt eine kurze Einleitung („hier legen wir alle Dokumente zum Projekt ab“) mit zwei Links: Projektstand und Sales/Marketing Engine. Kennzahlen und Links auf die Juli-Unterlagen und die Funktionsbeschreibung ausgeblendet; die Dateien selbst bleiben unter ihren Adressen erreichbar.
