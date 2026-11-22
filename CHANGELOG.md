@@ -1,5 +1,10 @@
 # Changelog B_77 Website
 
+## 2026-11-22 · Mahlo: Präsentation Sales/Marketing Engine
+
+- Neue Seite /mahlo/salesengine: self-contained Präsentation der Sales/Marketing Engine für Mahlo (Quelle `~/Projects/mahlo/marketing-engine/`), durch das Critic-Gate geführt.
+- Liegt in der passwortgeschützten Mahlo-Mappe (middleware.js), `noindex`, keine externen Ressourcen, keine Datenübertragung.
+
 ## 2026-11-15 · SEO Phase 4, Welle 1: Ratgeber-Hub und 5 Fachartikel
 
 Start der nationalen Content-Offensive. Die Pillar-Seite /vertriebsberatung wird
