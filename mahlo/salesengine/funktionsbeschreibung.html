@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sales/Marketing Engine · Funktionsbeschreibung v4</title>
+<style>
+:root{
+  --paper:#f2f3f1; --sheet:#ffffff; --ink:#14181b; --mute:#5d6468; --line:#d9dcda;
+  --acc:#0d5c57; --acc-soft:#e1ecea; --warn:#9a4a12; --warn-soft:#f6ebe1;
+  --head:"Avenir Next","Avenir","Helvetica Neue",Arial,sans-serif;
+  --body:"Charter","Iowan Old Style","Georgia",serif;
+}
+@media (prefers-color-scheme:dark){:root{
+  --paper:#0f1214; --sheet:#161a1d; --ink:#e8ebea; --mute:#9aa3a6; --line:#2a3034;
+  --acc:#5cc2b7; --acc-soft:#16302e; --warn:#e3a06a; --warn-soft:#33241a;
+}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 var(--body)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:220px 1fr;gap:56px}
+header.hero{max-width:1180px;margin:0 auto;padding:72px 24px 40px;display:grid;grid-template-columns:220px 1fr;gap:56px;align-items:end}
+.meta{font:500 12px/1.5 var(--head);letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.meta b{display:block;color:var(--acc);font-weight:700}
+h1{font:700 clamp(40px,6vw,76px)/.98 var(--head);letter-spacing:-.025em;margin:0}
+h1 span{color:var(--acc)}
+.lede{font-size:20px;max-width:62ch;margin:22px 0 0;color:var(--ink)}
+nav{position:sticky;top:24px;align-self:start;font:500 13px/1.4 var(--head)}
+nav a{display:flex;gap:10px;padding:6px 0;color:var(--mute);text-decoration:none;border-left:2px solid transparent;padding-left:10px}
+nav a:hover,nav a:focus-visible{color:var(--ink);border-left-color:var(--acc);outline:none}
+nav a i{font-style:normal;color:var(--acc);min-width:20px}
+main{padding-bottom:96px}
+section{background:var(--sheet);border:1px solid var(--line);padding:40px 44px;margin-bottom:20px}
+section h2{font:700 26px/1.2 var(--head);letter-spacing:-.01em;margin:0 0 18px;display:flex;gap:14px;align-items:baseline}
+section h2 i{font-style:normal;font-size:13px;color:var(--acc);letter-spacing:.1em}
+h3{font:700 17px/1.3 var(--head);margin:30px 0 8px}
+h3 small{font-weight:500;color:var(--mute);margin-left:8px}
+p{margin:0 0 14px;max-width:70ch}
+ul,ol{padding-left:1.2em;margin:0 0 14px;max-width:70ch}
+li{margin:4px 0}
+table{width:100%;border-collapse:collapse;margin:14px 0 18px;font:15px/1.45 var(--head)}
+th{text-align:left;font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);border-bottom:2px solid var(--ink);padding:8px 12px 8px 0}
+td{border-bottom:1px solid var(--line);padding:10px 12px 10px 0;vertical-align:top}
+td:first-child{font-weight:600;white-space:nowrap}
+.key{background:var(--acc-soft);border-left:4px solid var(--acc);padding:18px 22px;margin:18px 0;max-width:72ch}
+.key strong{color:var(--acc)}
+.note{background:var(--warn-soft);border-left:4px solid var(--warn);padding:16px 22px;margin:18px 0;max-width:72ch}
+.note strong{color:var(--warn)}
+/* Signature: der Kreislauf */
+.loop{display:grid;grid-template-columns:minmax(260px,360px) 1fr;gap:36px;align-items:center;margin:10px 0 6px}
+.loop svg{width:100%;height:auto}
+.loop svg text{font-family:var(--head);fill:var(--ink)}
+.loop ol{counter-reset:s;list-style:none;padding:0}
+.loop ol li{counter-increment:s;padding:10px 0 10px 44px;position:relative;border-bottom:1px solid var(--line)}
+.loop ol li::before{content:counter(s);position:absolute;left:0;top:9px;width:28px;height:28px;border-radius:50%;background:var(--acc);color:var(--sheet);font:700 13px/28px var(--head);text-align:center}
+.orbit{transform-origin:180px 180px;animation:spin 28s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.orbit{animation:none}}
+/* Module-Raster */
+.mods{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:2px solid var(--ink);margin-top:8px}
+.mod{padding:22px 22px 22px 0;border-bottom:1px solid var(--line)}
+.mod:nth-child(odd){border-right:1px solid var(--line)}
+.mod:nth-child(even){padding-left:22px}
+.mod .tag{font:700 12px/1 var(--head);color:var(--acc);letter-spacing:.1em}
+.mod h3{margin:8px 0 6px}
+.mod p{font-size:15.5px;margin:0}
+.mod.opt .tag::after{content:" · optional";color:var(--mute)}
+/* Ablauf */
+.flow{list-style:none;padding:0;margin:10px 0;max-width:none;display:grid;gap:0}
+.flow li{display:grid;grid-template-columns:56px 1fr;gap:0;margin:0}
+.flow .n{font:700 22px/1 var(--head);color:var(--acc);padding:16px 0;border-right:2px solid var(--acc);position:relative}
+.flow .n::after{content:"";position:absolute;right:-7px;top:20px;width:12px;height:12px;border-radius:50%;background:var(--sheet);border:2px solid var(--acc)}
+.flow .t{padding:14px 0 14px 26px;border-bottom:1px solid var(--line)}
+.flow li.gate .t{background:var(--acc-soft)}
+.stages{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:10px}
+.stage{border-top:4px solid var(--acc);padding:16px 0 0}
+.stage:nth-child(2){border-top-color:color-mix(in srgb,var(--acc) 65%,var(--paper))}
+.stage:nth-child(3){border-top-color:color-mix(in srgb,var(--acc) 35%,var(--paper))}
+.stage b{font:700 13px/1 var(--head);letter-spacing:.1em;color:var(--mute)}
+.stage p{font-size:15.5px;margin-top:8px}
+.q{counter-reset:q;list-style:none;padding:0;max-width:none}
+.q li{counter-increment:q;display:grid;grid-template-columns:40px 1fr;padding:12px 0;border-bottom:1px solid var(--line);margin:0}
+.q li::before{content:counter(q,decimal-leading-zero);font:700 14px/1.6 var(--head);color:var(--acc)}
+code{font-size:.88em;background:var(--paper);padding:1px 5px}
+footer{font:13px var(--head);color:var(--mute);padding:0 0 48px}
+@media (max-width:900px){
+  .wrap,header.hero{grid-template-columns:1fr;gap:20px}
+  nav{display:none}
+  section{padding:28px 20px}
+  .loop,.mods,.stages{grid-template-columns:1fr}
+  .mod,.mod:nth-child(even){padding:18px 0;border-right:0}
+  td:first-child{white-space:normal}
+  table{font-size:14px}
+}
+@media (max-width:600px){
+  header.hero,.wrap{padding-left:16px;padding-right:16px}
+  table,thead,tbody,tr,th,td{display:block}
+  thead{display:none}
+  tr{border-bottom:1px solid var(--line);padding:8px 0}
+  td{border:0;padding:2px 0}
+}
+.mod.wide{grid-column:1/-1;border-right:0;padding-left:0}
+.steps{list-style:none;padding:0;max-width:none;counter-reset:a;margin:10px 0 14px}
+.steps li{counter-increment:a;display:grid;grid-template-columns:40px 1fr;padding:10px 0;border-bottom:1px solid var(--line);margin:0}
+.steps li::before{content:counter(a);font:700 15px/1.6 var(--head);color:var(--acc)}
+.dep{margin-top:18px}
+@media print{nav{display:none}.wrap,header.hero{grid-template-columns:1fr}section{break-inside:avoid-page;border:0;padding:20px 0}.orbit{animation:none}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="meta"><b>B77 · Produktentwicklung</b>Funktionsbeschreibung v4<br>Stand 18.11.2026<br>Entscheidungen Runde 1 bis 3 eingearbeitet</div>
+  <div>
+    <h1>Sales/<span>Marketing</span><br>Engine</h1>
+    <p class="lede">Ein System für Vertrieb und Marketing: Mittelständische Unternehmen bauen damit ihr Marketing auf und steuern es. Das CRM schließt den Vertrieb direkt an.</p>
+  </div>
+</header>
+
+<div class="wrap">
+<nav aria-label="Inhalt">
+  <a href="#entscheidungen"><i>00</i>Entscheidungen</a>
+  <a href="#zielbild"><i>01</i>Zielbild</a>
+  <a href="#rollen"><i>02</i>Rollen</a>
+  <a href="#module"><i>03</i>Module</a>
+  <a href="#ablauf"><i>04</i>Kernablauf</a>
+  <a href="#leitplanken"><i>05</i>Vollautomatik</a>
+  <a href="#gehirn"><i>06</i>Gehirn: Empfehlung</a>
+  <a href="#betrieb"><i>07</i>Betrieb</a>
+  <a href="#abgrenzung"><i>08</i>Abgrenzung</a>
+  <a href="#stufen"><i>09</i>Ausbaustufen</a>
+  <a href="#geschaeftsmodell"><i>10</i>Geschäftsmodell</a>
+  <a href="#fragen"><i>11</i>Offene Fragen</a>
+</nav>
+
+<main>
+
+<section id="entscheidungen">
+  <h2><i>00</i>Entscheidungen</h2>
+  <h3>Runde 1</h3>
+  <table>
+    <thead><tr><th>#</th><th>Thema</th><th>Entscheidung</th></tr></thead>
+    <tbody>
+      <tr><td>E1</td><td>Absender</td><td>Die Mail geht im Namen des zuständigen Vertrieblers raus</td></tr>
+      <tr><td>E2</td><td>CRM</td><td>Das Mahlo-CRM gehört B77. Mahlo ist der erste Kunde der Engine (Pilot)</td></tr>
+      <tr><td>E3</td><td>Fremd-CRM</td><td>Anbindung fremder CRMs (HubSpot, Pipedrive, Salesforce usw.) soll später möglich sein</td></tr>
+      <tr><td>E4</td><td>Claude und Datenschutz</td><td>Pseudonymisierung: Claude sieht keine personenbezogenen Daten</td></tr>
+      <tr><td>E5</td><td>Tracking-Einwilligung</td><td>Wird in den Double-Opt-in aufgenommen</td></tr>
+      <tr><td>E6</td><td>Geschäftsmodell</td><td>Onboarding und Aufsetzen der Software einmalig, danach laufende Lizenz je Platz. Preise noch offen</td></tr>
+      <tr><td>E7</td><td>Name</td><td>Kommt von Ben, bis dahin Arbeitstitel</td></tr>
+    </tbody>
+  </table>
+  <h3>Runde 2</h3>
+  <table>
+    <thead><tr><th>#</th><th>Thema</th><th>Entscheidung</th></tr></thead>
+    <tbody>
+      <tr><td>E8</td><td>Pricing</td><td>Bleibt vorerst offen</td></tr>
+      <tr><td>E9</td><td>Handelsvertreter als Absender</td><td>Mail geht im Namen des Handelsvertreters raus, es sei denn, er ist im System anders angelegt</td></tr>
+      <tr><td>E10</td><td>Mahlo als Pilot</td><td>Die Engine startet bei Mahlo parallel zu CRM Stufe 1, nicht erst nach dessen Abnahme</td></tr>
+      <tr><td>E11</td><td>CRM als Produkt</td><td>Die Verallgemeinerung zum Produkt beginnt bis 02.12.2026</td></tr>
+      <tr><td>E12</td><td>Forecast-Regeln</td><td>Die Forecast-Regeln aus dem Mahlo-CRM gelten für alle Kunden. Ausnahme: Kunden ohne internationales Geschäft, bei denen die Länder-Ebene entfällt</td></tr>
+    </tbody>
+  </table>
+  <h3>Runde 3</h3>
+  <table>
+    <thead><tr><th>#</th><th>Thema</th><th>Entscheidung</th></tr></thead>
+    <tbody>
+      <tr><td>E13</td><td>Broschüren</td><td>Broschüren per Klick gehören von der Pilotphase an zum Umfang (Stufe 1), nicht erst in eine spätere Ausbaustufe</td></tr>
+      <tr><td>E14</td><td>Präsentation Mahlo</td><td>Vorstellung für Mahlo: <code>~/Projects/mahlo/marketing-engine/Praesentation-Marketing-Engine.html</code></td></tr>
+      <tr><td>E15</td><td>Erscheinungsbild Broschüren</td><td>Die Broschürenvorlagen warten auf die neue Mahlo-CI (Richtungen A/B/C). Kein Zwischenstand im heutigen Auftritt. Die Mailabläufe starten unabhängig davon. Ausnahme: Das Muster in der Mahlo-Präsentation zeigt auf Bens Wunsch das heutige Mahlo-Logo und Mahlo-Rot, nur zur Veranschaulichung</td></tr>
+      <tr><td>E16</td><td>Rahmung</td><td>Das Produkt ist eine Sales UND Marketing Engine: CRM (Vertriebsteil) und Marketingteil in einem System. „Engine“ meint immer das Ganze. Das Thema ist <strong>vollautomatisches Marketing</strong>, direkt verbunden mit dem Vertrieb. Das Mitlaufen über den CRM-Haken ist einer von drei Wegen, es anzustoßen (Haken, Auftrag der Marketingleitung, Broschüre per Klick)</td></tr>
+      <tr><td>E17</td><td>Aufträge an die Engine</td><td>Die Marketingleitung beim Kunden kann der Engine Aufträge in eigenen Worten geben (Kampagne für eine Kundengruppe, Messeplanung, Neuheiten, Bestandskunden). Die Engine schlägt Zielgruppe, Ablauf, Inhalte und Absender vor. Start erst nach Freigabe durch die Marketingleitung</td></tr>
+      <tr><td>E18</td><td>Einmal ändern, überall aktuell</td><td>Kernvorteil: Jeder Inhalt entsteht neu aus Gehirn und Standards. Eine Änderung (Referenz, Ansprechpartner, Vorlage, Fachbegriffe) gilt sofort für alle künftigen Mails, Broschüren und Kampagnen, in allen Sprachen und Niederlassungen. Bereits versendete Mails bleiben protokolliert unverändert. In laufenden Kampagnen gilt eine Änderung ab der nächsten Mail. Broschüren per Link zeigen immer die aktuelle Fassung. Freigegebene Standardinhalte, die betroffen sind, legt die Engine zur erneuten Freigabe vor (Vorschlag, Bens Entscheidung offen). Neue Referenzen erst nach Zustimmung des Referenzkunden</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="zielbild">
+  <h2><i>01</i>Zielbild</h2>
+  <p>Mittelständische Unternehmen bauen mit der Engine ihr Marketing auf und steuern es, ohne eigene Marketingabteilung in voller Größe. Alles Wissen über das Unternehmen liegt an einer Stelle. Claude-Agenten erstellen auf dieser Grundlage markenkonforme Inhalte und versenden sie automatisch.</p>
+  <div class="key"><strong>Die Brücke:</strong> Optional kommt ein CRM dazu. Ein Vertriebler setzt bei einem Kontakt den Haken <strong>„permanent ins Marketing aufnehmen“</strong>, und ab dann wird dieser Kontakt im festgelegten Rhythmus mit relevanten Inhalten versorgt, ohne dass ein Mensch etwas tun muss. Der Haken ist einer von drei Wegen, das Marketing anzustoßen, neben dem Auftrag der Marketingleitung und der Broschüre per Klick (E16).</div>
+  <h3>Der Kreislauf, den das Produkt erzeugt</h3>
+  <div class="loop">
+    <svg viewBox="0 0 360 360" role="img" aria-label="Kreislauf: Vertrieb spart Arbeit, CRM wird gepflegt, Geschäftsführung bekommt Transparenz, Tracking meldet warme Kontakte">
+      <circle cx="180" cy="180" r="128" fill="none" stroke="var(--line)" stroke-width="2"/>
+      <g class="orbit"><circle cx="180" cy="52" r="7" fill="var(--acc)"/></g>
+      <circle cx="180" cy="180" r="58" fill="var(--acc-soft)"/>
+      <text x="180" y="176" text-anchor="middle" font-size="15" font-weight="700">Engine</text>
+      <text x="180" y="196" text-anchor="middle" font-size="11" style="fill:var(--mute)">Gehirn + Agenten</text>
+      <g font-size="12.5" font-weight="700">
+        <text x="180" y="30" text-anchor="middle">1 · Vertrieb spart Arbeit</text>
+        <text x="350" y="185" text-anchor="end">2 · CRM wird gepflegt</text>
+        <text x="180" y="345" text-anchor="middle">3 · Transparenz für die GF</text>
+        <text x="10" y="185">4 · Warme</text>
+        <text x="10" y="201">Kontakte</text>
+      </g>
+    </svg>
+    <ol>
+      <li>Der Vertrieb spart Arbeit und bleibt beim Kunden präsent.</li>
+      <li>Dafür pflegt er das CRM, auch für Kontakte ohne Angebotsanfrage.</li>
+      <li>Die Geschäftsführung bekommt Transparenz und Planbarkeit in der Pipeline.</li>
+      <li>Das Tracking meldet warme Kontakte zurück, der Vertrieb ruft gezielt an.</li>
+    </ol>
+  </div>
+</section>
+
+<section id="rollen">
+  <h2><i>02</i>Rollen</h2>
+  <table>
+    <thead><tr><th>Rolle</th><th>Wo</th><th>Was sie tut</th></tr></thead>
+    <tbody>
+      <tr><td>Geschäftsführung</td><td>Kunde</td><td>Sieht Pipeline und Wirkung des Marketings, gibt die Strategie frei</td></tr>
+      <tr><td>Marketing-Verantwortliche</td><td>Kunde</td><td>Pflegt Gehirn und Standards, legt Strecken und Rhythmus fest</td></tr>
+      <tr><td>Innendienst, Sachbearbeitung</td><td>Kunde</td><td>Erfasst Kontakte, versendet Angebote, setzt den Marketing-Haken</td></tr>
+      <tr><td>Außendienst, Handelsvertreter</td><td>Kunde oder extern</td><td>Wie Innendienst, mit Rechten nur auf das eigene Gebiet</td></tr>
+      <tr><td>Onboarding-Team</td><td>B77</td><td>Befüllt Gehirn und Standards, setzt die Agenten auf</td></tr>
+      <tr><td>Kontakt (Empfänger)</td><td>Markt</td><td>Erhält Mails, kann sich jederzeit abmelden</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="module">
+  <h2><i>03</i>Module</h2>
+  <div class="mods">
+    <div class="mod"><span class="tag">M1</span><h3>Gehirn</h3><p>Strategie und Positionierung, Zielgruppen und Branchen, Kundenpersonas, Produkte und Leistungen, Nutzenargumente, Referenzen, Wettbewerb, häufige Einwände und Antworten, Kaufphasen. Im Onboarding befüllt, danach laufend gepflegt.</p></div>
+    <div class="mod"><span class="tag">M2</span><h3>Standards</h3><p>Designrichtlinien (Farben, Schrift, Logo-Einsatz), Templates je Medium (zuerst Mail), Tonalität je Kanal und Persona, Sprachregeln (Du/Sie, Fachbegriffe, verbotene Formulierungen), rechtliche Pflichtbausteine (Impressum, Abmeldelink).</p></div>
+    <div class="mod"><span class="tag">M3</span><h3>Agenten</h3><p>Content-Agent, Standards-Prüfer, Strecken-Planer, Auswertungs-Agent. Im Onboarding nach Bedarf des Kunden aufgesetzt.</p></div>
+    <div class="mod"><span class="tag">M4</span><h3>Inhalte und Strecken</h3><p>Standard-Inhalte, einmal erstellt und freigegeben, plus generierte Inhalte passend zu Persona, Branche und Situation. Strecken mit festem Rhythmus, im Onboarding definiert.</p></div>
+    <div class="mod"><span class="tag">M5</span><h3>Versand</h3><p>Zuerst nur Mail, vollautomatisch, im Namen des zuständigen Vertrieblers (E1). Antworten landen in seinem Postfach und am Kontakt. Weitere Kanäle (LinkedIn, Post, Social) folgen später.</p></div>
+    <div class="mod"><span class="tag">M5b</span><h3>Broschüren per Klick</h3><p>Druckfertige PDF-Unterlagen aus Gehirn und Standards, nach Branche, Anlass und Sprache. Ab Pilotphase (E13).</p></div>
+    <div class="mod"><span class="tag">M5c</span><h3>Aufträge an die Engine</h3><p>Die Marketingleitung gibt Aufträge in eigenen Worten. Die Engine schlägt vor, nach Freigabe läuft alles automatisch (E17).</p></div>
+    <div class="mod"><span class="tag">M6</span><h3>Tracking und Rückkanal</h3><p>Zustellung, Öffnung, Klick, Antwort, Abmeldung, Angebotsansicht. Bewertung warm/kalt, Meldung an den zuständigen Vertriebler. Muster aus Dealfalcon.</p></div>
+    <div class="mod opt"><span class="tag">M7</span><h3>CRM mit Marketing-Brücke</h3><p>Basis ist das Mahlo-CRM (gehört B77, E2), verallgemeinert zum Produkt. Übliche CRM-Funktionen plus Haken „ins Marketing aufnehmen“, Streckenwahl, Pause und Stopp, Ereignisse am Kontakt.</p></div>
+    <div class="mod"><span class="tag">M8</span><h3>Onboarding</h3><p>Geführter Prozess, durchgeführt von B77: Strategie-Workshop, Marke und Tonalität, Strecken, Agenten testen, Instanz einrichten, Schulung.</p></div>
+  </div>
+
+  <div class="key"><strong>Einmal ändern, überall aktuell (E18).</strong> Jeder Inhalt entsteht neu aus Gehirn und Standards. Eine Änderung an Referenz, Ansprechpartner, Vorlage oder Fachbegriffen gilt sofort für alle künftigen Mails, Broschüren und Kampagnen, in allen Sprachen und Niederlassungen. Versendete Mails bleiben protokolliert unverändert, laufende Kampagnen übernehmen die Änderung ab der nächsten Mail.</div>
+
+  <h3>Strecken <small>Beispiele, im Onboarding je Kunde festgelegt</small></h3>
+  <table>
+    <thead><tr><th>Strecke</th><th>Auslöser</th><th>Beispiel-Rhythmus</th></tr></thead>
+    <tbody>
+      <tr><td>Angebots-Nachfass</td><td>Angebot versendet + Haken</td><td>Tag 3, 10, 21, danach monatlich</td></tr>
+      <tr><td>Interessent ohne Anfrage</td><td>Kontakt als Chance + Haken</td><td>alle 3 Wochen</td></tr>
+      <tr><td>Bestandskunde</td><td>Kunde mit Auftrag + Haken</td><td>monatlich bis quartalsweise</td></tr>
+    </tbody>
+  </table>
+
+  <h3>M5 · Versand im Namen des Vertrieblers <small>was daraus folgt</small></h3>
+  <ul>
+    <li>Absenderadresse und Signatur des Vertrieblers, versendet über die Domain des Kunden. Der Kontakt erlebt die Mail als persönliche Nachricht seines Ansprechpartners.</li>
+    <li>Antworten gehen direkt in sein Postfach und werden zusätzlich am Kontakt protokolliert. Eine Antwort stoppt die Strecke.</li>
+    <li>Wechselt der Zuständige (Gebietswechsel, Austritt), übernimmt der neue Vertriebler die Strecke automatisch als Absender.</li>
+  </ul>
+  <h3>Absender-Profil je Nutzer <small>auch für Handelsvertreter (E9)</small></h3>
+  <table>
+    <thead><tr><th>Variante</th><th>Wann</th><th>Was nötig ist</th></tr></thead>
+    <tbody>
+      <tr><td>Adresse auf Kundendomain</td><td>Standard für Angestellte</td><td>Nichts weiter, Versand über die Domain des Kunden</td></tr>
+      <tr><td>Eigene Domain</td><td>Handelsvertreter mit eigener Firma</td><td>SPF/DKIM-Eintrag auf seiner Domain, sonst landen Mails im Spam. Anleitung kommt aus dem Onboarding</td></tr>
+      <tr><td>Anders angelegt</td><td>Wenn der Kunde es so festlegt</td><td>Versand im Namen einer festgelegten Person, z. B. des Innendienstes</td></tr>
+    </tbody>
+  </table>
+
+  <h3>M5b · Broschüren per Klick <small>ab Pilotphase (E13)</small></h3>
+  <table>
+    <thead><tr><th>Punkt</th><th>Festlegung</th></tr></thead>
+    <tbody>
+      <tr><td>Auswahl</td><td>Branche, Anlass (z. B. Produktübersicht, Messe-Einladung, Referenzbericht) und Sprache</td></tr>
+      <tr><td>Inhalt und Layout</td><td>Inhalt aus dem Gehirn (Produkte, Nutzen, Referenzen je Branche), Layout aus den Broschürenvorlagen in den Standards (Mahlo-Erscheinungsbild)</td></tr>
+      <tr><td>Ablauf</td><td>Inhalte laden, Text schreiben bzw. übersetzen, Standards-Prüfer, Satz in die Vorlage, PDF</td></tr>
+      <tr><td>Regeln</td><td>Fachbegriffe je Sprache legen die Niederlassungen fest. Messe-Einladungen passen zur Branche (ITMA nur für Textil und Vliesstoff). Preise und Zusagen nur, wenn im Gehirn freigegeben</td></tr>
+      <tr><td>Nutzung</td><td>Einzeln durch den Verkäufer (Download oder als Anhang einer Mail) und automatisch als Inhalt einer Strecke</td></tr>
+      <tr><td>Immer aktuell (E18)</td><td>Broschüren werden bei Abruf neu erzeugt. Per Link verschickte Broschüren zeigen immer die aktuelle Fassung, als Anhang verschickte PDFs tragen Stand und Version</td></tr>
+      <tr><td>Datenschutz</td><td>Broschüren sind nicht personalisiert, an Claude gehen keine Kontaktdaten. Eine persönliche Anrede steht nur in der begleitenden Mail</td></tr>
+    </tbody>
+  </table>
+
+  <h3>M5c · Aufträge an die Engine <small>E17</small></h3>
+  <p>Neben den laufenden Strecken aus dem CRM-Haken nimmt die Engine Aufträge der Marketingleitung entgegen.</p>
+  <ol class="steps">
+    <li><span><strong>Auftrag:</strong> in eigenen Worten, z. B. „Vliesstoffhersteller in Italien und Spanien auf QUALISCAN aufmerksam machen, Start März, Ziel Vorführtermine“.</span></li>
+    <li><span><strong>Vorschlag:</strong> Die Engine wählt die Zielgruppe aus dem CRM (Branche, Land, Status, nur Kontakte mit Zustimmung) und schlägt Ablauf, Inhalte (Mails, Broschüren), Sprachen, Absender je Gebiet und Messgröße vor. Änderungen ebenfalls in Worten.</span></li>
+    <li><span><strong>Freigabe:</strong> Ohne Freigabe der Marketingleitung startet keine Kampagne. Danach läuft sie vollautomatisch wie jede Strecke.</span></li>
+    <li><span><strong>Abstimmung:</strong> Kampagnen und laufende Strecken werden gegeneinander abgeglichen (Frequenz-Obergrenze je Kontakt).</span></li>
+    <li><span><strong>Vertrieb:</strong> Die zuständigen Verkäufer werden informiert, Rückmeldungen landen bei ihnen, Ergebnisse sind im CRM sichtbar.</span></li>
+  </ol>
+  <p>Typische Aufträge: Kampagne für eine Kundengruppe, Messeplanung (Einladung, Termine am Stand, Nachfassen getrennt nach Besuchern), Produktneuheit je Branche, Bestandskunden (Nachrüstung, Service; braucht eine Kundenliste, weil CRM Stufe 1 keine Altkunden enthält).</p>
+  <p><strong>Datenschutz:</strong> Die Zielgruppen-Auswahl läuft in der Instanz. Claude erhält nur den Auftrag und die Merkmale der Zielgruppe, keine Kontaktdaten. Besprochene Themen (z. B. am Messestand) werden im CRM als Auswahl erfasst, nicht als Freitext, damit keine Notizen an Claude gehen.</p>
+  <div class="note"><strong>Zeitpunkt:</strong> Aufträge setzen die Anbindung an das CRM voraus (Stufe 2). In der Pilotphase kommen Kontakte per Liste.</div>
+
+  <h3>M6 · Tracking und Rückkanal <small>nach dem Muster von Dealfalcon</small></h3>
+  <ul>
+    <li>Mail zugestellt, geöffnet, Link geklickt, geantwortet, abgemeldet.</li>
+    <li>Angebot geöffnet und angesehen, auch außerhalb der Strecken, direkt nach Angebotsversand.</li>
+    <li>Kontakt-Bewertung (warm/kalt) aus den Ereignissen.</li>
+    <li>Benachrichtigung an den zuständigen Vertriebler, wenn ein Kontakt warm wird.</li>
+  </ul>
+
+  <h3>M7 · Vom Mahlo-CRM zum Produkt <small>Start bis 02.12.2026 (E11, E12)</small></h3>
+  <p>Basis ist das Mahlo-CRM (<code>~/Projects/mahlo/crm</code>: Next.js, PostgreSQL, Betrieb auf Hetzner, Forecast mit Änderungshistorie). Es gehört B77 und wird zum Produkt verallgemeinert und um die Marketing-Brücke erweitert. Mahlo ist der erste Kunde der Engine und damit der Pilot.</p>
+  <div class="key"><strong>Grundsatz:</strong> Das Produkt ist der Kern, Mahlo ist seine erste Konfiguration.</div>
+  <ul>
+    <li><strong>Forecast-Regeln</strong> (Stufen, Wert, erwarteter Auftragsmonat, Änderungshistorie mit Begründung, Stichtags-Snapshots) sind Produkt-Standard für alle Kunden.</li>
+    <li><strong>Länder-Ebene</strong> als Schalter je Instanz: an bei internationalem Geschäft (wie Mahlo), aus bei rein nationalen Kunden. Dann läuft der Forecast je Verkäufer und Gebiet.</li>
+    <li>Was nur für Mahlo gilt (Märkte, Niederlassungen, Namen, Zahlen, Anfragetypen), liegt in Konfiguration und Daten der Mahlo-Instanz, nicht im Code.</li>
+  </ul>
+  <p>Übliche CRM-Funktionen (Accounts, Kontakte, Leads, Deals, Pipeline, Angebote, Aktivitäten, Wiedervorlagen, Gebiete und Rechte) plus die <strong>Marketing-Brücke</strong>:</p>
+  <ul>
+    <li>Haken „permanent ins Marketing aufnehmen“ je Kontakt, sichtbar nur mit Freigabe (Rolle).</li>
+    <li>Auswahl der Strecke, oder automatisch nach Kontaktstatus.</li>
+    <li>Pause und Stopp durch den Vertriebler.</li>
+    <li>Tracking-Ereignisse erscheinen direkt am Kontakt.</li>
+  </ul>
+  <p>Ohne CRM werden Kontakte zunächst per Import übergeben. Später kommt eine Anbindung fremder CRMs dazu (E3), z. B. HubSpot, Pipedrive, Salesforce. Der Marketing-Haken lebt dann im fremden CRM als Feld oder Tag.</p>
+
+  <h3>M8 · Onboarding <small>durchgeführt von B77</small></h3>
+  <ol class="steps">
+    <li><span>Strategie-Workshop, Gehirn befüllen</span></li>
+    <li><span>Marke und Tonalität aufnehmen, Standards befüllen</span></li>
+    <li><span>Strecken und Rhythmus festlegen</span></li>
+    <li><span>Agenten aufsetzen und mit Probeinhalten testen</span></li>
+    <li><span>Instanz einrichten (Mailversand, Domain, CRM-Anbindung)</span></li>
+    <li><span>Schulung der Nutzer, Start</span></li>
+  </ol>
+</section>
+
+<section id="ablauf">
+  <h2><i>04</i>Kernablauf: „Permanent ins Marketing aufnehmen“</h2>
+  <ol class="flow">
+    <li><span class="n">1</span><span class="t">Sachbearbeiter versendet ein Angebot an einen neuen Interessenten.</span></li>
+    <li><span class="n">2</span><span class="t">Er setzt den Haken „permanent ins Marketing aufnehmen“.</span></li>
+    <li class="gate"><span class="n">3</span><span class="t">Die Engine prüft, ob eine gültige Einwilligung vorliegt. Wenn nein, geht zuerst die Einwilligungs-Mail (Double-Opt-in) im Namen des Vertrieblers raus. Sie umfasst den Mailversand und das Öffnungs- und Klick-Tracking (E5).</span></li>
+    <li><span class="n">4</span><span class="t">Der Strecken-Planer ordnet den Kontakt der Strecke „Angebots-Nachfass“ zu.</span></li>
+    <li><span class="n">5</span><span class="t">Zum fälligen Termin wählt er den nächsten Inhalt: Standard-Inhalt oder ein vom Content-Agent generierter Text passend zu Persona und Produkt.</span></li>
+    <li class="gate"><span class="n">6</span><span class="t">Der Standards-Prüfer prüft den Inhalt. Fällt er durch, wird neu geschrieben oder auf einen Standard-Inhalt zurückgegriffen.</span></li>
+    <li><span class="n">7</span><span class="t">Versand. Tracking-Ereignisse fließen zurück an den Kontakt.</span></li>
+    <li><span class="n">8</span><span class="t">Wird der Kontakt warm, bekommt der Sachbearbeiter eine Meldung.</span></li>
+    <li><span class="n">9</span><span class="t">Die Strecke stoppt automatisch bei Antwort, Abmeldung, gewonnenem oder verlorenem Deal oder wenn der Vertriebler pausiert.</span></li>
+  </ol>
+</section>
+
+<section id="leitplanken">
+  <h2><i>05</i>Vollautomatik mit Leitplanken</h2>
+  <p>Es gibt keine manuelle Freigabe einzelner Mails. Damit das sicher bleibt, laufen die Leitplanken automatisch:</p>
+  <ul>
+    <li>Jeder Inhalt geht durch den Standards-Prüfer.</li>
+    <li>Feste Verbote: keine Preise, Rabatte, Liefertermine oder Zusagen, die nicht im Gehirn als freigegeben stehen.</li>
+    <li>Fallback auf einen Standard-Inhalt, wenn ein generierter Text die Prüfung nicht besteht.</li>
+    <li>Frequenz-Obergrenze je Kontakt über alle Strecken hinweg.</li>
+    <li>Protokoll jedes versendeten Inhalts, einsehbar am Kontakt.</li>
+  </ul>
+</section>
+
+<section id="gehirn">
+  <h2><i>06</i>Empfehlung: Wie wird das Gehirn genutzt?</h2>
+  <div class="key"><strong>Obsidian-Format im Hintergrund, eigene Oberfläche für den Kunden.</strong></div>
+  <table>
+    <thead><tr><th>Ebene</th><th>Wie</th><th>Warum</th></tr></thead>
+    <tbody>
+      <tr><td>Im Hintergrund</td><td>Markdown-Dateien (Obsidian-kompatibel) in der Instanz des Kunden, versioniert mit Git</td><td>Claude liest das Format ohne Umweg, jede Änderung ist nachvollziehbar, der Kunde kann seine Daten jederzeit mitnehmen</td></tr>
+      <tr><td>Für den Kunden</td><td>Weboberfläche mit geführten Masken („Persona anlegen“, „Tonalität für Mail“)</td><td>Marketing-Verantwortliche im Mittelstand arbeiten nicht in Obsidian. Die Oberfläche regelt Rechte, gleichzeitige Bearbeitung und Freigaben</td></tr>
+      <tr><td>Für B77 und Power-User</td><td>Derselbe Ordner direkt in Obsidian</td><td>Schnelles Arbeiten, z. B. im Onboarding</td></tr>
+    </tbody>
+  </table>
+  <p>So bleibt das Gehirn KI-freundlich und portabel, ohne dass der Kunde ein neues Werkzeug lernen muss.</p>
+</section>
+
+<section id="betrieb">
+  <h2><i>07</i>Betrieb</h2>
+  <ul>
+    <li>Eigene Instanz pro Kunde auf Hetzner mit Coolify: Anwendung, Datenbank, Gehirn-Ordner, Versand.</li>
+    <li>Datenbank nicht öffentlich erreichbar, Backups je Instanz.</li>
+    <li>Mailversand über die Domain des Kunden (SPF, DKIM, DMARC), Versanddienst mit EU-Sitz.</li>
+  </ul>
+  <div class="key"><strong>Entschieden: Pseudonymisierung (E4).</strong> Die Agenten bekommen nur Persona, Branche, Produkt, Kaufphase und Situation (z. B. „Angebot vor 3 Wochen, noch nicht geöffnet“), nie Name, Mailadresse oder Firma des Kontakts. Anrede, Name, Firma und die Signatur des Vertrieblers setzt die Instanz erst beim Versand lokal ein. Freitext aus dem CRM (Notizen) geht nicht an Claude. Ein technischer Filter prüft jede Anfrage an Claude auf Namen, Mailadressen und Telefonnummern, bevor sie die Instanz verlässt.</div>
+</section>
+
+<section id="abgrenzung">
+  <h2><i>08</i>Abgrenzung zu bestehenden Projekten</h2>
+  <table>
+    <thead><tr><th>Projekt</th><th>Verhältnis</th></tr></thead>
+    <tbody>
+      <tr><td>Akquise-Engine</td><td>Gewinnt Neukunden für B77 und SEVEN SEVEN. Die Engine hier läuft beim Kunden. Bausteine (Recherche, Mail-Vorlagen) evtl. wiederverwendbar</td></tr>
+      <tr><td>Mahlo CRM</td><td><strong>Basis für M7</strong>, gehört B77. Wird zum Produkt verallgemeinert. Mahlo ist der erste Kunde der Engine</td></tr>
+      <tr><td>Dealfalcon CRM</td><td>Vorbild für das Tracking (Aktivitäten-Historie, Angebots-Ereignisse), kein Code-Fundament</td></tr>
+      <tr><td>SCRM</td><td>Zu klären: wird es durch M7 abgelöst?</td></tr>
+      <tr><td>Kunden-Cockpit</td><td>Zu klären: mögliche Oberfläche für Auswertungen der Geschäftsführung</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="stufen">
+  <h2><i>09</i>Ausbaustufen (Vorschlag)</h2>
+  <div class="stages">
+    <div class="stage"><b>STUFE 1</b><p>Gehirn und Standards (inkl. Broschürenvorlagen), Content-Agent, Standards-Prüfer, Mailversand im Namen des Vertrieblers, Broschüren per Klick, Tracking. Kontakte per Import.</p></div>
+    <div class="stage"><b>STUFE 2</b><p>CRM mit Marketing-Brücke: Haken, Strecken, Rückmeldung an den Vertrieb, Angebots-Tracking.</p></div>
+    <div class="stage"><b>STUFE 3</b><p>Anbindung fremder CRMs, weitere Kanäle (LinkedIn, Post, Social), Auswertungen für die Geschäftsführung.</p></div>
+  </div>
+
+  <h3>Pilot Mahlo <small>parallel zu CRM Stufe 1 (E10)</small></h3>
+  <table>
+    <thead><tr><th>Strang</th><th>Was läuft</th><th>Bezug</th></tr></thead>
+    <tbody>
+      <tr><td>CRM Stufe 1</td><td>Wie geplant, Ziel 12.01.2027, ab jetzt als Produkt mit Mahlo-Konfiguration gebaut</td><td><code>~/Projects/mahlo/crm</code></td></tr>
+      <tr><td>Engine Stufe 1</td><td>Onboarding Mahlo (Gehirn, Standards, Strecken, Broschürenvorlagen), Agenten, Mailversand, Broschüren per Klick. Kontakte zunächst per Import</td><td>dieses Projekt</td></tr>
+      <tr><td>Zusammenführung</td><td>Marketing-Brücke im CRM, sobald CRM Stufe 1 abgenommen ist</td><td>Stufe 2</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="geschaeftsmodell">
+  <h2><i>10</i>Geschäftsmodell</h2>
+  <table>
+    <thead><tr><th>Teil</th><th>Abrechnung</th></tr></thead>
+    <tbody>
+      <tr><td>Onboarding</td><td>einmalig: Workshop, Gehirn, Standards, Strecken, Agenten</td></tr>
+      <tr><td>Aufsetzen der Software</td><td>einmalig: Instanz, Domain, Mailversand, CRM-Anbindung</td></tr>
+      <tr><td>Nutzung Marketing-Tool</td><td>laufend je Platz</td></tr>
+      <tr><td>CRM (optional)</td><td>laufend je Platz</td></tr>
+    </tbody>
+  </table>
+  <p>Preise bleiben vorerst offen (E8).</p>
+</section>
+
+<section id="fragen">
+  <h2><i>11</i>Offene Fragen</h2>
+  <ol class="q">
+    <li><span><strong>Pricing:</strong> vorerst offen. Später zu klären: Zählt jeder CRM-Nutzer als Platz oder nur, wer den Marketing-Haken nutzen darf? Sind Handelsvertreter eigene, günstigere Plätze?</span></li>
+    <li><span><strong>Mahlo-Kontakte für den Piloten:</strong> Welche Kontakte gehen in den ersten Import (z. B. offene Angebote, Interessenten einer Region)? Wer bei Mahlo verantwortet die Inhalte im Gehirn?</span></li>
+    <li><span><strong>Name:</strong> kommt von Ben.</span></li>
+    <li><span><strong>Anforderungen an das CRM</strong> (aus dem Critic-Gate, mit Ines und Arne abstimmen): Kontakte ohne Vorgang anlegen (Interessenten ohne Anfrage), denn Stufe 1 ist auf Anfragen und laufende Vorgänge zugeschnitten. Handelsvertretungen als eigene Nutzer mit Gebietsrechten (heute als Partner-Datensätze mit Betreuer geplant). Angebotsansicht als Rückmeldung (Stufe 2 der Engine).</span></li>
+    <li><span><strong>Löschfrist und „permanent“:</strong> Das CRM löscht Kontakte nach Frist (DS-01). Mit dem Datenschutz klären, ob Kontakte mit Zustimmung zum Marketing ausgenommen sind.</span></li>
+    <li><span><strong>Lizenz und CRM:</strong> Mit der Rahmung als ein Produkt gilt das Lizenzmodell je Platz auch für das CRM. Mit dem Stand zu T-01 (Ralph: Kostenrahmen, Rechte am Code) abgleichen.</span></li>
+  </ol>
+  <div class="note dep"><strong>Abhängigkeit:</strong> Broschüren im Pilot setzen die Entscheidung zur Mahlo-CI voraus (E15). Verzögert sie sich, startet die Pilotphase nur mit den Mailabläufen, und die Broschüren kommen nach, sobald die Vorlagen stehen.</div>
+</section>
+
+<footer>B77 · Sales/Marketing Engine · Funktionsbeschreibung v4 · Lesefassung der Markdown-Quelle · interner Entwurf</footer>
+</main>
+</div>
+</body>
+</html>
