@@ -1,5 +1,9 @@
 # Changelog B_77 Website
 
+## 2026-11-25 · Startseite: Standpunkt-Satz als B_77-Aussage
+
+Der Satz „Aktiver Vertrieb ist der Motor Ihres Unternehmens.“ steht wieder auf der Startseite, jetzt als Aussage von B_77 ohne Name und Foto. Die Überschrift heißt „Unser Standpunkt“.
+
 ## 2026-11-25 · Startseite: Name, Foto und Standpunkt-Zitat entfernt
 
 Der Abschnitt „Standpunkt“ mit Foto, Name und Zitat ist von der Startseite entfernt. Sonst keine Änderung.
