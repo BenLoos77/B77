@@ -1,5 +1,9 @@
 # Changelog B_77 Website
 
+## 2026-11-25 · Startseite: Name, Foto und Standpunkt-Zitat entfernt
+
+Der Abschnitt „Standpunkt“ mit Foto, Name und Zitat ist von der Startseite entfernt. Sonst keine Änderung.
+
 ## 2026-11-22 · Mahlo-Mappe: Kontakt aus dem Menü
 
 - Menüpunkt „Kontakt“ auf /mahlo entfernt, Mahlo braucht kein Erstgespräch.
